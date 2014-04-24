@@ -42,15 +42,12 @@ public class KopfbereichController extends HttpServlet
 		// Inhalt des Kopfbereiches ausgeben
 		kopfbereichView.outKopfbereichInhalt();
 		
-		// Kopfbereich schließen, Navigationsbereich oeffnen
-		kopfbereichView.outKopfbereichMitte();
+		// Kopfbereich schließen
+		kopfbereichView.outKopfbereichEnde();
 		
 		// Navigationsbereich einbinden
 		RequestDispatcher rd = getServletContext().getRequestDispatcher("/NavigationsbereichController");
 		rd.include(request, response);
-		
-		// Navigationsbereich schließen
-		kopfbereichView.outKopfbereichEnde();
 	}
 
 	/**

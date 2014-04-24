@@ -1,3 +1,4 @@
+
 package controller;
 
 import java.io.IOException;
@@ -34,16 +35,25 @@ public class IndexPlatzhalter extends HttpServlet
 	{
 		
 		/*
-		 * DIES IST NUR EIN PLATZHALTER UND SIMULIERT DIE SPAETERE INDEX-DATEI!!
+		 * DIES IST NUR EIN PLATZHALTER UND SIMULIERT DIE SPAETERE INDEX-DATEI!
+		 * 
+		 * Jedes Servlet fuer den Hauptbereich MUSS Kopfbereich & Fussbereich einbinden!! 
 		 */
 		
+		// Kopfbereich (und damit auch Navigationsbereich) einbinden
 		RequestDispatcher rd = getServletContext().getRequestDispatcher("/KopfbereichController");
 		rd.include(request, response);
 				
+		
+		
+		// Inhalte ausgeben (per Servlet & view!)
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		out.println("Hauptseite");
 		
+		
+		
+		// Fussbereich einbinden
 		rd = getServletContext().getRequestDispatcher("/FussbereichController");
 		rd.include(request, response);		
 	}

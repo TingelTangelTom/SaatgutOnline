@@ -32,10 +32,16 @@ public class FussbereichController extends HttpServlet
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
+		// Fussbereichview schliessen
 		FussbereichView fussbereichView = new FussbereichView(response);
 		
+		// Fussbereich oeffnen
 		fussbereichView.outFussbereichAnfang();
+		
+		// Inhalte des Fussbereiches ausgeben
 		fussbereichView.outFussbereichInhalt();
+		
+		// Fussbereich schliessen
 		fussbereichView.outFussbereichEnde();
 		
 	}

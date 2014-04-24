@@ -36,8 +36,14 @@ public class NavigationsbereichController extends HttpServlet
 		// NavigationsbereichView erzeugen
 		NavigationsbereichView navigationsbereichView = new NavigationsbereichView(response);
 		
+		// Navigationsbereich oeffnen
+		navigationsbereichView.outNavigationsabereichAnfang();
+		
 		// Inhalte des Navigationsbereiches ausgeben
 		navigationsbereichView.outNavigationsbereichInhalt();
+		
+		//Navigationsbereich schliessen
+		navigationsbereichView.outNavigationsbereichEnde();
 	}
 
 	/**
