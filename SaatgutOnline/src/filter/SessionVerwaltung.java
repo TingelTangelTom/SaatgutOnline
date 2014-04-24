@@ -14,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -41,9 +42,29 @@ public class SessionVerwaltung implements Filter {
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		
-		// prüfen, ob eine gültige Session vorhanden ist
+	
+		// den ankommenden ServletRequest in einen HttpServletRequest casten,
+		// damit die Session-Funktionen zur Verfügung stehen
+		
+		
+		// Alternative Methode
 		
 //		HttpSession session = request.getSession();
+//		if (session.isNew()) {
+//		    // Session wurde soeben erstellt
+//		} else {
+//		    // Wurde bereits früher erstellt
+//		}
+		
+		// prüfen, ob eine gültige Session vorhanden ist
+		
+		HttpSession session = ((HttpServletRequest) request).getSession(false);
+		if (session == null) {
+		    // Keine gültige Session vorhanden. Neue erstellen:
+		    session = ((HttpServletRequest) request).getSession();
+		} else {
+		    // Gültige Session gefunden
+		}
 		
 		chain.doFilter(request, response);
 	}
