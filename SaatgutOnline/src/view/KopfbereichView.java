@@ -42,28 +42,21 @@ public class KopfbereichView
 	 */
 	public void outKopfbereichAnfang()
 	{
-		out.println("<table border='1'>\n<tr>\n<td>");
+		out.println("<table border='0' width=100%  height=100% cellspacing='0' cellpadding='0'>"); // oeffnet Tabelle
+		
+		// TODO: "height=20%" ist depricated in Strict-Variante --> ersetzen?! 
+		out.println("<tr height=20%>\n<td colspan='2' bgcolor='#EEEEEE'>"); // oeffnet Kopfbereich
 	}
 
 	/**
 	 * Schließt eine Tabellenspalte.</br> Schließt eine Tabellenzeile.</br>
 	 * Oeffnet eine Tabellenzeile.</br> Oeffnet eine Tabellenspalte.
 	 */
-	public void outKopfbereichMitte()
-	{
-		out.println("</td>\n</tr>\n<tr>\n<td>");
-	}
-	
-	
-	/**
-	 * Schliesst eine Tabellenzeile.</br>
-	 * Oeffnet eine tabellenzeile.
-	 */
 	public void outKopfbereichEnde()
 	{
-		out.println("</td>\n<td>");
+		out.println("</td>\n</tr>"); // schliesst Kopfbereich
 	}
-
+	
 	/**
 	 * Inhalte des Kopfbereichs
 	 */
