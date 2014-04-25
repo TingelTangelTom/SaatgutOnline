@@ -40,8 +40,7 @@ public class FussbereichView
 	{
 		out.println("</td>\n</tr>"); // schliesst Hauptbereich
 		
-		// TODO: "height=5%" ist depricated in Strict-Variante --> ersetzen?!
-		out.println("<tr height=5%>\n<td colspan='2' bgcolor='#EEEEEE'>"); // oeffnet Fussbereich
+		out.println("<tr style=\"height:5%;\">\n<td colspan='2' bgcolor='#EEEEEE'>"); // oeffnet Fussbereich
 	}
 	
 	public void outFussbereichEnde()

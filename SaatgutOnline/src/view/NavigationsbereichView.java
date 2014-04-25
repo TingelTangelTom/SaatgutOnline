@@ -38,7 +38,7 @@ public class NavigationsbereichView
 
 	public void outNavigationsabereichAnfang()
 	{
-		out.println("<tr>\n<td width=20% bgcolor='#EEEEEE'>"); // oeffnet Navigationsbereich
+		out.println("<tr>\n<td width=15% bgcolor='#EEEEEE'>"); // oeffnet Navigationsbereich
 	}
 	
 	public void outNavigationsbereichInhalt()
