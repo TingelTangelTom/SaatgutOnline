@@ -12,7 +12,7 @@ public class KopfbereichView
 	private PrintWriter out;
 
 	/**
-	 * Konstruktor der Klasse KopfbereichView.</br> Erzeugt einen PrintWriter
+	 * Konstruktor der Klasse KopfbereichView.<br /> Erzeugt einen PrintWriter
 	 * aus response.
 	 * 
 	 * @param response
@@ -37,7 +37,7 @@ public class KopfbereichView
 	}
 
 	/**
-	 * Oeffnet eine Tabelle.</br> Oeffnet eine Tabellenzeile.</br> Oeffnet eine
+	 * Oeffnet eine Tabelle.<br /> Oeffnet eine Tabellenzeile.<br /> Oeffnet eine
 	 * Tabellenspalte.
 	 */
 	public void outKopfbereichAnfang()
@@ -46,8 +46,8 @@ public class KopfbereichView
 	}
 
 	/**
-	 * Schließt eine Tabellenspalte.</br> Schließt eine Tabellenzeile.</br>
-	 * Oeffnet eine Tabellenzeile.</br> Oeffnet eine Tabellenspalte.
+	 * Schließt eine Tabellenspalte.<br /> Schließt eine Tabellenzeile.<br />
+	 * Oeffnet eine Tabellenzeile.<br /> Oeffnet eine Tabellenspalte.
 	 */
 	public void outKopfbereichMitte()
 	{
