@@ -39,7 +39,7 @@ public class IndexPlatzhalter extends HttpServlet
 		 * 
 		 * Jedes Servlet fuer den Hauptbereich MUSS Kopfbereich & Fussbereich einbinden!! 
 		 */
-		
+		DatenbankController.getVerbindung();
 		// Kopfbereich (und damit auch Navigationsbereich) einbinden
 		RequestDispatcher rd = getServletContext().getRequestDispatcher("/KopfbereichController");
 		rd.include(request, response);

@@ -12,7 +12,7 @@ public class DatenbankController {
 	// Port (Standard: 3306)
 	private static String     dbPort 	 = "3306";
 	// Datenbank - Name
-	private static String 	  datenbank  = "tippgemeinschaft";
+	private static String 	  datenbank  = "saatgutonline";
 	// Datenbank - Benutzer
 	private static String 	  dbBenutzer = "root";
 	// Datenbank - Passwort
@@ -41,7 +41,7 @@ public class DatenbankController {
 	}
 	  
 		// Wenn Verbindung getrennt ist, neue Verbindung aufbauen
-		static Connection getVerbindung() {
+		public static Connection getVerbindung() {
 		    if(verbindung == null)
 		      new DatenbankController();
 		    return verbindung;
