@@ -2,7 +2,7 @@ package model;
 
 public class ProduktModel {
 	private int id;
-	private String name;
+	private int kategorie_id;
 	
 	public ProduktModel() {
 		super();		
@@ -18,11 +18,11 @@ public class ProduktModel {
 	public void setNummer(int nummer) {
 		this.id = nummer;
 	}
-	public String getName() {
-		return name;
+	public int getKategorieId() {
+		return kategorie_id;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setKategorieId(int kategorie_id) {
+		this.kategorie_id = kategorie_id;
 	}
 	
 }

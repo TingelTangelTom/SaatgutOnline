@@ -3,17 +3,13 @@ package servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-
-
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.ProduktModel;
-import controller.ProduktController;
+
 import view.ProduktView;
 
 
@@ -37,17 +33,13 @@ public class Anzeige extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		ProduktModel pm = new ProduktModel();
+		
 		ProduktView pv = new ProduktView();
-		ProduktController pc = new ProduktController();
-		
-		
-		
+
 		// Inhalte ausgeben (per Servlet & view!)
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		
-		out.println(pv.outHtmlOutput());
+		out.print(pv.outHtmlOutput());
 		
 	}
 
