@@ -5,30 +5,27 @@ import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletResponse;
 
-import controller.KopfbereichController;
-
 public class KopfbereichView
 {
 
 	private HttpServletResponse response;
-	private KopfbereichController kopfbereichController;
 	private PrintWriter out;
 
-	/**
-	 * Konstruktor der Klasse KopfbereichView.<br /> Erzeugt einen PrintWriter
-	 * aus response.
-	 * 
-	 * @param response
-	 *            response aus dem KopfbereichController als
-	 *            <i>HttpServletResponse</i>.
-	 * 
-	 */
-	public KopfbereichView(HttpServletResponse response, KopfbereichController kopfbereichController)
+	
+	public KopfbereichView(HttpServletResponse response)
 	{
+		/*
+		 * SCHRITT 3:
+		 * 
+		 * response entgegen nehmen und entschatten.
+		 * Aus der response den PrintWriter erzeugen.
+		 * 
+		 * --> weiter: unten
+		 */
 		this.response = response;
 
+		//PrintWriter erzeugen
 		this.response.setContentType("text/html");
-
 		try
 		{
 			this.out = response.getWriter();
@@ -36,11 +33,17 @@ public class KopfbereichView
 		{
 			System.out.println("PrintWriter nicht erstellt!");
 			e.printStackTrace();
-		}
-		
-		this.kopfbereichController = kopfbereichController;
+		}		
 	}
 
+	/*
+	 * SCHRITT 4:
+	 * 
+	 * Ausgabemodule bauen.
+	 * 
+	 * --> weiter in KopfbereichController
+	 */
+	
 	/**
 	 * Oeffnet eine Tabelle.<br /> Oeffnet eine Tabellenzeile.<br /> Oeffnet eine
 	 * Tabellenspalte.

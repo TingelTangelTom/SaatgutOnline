@@ -17,14 +17,14 @@ import controller.DatenbankController;
  * Servlet implementation class IndexPlatzhalter
  */
 @WebServlet("/IndexPlatzhalter")
-public class IndexPlatzhalter extends HttpServlet
+public class IndexPlatzhalterServlet extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public IndexPlatzhalter()
+	public IndexPlatzhalterServlet()
 	{
 		super();
 	}
@@ -49,6 +49,11 @@ public class IndexPlatzhalter extends HttpServlet
 		
 		
 		// Inhalte ausgeben (per view!)
+		/*
+		 * Ich habe hier nur den PrintWriter genommen, weil ich nicht extra
+		 * einen Controller und einen View bauen wollte...
+		 * Normal so, wie auch z.B. in Kopf oder Navi!
+		 */
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		out.println("Hauptseite");

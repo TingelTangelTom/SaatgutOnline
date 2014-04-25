@@ -33,8 +33,30 @@ public class KopfbereichServlet extends HttpServlet
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
+		/*
+		 * Hier ein FollowMe fuer meine Vorgehensweise.
+		 * Bitte klauen, was gefaellt! =D
+		 */
+		
+		/*
+		 * Schritt 1:
+		 * Controller initialisieren.
+		 * 
+		 * Ich schicke die response mit, da ich die spaeter fuer den
+		 * PrintWriter im View brauche.
+		 * 
+		 * --> weiter in KopfbereichController
+		 */
 		KopfbereichController kopfbereichController = new KopfbereichController(response);
 		
+	
+		/*
+		 * SCHRITT 7:
+		 * 
+		 * Alles komplett ausgeben.
+		 * 
+		 * --> ENDE! =D
+		 */
 		kopfbereichController.outKopfbereichAnzeigen();
 		
 		
