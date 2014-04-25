@@ -12,7 +12,7 @@ public class DatenbankController {
 	// Port (Standard: 3306)
 	private static String     dbPort 	 = "3306";
 	// Datenbank - Name
-	private static String 	  datenbank  = "tippgemeinschaft";
+	private static String 	  datenbank  = "saatgutonline";
 	// Datenbank - Benutzer
 	private static String 	  dbBenutzer = "root";
 	// Datenbank - Passwort
