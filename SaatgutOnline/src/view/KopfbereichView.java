@@ -12,7 +12,7 @@ public class KopfbereichView
 	private PrintWriter out;
 
 	/**
-	 * Konstruktor der Klasse KopfbereichView.</br> Erzeugt einen PrintWriter
+	 * Konstruktor der Klasse KopfbereichView.<br /> Erzeugt einen PrintWriter
 	 * aus response.
 	 * 
 	 * @param response
@@ -37,20 +37,19 @@ public class KopfbereichView
 	}
 
 	/**
-	 * Oeffnet eine Tabelle.</br> Oeffnet eine Tabellenzeile.</br> Oeffnet eine
+	 * Oeffnet eine Tabelle.<br /> Oeffnet eine Tabellenzeile.<br /> Oeffnet eine
 	 * Tabellenspalte.
 	 */
 	public void outKopfbereichAnfang()
 	{
 		out.println("<table border='0' width=100%  height=100% cellspacing='0' cellpadding='0'>"); // oeffnet Tabelle
 		
-		// TODO: "height=20%" ist depricated in Strict-Variante --> ersetzen?! 
-		out.println("<tr height=20%>\n<td colspan='2' bgcolor='#EEEEEE'>"); // oeffnet Kopfbereich
+		out.println("<tr style=\"height:15%;\">\n<td colspan='2' bgcolor='#EEEEEE'>"); // oeffnet Kopfbereich
 	}
 
 	/**
-	 * Schließt eine Tabellenspalte.</br> Schließt eine Tabellenzeile.</br>
-	 * Oeffnet eine Tabellenzeile.</br> Oeffnet eine Tabellenspalte.
+	 * Schließt eine Tabellenspalte.<br /> Schließt eine Tabellenzeile.<br />
+	 * Oeffnet eine Tabellenzeile.<br /> Oeffnet eine Tabellenspalte.
 	 */
 	public void outKopfbereichEnde()
 	{
