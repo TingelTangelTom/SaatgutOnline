@@ -38,7 +38,10 @@ public class NavigationsbereichView
 
 	public void outNavigationsabereichAnfang()
 	{
-		out.println("<tr>\n<td width=15% bgcolor='#EEEEEE'>"); // oeffnet Navigationsbereich
+		out.println("<tr style=\"vertical-align: top;\">\n<td width=15% bgcolor='#EEEEEE'>"); // oeffnet Navigationsbereich
+		/*
+		 * Ich habe den vertical-align eingesetzt, damit die Navigation und die Main jeweils oben links beginnen!
+		 */
 	}
 	
 	public void outNavigationsbereichInhalt()

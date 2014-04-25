@@ -8,7 +8,7 @@ public class ProduktModel {
 		super();		
 	}	
 	
-	public ProduktModel(int id, String name) {
+	public ProduktModel(int id, int kategorieId) {
 		super();		
 	}
 	

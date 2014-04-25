@@ -52,7 +52,7 @@ public class KopfbereichView
 	{
 		out.println("<table border='0' width=100%  height=100% cellspacing='0' cellpadding='0'>"); // oeffnet Tabelle
 		
-		out.println("<tr style=\"height:15%;\">\n<td colspan='2' bgcolor='#EEEEEE'>"); // oeffnet Kopfbereich
+		out.println("<tr style=\"height:15%; \">\n<td colspan='2' bgcolor='#EEEEEE'>"); // oeffnet Kopfbereich
 	}
 
 	/**
