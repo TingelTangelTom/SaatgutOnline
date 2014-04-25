@@ -38,12 +38,16 @@ public class FussbereichView
 	
 	public void outFussbereichAnfang()
 	{
-		out.println("</td>\n</tr>\n<tr>\n<<td>");
+		out.println("</td>\n</tr>"); // schliesst Hauptbereich
+		
+		// TODO: "height=5%" ist depricated in Strict-Variante --> ersetzen?!
+		out.println("<tr height=5%>\n<td colspan='2' bgcolor='#EEEEEE'>"); // oeffnet Fussbereich
 	}
 	
 	public void outFussbereichEnde()
 	{
-		out.println("</td>\n</tr>\n</table>");
+		out.println("</td>\n</tr>"); // schliesst Fussbereich
+		out.println("</table>"); // schliesst Tabelle
 	}
 	
 	public void outFussbereichInhalt()
