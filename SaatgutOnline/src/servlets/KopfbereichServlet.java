@@ -1,30 +1,30 @@
-package controller;
+ package servlets;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import view.NavigationsbereichView;
+import controller.KopfbereichController;
 
 /**
- * Servlet implementation class NavigationsbereichController
+ * Servlet implementation class KopfbereichController
  */
-@WebServlet("/NavigationsbereichController")
-public class NavigationsbereichController extends HttpServlet
+@WebServlet("/KopfbereichController")
+public class KopfbereichServlet extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public NavigationsbereichController()
+	public KopfbereichServlet()
 	{
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -33,17 +33,15 @@ public class NavigationsbereichController extends HttpServlet
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		// NavigationsbereichView erzeugen
-		NavigationsbereichView navigationsbereichView = new NavigationsbereichView(response);
+		KopfbereichController kopfbereichController = new KopfbereichController(response);
 		
-		// Navigationsbereich oeffnen
-		navigationsbereichView.outNavigationsabereichAnfang();
+		kopfbereichController.outKopfbereichAnzeigen();
 		
-		// Inhalte des Navigationsbereiches ausgeben
-		navigationsbereichView.outNavigationsbereichInhalt();
 		
-		//Navigationsbereich schliessen
-		navigationsbereichView.outNavigationsbereichEnde();
+		
+		// Navigationsbereich einbinden
+		RequestDispatcher rd = getServletContext().getRequestDispatcher("/NavigationsbereichController");
+		rd.include(request, response);
 	}
 
 	/**

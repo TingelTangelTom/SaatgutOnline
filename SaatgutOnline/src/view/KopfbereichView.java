@@ -5,10 +5,13 @@ import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletResponse;
 
+import controller.KopfbereichController;
+
 public class KopfbereichView
 {
 
 	private HttpServletResponse response;
+	private KopfbereichController kopfbereichController;
 	private PrintWriter out;
 
 	/**
@@ -20,7 +23,7 @@ public class KopfbereichView
 	 *            <i>HttpServletResponse</i>.
 	 * 
 	 */
-	public KopfbereichView(HttpServletResponse response)
+	public KopfbereichView(HttpServletResponse response, KopfbereichController kopfbereichController)
 	{
 		this.response = response;
 
@@ -34,6 +37,8 @@ public class KopfbereichView
 			System.out.println("PrintWriter nicht erstellt!");
 			e.printStackTrace();
 		}
+		
+		this.kopfbereichController = kopfbereichController;
 	}
 
 	/**
@@ -63,5 +68,12 @@ public class KopfbereichView
 	{
 		out.println("Kopfbereich");
 	}
-
+	
+	public void outLoginBereich()
+	{
+		
+	}
+	
+	public 
+	
 }

@@ -1,41 +1,23 @@
- package controller;
+package controller;
 
-import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import view.KopfbereichView;
 
-/**
- * Servlet implementation class KopfbereichController
- */
-@WebServlet("/KopfbereichController")
-public class KopfbereichController extends HttpServlet
+public class KopfbereichController
 {
-	private static final long serialVersionUID = 1L;
-
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public KopfbereichController()
+	private KopfbereichView kopfbereichView;
+	private HttpServletResponse response;
+	
+	public KopfbereichController(HttpServletResponse response)
 	{
-		super();
+		this.response = response;
+		this.kopfbereichView = new KopfbereichView(this.response, this);
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-	{
-		// KopfbereichView erzeugen
-		KopfbereichView kopfbereichView = new KopfbereichView(response);
-		
+	
+	public void outKopfbereichAnzeigen()
+	{	
 		// Kopfbereich oeffnen
 		kopfbereichView.outKopfbereichAnfang();
 		
@@ -43,21 +25,10 @@ public class KopfbereichController extends HttpServlet
 		kopfbereichView.outKopfbereichInhalt();
 		
 		// Kopfbereich schließen
-		kopfbereichView.outKopfbereichEnde();
-		
-		// Navigationsbereich einbinden
-		RequestDispatcher rd = getServletContext().getRequestDispatcher("/NavigationsbereichController");
-		rd.include(request, response);
+		kopfbereichView.outKopfbereichEnde();		
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
-			IOException
-	{
-		doGet(request, response);
-	}
-
+	
+	
+	
 }

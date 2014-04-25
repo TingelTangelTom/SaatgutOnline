@@ -1,4 +1,4 @@
-package controller;
+package servlets;
 
 import java.io.IOException;
 
@@ -14,14 +14,14 @@ import view.FussbereichView;
  * Servlet implementation class FussbereichController
  */
 @WebServlet("/FussbereichController")
-public class FussbereichController extends HttpServlet
+public class FussbereichServlet extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public FussbereichController()
+	public FussbereichServlet()
 	{
 		super();
 	}

@@ -1,5 +1,5 @@
 
-package controller;
+package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -10,6 +10,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import controller.DatenbankController;
 
 /**
  * Servlet implementation class IndexPlatzhalter
@@ -46,7 +48,7 @@ public class IndexPlatzhalter extends HttpServlet
 				
 		
 		
-		// Inhalte ausgeben (per Servlet & view!)
+		// Inhalte ausgeben (per view!)
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		out.println("Hauptseite");
