@@ -16,14 +16,14 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class SimonKopfbereich
  */
-@WebServlet("/SimonContent")
-public class SimonContent extends HttpServlet {
+@WebServlet("/SimonKopfbereich")
+public class SimonKopfbereich extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SimonContent() {
+    public SimonKopfbereich() {
         super();
         // TODO Auto-generated constructor stub
     }
