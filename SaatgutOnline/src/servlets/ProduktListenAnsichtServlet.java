@@ -45,7 +45,7 @@ public class ProduktListenAnsichtServlet extends HttpServlet {
 				
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		out.print(this.produktView.outHtmlOutput());
+		out.print(this.produktView.anzeigenProduktAuflistung());
 
 		// Fussbereich einbinden
 		rd = getServletContext().getRequestDispatcher("/FussbereichController");
