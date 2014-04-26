@@ -52,7 +52,7 @@ public class KopfbereichView
 	{
 		out.println("<table border='0' width=100%  height=100% cellspacing='0' cellpadding='0'>"); // oeffnet Tabelle
 		
-		out.println("<tr style=\"height:15%; \">\n<td colspan='2' bgcolor='#EEEEEE'>"); // oeffnet Kopfbereich
+		out.println("<tr style='height:15%;'>\n<td colspan='2' bgcolor='#EEEEEE'>"); // oeffnet Kopfbereich
 	}
 
 	/**
@@ -69,13 +69,38 @@ public class KopfbereichView
 	 */
 	public void outKopfbereichInhalt()
 	{
-		out.println("Kopfbereich");
+		out.println("<table border='0' width=100% cellspacing='0' cellpadding='0'>\n<tr>\n<td width=15%>");
+		
+		this.outLogo();
+		
+		out.println("</td>\n<td>");
+		
+		this.outLoginBereich();
+		
+		out.println("</td>\n</tr>\n</table>");
 	}
 	
 	public void outLoginBereich()
 	{
-		
+		out.println("<form action='' method='POST'>");
+		out.println("<table border='0' cellspacing='0' cellpadding='0'>");
+		out.println("<tr>\n<td colspan='2'>\n<input name='nutzername' value='Nutzername' type='text' size='25'>\n</td>\n</tr>");
+		out.println("<tr>\n<td>\n<input name='passwort' value='Passwort' type='password' size='15'></td>");
+		out.println("<td>\n<input name='login' value='Login' type='submit'>\n</td>\n</tr>");
+		out.println("<tr>\n<td colspan='2'>\n<a href='http://localhost:8080/SaatgutOnline/NoFunctionServlet'>Passwort vergessen?</a> (nf)\n</td>\n</tr>");
+		out.println("</table>");
+		out.println("</form>");		
 	}
+	
+	public void outLogo()
+	{		
+		out.println("<table border='0' cellspacing='0' cellpadding='0'>\n<tr>\n<td>");
+		out.println("<img src='/SaatgutOnline/src/resources/logo.jpg' width='75' height='75' alt='Logo'>");
+		out.println("</td>\n</tr>\n<tr>\n<td>");
+		out.println("<h3>SaatgutOnline</h3>");
+		out.println("</td>\n</tr>\n</table>");		
+	}
+
 	
 	
 }

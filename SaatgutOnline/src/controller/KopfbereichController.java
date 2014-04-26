@@ -40,6 +40,8 @@ public class KopfbereichController
 		// Inhalt des Kopfbereiches ausgeben
 		kopfbereichView.outKopfbereichInhalt();
 		
+
+		
 		// Kopfbereich schließen
 		kopfbereichView.outKopfbereichEnde();		
 	}

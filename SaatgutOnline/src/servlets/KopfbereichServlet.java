@@ -73,6 +73,17 @@ public class KopfbereichServlet extends HttpServlet
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
 			IOException
 	{
+		System.out.println("\nPOST-Attribut angenommen...");
+		
+		
+		if(request.getParameter("login") != null)
+		{
+			System.out.println("LOGIN erfolgt!");
+			System.out.println("Nutzername: " + request.getParameter("nutzername"));
+			System.out.println("Passwort: " + request.getParameter("passwort"));
+			
+		}
+		
 		doGet(request, response);
 	}
 
