@@ -35,23 +35,17 @@ public class ProduktinfoView {
 	//texte.getString("WILLKOMMEN");
 	public String anzeigenProduktinfo() {	
 		produktModel = this.produktController.getProdukt(1, 1);
-		htmlOutput = "<table border='1' width=100%  height=100% cellspacing='0' cellpadding='0'>"
-						+ "<tr style=\"height:100;\">"
+		htmlOutput = "<table class=\"produktinfo\">"
+						+ "<tr>"
 						+ "<td>"
-						+ "Bild"
+						+ "<img src=\"resources/bilder/phoenix_canariensis.jpg\" width=\"75\" height=\"75\" alt=\"Logo\">\""
 						+ "</td><td>"
 						+ produktModel.getName() + "<br />"
-						+ produktModel.getPreis() + "<br />"
+						+ "<produktinfo>" + produktModel.getPreis() + "<produktinfo><br />"
 						+ produktModel.getGewicht()
-						+ "</td></tr><tr><td>"
+						+ "</td></tr><tr><td colspan=\"2\">"
 						+ produktModel.getBeschreibung()
-						+ "</td><td>"
-
-						+ "</td></tr>"
-						+ "<tr><td colspan=\"2\">"
-						
-						+ "</td></tr>"
-						+ "<tr><td colspan=\"2\">"
+						+ "</td></tr><tr><td colspan=\"2\">"
 						+ "Button 1 Button 2"
 						+ "</td></tr></table>";
 		

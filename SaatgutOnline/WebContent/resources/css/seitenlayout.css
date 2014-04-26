@@ -1,20 +1,22 @@
 /* CSS Document */
 html {
 	height: 100%;
-
 }
 
 body {
-margin-left: auto;
-margin-right: auto;
-width: 970px;
-text-align: left;
-border: 0px;
-padding: 0;
-text-align: center;
-background-color: Yellow;
+	margin-left: auto;
+	margin-right: auto;
+	width: 970px;
+	background-color: White;
 }
 
+table {
+	border-collapse: separate;
+    border-spacing: 0px;
+    border-padding: 0px;
+}
+
+/*
 a:link { text-decoration:none; font-weight:bold; color:#BEBEBE; }
 a:visited { text-decoration:none; font-weight:bold; color:#BEBEBE; }
 a:hover { text-decoration:none; font-weight:bold; color:#BEBEBE; }
@@ -26,59 +28,53 @@ a:focus { text-decoration:none; font-weight:bold; color:#BEBEBE; }
 .content a:hover { text-decoration:none; font-weight:bold; color:#000000; }
 .content a:active { text-decoration:none; font-weight:bold; color:#000000; }
 .content a:focus { text-decoration:none; font-weight:bold; color:#000000; }
+*/
 
-.kopfbereich {
-  font-family: Verdana, Arial;
-  font-weight: bold;
-  font-size:12px;
-	color: #BEBEBE;
+
+.produktinfo {
+  	font-family: Verdana, Arial;
+	font-size: 10px;
+	color: #000000;
 	width: 100%;
-	height:100px;
-	background: #273037;
+	height: 100%;
+	background-color: YELLOW;
+	border: 0px;
+	text-align: justify;
+
 }
 
-#footer {
-	font-family: Verdana, Arial;
-  	font-weight: bold;
-  	font-size:10px;
-	position: absolute;
-	bottom: 0;
-	left:0;
+.kopfbereich {
+  	font-family: Verdana, Arial;
+  	font-size:11px;
+	color: #000000;
 	width: 100%;
-	background: #333;
-	height:20px;
-	padding: 3px 0;
-	text-align: center;
-	color: #fff;
+	height:100px;
+	background: RED;
+	border: 0px;
 }
 
 .navigation {
-  font-family: Kartika;
-  font-weight:bold;
-	text-align:center;
-	margin-top: 85px;
-	margin-left: 0px;
-	height: 15px;
-	background: #697891;
-	padding: 5px 5px 25px 5px;
+  	font-family: Verdana, Arial;
+  	font-size:11px;
+  	vertical-align: top;
+	color: #000000;
+	width: 200px;
+	height:100px;
+	background: GREEN;
+	border: 0px;
 }
 
-.produktinfo {
-  font-family: Verdana, Arial;
-	font-size: 14px;
+.inhalt {
+	width: 770px;
+	height:500px;
+}
+
+.fussbereich {
+  	font-family: Verdana, Arial;
+  	font-size:11px;
+	color: #000000;
 	width: 100%;
-	background: #FFFFFF;
-}
-
-#produktinfo {
-	font-family: Verdana, Arial;
-}
-
-.pflichtfeld {
-	background-color: yellow;
-}
-
-select {
-	width: 100%;
-	border:none 0; 
+	height:30px;
+	background: BLUE;
+	border: 0px;
 }

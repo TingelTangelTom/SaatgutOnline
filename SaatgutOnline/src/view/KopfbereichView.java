@@ -10,7 +10,6 @@ public class KopfbereichView
 
 	private HttpServletResponse response;
 	private PrintWriter out;
-
 	
 	public KopfbereichView(HttpServletResponse response)
 	{
@@ -53,13 +52,13 @@ public class KopfbereichView
 		out.println("<!doctype html>\n"
 				+ "<html>\n<head>\n"
 				+ "<meta charset=\"UTF-8\">\n"
-				+ "<link type=\"text/css\" href=\"ressources/css/seitenlayout.css\" rel=\"stylesheet\" />\n"
+				+ "<link type=\"text/css\" href=\"resources/css/seitenlayout.css\" rel=\"stylesheet\" />\n"
 				+ "<title></title>\n"
 				+ "</head>\n<body>\n");
 		
-		out.println("<table border='0' width=100%  height=100% cellspacing='0' cellpadding='0'>"); // oeffnet Tabelle
+		out.println("<table class=\"kopfbereich\">\n"); // oeffnet Tabelle
 		
-		out.println("<tr style='height:15%;'>\n<td colspan='2' bgcolor='#EEEEEE'>"); // oeffnet Kopfbereich
+		out.println("<tr>\n<td colspan='2'>\n"); // oeffnet Kopfbereich
 	}
 
 	/**
@@ -68,7 +67,7 @@ public class KopfbereichView
 	 */
 	public void outKopfbereichEnde()
 	{
-		out.println("</td>\n</tr>"); // schliesst Kopfbereich
+		out.println("</td>\n</tr>\n"); // schliesst Kopfbereich
 	}
 	
 	/**

@@ -40,7 +40,7 @@ public class FussbereichView
 	{
 		out.println("</td>\n</tr>"); // schliesst Hauptbereich
 		
-		out.println("<tr style=\"height:5%;\">\n<td colspan='2' bgcolor='#EEEEEE'>"); // oeffnet Fussbereich
+		out.println("<tr>\n<td class=\"fussbereich\" colspan='2'>"); // oeffnet Fussbereich
 	}
 	
 	public void outFussbereichEnde()
