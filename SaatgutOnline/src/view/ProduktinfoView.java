@@ -55,7 +55,7 @@ public class ProduktinfoView {
 		//htmlOutput = String.valueOf(produktModel.getKategorieId());
 		return htmlOutput;
 	}
-	
+	/*
 	public String anzeigenListenProdukt() {	
 		produktModel = this.produktController.getProdukt(1, 1);
 		htmlOutput = "<table border='1' width=150  height=200 cellspacing='0' cellpadding='0'>"
@@ -74,5 +74,5 @@ public class ProduktinfoView {
 		//htmlOutput = String.valueOf(produktModel.getKategorieId());
 		return htmlOutput;
 	}
-	
+	*/
 }
