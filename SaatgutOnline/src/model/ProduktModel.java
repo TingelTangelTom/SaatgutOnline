@@ -10,9 +10,11 @@ public class ProduktModel {
 	private String beschreibung;
 	private String suchbegriffe;
 	private int angesehen;
-	private double preis;
+	private double preisNetto;
+	private double preisBrutto;
 	private double gewicht;
 	private int steuersatzId;
+	private double steuersatz;
 	private Date hinzugefeugt;
 	private Date geaendert;
 	
@@ -76,12 +78,20 @@ public class ProduktModel {
 		this.angesehen = angesehen;
 	}
 
-	public double getPreis() {
-		return preis;
+	public double getPreisNetto() {
+		return preisNetto;
 	}
 
-	public void setPreis(double d) {
-		this.preis = d;
+	public void setPreisNetto(double d) {
+		this.preisNetto = d;
+	}	
+	
+	public double getPreisBrutto() {
+		return preisBrutto;
+	}
+
+	public void setPreisBrutto(double d) {
+		this.preisBrutto = d;
 	}
 
 	public double getGewicht() {
@@ -114,6 +124,16 @@ public class ProduktModel {
 
 	public void setGeaendert(Date geaendert) {
 		this.geaendert = geaendert;
+	}
+
+	public double getSteuersatz() {
+		return steuersatz;
+	}
+
+	public void setSteuersatz(double steuersatz) {
+		this.steuersatz = steuersatz;
 	}	
+	
+	
 	
 }

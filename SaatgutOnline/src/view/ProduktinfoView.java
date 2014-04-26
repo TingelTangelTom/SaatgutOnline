@@ -23,14 +23,14 @@ public class ProduktinfoView {
 	//texte.getString("WILLKOMMEN");
 	public String anzeigenProduktinfo() {	
 		produktModel = this.produktController.getProdukt(1, 1);
-		Locale sprache = Locale.GERMAN;
+		Locale sprache = Locale.GERMANY;
 		output = "<table class=\"produktinfo\">"
 				+ "<tr><td rowspan=\"6\">Cell 1</td><td colspan=\"2\">" + produktModel.getName() + "</td></tr>" // Titel
 				+ "<tr><td colspan=\"2\">" + produktModel.getName() + "</td></tr>" // Titel
 				+ "<tr><td>Bechriftung</td><td>Cell 3</td></tr>" // Eigenschaft 1
 				+ "<tr><td>Bechriftung</td><td>Cell 3</td></tr>" // Eigenschaft 2
 				+ "<tr><td>Bechriftung</td><td>Cell 3</td></tr>" // Eigenschaft 3
-				+ "<tr><td colspan=\"2\">" + htmlOutput.outPreisformat(sprache, produktModel.getPreis()) + " " + htmlOutput.outPreisverordnung(sprache, 19.00) + "</td></tr>" // Titel
+				+ "<tr><td colspan=\"2\">" + htmlOutput.outPreisformat(sprache, produktModel.getPreisBrutto()) + " " + htmlOutput.outPreisverordnung(sprache, 19.00) + "</td></tr>" // Titel
 				+ "<tr><td colspan=\"3\">" + produktModel.getBeschreibung() + "</td></tr>" // Produktbeschreibung
 				+ "<tr><td colspan=\"3\">Warenkorb</td></tr>" // Button Warenkorb
 				+ "</table>";
@@ -48,8 +48,7 @@ public class ProduktinfoView {
 						+ "Button 1 Button 2"
 						
 						*/
-					
-		
+
 
 		
 		//produktModel = this.produktController.getProdukt(1);

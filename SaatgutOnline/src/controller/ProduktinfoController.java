@@ -10,6 +10,8 @@ import model.ProduktModel;
 public class ProduktinfoController {
 	
 	private ProduktModel produktModel;
+	double steuersatz;
+	double preisBrutto;
 	
 	public ProduktinfoController() {
 		super();
@@ -17,7 +19,7 @@ public class ProduktinfoController {
 	}
 
 	// Testabfrage
-	public ProduktModel getProdukt(int id, int sprache_id) {
+public ProduktModel getProdukt(int id, int sprache_id) {
 		
 		DatenbankController.getVerbindung();
 		
@@ -39,7 +41,7 @@ public class ProduktinfoController {
 				this.produktModel.setBeschreibung(resultset.getString(4));
 				this.produktModel.setSuchbegriffe(resultset.getString(5));
 				this.produktModel.setAngesehen(resultset.getInt(6));
-				this.produktModel.setPreis(resultset.getInt(7));
+				this.produktModel.setPreisNetto(resultset.getInt(7));
 				this.produktModel.setGewicht(resultset.getInt(8));
 				this.produktModel.setSteuerId(resultset.getInt(9));
 				this.produktModel.setHinzugefeugt(resultset.getDate(10));
@@ -51,21 +53,34 @@ public class ProduktinfoController {
 			e.printStackTrace();
 		}
 		
+		DatenbankController.getVerbindung();
+		
 		try {
 			String query = "SELECT steuer_satz FROM steuer WHERE steuer_id = '1'";
+			
 			Statement statement = DatenbankController.verbindung.createStatement();
 			ResultSet resultset = statement.executeQuery(query);
-			while(resultset.next()){
-				this.produktModel.setPreis(this.produktModel.getPreis() * resultset.getDouble(1) / 100 + this.produktModel.getPreis());
+			if(resultset.next()){
+				steuersatz = resultset.getDouble(1);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
 
+		this.produktModel.setSteuersatz(steuersatz);
+		this.produktModel.setPreisBrutto(this.produktModel.getPreisNetto() * this.produktModel.getSteuersatz() / 100 + this.produktModel.getPreisNetto());
+		System.out.println(this.produktModel.getPreisNetto());
+		System.out.println(this.produktModel.getPreisBrutto());
+		System.out.println(this.produktModel.getSteuersatz());
 		return produktModel;
 	}
+
+	public double getProduktSteuersatz(int id, int sprache_id) {
+		
+		
+		
+		return steuersatz;
+	}	
 
 }
