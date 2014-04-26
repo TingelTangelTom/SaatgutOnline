@@ -7,11 +7,11 @@ import model.ProduktModel;
 
 
 
-public class ProduktListenAnsichtController {
+public class ProduktinfoController {
 	
 	private ProduktModel produktModel;
 	
-	public ProduktListenAnsichtController() {
+	public ProduktinfoController() {
 		super();
 		this.produktModel = new ProduktModel();
 	}

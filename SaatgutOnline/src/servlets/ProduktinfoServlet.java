@@ -14,23 +14,23 @@ import javax.servlet.http.HttpServletResponse;
 
 
 import controller.DatenbankController;
-import view.ProduktListenAnsichtView;
+import view.ProduktinfoView;
 
 
 /**
  * Servlet implementation class Anzeige
  */
-@WebServlet("/Anzeige")
-public class ProduktListenAnsichtServlet extends HttpServlet {
+@WebServlet("/ProduktinfoServlet")
+public class ProduktinfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private ProduktListenAnsichtView produktView;
+	private ProduktinfoView produktView;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProduktListenAnsichtServlet() {
+    public ProduktinfoServlet() {
         super();
-        this.produktView = new ProduktListenAnsichtView();
+        this.produktView = new ProduktinfoView();
     }
 
 	/**
@@ -45,7 +45,7 @@ public class ProduktListenAnsichtServlet extends HttpServlet {
 				
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		out.print(this.produktView.anzeigenProduktAuflistung());
+		out.print(this.produktView.anzeigenProduktinfo());
 
 		// Fussbereich einbinden
 		rd = getServletContext().getRequestDispatcher("/FussbereichController");
