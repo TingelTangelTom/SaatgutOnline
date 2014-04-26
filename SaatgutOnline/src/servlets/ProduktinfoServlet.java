@@ -38,6 +38,7 @@ public class ProduktinfoServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		response.setCharacterEncoding("ISO-8859-15");
 		DatenbankController.getVerbindung();
 		// Kopfbereich (und damit auch Navigationsbereich) einbinden
 		RequestDispatcher rd = getServletContext().getRequestDispatcher("/KopfbereichController");

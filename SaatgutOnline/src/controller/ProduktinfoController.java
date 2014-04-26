@@ -20,6 +20,7 @@ public class ProduktinfoController {
 	public ProduktModel getProdukt(int id, int sprache_id) {
 		
 		DatenbankController.getVerbindung();
+		
 		try {
 			String query = "SELECT p.produkt_id, p.produkt_bestand, pb.produkt_name, pb.produkt_beschreibung,"
 						+ "pb.produkt_suchbegriffe, pb.produkt_angesehen, p.produkt_preis, p.produkt_gewicht,"

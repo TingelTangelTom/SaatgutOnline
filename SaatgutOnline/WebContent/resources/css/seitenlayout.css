@@ -11,10 +11,11 @@ body {
 }
 
 table {
+	vertical-align: top;
 	border-collapse: separate;
     border-spacing: 0px;
     border-padding: 0px;
-    border: 0px;
+    border: none;
 }
 
 /*
@@ -31,18 +32,6 @@ a:focus { text-decoration:none; font-weight:bold; color:#BEBEBE; }
 .content a:focus { text-decoration:none; font-weight:bold; color:#000000; }
 */
 
-
-.produktinfo {
-  	font-family: Verdana, Arial;
-	font-size: 10px;
-	color: #000000;
-	width: 100%;
-	height: 100%;
-	background-color: WHITE;
-	text-align: justify;
-
-}
-
 .kopfbereich {
   	font-family: Verdana, Arial;
   	font-size:11px;
@@ -55,19 +44,22 @@ a:focus { text-decoration:none; font-weight:bold; color:#BEBEBE; }
 .navigation {
   	font-family: Verdana, Arial;
   	font-size:11px;
-  	vertical-align: top;
-	color: #000000;
-	width: 200px;
+  	color: #000000;
+  	width: 200px;
 	height:100px;
+	vertical-align: top;
 	background: GREY;
 }
 
 .inhalt {
-	width: 770px;
-	height:500px;
 	font-family: Verdana, Arial;
   	font-size:11px;
+  	color: #000000;
+  	width: 770px;
+	height:500px;
+  	vertical-align: top;
 	background: WHITE;
+	padding: 10px 0px 10px 10px;
 }
 
 .fussbereich {
@@ -77,4 +69,24 @@ a:focus { text-decoration:none; font-weight:bold; color:#BEBEBE; }
 	width: 100%;
 	height:30px;
 	background: GREY;
+}
+
+.produktinfo {
+	font-family: Verdana, Arial;
+  	font-size:11px;
+  	color: #000000;
+  	width: 100%;
+	height:500px;
+  	vertical-align: top;
+  	text-align: justify;
+	background: WHITE;
+	/*border-collapse: separate;*/
+    border-spacing: 0px;
+    border-padding: 0px;
+	border: 0px solid #000000;
+}
+
+.produktinfo td {
+	vertical-align: top;
+	border: 1px solid #000000;
 }
