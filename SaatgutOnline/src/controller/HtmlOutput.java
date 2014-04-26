@@ -21,7 +21,7 @@ public class HtmlOutput {
 		
 		NumberFormat prozentFormat = NumberFormat.getPercentInstance(sprache);
 		String prozent = prozentFormat.format(mwst / 100);
-		ResourceBundle text = PropertyResourceBundle.getBundle("I18N." + sprache.getLanguage() + ".Produktinfo", sprache);
+		ResourceBundle text = PropertyResourceBundle.getBundle("I18N." + sprache.getLanguage() + ".Produktinfo", sprache); // Pfad muss noch angepasst werden
 		
 		return MessageFormat.format(text.getString("PREISTEXT"), prozent);
 		
