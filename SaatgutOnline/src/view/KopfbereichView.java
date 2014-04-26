@@ -50,6 +50,13 @@ public class KopfbereichView
 	 */
 	public void outKopfbereichAnfang()
 	{
+		out.println("<!doctype html>\n"
+				+ "<html>\n<head>\n"
+				+ "<meta charset=\"UTF-8\">\n"
+				+ "<link type=\"text/css\" href=\"ressources/css/seitenlayout.css\" rel=\"stylesheet\" />\n"
+				+ "<title></title>\n"
+				+ "</head>\n<body>\n");
+		
 		out.println("<table border='0' width=100%  height=100% cellspacing='0' cellpadding='0'>"); // oeffnet Tabelle
 		
 		out.println("<tr style='height:15%;'>\n<td colspan='2' bgcolor='#EEEEEE'>"); // oeffnet Kopfbereich
@@ -95,7 +102,7 @@ public class KopfbereichView
 	public void outLogo()
 	{		
 		out.println("<table border='0' cellspacing='0' cellpadding='0'>\n<tr>\n<td>");
-		out.println("<img src='/SaatgutOnline/src/resources/logo.jpg' width='75' height='75' alt='Logo'>");
+		out.println("<img src='resources/bilder/logo.jpg' width='75' height='75' alt='Logo'>");
 		out.println("</td>\n</tr>\n<tr>\n<td>");
 		out.println("<h3>SaatgutOnline</h3>");
 		out.println("</td>\n</tr>\n</table>");		

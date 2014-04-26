@@ -47,6 +47,7 @@ public class FussbereichView
 	{
 		out.println("</td>\n</tr>"); // schliesst Fussbereich
 		out.println("</table>"); // schliesst Tabelle
+		out.println("</body></html>");
 	}
 	
 	public void outFussbereichInhalt()
