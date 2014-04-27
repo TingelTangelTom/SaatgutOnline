@@ -104,9 +104,9 @@ public class HtmlAusgabe
 	 * @return
 	 * Der Html-Code als String
 	 */
-	public String htmlTabelleOeffnen(String name)
+	public String htmlTabelleOeffnen(String className)
 	{
-		return "<table class='" + name + "'>\n";
+		return "<table class='" + className + "'>\n";
 	}
 	
 }

@@ -64,7 +64,6 @@ public class KopfbereichView
 
 	/**
 	 * Schließt eine Tabellenspalte.<br /> Schließt eine Tabellenzeile.<br />
-	 * Oeffnet eine Tabellenzeile.<br /> Oeffnet eine Tabellenspalte.
 	 */
 	public void outKopfbereichEnde()
 	{
@@ -112,21 +111,11 @@ public class KopfbereichView
 	{
 		out.println("<table border='1' cellspacing='0' cellpadding='0' width=15%>\n<tr>\n<td>");
 		out.println("<h2>Saatgut</h2>");
-		out.println(HtmlAusgabe.NEUE_ZEILE_NEUE_SPALTE);
-		
-//		out.println("</td>\n</tr>\n<tr>\n<td>");
-		out.println("<h3>Online</h3>");	
-		
-		out.println(HtmlAusgabe.TABELLE_SCHLIESSEN);
-		
-//		out.println("</td>\n</tr>\n</table>");
+		out.println("</td>\n</tr>\n<tr>\n<td>");		
+		out.println("<h3>Online</h3>");			
+		out.println("</td>\n</tr>\n</table>");		
 	}
 	
-	
-	public void outNeueSpalte()
-	{
-		out.println("</td>\n<td>");
-	}
 
 	
 	
