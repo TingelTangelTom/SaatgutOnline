@@ -58,6 +58,10 @@ public class KopfbereichController
 		
 		this.kopfbereichView.outInhaltsframeNeueSpalte();
 		
+		this.kopfbereichView.outWarenkorbPreview();
+		
+		this.kopfbereichView.outInhaltsframeNeueSpalte();
+		
 		// Sprache ermitteln und entsprechende Sprachwahl anbieten
 		if(this.locale.getLanguage() != null && this.locale.getLanguage() == "de")
 		{

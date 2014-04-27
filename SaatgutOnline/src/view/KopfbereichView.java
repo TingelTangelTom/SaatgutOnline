@@ -148,5 +148,12 @@ public class KopfbereichView
     	out.println("</td></tr></table></form>");
 	}
 	
+	public void outWarenkorbPreview()
+	{
+		out.println("<table border='1' cellspacing='0' cellpadding='0'>\n<tr>\n<td>");
+		out.println("Warenkorb-Preview");
+		out.println("</td>\n</tr>\n</table>");
+	}
+	
 	
 }
