@@ -47,7 +47,7 @@ public class KopfbereichServlet extends HttpServlet
 		 * 
 		 * --> weiter in KopfbereichController
 		 */
-		KopfbereichController kopfbereichController = new KopfbereichController(response);
+		KopfbereichController kopfbereichController = new KopfbereichController(request, response);
 		
 	
 		/*

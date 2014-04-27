@@ -1,5 +1,6 @@
 package controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import view.KopfbereichView;
@@ -8,7 +9,7 @@ public class KopfbereichController
 {
 	private KopfbereichView kopfbereichView;
 	
-	public KopfbereichController(HttpServletResponse response)
+	public KopfbereichController(HttpServletRequest request, HttpServletResponse response)
 	{
 		/*
 		 * SCHRITT 2:
@@ -19,7 +20,7 @@ public class KopfbereichController
 		 * 
 		 *  --> weiter im KopfbereichView
 		 */
-		this.kopfbereichView = new KopfbereichView(response);
+		this.kopfbereichView = new KopfbereichView(request, response);
 	}
 
 	/*

@@ -6,28 +6,19 @@ import java.util.Locale;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet Filter implementation class SprachversionFilter
  */
-@WebFilter(filterName = "SprachversionFilter", urlPatterns = {"/nofunction*"})
+@WebFilter(filterName = "SprachversionFilter", urlPatterns = { "/*" })
 public class SprachversionFilter implements Filter
 {
-
-	/**
-	 * Default constructor.
-	 */
-	public SprachversionFilter()
-	{
-	}
-
 	/**
 	 * @see Filter#destroy()
 	 */
@@ -41,38 +32,43 @@ public class SprachversionFilter implements Filter
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,
 			ServletException
 	{
-		
-		if(request.getAttribute("lang") == null)
-		{
-			Locale sprache = request.getLocale();
-			System.out.println(sprache);
-			
-			
-			
-			String originalUrl = ((HttpServletRequest) request).getRequestURI().toString();
-			System.out.println(originalUrl);
-			
-			String[] arr = originalUrl.split("/");
-			for (int i = 0; i < arr.length; i++)
-			{
-				System.out.println("arr" + i + ": " + arr[i]);
-			}
-			
-			String neueUrl = arr[arr.length-1];
-			System.out.println("/" + neueUrl + "?lang=" + sprache);
-			
-			
-			
-			RequestDispatcher rd = ((HttpServletRequest) request).getRequestDispatcher("/" + neueUrl + "?lang=" + sprache);
-			rd.forward(request, response);
-			
-			((HttpServletResponse)response).sendRedirect(neueUrl);
-		}
 
+		HttpSession session = ((HttpServletRequest) request).getSession(true); 
+		Locale locale;
+		
+		/*
+		 * wenn noch keine Sprache in der Session steht,
+		 * eingestellte Sprache des Browsers als Defaultwert setzen.
+		 */
+		if(session.getAttribute("sprache") == null)
+		{			
+			session.setAttribute("sprache", request.getLocale());			
+		}
+		
+		/*
+		 * falls Sprachwahl erfolgt, entsprechende locale in die Session schreiben
+		 */
+		if (((HttpServletRequest) request).getParameter("sprache") != null)
+		{
+			String sprachwahl = ((HttpServletRequest) request).getParameter("sprache"); // ParameterValue aus POST lesen
+			switch (sprachwahl)
+			{
+			case "de":
+				locale = Locale.GERMAN;
+				break;
+			case "en":
+				locale = Locale.ENGLISH;
+				break;
+			default:
+				locale = request.getLocale();
+				break;
+			}			
+			session.setAttribute("sprache", locale);			
+		}
+		
 		
 		chain.doFilter(request, response);
-		
-		
+
 	}
 
 	/**
@@ -80,6 +76,6 @@ public class SprachversionFilter implements Filter
 	 */
 	public void init(FilterConfig fConfig) throws ServletException
 	{
-}
+	}
 
 }

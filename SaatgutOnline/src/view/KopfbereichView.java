@@ -2,30 +2,24 @@ package view;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Locale;
+import java.util.PropertyResourceBundle;
+import java.util.ResourceBundle;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class KopfbereichView
 {
-
-	private HttpServletResponse response;
 	private PrintWriter out;
+	private ResourceBundle textbundle;
 	
 	
-	public KopfbereichView(HttpServletResponse response)
+	public KopfbereichView(HttpServletRequest request, HttpServletResponse response)
 	{
-		/*
-		 * SCHRITT 3:
-		 * 
-		 * response entgegen nehmen und entschatten.
-		 * Aus der response den PrintWriter erzeugen.
-		 * 
-		 * --> weiter: unten
-		 */
-		this.response = response;
-
 		//PrintWriter erzeugen
-		this.response.setContentType("text/html");
+		response.setContentType("text/html");
 		try
 		{
 			this.out = response.getWriter();
@@ -34,6 +28,11 @@ public class KopfbereichView
 			System.out.println("PrintWriter nicht erstellt!");
 			e.printStackTrace();
 		}		
+		
+		HttpSession session = request.getSession();
+		Locale locale = (Locale)session.getAttribute("sprache");		
+		this.textbundle = PropertyResourceBundle.getBundle("I18N." + locale.getLanguage() + "." + getClass().getSimpleName(), locale);
+		
 	}
 
 	/*
@@ -95,7 +94,7 @@ public class KopfbereichView
 		out.println("<tr>\n<td colspan='2'>\n<input name='nutzername' value='Nutzername' type='text' size='25'>\n</td>\n</tr>");
 		out.println("<tr>\n<td>\n<input name='passwort' value='Passwort' type='password' size='15'></td>");
 		out.println("<td>\n<input name='login' value='Login' type='submit'>\n</td>\n</tr>");
-		out.println("<tr>\n<td colspan='2'>\n<a href='http://localhost:8080/SaatgutOnline/NoFunctionServlet'>Passwort vergessen?</a> (nf)\n</td>\n</tr>");
+		out.println("<tr>\n<td colspan='2'>\n<a href='http://localhost:8080/SaatgutOnline/NoFunctionServlet'>" + this.textbundle.getString("PASSWORT_VERGESSEN")+ "</a> (nf)\n</td>\n</tr>");
 		out.println("</table>");
 		out.println("</form>");		
 	}
@@ -103,13 +102,13 @@ public class KopfbereichView
 	public void outLogo()
 	{		
 		out.println("<table border='1' cellspacing='0' cellpadding='0'>\n<tr>\n<td>");
-		out.println("<img src='resources/bilder/logo.jpg' width=50% height=50% alt='Logo'>");
+		out.println("<img src='resources/bilder/logo.jpg' width=100px height= alt='Logo'>");
 		out.println("</td>\n</tr>\n</table>");		
 	}
 	
 	public void outSchriftzug()
 	{
-		out.println("<table border='1' cellspacing='0' cellpadding='0' width=15%>\n<tr>\n<td>");
+		out.println("<table border='1' cellspacing='0' cellpadding='0'>\n<tr>\n<td>");
 		out.println("<h2>Saatgut</h2>");
 		out.println("</td>\n</tr>\n<tr>\n<td>");		
 		out.println("<h3>Online</h3>");			
