@@ -26,7 +26,7 @@ public class KopfbereichController
 		 */
 		this.kopfbereichView = new KopfbereichView(request, response);
 		
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(false);
 		this.locale = (Locale)session.getAttribute("sprache");
 	}
 
@@ -55,6 +55,10 @@ public class KopfbereichController
 		
 		//TODO LogoutBereich-Verzweigung einfuegen
 			this.kopfbereichView.outLoginBereich();
+		
+		this.kopfbereichView.outInhaltsframeNeueSpalte();
+		
+		this.kopfbereichView.outWarenkorbPreview();
 		
 		this.kopfbereichView.outInhaltsframeNeueSpalte();
 		

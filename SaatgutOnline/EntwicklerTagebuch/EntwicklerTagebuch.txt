@@ -1,6 +1,23 @@
 EntwicklungsTagebuch f�r das JavaEE-Projekt "SaatgutOnline"
 
 
+
+--------------------------------------
+21:25h (Tom) - Änderungen im Framework
+--------------------------------------
+
+Wie ich grade feststellen musste, wurden im IndexPlatzhalterservlet (das ja irgendwie so eine Art Vorlage ist) bis eben grade
+noch KopfbereichController und FussbereichController includiert - DAS IST NICHT MEHR UP2DATE!
+Wir haben ja irgendwann die Controller von den Servlets getrennt - und da ist das nicht geändert worden. Aber das habe ich nun wagemutig nachgeholt! ^^
+
+	Inkludiert bitte in euren Servlets am Anfang
+
+		/Kopfbereich
+	und am Ende
+		/Fussbereich.
+
+Dann funzt des auch wieder! =)
+
 -----------------------------------------------------------
 27.April, 17:45h - (Tom) SprachversionsFilter implementiert
 -----------------------------------------------------------
