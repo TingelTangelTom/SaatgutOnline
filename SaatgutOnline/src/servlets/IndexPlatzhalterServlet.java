@@ -1,5 +1,4 @@
 
-
 package servlets;
 
 import java.io.IOException;
@@ -44,7 +43,7 @@ public class IndexPlatzhalterServlet extends HttpServlet
 		 */
 		DatenbankController.getVerbindung();
 		// Kopfbereich (und damit auch Navigationsbereich) einbinden
-		RequestDispatcher rd = getServletContext().getRequestDispatcher("/KopfbereichController");
+		RequestDispatcher rd = getServletContext().getRequestDispatcher("/Kopfbereich");
 		rd.include(request, response);
 				
 		
@@ -62,7 +61,7 @@ public class IndexPlatzhalterServlet extends HttpServlet
 		
 		
 		// Fussbereich einbinden
-		rd = getServletContext().getRequestDispatcher("/FussbereichController");
+		rd = getServletContext().getRequestDispatcher("/Fussbereich");
 		rd.include(request, response);		
 	}
 
