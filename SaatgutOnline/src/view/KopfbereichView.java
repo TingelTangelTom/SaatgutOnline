@@ -18,6 +18,9 @@ public class KopfbereichView
 	
 	public KopfbereichView(HttpServletRequest request, HttpServletResponse response)
 	{
+		/*
+		 * Schritt 3
+		 */
 		//PrintWriter erzeugen
 		response.setContentType("text/html");
 		try
@@ -29,7 +32,7 @@ public class KopfbereichView
 			e.printStackTrace();
 		}		
 		
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(false);
 		Locale locale = (Locale)session.getAttribute("sprache");
 		
 		this.textbundle = PropertyResourceBundle.getBundle("I18N." + locale.getLanguage() + "." + getClass().getSimpleName(), locale);
@@ -115,7 +118,9 @@ public class KopfbereichView
 	public void outSchriftzug()
 	{
 		out.println("<table border='1' cellspacing='0' cellpadding='0'>\n<tr>\n<td>");
-		out.println("<h2>Saatgut</h2>");
+		out.println("<h2>"
+				+ this.textbundle.getString("SAATGUT")
+				+ "</h2>");
 		out.println("</td>\n</tr>\n<tr>\n<td>");		
 		out.println("<h3>Online</h3>");			
 		out.println("</td>\n</tr>\n</table>");		

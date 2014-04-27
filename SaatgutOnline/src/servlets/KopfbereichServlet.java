@@ -14,7 +14,7 @@ import controller.KopfbereichController;
 /**
  * Servlet implementation class KopfbereichController
  */
-@WebServlet("/KopfbereichController")
+@WebServlet("/Kopfbereich")
 public class KopfbereichServlet extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
@@ -62,7 +62,7 @@ public class KopfbereichServlet extends HttpServlet
 		
 		
 		// Navigationsbereich einbinden
-		RequestDispatcher rd = getServletContext().getRequestDispatcher("/NavigationsbereichController");
+		RequestDispatcher rd = getServletContext().getRequestDispatcher("/Navigationsbereich");
 		rd.include(request, response);
 	}
 

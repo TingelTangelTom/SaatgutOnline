@@ -26,7 +26,7 @@ public class KopfbereichController
 		 */
 		this.kopfbereichView = new KopfbereichView(request, response);
 		
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(false);
 		this.locale = (Locale)session.getAttribute("sprache");
 	}
 

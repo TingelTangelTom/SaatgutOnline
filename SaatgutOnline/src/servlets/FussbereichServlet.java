@@ -13,7 +13,7 @@ import view.FussbereichView;
 /**
  * Servlet implementation class FussbereichController
  */
-@WebServlet("/FussbereichController")
+@WebServlet("/Fussbereich")
 public class FussbereichServlet extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
