@@ -33,17 +33,9 @@ public class KopfbereichController
 	 * -->weiter im KopfbereichServlet
 	 */
 	public void outKopfbereichAnzeigen()
-	{	
-		// Kopfbereich oeffnen
-		kopfbereichView.outKopfbereichAnfang();
-				
-		// Inhalt des Kopfbereiches ausgeben
+	{					
+		//Kopfbereich ausgeben
 		kopfbereichView.outKopfbereichInhalt();
-		
-
-		
-		// Kopfbereich schließen
-		kopfbereichView.outKopfbereichEnde();		
 	}
 	
 	

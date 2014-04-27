@@ -11,6 +11,7 @@ public class KopfbereichView
 	private HttpServletResponse response;
 	private PrintWriter out;
 	
+	
 	public KopfbereichView(HttpServletResponse response)
 	{
 		/*
@@ -51,14 +52,14 @@ public class KopfbereichView
 	{
 		out.println("<!doctype html>\n"
 				+ "<html>\n<head>\n"
-				+ "<meta charset=\"UTF-8\">\n"
+				+ "<meta charset='UTF-8'>\n"
 				+ "<link type=\"text/css\" href=\"resources/css/seitenlayout.css\" rel=\"stylesheet\" />\n"
 				+ "<title></title>\n"
 				+ "</head>\n<body>\n");
 		
-		out.println("<table class=\"kopfbereich\">\n"); // oeffnet Tabelle
+		out.println("<table class=\"kopfbereich\">\n");
 		
-		out.println("<tr>\n<td colspan='2'>\n"); // oeffnet Kopfbereich
+		out.println("<tr>\n<td colspan='2'>\n");
 	}
 
 	/**
@@ -75,21 +76,23 @@ public class KopfbereichView
 	 */
 	public void outKopfbereichInhalt()
 	{
-		out.println("<table border='0' width=100% cellspacing='0' cellpadding='0'>\n<tr>\n<td width=15%>");
+		this.outKopfbereichAnfang();
 		
-		this.outLogo();
+		out.println("<table border='1' width=100% cellspacing='0' cellpadding='0'>\n<tr>\n<td>");		
+		this.outLogo();			
+		out.println(HtmlAusgabe.NEUE_SPALTE);		
+		this.outSchriftzug();		
+		out.println(HtmlAusgabe.NEUE_SPALTE);		
+		this.outLoginBereich();		
+		out.println(HtmlAusgabe.TABELLE_SCHLIESSEN);
 		
-		out.println("</td>\n<td>");
-		
-		this.outLoginBereich();
-		
-		out.println("</td>\n</tr>\n</table>");
+		this.outKopfbereichEnde();
 	}
 	
 	public void outLoginBereich()
 	{
 		out.println("<form action='' method='POST'>");
-		out.println("<table border='0' cellspacing='0' cellpadding='0'>");
+		out.println("<table border='1' cellspacing='0' cellpadding='0'>");
 		out.println("<tr>\n<td colspan='2'>\n<input name='nutzername' value='Nutzername' type='text' size='25'>\n</td>\n</tr>");
 		out.println("<tr>\n<td>\n<input name='passwort' value='Passwort' type='password' size='15'></td>");
 		out.println("<td>\n<input name='login' value='Login' type='submit'>\n</td>\n</tr>");
@@ -100,11 +103,29 @@ public class KopfbereichView
 	
 	public void outLogo()
 	{		
-		out.println("<table border='0' cellspacing='0' cellpadding='0'>\n<tr>\n<td>");
-		out.println("<img src='resources/bilder/logo.jpg' width='75' height='75' alt='Logo'>");
-		out.println("</td>\n</tr>\n<tr>\n<td>");
-		out.println("<h3>SaatgutOnline</h3>");
+		out.println("<table border='1' cellspacing='0' cellpadding='0'>\n<tr>\n<td>");
+		out.println("<img src='resources/bilder/logo.jpg' width=50% height=50% alt='Logo'>");
 		out.println("</td>\n</tr>\n</table>");		
+	}
+	
+	public void outSchriftzug()
+	{
+		out.println("<table border='1' cellspacing='0' cellpadding='0' width=15%>\n<tr>\n<td>");
+		out.println("<h2>Saatgut</h2>");
+		out.println(HtmlAusgabe.NEUE_ZEILE_NEUE_SPALTE);
+		
+//		out.println("</td>\n</tr>\n<tr>\n<td>");
+		out.println("<h3>Online</h3>");	
+		
+		out.println(HtmlAusgabe.TABELLE_SCHLIESSEN);
+		
+//		out.println("</td>\n</tr>\n</table>");
+	}
+	
+	
+	public void outNeueSpalte()
+	{
+		out.println("</td>\n<td>");
 	}
 
 	
