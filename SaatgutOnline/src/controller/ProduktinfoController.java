@@ -70,9 +70,7 @@ public ProduktModel getProdukt(int id, int sprache_id) {
 
 		this.produktModel.setSteuersatz(steuersatz);
 		this.produktModel.setPreisBrutto(this.produktModel.getPreisNetto() * this.produktModel.getSteuersatz() / 100 + this.produktModel.getPreisNetto());
-		System.out.println(this.produktModel.getPreisNetto());
-		System.out.println(this.produktModel.getPreisBrutto());
-		System.out.println(this.produktModel.getSteuersatz());
+
 		return produktModel;
 	}
 

@@ -18,19 +18,19 @@ table {
     border: none;
 }
 
-/*
+
 a:link { text-decoration:none; font-weight:bold; color:#BEBEBE; }
 a:visited { text-decoration:none; font-weight:bold; color:#BEBEBE; }
 a:hover { text-decoration:none; font-weight:bold; color:#BEBEBE; }
 a:active { text-decoration:none; font-weight:bold; color:#BEBEBE; }
 a:focus { text-decoration:none; font-weight:bold; color:#BEBEBE; }
 
-.content a:link { text-decoration:none; font-weight:bold; color:#000000; }
-.content a:visited { text-decoration:none; font-weight:bold; color:#000000; }
-.content a:hover { text-decoration:none; font-weight:bold; color:#000000; }
-.content a:active { text-decoration:none; font-weight:bold; color:#000000; }
-.content a:focus { text-decoration:none; font-weight:bold; color:#000000; }
-*/
+.fussbereich a:link { text-decoration:none; font-weight:bold; color:#000000; }
+.fussbereich a:visited { text-decoration:none; font-weight:bold; color:#000000; }
+.fussbereich a:hover { text-decoration:none; font-weight:bold; color:#000000; }
+.fussbereich a:active { text-decoration:none; font-weight:bold; color:#000000; }
+.fussbereich a:focus { text-decoration:none; font-weight:bold; color:#000000; }
+
 
 .kopfbereich {
   	font-family: Verdana, Arial;

@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 public class ProduktModel {
 	private int id;
@@ -8,6 +9,7 @@ public class ProduktModel {
 	private int bestand;
 	private String name;
 	private String beschreibung;
+	private ArrayList<String> merkmale;
 	private String suchbegriffe;
 	private int angesehen;
 	private double preisNetto;
@@ -132,8 +134,14 @@ public class ProduktModel {
 
 	public void setSteuersatz(double steuersatz) {
 		this.steuersatz = steuersatz;
+	}
+
+	public ArrayList<String> getMerkmale() {
+		return merkmale;
+	}
+
+	public void setMerkmale(ArrayList<String> merkmale) {
+		this.merkmale = merkmale;
 	}	
-	
-	
 	
 }

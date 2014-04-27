@@ -30,7 +30,7 @@ public class ProduktinfoView {
 				+ "<tr><td>Bechriftung</td><td>Cell 3</td></tr>" // Eigenschaft 1
 				+ "<tr><td>Bechriftung</td><td>Cell 3</td></tr>" // Eigenschaft 2
 				+ "<tr><td>Bechriftung</td><td>Cell 3</td></tr>" // Eigenschaft 3
-				+ "<tr><td colspan=\"2\">" + htmlOutput.outPreisformat(sprache, produktModel.getPreisBrutto()) + " " + htmlOutput.outPreisverordnung(sprache, 19.00) + "</td></tr>" // Titel
+				+ "<tr><td colspan=\"2\">" + htmlOutput.outPreisformat(sprache, produktModel.getPreisBrutto()) + " " + htmlOutput.outPreisverordnung(sprache, produktModel.getSteuersatz()) + "</td></tr>" // Titel
 				+ "<tr><td colspan=\"3\">" + produktModel.getBeschreibung() + "</td></tr>" // Produktbeschreibung
 				+ "<tr><td colspan=\"3\">Warenkorb</td></tr>" // Button Warenkorb
 				+ "</table>";
