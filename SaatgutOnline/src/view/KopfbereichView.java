@@ -131,7 +131,7 @@ public class KopfbereichView
 		out.println("<form action='' method='POST'>");
 		out.println("<table border='1'><tr><td>	<div>");
   		out.println("<button type='submit' name='sprache' value='de'>");
-      	out.println("<p><img src='resources/bilder/de-flagge.jpg' height=10px width=10px alt='de'><br></p>");
+      	out.println("<img src='resources/bilder/flags_iso/48/de.png' height=48px width=48px alt='de'>");
     	out.println("</button></div></td></tr><tr><td>");
     	out.println(this.textbundle.getString("SPRACHWAHL"));
     	out.println("</td></tr></table></form>");
@@ -142,7 +142,7 @@ public class KopfbereichView
 		out.println("<form action='' method='POST'>");
 		out.println("<table border='1'><tr><td>	<div>");
   		out.println("<button type='submit' name='sprache' value='en'>");
-      	out.println("<p><img src='resources/bilder/en-flagge.jpg' height=10px width=10px alt='en'><br></p>");
+      	out.println("<img src='resources/bilder/flags_iso/48/us.png' height=48px width=48px alt='en'>");
     	out.println("</button></div></td></tr><tr><td>");
     	out.println(this.textbundle.getString("SPRACHWAHL"));
     	out.println("</td></tr></table></form>");
