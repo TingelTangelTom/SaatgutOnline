@@ -3,6 +3,13 @@ package controller;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.PropertyResourceBundle;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import model.ProduktModel;
 
 
@@ -10,25 +17,32 @@ import model.ProduktModel;
 public class ProduktinfoController {
 	
 	private ProduktModel produktModel;
-	double steuersatz;
-	double preisBrutto;
+	private Locale locale;
+	private double steuersatz;
+	//private double preisBrutto;
+	private HashMap<String, String> merkmale;
 	
-	public ProduktinfoController() {
+	public ProduktinfoController(HttpServletRequest request) {
 		super();
+		
 		this.produktModel = new ProduktModel();
+		this.merkmale = new HashMap<String, String>();
+		HttpSession session = request.getSession();
+		this.locale = (Locale)session.getAttribute("sprache");
+		
 	}
 
 	// Testabfrage
-public ProduktModel getProdukt(int id, int sprache_id) {
+	public ProduktModel getProdukt(int id) {
 		
 		DatenbankController.getVerbindung();
-		
+
 		try {
 			String query = "SELECT p.produkt_id, p.produkt_bestand, pb.produkt_name, pb.produkt_beschreibung,"
 						+ "pb.produkt_suchbegriffe, pb.produkt_angesehen, p.produkt_preis, p.produkt_gewicht,"
 						+ "p.produkt_steuer_id, p.produkt_datum_hinzugefuegt, p.produkt_datum_geaendert FROM "
 						+ "produkt AS p INNER JOIN produktbeschreibung AS pb ON p.produkt_id = pb.produkt_id "
-						+ "WHERE pb.sprache_id = '" + sprache_id + "' AND p.produkt_id = '" + id + "' ORDER "
+						+ "WHERE pb.sprache_id = '1' AND p.produkt_id = '" + id + "' ORDER "
 						+ "BY pb.produkt_name";
 
 		
@@ -53,10 +67,8 @@ public ProduktModel getProdukt(int id, int sprache_id) {
 			e.printStackTrace();
 		}
 		
-		DatenbankController.getVerbindung();
-		
 		try {
-			String query = "SELECT steuer_satz FROM steuer WHERE steuer_id = '1'";
+			String query = "SELECT steuer_satz FROM steuer WHERE steuer_id = " + this.produktModel.getSteuersatz_id();
 			
 			Statement statement = DatenbankController.verbindung.createStatement();
 			ResultSet resultset = statement.executeQuery(query);
@@ -70,6 +82,29 @@ public ProduktModel getProdukt(int id, int sprache_id) {
 
 		this.produktModel.setSteuersatz(steuersatz);
 		this.produktModel.setPreisBrutto(this.produktModel.getPreisNetto() * this.produktModel.getSteuersatz() / 100 + this.produktModel.getPreisNetto());
+		
+		try {
+			String query = "SELECT p.produktmerkmal_name, pz.produktmerkmal_wert FROM "
+					+ "produktmerkmal AS p INNER JOIN produktmerkmal_zuordnung AS pz ON p.produktmerkmal_id = pz.produktmerkmal_id "
+					+ "WHERE pz.produkt_id = '1' AND p.sprache_id = '1' ORDER BY p.produktmerkmal_name";
+			
+			Statement statement = DatenbankController.verbindung.createStatement();
+			ResultSet resultset = statement.executeQuery(query);
+			
+			String name;
+			String wert;
+			
+			while (resultset.next()){
+				name = resultset.getString(1);
+				wert = resultset.getString(2);
+				this.merkmale.put(name, wert);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		this.produktModel.setMerkmale(merkmale);
 
 		return produktModel;
 	}

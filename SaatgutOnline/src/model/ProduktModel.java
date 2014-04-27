@@ -2,6 +2,7 @@ package model;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ProduktModel {
 	private int id;
@@ -9,7 +10,7 @@ public class ProduktModel {
 	private int bestand;
 	private String name;
 	private String beschreibung;
-	private ArrayList<String> merkmale;
+	private HashMap<String, String> merkmale;
 	private String suchbegriffe;
 	private int angesehen;
 	private double preisNetto;
@@ -136,12 +137,12 @@ public class ProduktModel {
 		this.steuersatz = steuersatz;
 	}
 
-	public ArrayList<String> getMerkmale() {
+	public HashMap<String, String> getMerkmale() {
 		return merkmale;
 	}
 
-	public void setMerkmale(ArrayList<String> merkmale) {
+	public void setMerkmale(HashMap<String, String> merkmale) {
 		this.merkmale = merkmale;
-	}	
+	}
 	
 }

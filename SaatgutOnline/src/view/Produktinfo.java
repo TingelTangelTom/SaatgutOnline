@@ -1,37 +1,51 @@
 package view;
 
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.PropertyResourceBundle;
+import java.util.ResourceBundle;
+
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
 
 import controller.HtmlOutput;
 import controller.ProduktinfoController;
 import model.ProduktModel;
 
-public class ProduktinfoView {
-	ProduktinfoController produktController;
-	ProduktModel produktModel;
-	HtmlOutput htmlOutput;
-	private String output;	
-	public static final int ANZAHL_PRODUKTE_PRO_ZEILE   = 5;
-	public static final int ANZAHL_ZEILEN   = 5;
+public class Produktinfo {
+	private ResourceBundle resourceBundle;
+	private ProduktinfoController produktController;
+	private ProduktModel produktModel;
+	private HtmlOutput htmlOutput;
+	private String output;
+	private HashMap<String, String> merkmale;
 	
-	public ProduktinfoView() {
-		this.produktController = new ProduktinfoController();
+	public Produktinfo(HttpServletRequest request) {
+		
+		this.produktController = new ProduktinfoController(request);
 		this.produktModel = new ProduktModel();
-		this.htmlOutput = new HtmlOutput();
+		this.htmlOutput = new HtmlOutput(request);
+		
+		HttpSession session = request.getSession();
+		Locale locale = (Locale)session.getAttribute("sprache");
+		this.resourceBundle = PropertyResourceBundle.getBundle("I18N." + locale.getLanguage() + "." + getClass().getSimpleName(), locale);
 	}
 
 	//texte.getString("WILLKOMMEN");
 	public String anzeigenProduktinfo() {	
-		produktModel = this.produktController.getProdukt(1, 1);
+		produktModel = this.produktController.getProdukt(1);
 		Locale sprache = Locale.GERMANY;
+		
+		this.merkmale = this.produktModel.getMerkmale();
+		
 		output = "<table class=\"produktinfo\">"
 				+ "<tr><td rowspan=\"6\">Cell 1</td><td colspan=\"2\">" + produktModel.getName() + "</td></tr>" // Titel
-				+ "<tr><td colspan=\"2\">" + produktModel.getName() + "</td></tr>" // Titel
-				+ "<tr><td>Bechriftung</td><td>Cell 3</td></tr>" // Eigenschaft 1
-				+ "<tr><td>Bechriftung</td><td>Cell 3</td></tr>" // Eigenschaft 2
-				+ "<tr><td>Bechriftung</td><td>Cell 3</td></tr>" // Eigenschaft 3
-				+ "<tr><td colspan=\"2\">" + htmlOutput.outPreisformat(sprache, produktModel.getPreisBrutto()) + " " + htmlOutput.outPreisverordnung(sprache, produktModel.getSteuersatz()) + "</td></tr>" // Titel
-				+ "<tr><td colspan=\"3\">" + produktModel.getBeschreibung() + "</td></tr>" // Produktbeschreibung
+				+ "<tr><td colspan=\"2\">" + this.produktModel.getName() + "</td></tr>"; // Titel
+				for(String name : merkmale.keySet()) {
+					output += "<tr><td>" + name + "</td><td>" + merkmale.get(name) +"</td></tr>"; // Eigenschaft 1
+				}
+		output += "<tr><td colspan=\"2\">" + htmlOutput.outPreisformat(this.produktModel.getPreisBrutto()) + " " + htmlOutput.outPreisverordnung(this.produktModel.getSteuersatz()) + "</td></tr>" // Titel
+				+ "<tr><td colspan=\"3\">" + this.produktModel.getBeschreibung() + "</td></tr>" // Produktbeschreibung
 				+ "<tr><td colspan=\"3\">Warenkorb</td></tr>" // Button Warenkorb
 				+ "</table>";
 				
