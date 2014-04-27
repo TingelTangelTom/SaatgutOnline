@@ -1,4 +1,4 @@
-EntwicklungsTagebuch für das JavaEE-Projekt "SaatgutOnline"
+EntwicklungsTagebuch fï¿½r das JavaEE-Projekt "SaatgutOnline"
 
 
 -----------------------------------------------------------
@@ -7,10 +7,10 @@ EntwicklungsTagebuch für das JavaEE-Projekt "SaatgutOnline"
 
 Hallo meine lieben Mitstreiter,
 
-ich dachte mir, es wäre vielleicht eine ganz gute Idee, ein Dokument anzulegen, in dem man mal eben ein paar RundInfos fürs Team raushauen könnte.
+ich dachte mir, es wï¿½re vielleicht eine ganz gute Idee, ein Dokument anzulegen, in dem man mal eben ein paar RundInfos fï¿½rs Team raushauen kï¿½nnte.
 Gedacht - tun getan! ^^
 
-Ps. ich pack das hier auch mal ins Projekt - dann sieht man immer gleich beim pullen, wenn sich hier was geändert hat,
+Ps. ich pack das hier auch mal ins Projekt - dann sieht man immer gleich beim pullen, wenn sich hier was geï¿½ndert hat,
 und man kann beim commit das Thema dazu schreiben. =)
 
 -------
@@ -18,45 +18,45 @@ und man kann beim commit das Thema dazu schreiben. =)
 Zum Thema:
 
 Der SprachversionsFilter spring an, sobald irgendein Servlet angesteuert wird (urlPatterns = { "/*" }).
-Er guckt zunächst, ob es eine Session gibt, erzeugt im Zweifeldfall eine neue Session, und speichert dann
+Er guckt zunï¿½chst, ob es eine Session gibt, erzeugt im Zweifeldfall eine neue Session, und speichert dann
 unter dem Attribut "sprache" ein Locale-Objekt.
 
 
 
-WAS FÜR EUCH WICHTIG IST:
+WAS Fï¿½R EUCH WICHTIG IST:
 
-Ihr müsst in den Ordnern I18N.de und I18N.en .properties-Dateien anlegen, die heißen wie die Klasse, aus der ihr später darauf zugreifen wollt.
+Ihr mï¿½sst in den Ordnern I18N.de und I18N.en .properties-Dateien anlegen, die heiï¿½en wie die Klasse, aus der ihr spï¿½ter darauf zugreifen wollt.
 Schaut einfach mal rein, Simon und ich haben schon damit gearbeitet - das sollte ein gutes Beispiel sein.
 
-Dann wollt ihr natürlich auch auf diese Textbausteine zugreifen:
+Dann wollt ihr natï¿½rlich auch auf diese Textbausteine zugreifen:
 
-Ihr müsst dort, wo ihr mit der Internationalisierung arbeiten wollt, zunächst einmal die Session verfügbar haben.
+Ihr mï¿½sst dort, wo ihr mit der Internationalisierung arbeiten wollt, zunï¿½chst einmal die Session verfï¿½gbar haben.
 Auf die Session greift ihr so zu:
 
 	HttpSession session = request.getSession();
 
-Das setzt natürlich vorraus, dass dort auch die >HttpRequest request;< verfügbar ist - also entsprechend aus dem Servlet mitschicken!
+Das setzt natï¿½rlich vorraus, dass dort auch die >HttpRequest request;< verfï¿½gbar ist - also entsprechend aus dem Servlet mitschicken!
 Dann holt ihr euch das Locale-Objekt wie folgt aus der Session:
 
 		Locale locale = (Locale)session.getAttribute("sprache");		
 
-Um nun auf die Texte aus den I18N-properties-Datein zugreifen zu können, müsst ihr ein ResourceBundle-Objekt erzeugen
+Um nun auf die Texte aus den I18N-properties-Datein zugreifen zu kï¿½nnen, mï¿½sst ihr ein ResourceBundle-Objekt erzeugen
 
-	ResourceBunde textbundle = PropertyResourceBundle.getBundle("I18N." + locale.getLanguage() + "." + getClass().getSimpleName(), locale);
+	ResourceBunde textbundle = PropertyResourceBundle.getBundle("I18N." + locale.getLanguage() + "." + getClass().getSimpleName(), locale); <--- Meine Idee :-)
 		
-und darüber auf die Textblöcke zugreifen, indem ihr entweder direkt an die Stelle, wo der internationalisierte Text
+und darï¿½ber auf die Textblï¿½cke zugreifen, indem ihr entweder direkt an die Stelle, wo der internationalisierte Text
 auftauchen soll das textbundle einbaut:
 
 	textbundle.getString("BEISPIELTEXT")
 
-oder es noch in einem String zwischenspeichert, den ihr dann später an Ort und Stelle unter bringt:
+oder es noch in einem String zwischenspeichert, den ihr dann spï¿½ter an Ort und Stelle unter bringt:
 
 	final String beispieltext = textbundle.getString("BEISPIELTEXT");
 
-Das bietet sich an, wenn man den Text öfter braucht.
+Das bietet sich an, wenn man den Text ï¿½fter braucht.
 
 
-ich persönlich habe es so gemacht, dass beim Erzeugen des Objektes der Klasse, in der ich die internationalisierten Textblöcke verwenden wollte
+ich persï¿½nlich habe es so gemacht, dass beim Erzeugen des Objektes der Klasse, in der ich die internationalisierten Textblï¿½cke verwenden wollte
 (bei mir ist das KopfbereichView - im Zweifelsfalle einfach mal reingucken...^^) den request mitgeschickt habe, dann die Klassenvariable 
 
 	private ResourceBundle textbundle;
@@ -73,7 +73,7 @@ erzeugt, und im Konstruktor folgendes aufgerufen habe:
 
 Ich denke mal, dass du im Servlet-Package die Datei AGB angelegt hast.
 Du leitest von dort aus auf das (nicht vorhandene) Servlet /AGBController weiter - das funktioniert so nicht!
-Statt dessen musst du ein AGBController-Objekt erzeugen (und am besten gleich den request mitschicken, um auf die Session zugreifen zu können):
+Statt dessen musst du ein AGBController-Objekt erzeugen (und am besten gleich den request mitschicken, um auf die Session zugreifen zu kï¿½nnen):
 
 	AGBController agbController = new AGBController(request);
 
@@ -81,7 +81,7 @@ Die Action passiert dann im Konstruktor, wo du ja schon die Datenbank-Verbindung
 
 -------
 
-Hoffe, ihr habt brav alle alles durchgelesen, hehe, und einen schönen, bunten Tag! =D
+Hoffe, ihr habt brav alle alles durchgelesen, hehe, und einen schï¿½nen, bunten Tag! =D
 
 
 
@@ -91,6 +91,10 @@ ACHTUNG: DIESER BLOCK SOLL immer GANZ UNTEN STEHEN!
 - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 Bitte offene Fragen hier posten:
+
+Bitte in den Filter noch die sprache_id einbauen
+
+Stehen aktuelle Anregungen nicht immer oben?
 
 
 
