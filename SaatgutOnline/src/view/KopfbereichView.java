@@ -30,7 +30,8 @@ public class KopfbereichView
 		}		
 		
 		HttpSession session = request.getSession();
-		Locale locale = (Locale)session.getAttribute("sprache");		
+		Locale locale = (Locale)session.getAttribute("sprache");
+		
 		this.textbundle = PropertyResourceBundle.getBundle("I18N." + locale.getLanguage() + "." + getClass().getSimpleName(), locale);
 		
 	}
@@ -58,7 +59,7 @@ public class KopfbereichView
 		
 		out.println("<table class=\"kopfbereich\">\n");
 		
-		out.println("<tr>\n<td colspan='2'>\n");
+		out.println("<tr>\n<td colspan='2'>\n");		
 	}
 
 	/**
@@ -69,32 +70,37 @@ public class KopfbereichView
 		out.println("</td>\n</tr>\n"); // schliesst Kopfbereich
 	}
 	
-	/**
-	 * Inhalte des Kopfbereichs
-	 */
-	public void outKopfbereichInhalt()
+	public void outInhaltsframeAnfang()
 	{
-		this.outKopfbereichAnfang();
-		
-		out.println("<table border='1' width=100% cellspacing='0' cellpadding='0'>\n<tr>\n<td>");		
-		this.outLogo();			
-		out.println(HtmlAusgabe.NEUE_SPALTE);		
-		this.outSchriftzug();		
-		out.println(HtmlAusgabe.NEUE_SPALTE);		
-		this.outLoginBereich();		
-		out.println(HtmlAusgabe.TABELLE_SCHLIESSEN);
-		
-		this.outKopfbereichEnde();
+		out.println("<table border='1' width=100% cellspacing='0' cellpadding='0'>\n<tr>\n<td>");
+	}
+	
+	public void outInhaltsframeNeueSpalte()
+	{
+		out.println("</td>\n<td>");
+	}
+	
+	public void outInhaltsframeEnde()
+	{
+		out.println("</td>\n</tr>\n</table>");
 	}
 	
 	public void outLoginBereich()
 	{
 		out.println("<form action='' method='POST'>");
 		out.println("<table border='1' cellspacing='0' cellpadding='0'>");
-		out.println("<tr>\n<td colspan='2'>\n<input name='nutzername' value='Nutzername' type='text' size='25'>\n</td>\n</tr>");
-		out.println("<tr>\n<td>\n<input name='passwort' value='Passwort' type='password' size='15'></td>");
-		out.println("<td>\n<input name='login' value='Login' type='submit'>\n</td>\n</tr>");
-		out.println("<tr>\n<td colspan='2'>\n<a href='http://localhost:8080/SaatgutOnline/NoFunctionServlet'>" + this.textbundle.getString("PASSWORT_VERGESSEN")+ "</a> (nf)\n</td>\n</tr>");
+		out.println("<tr>\n<td>"
+				+ this.textbundle.getString("NUTZERNAME")
+				+ "</td><td colspan='2'><input name='nutzername' type='text' size='25'>\n</td>\n</tr>");
+		out.println("<tr>\n<td>\n"
+				+ this.textbundle.getString("PASSWORT")
+				+ "</td><td><input name='passwort' type='password' size='15'></td>");
+		out.println("<td>\n<input name='login' value='"
+				+ this.textbundle.getString("ANMELDEN")
+				+ "' type='submit'>\n</td>\n</tr>");
+		out.println("<tr>\n<td></td><td colspan='2'>\n<a href='http://localhost:8080/SaatgutOnline/NoFunctionServlet'>"
+				+ this.textbundle.getString("PASSWORT_VERGESSEN") 
+				+ "</a> (nf)\n</td>\n</tr>");
 		out.println("</table>");
 		out.println("</form>");		
 	}
@@ -102,7 +108,7 @@ public class KopfbereichView
 	public void outLogo()
 	{		
 		out.println("<table border='1' cellspacing='0' cellpadding='0'>\n<tr>\n<td>");
-		out.println("<img src='resources/bilder/logo.jpg' width=100px height= alt='Logo'>");
+		out.println("<img src='resources/bilder/logo.jpg' width=100px height=100px alt='Logo'>");
 		out.println("</td>\n</tr>\n</table>");		
 	}
 	
@@ -115,7 +121,27 @@ public class KopfbereichView
 		out.println("</td>\n</tr>\n</table>");		
 	}
 	
-
+	public void outSprachwahlDe()
+	{
+		out.println("<form action='' method='POST'>");
+		out.println("<table border='1'><tr><td>	<div>");
+  		out.println("<button type='submit' name='sprache' value='de'>");
+      	out.println("<p><img src='resources/bilder/de-flagge.jpg' height=10px width=10px alt='de'><br></p>");
+    	out.println("</button></div></td></tr><tr><td>");
+    	out.println(this.textbundle.getString("SPRACHWAHL"));
+    	out.println("</td></tr></table></form>");
+	}
+	
+	public void outSprachwahlEn()
+	{
+		out.println("<form action='' method='POST'>");
+		out.println("<table border='1'><tr><td>	<div>");
+  		out.println("<button type='submit' name='sprache' value='en'>");
+      	out.println("<p><img src='resources/bilder/en-flagge.jpg' height=10px width=10px alt='en'><br></p>");
+    	out.println("</button></div></td></tr><tr><td>");
+    	out.println(this.textbundle.getString("SPRACHWAHL"));
+    	out.println("</td></tr></table></form>");
+	}
 	
 	
 }

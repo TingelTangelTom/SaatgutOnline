@@ -1,14 +1,18 @@
 package controller;
 
+import java.util.Locale;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import view.KopfbereichView;
 
 public class KopfbereichController
 {
 	private KopfbereichView kopfbereichView;
-	
+	private Locale locale;
+		
 	public KopfbereichController(HttpServletRequest request, HttpServletResponse response)
 	{
 		/*
@@ -21,6 +25,9 @@ public class KopfbereichController
 		 *  --> weiter im KopfbereichView
 		 */
 		this.kopfbereichView = new KopfbereichView(request, response);
+		
+		HttpSession session = request.getSession();
+		this.locale = (Locale)session.getAttribute("sprache");
 	}
 
 	/*
@@ -35,11 +42,54 @@ public class KopfbereichController
 	 */
 	public void outKopfbereichAnzeigen()
 	{					
-		//Kopfbereich ausgeben
-		kopfbereichView.outKopfbereichInhalt();
+		this.kopfbereichView.outKopfbereichAnfang();
+		this.kopfbereichView.outInhaltsframeAnfang();
+		
+		this.kopfbereichView.outLogo();
+		
+		this.kopfbereichView.outInhaltsframeNeueSpalte();
+		
+		this.kopfbereichView.outSchriftzug();
+		
+		this.kopfbereichView.outInhaltsframeNeueSpalte();
+		
+		//TODO LogoutBereich-Verzweigung einfuegen
+			this.kopfbereichView.outLoginBereich();
+		
+		this.kopfbereichView.outInhaltsframeNeueSpalte();
+		
+		// Sprache ermitteln und entsprechende Sprachwahl anbieten
+		if(this.locale.getLanguage() != null && this.locale.getLanguage() == "de")
+		{
+			this.kopfbereichView.outSprachwahlEn();
+		}
+		else
+		{
+			this.kopfbereichView.outSprachwahlDe();
+		}
+		
+		this.kopfbereichView.outInhaltsframeEnde();
+		this.kopfbereichView.outKopfbereichEnde();	
 	}
 	
 	
+//	/**
+//	 * Inhalte des Kopfbereichs
+//	 */
+//	public void outKopfbereichInhalt()
+//	{
+//		this.outKopfbereichAnfang();
+//		
+//				
+//		this.outLogo();			
+//		out.println("</td>\n<td>");		
+//		this.outSchriftzug();		
+//		out.println("</td>\n<td>");		
+//		this.outLoginBereich();		
+//		
+//		
+//		this.outKopfbereichEnde();
+//	}
 
 	
 	
