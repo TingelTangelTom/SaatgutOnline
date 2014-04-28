@@ -38,7 +38,7 @@ public class SprachversionFilter implements Filter
 			ServletException
 	{
 System.out.println("\n---SprachversionsFilter---");
-		DatenbankController.getVerbindung();
+
 		HttpSession session = ((HttpServletRequest) request).getSession(); 
 		Locale locale;
 		
@@ -101,6 +101,7 @@ System.out.println("---pre-processing  ende---");
 	
 	private void spracheIdInSessionLegen(HttpSession session, Locale locale)
 	{
+		DatenbankController.getVerbindung();
 		try {
 			String query = "SELECT sprache_id FROM sprache WHERE name = \"" + locale.getLanguage() + "\"";
 			
