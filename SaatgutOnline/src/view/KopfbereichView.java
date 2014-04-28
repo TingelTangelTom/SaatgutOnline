@@ -118,32 +118,26 @@ public class KopfbereichView
 	public void outSchriftzug()
 	{
 		out.println("<table border='1' cellspacing='0' cellpadding='0'>\n<tr>\n<td>");
-		out.println("<h2>Saatgut</h2>");
+		out.println("<h1>Saatgut</h1>");
 		out.println("</td>\n</tr>\n<tr>\n<td>");		
-		out.println("<h3>Online</h3>");			
+		out.println("<h2>Online</h2>");			
 		out.println("</td>\n</tr>\n</table>");		
 	}
 	
-	public void outSprachwahlDe()
-	{
-		out.println("<form action='' method='POST'>");
-		out.println("<table border='1'><tr><td>	<div>");
-  		out.println("<button type='submit' name='sprache' value='de'>");
-      	out.println("<img src='resources/bilder/flags_iso/48/de.png' height=48px width=48px alt='de'>");
-    	out.println("</button></div></td></tr><tr><td>");
-    	out.println(this.resourceBundle.getString("SPRACHWAHL"));
-    	out.println("</td></tr></table></form>");
-	}
-	
-	public void outSprachwahlEn()
-	{
-		out.println("<form action='' method='POST'>");
-		out.println("<table border='1'><tr><td>	<div>");
-  		out.println("<button type='submit' name='sprache' value='us'>");
-      	out.println("<img src='resources/bilder/flags_iso/48/us.png' height=48px width=48px alt='us'>");
-    	out.println("</button></div></td></tr><tr><td>");
-    	out.println(this.resourceBundle.getString("SPRACHWAHL"));
-    	out.println("</td></tr></table></form>");
+	public void outSprachwahl()
+	{		
+		out.println("<table border=\"1\">\n<tr>\n<td>");
+		out.println("<form action=\"\" method=\"POST\">");		
+		out.println("<input type=\"image\" src=\"resources/bilder/flags_iso/24/de.png\" alt=\"de\">");
+		out.println("<input type=\"hidden\" name=\"sprache\" value=\"de\"");
+		out.println("</form>");
+		out.println("</td>\n<td>");
+		out.println("<form action=\"\" method=\"POST\">");
+		out.println("<input type=\"image\" src=\"resources/bilder/flags_iso/24/us.png\" alt=\"en\">");
+		out.println("<input type=\"hidden\" name=\"sprache\" value=\"en\"");
+		out.println("</form>");
+		out.println("</td>\n</tr>\n<td colspan = \"2\"");
+		out.println("</td></tr></table>");		
 	}
 	
 	public void outWarenkorbPreview()

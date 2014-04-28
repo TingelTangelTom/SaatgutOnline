@@ -26,7 +26,7 @@ public class KopfbereichController
 		 */
 		this.kopfbereichView = new KopfbereichView(request, response);
 		
-		HttpSession session = request.getSession(false);
+		HttpSession session = request.getSession();
 		this.locale = (Locale)session.getAttribute("sprache");
 	}
 
@@ -62,15 +62,17 @@ public class KopfbereichController
 		
 		this.kopfbereichView.outInhaltsframeNeueSpalte();
 		
-		// Sprache ermitteln und entsprechende Sprachwahl anbieten
-		if(this.locale.getLanguage() != null && this.locale.getLanguage() == "de")
-		{
-			this.kopfbereichView.outSprachwahlEn();
-		}
-		else
-		{
-			this.kopfbereichView.outSprachwahlDe();
-		}
+//		// Sprache ermitteln und entsprechende Sprachwahl anbieten
+//		if(this.locale.getLanguage() != null && this.locale.getLanguage() == "de")
+//		{
+//			this.kopfbereichView.outSprachwahlEn();
+//		}
+//		else
+//		{
+//			this.kopfbereichView.outSprachwahlDe();
+//		}
+		
+		this.kopfbereichView.outSprachwahl();
 		
 		this.kopfbereichView.outInhaltsframeEnde();
 		this.kopfbereichView.outKopfbereichEnde();	

@@ -37,7 +37,8 @@ public class SprachversionFilter implements Filter
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,
 			ServletException
 	{
-		DatenbankController.getVerbindung();
+System.out.println("\n---SprachversionsFilter---");
+
 		HttpSession session = ((HttpServletRequest) request).getSession(); 
 		Locale locale;
 		
@@ -57,8 +58,6 @@ System.out.println("Keine Sprache in der Session hinterlegt.");
 			{
 				locale = Locale.ENGLISH;
 			}
-System.out.println(locale.getLanguage());
-			
 			session.setAttribute("sprache", locale);
 			spracheIdInSessionLegen(session, locale);			
 		}
@@ -68,7 +67,7 @@ System.out.println(locale.getLanguage());
 		 */
 		if (((HttpServletRequest) request).getParameter("sprache") != null)
 		{
-System.out.println("Sprachauswahl erfolgt.");			
+System.out.println("Sprachauswahl per SprachversionFilter erfolgt.");			
 			
 			String sprachwahl = ((HttpServletRequest) request).getParameter("sprache"); // ParameterValue aus POST lesen
 			switch (sprachwahl)
@@ -86,9 +85,11 @@ System.out.println("Sprachauswahl erfolgt.");
 			session.setAttribute("sprache", locale);
 			spracheIdInSessionLegen(session, locale);
 		}
-				
-		chain.doFilter(request, response);
+System.out.println("---pre-processing  ende---");
 
+
+		chain.doFilter(request, response);
+	
 	}
 
 	/**
@@ -100,6 +101,7 @@ System.out.println("Sprachauswahl erfolgt.");
 	
 	private void spracheIdInSessionLegen(HttpSession session, Locale locale)
 	{
+		DatenbankController.getVerbindung();
 		try {
 			String query = "SELECT sprache_id FROM sprache WHERE name = \"" + locale.getLanguage() + "\"";
 			
@@ -107,7 +109,8 @@ System.out.println("Sprachauswahl erfolgt.");
 			ResultSet resultset = statement.executeQuery(query);
 			if(resultset.next()){
 				session.setAttribute("spracheId", resultset.getInt(1));
-				System.out.println(session.getAttribute("spracheId"));
+System.out.println("sprache = " + locale.getLanguage());
+System.out.println("spracheId = " + session.getAttribute("spracheId"));
 			}
 		} catch (SQLException e) {
 			System.out.println("SELECT-Anweisung nicht ausgeführt!");
