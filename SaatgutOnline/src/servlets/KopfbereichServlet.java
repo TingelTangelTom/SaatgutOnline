@@ -1,6 +1,7 @@
  package servlets;
 
 import java.io.IOException;
+import java.util.Enumeration;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -73,16 +74,18 @@ public class KopfbereichServlet extends HttpServlet
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
 			IOException
 	{
-		System.out.println("\nPOST-Attribut angenommen...");
+		System.out.println("\nPOST-Attribut(e) angenommen:");
 		
-		
-		if(request.getParameter("login") != null)
+		Enumeration<String> paramaters = request.getParameterNames();
+		while (paramaters.hasMoreElements())
 		{
-			System.out.println("LOGIN erfolgt!");
-			System.out.println("Nutzername: " + request.getParameter("nutzername"));
-			System.out.println("Passwort: " + request.getParameter("passwort"));
-			
+			String name = paramaters.nextElement();
+			String value = request.getParameter(name);
+			System.out.println(name + " = " + value);			
 		}
+		
+		System.out.println("");
+		
 		
 		doGet(request, response);
 	}
