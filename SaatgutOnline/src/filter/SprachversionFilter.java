@@ -1,6 +1,9 @@
 package filter;
 
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Locale;
 
 import javax.servlet.Filter;
@@ -12,6 +15,8 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import controller.DatenbankController;
 
 /**
  * Servlet Filter implementation class SprachversionFilter
@@ -32,17 +37,30 @@ public class SprachversionFilter implements Filter
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,
 			ServletException
 	{
-
-		HttpSession session = ((HttpServletRequest) request).getSession(true); 
+		DatenbankController.getVerbindung();
+		HttpSession session = ((HttpServletRequest) request).getSession(); 
 		Locale locale;
 		
 		/*
 		 * wenn noch keine Sprache in der Session steht,
-		 * eingestellte Sprache des Browsers als Defaultwert setzen.
+		 * Browsersprache auslesen. Wenn diese NICHT Deutsch ist,
+		 * default auf english setzen.
 		 */
 		if(session.getAttribute("sprache") == null)
-		{			
-			session.setAttribute("sprache", request.getLocale());			
+		{	
+			
+System.out.println("Keine Sprache in der Session hinterlegt.");
+
+			locale = request.getLocale();
+			
+			if(! locale.equals(Locale.GERMAN))
+			{
+				locale = Locale.ENGLISH;
+			}
+System.out.println(locale.getLanguage());
+			
+			session.setAttribute("sprache", locale);
+			spracheIdInSessionLegen(session, locale);			
 		}
 		
 		/*
@@ -50,6 +68,8 @@ public class SprachversionFilter implements Filter
 		 */
 		if (((HttpServletRequest) request).getParameter("sprache") != null)
 		{
+System.out.println("Sprachauswahl erfolgt.");			
+			
 			String sprachwahl = ((HttpServletRequest) request).getParameter("sprache"); // ParameterValue aus POST lesen
 			switch (sprachwahl)
 			{
@@ -60,13 +80,13 @@ public class SprachversionFilter implements Filter
 				locale = Locale.ENGLISH;
 				break;
 			default:
-				locale = request.getLocale();
+				locale = Locale.ENGLISH;
 				break;
 			}			
-			session.setAttribute("sprache", locale);			
+			session.setAttribute("sprache", locale);
+			spracheIdInSessionLegen(session, locale);
 		}
-		
-		
+				
 		chain.doFilter(request, response);
 
 	}
@@ -76,6 +96,23 @@ public class SprachversionFilter implements Filter
 	 */
 	public void init(FilterConfig fConfig) throws ServletException
 	{
+	}
+	
+	private void spracheIdInSessionLegen(HttpSession session, Locale locale)
+	{
+		try {
+			String query = "SELECT sprache_id FROM sprache WHERE name = \"" + locale.getLanguage() + "\"";
+			
+			Statement statement = DatenbankController.verbindung.createStatement();
+			ResultSet resultset = statement.executeQuery(query);
+			if(resultset.next()){
+				session.setAttribute("spracheId", resultset.getInt(1));
+				System.out.println(session.getAttribute("spracheId"));
+			}
+		} catch (SQLException e) {
+			System.out.println("SELECT-Anweisung nicht ausgeführt!");
+			e.printStackTrace();
+		}
 	}
 
 }
