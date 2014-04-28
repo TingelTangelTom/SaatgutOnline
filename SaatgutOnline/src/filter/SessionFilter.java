@@ -20,13 +20,13 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet Filter implementation class SessionVerwaltung
  */
-@WebFilter(description = "Universal-Filter für die Session-Verwaltung", urlPatterns = { "/*" })
-public class SessionVerwaltung implements Filter {
+@WebFilter(description = "Universal-Filter fÃ¼r die Session-Verwaltung", urlPatterns = { "/*" })
+public class SessionFilter implements Filter {
 
     /**
      * Default constructor. 
      */
-    public SessionVerwaltung() {
+    public SessionFilter() {
         // TODO Auto-generated constructor stub
     }
 
@@ -44,7 +44,7 @@ public class SessionVerwaltung implements Filter {
 		
 	
 		// den ankommenden ServletRequest in einen HttpServletRequest casten,
-		// damit die Session-Funktionen zur Verfügung stehen
+		// damit die Session-Funktionen zur Verfuegung stehen
 		
 		
 		// Alternative Methode
@@ -53,18 +53,27 @@ public class SessionVerwaltung implements Filter {
 //		if (session.isNew()) {
 //		    // Session wurde soeben erstellt
 //		} else {
-//		    // Wurde bereits früher erstellt
+//		    // Wurde bereits frueher erstellt
 //		}
 		
-		// prüfen, ob eine gültige Session vorhanden ist
+		// prï¿½fen, ob eine gueltige Session vorhanden ist
 		
 		HttpSession session = ((HttpServletRequest) request).getSession(false);
 		if (session == null) {
-		    // Keine gültige Session vorhanden. Neue erstellen:
+		    // Keine gueltige Session vorhanden. Neue erstellen:
 		    session = ((HttpServletRequest) request).getSession();
+		    
+		    // neue Sesison, daher Standard "nicht angemeldet" zuweisen
+		    session.setAttribute( "angemeldet", false);	
+		    
 		} else {
-		    // Gültige Session gefunden
+		    // Gueltige Session gefunden
 		}
+		
+		
+		
+		
+		
 		
 		chain.doFilter(request, response);
 	}

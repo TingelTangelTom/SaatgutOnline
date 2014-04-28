@@ -9,4 +9,25 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  
+  <!-- first define a named filter -->
+<filter>
+   <filter-name>SessionFilter</filter-name>
+   <filter-class>filter</filter-class>
+   <init-param>
+      <param-name>BenutzernameRegeln</param-name>
+      <param-value>^[a-z0-9_-]{3,15}$</param-value>
+   </init-param>
+</filter>
+
+<!-- now map this filter to a URL-pattern -->
+<filter-mapping>
+   <filter-name>SessionFilter</filter-name>
+   <url-pattern>/*</url-pattern>
+</filter-mapping>
+    <absolute-ordering>
+    <name>SessionVerwaltungFilter</name>
+    <name>SprachversionFilter</name>
+    <name>AnmeldungFilter</name>
+  </absolute-ordering>
 </web-app>
