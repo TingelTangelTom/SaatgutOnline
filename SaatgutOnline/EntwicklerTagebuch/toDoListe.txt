@@ -6,10 +6,13 @@ Christoph
 
 
 Tom
-- Kopfbereich CSS
-- Sprache_id einfügen
-- Navigation
+- Kopfbereich CSS - kriegt er nicht hin... =(
+- Sprache_id einfügen - ERLEDIGT!
+- Navigation - in Bearbeitung, Auswahl steht, yeah! =D
 - Warenkorb
+- Texte (DB) übersetzen
+- Bestellvorgang
+- Suchfeld im Kopfbereich einfügen
 
 
 Simon
@@ -18,6 +21,8 @@ Simon
 - Angebotsseite
 - Suchfunktion
 - SQL-Datei
+- (Tom sagt:) bitte Sortierreihenfolge aus Tabelle "kategorie" entfernen -> kriege ich nicht genutzt... 
+
 
 Anja
 - Kontaktformular
@@ -25,7 +30,7 @@ Anja
 
 
 Benjamin
-- Bestellvorgang
+--> ist bis auf Weiteres aus dem Spiel - der Arme ist krank... =(
 
 
 Kundenmaske?????
