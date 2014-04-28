@@ -88,7 +88,8 @@ a:focus { text-decoration:none; font-weight:bold; color:#BEBEBE; }
 
 .produktinfo td {
 	vertical-align: top;
-	border: 1px solid #000000;
+	height:12px;
+	border: px solid #000000;
 }
 
 /*

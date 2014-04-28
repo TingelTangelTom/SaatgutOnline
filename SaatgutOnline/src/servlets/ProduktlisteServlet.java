@@ -11,26 +11,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-
-
-
+import view.ProduktlisteView;
 import controller.DatenbankController;
-import view.ProduktinfoView;
-
 
 /**
- * Servlet implementation class Anzeige
+ * Servlet implementation class ProduktlisteServlet
  */
-@WebServlet("/ProduktinfoServlet")
-public class ProduktinfoServlet extends HttpServlet {
+@WebServlet("/ProduktlisteServlet")
+public class ProduktlisteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private ProduktinfoView produktinfoView;
+	private ProduktlisteView produktliste;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProduktinfoServlet() {
+    public ProduktlisteServlet() {
         super();
     }
 
@@ -39,7 +34,7 @@ public class ProduktinfoServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		this.produktinfoView = new ProduktinfoView(request);
+		this.produktliste = new ProduktlisteView(request);
 		
 		response.setCharacterEncoding("ISO-8859-15"); // Sonst wird das Euro-Symbol nicht angezeigt
 		DatenbankController.getVerbindung();
@@ -49,7 +44,7 @@ public class ProduktinfoServlet extends HttpServlet {
 				
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		out.print(this.produktinfoView.anzeigenProduktinfo());
+		out.print(this.produktliste.anzeigenProduktliste());
 
 		// Fussbereich einbinden
 		rd = getServletContext().getRequestDispatcher("/Fussbereich");

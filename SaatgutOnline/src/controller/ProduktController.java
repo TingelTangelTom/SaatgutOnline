@@ -3,7 +3,9 @@ package controller;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -18,6 +20,7 @@ public class ProduktController {
 	//private double preisBrutto;
 	private HashMap<String, String> merkmale;
 	private int sprache_id;
+	private ArrayList<ProduktModel> produktliste;
 	
 	public ProduktController(HttpServletRequest request) {
 		super();
@@ -25,6 +28,7 @@ public class ProduktController {
 		HttpSession session = request.getSession();
 		this.produktModel = new ProduktModel();
 		this.merkmale = new HashMap<String, String>();
+		this.produktliste = new ArrayList<>();
 		this.sprache_id = (int)session.getAttribute("spracheId");
 		
 	}
@@ -102,9 +106,72 @@ public class ProduktController {
 
 		this.produktModel.setMerkmale(merkmale);
 
-		return produktModel;
+		return this.produktModel;
 	}
 
+	public ArrayList<ProduktModel> getProduktliste(int kategorie_id) {
+		
+		DatenbankController.getVerbindung();
+		
+		try {
+			ArrayList<Integer> produkte = new ArrayList<>();
+			//String query = "SELECT p.produkt_id, p.produkt_bestand, p.kategorie_id, p.produkt_steuer_id FROM produkt AS p LEFT JOIN kategorie AS k ON p.kategorie_id = k.eltern_id WHERE k.sprache_id = '" + this.sprache_id + "'";
+			String query = "SELECT p.produkt_id,k.kategorie_id, p.produkt_bestand, p.kategorie_id, p.produkt_steuer_id FROM produkt AS p "
+					+ "LEFT JOIN kategorie AS k ON k.kategorie_id = p.kategorie_id WHERE k.kategorie_id = '6' AND k.sprache_id= '1'";					
+
+			String query2 = "SELECT pf.produktfelder_name AS name, pfz.produktfelder_wert AS wert FROM produktfelder AS pf "
+					+ "LEFT JOIN produktfelder_zuordnung AS pfz ON pfz.produktfelder_id = pf.produktfelder_id WHERE pfz.produkt_id = '1' AND "
+					+ "pfz.produktfelder_wert<>'' AND (pf.sprache_id= '" + this.sprache_id + "' AND pf.sprache_id = '" + this.sprache_id + "') ORDER BY pf.sortier_reihenfolge";
+			Statement statement = DatenbankController.verbindung.createStatement();
+			ResultSet resultset = statement.executeQuery(query);
+			while(resultset.next()){
+				produkte.add(resultset.getInt(1));
+				System.out.println("Produkt ID. " + resultset.getInt(1));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		/*
+		try {	
+			System.out.println(this.sprache_id);
+			String query = "SELECT p.produkt_id, p.produkt_bestand, p.kategorie_id, p.produkt_steuer_id "
+							+ "FROM produkt AS p LEFT JOIN kategorie AS k ON p.kategorie_id = k.kategorie_id WHERE "
+							+ "k.eltern_id = '" + kategorie_id + "'";
+		
+			Statement statement = DatenbankController.verbindung.createStatement();
+			ResultSet resultset = statement.executeQuery(query);
+			while(resultset.next()){
+				this.produktModel.setId(resultset.getInt(1));
+				//System.out.println(resultset.getInt(1));
+				this.produktModel.setBestand(resultset.getInt(2));
+				this.produktModel.setKategorieId(resultset.getInt(3));
+				this.produktModel.setSteuerId(resultset.getInt(4));
+
+				//System.out.println(resultset.getInt(4));
+				String query2 = "SELECT produkt_name, produkt_beschreibung FROM produktbeschreibung WHERE sprache_id = "
+								+ "'" + this.sprache_id + "' AND produkt_id = '" + resultset.getInt(1) + "'";
+		
+			
+			ResultSet resultset2 = statement.executeQuery(query2);
+			this.produktModel.setName(resultset2.getString(1));
+			this.produktModel.setBeschreibung(resultset2.getString(2));
+			System.out.println(resultset.getString(1));
+			this.produktliste.add(this.produktModel);
+			System.out.println(this.produktModel);	
+			}	
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		*/
+		//System.out.println("test");
+		
+		for (int i = 0; i < this.produktliste.size(); i++) {
+			//System.out.println(i);
+		}
+		
+		return this.produktliste;
+	}
+	
 	public double getProduktSteuersatz(int id, int sprache_id) {
 		
 		return steuersatz;
