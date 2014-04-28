@@ -53,7 +53,7 @@ public class FussbereichView
 	public void outFussbereichInhalt()
 	{
 		out.println("<footer><a href=\"/SaatgutOnline/src/servlets/Impressum.java\">"
-					+ "Impressum</a> | <a href=\"/SaatgutOnline/src/servlets/AGB.java\">"
+					+ "Impressum</a> | <a href=\"/SaatgutOnline/AGB\">"
 					+ "AGB</a> | <a href=\"/SaatgutOnline/src/servlets/VersandZahlung.java\">"
 					+ "Versand & Zahlung</a> | <a href=\"/SaatgutOnline/src/servlets/Datenschutz.java\">"
 					+ "Datenschutz</a> | <a href=\"/SaatgutOnline/src/servlets/Kontakt.java\">"
