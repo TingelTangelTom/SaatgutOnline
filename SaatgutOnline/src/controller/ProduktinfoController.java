@@ -68,7 +68,7 @@ public class ProduktinfoController {
 		}
 		
 		try {
-			String query = "SELECT steuer_satz FROM steuer WHERE steuer_id = " + this.produktModel.getSteuersatz_id();
+			String query = "SELECT steuersatz FROM steuersatz WHERE steuersatz_id = " + this.produktModel.getSteuersatz_id();
 			
 			Statement statement = DatenbankController.verbindung.createStatement();
 			ResultSet resultset = statement.executeQuery(query);
@@ -84,10 +84,10 @@ public class ProduktinfoController {
 		this.produktModel.setPreisBrutto(this.produktModel.getPreisNetto() * this.produktModel.getSteuersatz() / 100 + this.produktModel.getPreisNetto());
 		
 		try {
-			String query = "SELECT p.produktmerkmal_name, pz.produktmerkmal_wert FROM "
-					+ "produktmerkmal AS p INNER JOIN produktmerkmal_zuordnung AS pz ON p.produktmerkmal_id = pz.produktmerkmal_id "
-					+ "WHERE pz.produkt_id = '1' AND p.sprache_id = '1' ORDER BY p.produktmerkmal_name";
+			//String query = "SELECT produktmerkmal_name, produktmerkmal_wert FROM produktmerkmal_zuordnung WHERE sprache_id = '2' AND produkt_id = '1'";
 			
+			String query = "(SELECT produktmerkmal_id, produktmerkmal_wert FROM produktmerkmal_zuordnung WHERE produkt_id = '1' AND sprache_id = '2')";
+			String query2 = "(SELECT produktmerkmal_name FROM produktmerkmal WHERE ";
 			Statement statement = DatenbankController.verbindung.createStatement();
 			ResultSet resultset = statement.executeQuery(query);
 			
@@ -97,6 +97,7 @@ public class ProduktinfoController {
 			while (resultset.next()){
 				name = resultset.getString(1);
 				wert = resultset.getString(2);
+				System.out.println(name + " " + wert);
 				this.merkmale.put(name, wert);
 			}
 		} catch (SQLException e) {

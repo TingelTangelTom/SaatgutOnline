@@ -42,7 +42,7 @@ public class ProduktinfoServlet extends HttpServlet {
 		response.setCharacterEncoding("ISO-8859-15"); // Sonst wird das Euro-Symbol nicht angezeigt
 		DatenbankController.getVerbindung();
 		// Kopfbereich (und damit auch Navigationsbereich) einbinden
-		RequestDispatcher rd = getServletContext().getRequestDispatcher("/KopfbereichController");
+		RequestDispatcher rd = getServletContext().getRequestDispatcher("/Kopfbereich");
 		rd.include(request, response);
 				
 		response.setContentType("text/html");
@@ -50,7 +50,7 @@ public class ProduktinfoServlet extends HttpServlet {
 		out.print(this.produktView.anzeigenProduktinfo());
 
 		// Fussbereich einbinden
-		rd = getServletContext().getRequestDispatcher("/FussbereichController");
+		rd = getServletContext().getRequestDispatcher("/Fussbereich");
 		rd.include(request, response);		
 	
 	}
