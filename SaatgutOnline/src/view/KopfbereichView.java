@@ -139,8 +139,8 @@ public class KopfbereichView
 	{
 		out.println("<form action='' method='POST'>");
 		out.println("<table border='1'><tr><td>	<div>");
-  		out.println("<button type='submit' name='sprache' value='us'>");
-      	out.println("<img src='resources/bilder/flags_iso/48/us.png' height=48px width=48px alt='us'>");
+  		out.println("<button type='submit' name='sprache' value='en'>");
+      	out.println("<img src='resources/bilder/flags_iso/48/us.png' height=48px width=48px alt='en'>");
     	out.println("</button></div></td></tr><tr><td>");
     	out.println(this.resourceBundle.getString("SPRACHWAHL"));
     	out.println("</td></tr></table></form>");
