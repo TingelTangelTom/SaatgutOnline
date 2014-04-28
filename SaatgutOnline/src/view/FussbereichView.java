@@ -52,13 +52,12 @@ public class FussbereichView
 	
 	public void outFussbereichInhalt()
 	{
-		out.println("<footer><a href=\"/SaatgutOnline/src/servlets/Impressum.java\">"
-					+ "Impressum</a> | <a href=\"/SaatgutOnline/AGB\">"
-					+ "AGB</a> | <a href=\"/SaatgutOnline/src/servlets/VersandZahlung.java\">"
-					+ "Versand & Zahlung</a> | <a href=\"/SaatgutOnline/src/servlets/Datenschutz.java\">"
-					+ "Datenschutz</a> | <a href=\"/SaatgutOnline/src/servlets/Kontakt.java\">"
-					+ "Kontakt</a> | <a href=\"/SaatgutOnline/src/servlets/Sitemap.java\">"
-					+ "Sitemap</a> | <a href=\"/SaatgutOnline/src/servlets/Copyright.java\">"
-					+ "Copyright</a></footer>");
+		out.println("<footer><a href=\"/SaatgutOnline/Impressum\">Impressum</a> | "
+				      + "<a href=\"/SaatgutOnline/AGB\">AGB</a> | "
+				      + "<a href=\"/SaatgutOnline/VersandZahlung\">Versand & Zahlung</a> | "
+				      + "<a href=\"/SaatgutOnline/Datenschutz\">Datenschutz</a> | "
+				      + "<a href=\"/SaatgutOnline/Kontakt\">Kontakt</a> | "
+				      + "<a href=\"/SaatgutOnline/Sitemap\">Sitemap</a> | "
+				      + "<a href=\"/SaatgutOnline/Copyright\">Copyright</a></footer>");
 	}
 }
