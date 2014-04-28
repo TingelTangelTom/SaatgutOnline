@@ -2,6 +2,7 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Enumeration;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 
 
 
@@ -51,7 +53,15 @@ public class ProduktinfoServlet extends HttpServlet {
 
 		// Fussbereich einbinden
 		rd = getServletContext().getRequestDispatcher("/Fussbereich");
-		rd.include(request, response);		
+		rd.include(request, response);
+		
+		Enumeration<String> paramaters = request.getParameterNames();
+		while (paramaters.hasMoreElements())
+		{
+			String name = paramaters.nextElement();
+			String value = request.getParameter(name);
+			System.out.println(name + " = " + value);			
+		}
 	
 	}
 

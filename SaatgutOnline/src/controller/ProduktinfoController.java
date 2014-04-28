@@ -84,10 +84,11 @@ public class ProduktinfoController {
 		this.produktModel.setPreisBrutto(this.produktModel.getPreisNetto() * this.produktModel.getSteuersatz() / 100 + this.produktModel.getPreisNetto());
 		
 		try {
-			//String query = "SELECT produktmerkmal_name, produktmerkmal_wert FROM produktmerkmal_zuordnung WHERE sprache_id = '2' AND produkt_id = '1'";
 			
-			String query = "(SELECT produktmerkmal_id, produktmerkmal_wert FROM produktmerkmal_zuordnung WHERE produkt_id = '1' AND sprache_id = '2')";
-			String query2 = "(SELECT produktmerkmal_name FROM produktmerkmal WHERE ";
+			String query = "SELECT pf.produktfelder_name AS name, pfz.produktfelder_wert AS wert FROM produktfelder AS pf "
+							+ "LEFT JOIN produktfelder_zuordnung AS pfz ON pfz.produktfelder_id = pf.produktfelder_id WHERE pfz.produkt_id = '1' AND "
+							+ "pfz.produktfelder_wert<>'' AND (pf.sprache_id= '2' AND pf.sprache_id = '2') ORDER BY pf.sortier_reihenfolge";
+			
 			Statement statement = DatenbankController.verbindung.createStatement();
 			ResultSet resultset = statement.executeQuery(query);
 			

@@ -33,42 +33,32 @@ public class ProduktinfoView {
 
 	//texte.getString("WILLKOMMEN");
 	public String anzeigenProduktinfo() {	
-		produktModel = this.produktController.getProdukt(1);
+		this.produktModel = this.produktController.getProdukt(1);
 		Locale sprache = Locale.GERMANY;
 		
 		this.merkmale = this.produktModel.getMerkmale();
 		
 		output = "<table class=\"produktinfo\">"
-				+ "<tr><td rowspan=\"6\">Cell 1</td><td colspan=\"2\">" + produktModel.getName() + "</td></tr>" // Titel
-				+ "<tr><td colspan=\"2\">" + this.produktModel.getName() + "</td></tr>"; // Titel
+				+ "<tr><td rowspan=\"3\">Cell 1</td><td>" + this.produktModel.getName() + "</td></tr>" // Titel
+				+ "<tr><td>" + this.produktModel.getName() + "</td></tr>" // Titel
+				+ "<tr><td><table>";
 				for(String name : merkmale.keySet()) {
 					output += "<tr><td>" + name + "</td><td>" + merkmale.get(name) +"</td></tr>"; // Eigenschaft 1
 				}
-		output += "<tr><td colspan=\"2\">" + htmlOutput.outPreisformat(this.produktModel.getPreisBrutto()) + " " + htmlOutput.outPreisverordnung(this.produktModel.getSteuersatz()) + "</td></tr>" // Titel
-				+ "<tr><td colspan=\"3\">" + this.produktModel.getBeschreibung() + "</td></tr>" // Produktbeschreibung
-				+ "<tr><td colspan=\"3\">Warenkorb</td></tr>" // Button Warenkorb
-				+ "</table>";
-				
-				/*
-						+ "<tr>\n<td style=\"width: 340px; text-align: center;\">\n"
-						+ "<img src=\"resources/bilder/phoenix_canariensis.jpg\" alt=\"Logo\">\n"
-						+ "</td\n><td style=\"width: 430px;\">\n"
-						+ produktModel.getName() + "<br />"
-						+ "<produktinfo>" + produktModel.getPreis() + "<produktinfo><br />"
-						+ produktModel.getGewicht()
-						+ "</td></tr><tr><td colspan=\"2\">"
-						+ produktModel.getBeschreibung()
-						+ "</td></tr><tr><td colspan=\"2\">"
-						+ "Button 1 Button 2"
-						
-						*/
+		output += "</table></td></tr>"		
+				+ "<tr><td colspan=\"2\">" + htmlOutput.outPreisformat(this.produktModel.getPreisBrutto()) + " " + htmlOutput.outPreisverordnung(this.produktModel.getSteuersatz()) + "</td></tr>" // Titel
+				+ "<tr><td colspan=\"2\">" + this.produktModel.getBeschreibung() + "</td></tr>" // Produktbeschreibung
+				+ "<tr><td colspan=\"2\">Warenkorb</td></tr>" // Button Warenkorb
+				+ "<tr><td colspan=\"2\">" // Button Warenkorb"
+				+ "<form action='' method='POST'>"
+				+ "<input type=\"hidden\" name=\"menge\" value=\"3\">"
+				+ "<input type=\"hidden\" name=\"produkt\" value=\"" + this.produktModel + "\">"
+				+ "<input type=\"image\" name=\"absenden\" value=\"senden\" src=\"resources/bilder/flags_iso/24/us.png\">"
+				+ "</td></tr></table>";	
 
-
-		
-		//produktModel = this.produktController.getProdukt(1);
-		//htmlOutput = String.valueOf(produktModel.getKategorieId());
 		return output;
 	}
+	
 	/*
 	public String anzeigenListenProdukt() {	
 		produktModel = this.produktController.getProdukt(1, 1);
