@@ -11,8 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import controller.DatenbankController;
-
 /**
  * Servlet implementation class IndexPlatzhalter
  */
@@ -41,7 +39,6 @@ public class IndexPlatzhalterServlet extends HttpServlet
 		 * 
 		 * Jedes Servlet fuer den Hauptbereich MUSS Kopfbereich & Fussbereich einbinden!! 
 		 */
-		DatenbankController.getVerbindung();
 		// Kopfbereich (und damit auch Navigationsbereich) einbinden
 		RequestDispatcher rd = getServletContext().getRequestDispatcher("/Kopfbereich");
 		rd.include(request, response);
