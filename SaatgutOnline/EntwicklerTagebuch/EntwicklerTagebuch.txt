@@ -6,14 +6,28 @@ ACHTUNG: DIESER BLOCK SOLL immer GANZ OBEN STEHEN!
 
 Bitte offene Fragen hier posten:
 
-Bitte in den Filter noch die sprache_id einbauen
+ERLEDIGT! --- Bitte in den Filter noch die sprache_id einbauen
 
 
 
+-------------------------------------------------------------
+28.April, 12:25h (Tom) - Erweiterung des SprachversionFilters
+-------------------------------------------------------------
 
---------------------------------------
-27.April ,21:25h (Tom) - Änderungen im Framework
---------------------------------------
+Der SprachversionsFilter schaut nach wie vor, ob 'sprache' in der Session hinterlegt ist. Wenn nicht, wird die Browsersprache ausgelesen.
+
+Ist diese nun Deutsch, wird 'sprache = Locale.GERMAN' als Attribut in die Session geschrieben.
+Zusätzlich wird nun ein Attribut namens 'spracheId' in die Session geschrieben.
+Diese hat für Locale.GERMAN den Wert int '2' (ist so in der Datenbank in Tabelle 'sprache' hinterlegt).
+
+Bei allen anderen Sprachen wird 'sprache = Locale.ENGLISH' als Attribut in die Session geschrieben,
+und spracheId = int '1'.
+
+
+
+------------------------------------------------
+27.April, 21:25h (Tom) - Änderungen im Framework
+------------------------------------------------
 
 Wie ich grade feststellen musste, wurden im IndexPlatzhalterservlet (das ja irgendwie so eine Art Vorlage ist) bis eben grade
 noch KopfbereichController und FussbereichController includiert - DAS IST NICHT MEHR UP2DATE!
