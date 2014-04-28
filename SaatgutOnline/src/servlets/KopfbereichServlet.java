@@ -74,7 +74,8 @@ public class KopfbereichServlet extends HttpServlet
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
 			IOException
 	{
-		System.out.println("\nPOST-Attribut(e) angenommen:");
+		System.out.println("\n---KopfbereichServlet---");
+		System.out.println("POST-Attribut(e) angenommen:");
 		
 		Enumeration<String> paramaters = request.getParameterNames();
 		while (paramaters.hasMoreElements())

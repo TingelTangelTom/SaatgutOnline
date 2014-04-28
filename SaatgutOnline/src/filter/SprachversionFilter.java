@@ -37,6 +37,7 @@ public class SprachversionFilter implements Filter
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,
 			ServletException
 	{
+System.out.println("\n---SprachversionsFilter---");
 		DatenbankController.getVerbindung();
 		HttpSession session = ((HttpServletRequest) request).getSession(); 
 		Locale locale;
