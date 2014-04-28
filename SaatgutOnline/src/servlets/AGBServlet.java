@@ -41,7 +41,6 @@ public class AGBServlet extends HttpServlet {
 
 		// Inhalte ausgeben (per view!)
 		AGBController agbController = new AGBController(request, response);
-		// TODO : Inhalt einfuegen
 
 		// Fussbereich einbinden
 		rd = getServletContext().getRequestDispatcher("/Fussbereich");
