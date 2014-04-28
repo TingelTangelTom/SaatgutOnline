@@ -12,7 +12,7 @@ import controller.HtmlOutput;
 import controller.ProduktinfoController;
 import model.ProduktModel;
 
-public class Produktinfo {
+public class ProduktinfoView {
 	private ResourceBundle resourceBundle;
 	private ProduktinfoController produktController;
 	private ProduktModel produktModel;
@@ -20,7 +20,7 @@ public class Produktinfo {
 	private String output;
 	private HashMap<String, String> merkmale;
 	
-	public Produktinfo(HttpServletRequest request) {
+	public ProduktinfoView(HttpServletRequest request) {
 		
 		this.produktController = new ProduktinfoController(request);
 		this.produktModel = new ProduktModel();

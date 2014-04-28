@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 import controller.DatenbankController;
-import view.Produktinfo;
+import view.ProduktinfoView;
 
 
 /**
@@ -23,7 +23,7 @@ import view.Produktinfo;
 @WebServlet("/ProduktinfoServlet")
 public class ProduktinfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private Produktinfo produktView;
+	private ProduktinfoView produktView;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -37,7 +37,7 @@ public class ProduktinfoServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		this.produktView = new Produktinfo(request);
+		this.produktView = new ProduktinfoView(request);
 		
 		response.setCharacterEncoding("ISO-8859-15"); // Sonst wird das Euro-Symbol nicht angezeigt
 		DatenbankController.getVerbindung();
