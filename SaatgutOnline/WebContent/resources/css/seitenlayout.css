@@ -90,3 +90,30 @@ a:focus { text-decoration:none; font-weight:bold; color:#BEBEBE; }
 	vertical-align: top;
 	border: 1px solid #000000;
 }
+
+/*
+.kopflogo {
+	width: 200px;
+	height: 100px;
+	border: 0px solid #000000;		
+}
+
+.kopfschriftzug {
+	font-weight: bold;
+	text-align: justify;
+	font-size:40px;
+	width: 200px;
+	border: 0px solid #000000;
+}
+
+.kopflogin {	
+	width: 300px;	
+	border: 0px solid #000000;
+}
+
+.kopfsprachwahl {	
+	
+	width: 200px;	
+	border: 0px solid #000000;
+}
+*/

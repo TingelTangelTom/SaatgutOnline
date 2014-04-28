@@ -75,7 +75,7 @@ public class KopfbereichView
 	
 	public void outInhaltsframeAnfang()
 	{
-		out.println("<table border='1' width=100% cellspacing='0' cellpadding='0'>\n<tr>\n<td>");
+		out.println("<table class=\"kopfinhalt\">\n<tr>\n<td>");
 	}
 	
 	public void outInhaltsframeNeueSpalte()
@@ -90,12 +90,12 @@ public class KopfbereichView
 	
 	public void outLoginBereich()
 	{
+		out.println("<table class=\"kopflogin\">");
 		out.println("<form action='' method='POST'>");
-		out.println("<table border='1' cellspacing='0' cellpadding='0'>");
-		out.println("<tr>\n<td>"
+		out.println("<tr>\n<td class=\"kopfnutzername\">"
 				+ this.resourceBundle.getString("NUTZERNAME")
 				+ "</td><td colspan='2'><input name='nutzername' type='text' size='25'>\n</td>\n</tr>");
-		out.println("<tr>\n<td>\n"
+		out.println("<tr>\n<td class=\"kopfpasswort\">\n"
 				+ this.resourceBundle.getString("PASSWORT")
 				+ "</td><td><input name='passwort' type='password' size='15'></td>");
 		out.println("<td>\n<input name='login' value='"
@@ -103,30 +103,30 @@ public class KopfbereichView
 				+ "' type='submit'>\n</td>\n</tr>");
 		out.println("<tr>\n<td></td><td colspan='2'>\n<a href='http://localhost:8080/SaatgutOnline/NoFunctionServlet'>"
 				+ this.resourceBundle.getString("PASSWORT_VERGESSEN") 
-				+ "</a> (nf)\n</td>\n</tr>");
-		out.println("</table>");
+				+ "</a> (nf)\n</td>\n</tr>");		
 		out.println("</form>");		
+		out.println("</table>");
 	}
 	
 	public void outLogo()
 	{		
-		out.println("<table border='1' cellspacing='0' cellpadding='0'>\n<tr>\n<td>");
-		out.println("<img src='resources/bilder/logo.jpg' width=100px height=100px alt='Logo'>");
+		out.println("<table class=\"kopflogo\">\n<tr>\n<td>");
+		out.println("<img src='resources/bilder/logo.png' alt='Logo'>");
 		out.println("</td>\n</tr>\n</table>");		
 	}
 	
 	public void outSchriftzug()
 	{
-		out.println("<table border='1' cellspacing='0' cellpadding='0'>\n<tr>\n<td>");
-		out.println("<h1>Saatgut</h1>");
+		out.println("<table class=\"kopfschriftzug\">\n<tr>\n<td>");
+		out.println("Saatgut");
 		out.println("</td>\n</tr>\n<tr>\n<td>");		
-		out.println("<h2>Online</h2>");			
+		out.println("Online");			
 		out.println("</td>\n</tr>\n</table>");		
 	}
 	
 	public void outSprachwahl()
 	{		
-		out.println("<table border=\"1\">\n<tr>\n<td>");
+		out.println("<table class=\"kopfsprachwahl\">\n<tr>\n<td>");
 		out.println("<form action=\"\" method=\"POST\">");		
 		out.println("<input type=\"image\" src=\"resources/bilder/flags_iso/24/de.png\" alt=\"de\">");
 		out.println("<input type=\"hidden\" name=\"sprache\" value=\"de\"");
@@ -142,7 +142,7 @@ public class KopfbereichView
 	
 	public void outWarenkorbPreview()
 	{
-		out.println("<table border='1' cellspacing='0' cellpadding='0'>\n<tr>\n<td>");
+		out.println("<table>\n<tr>\n<td>");
 		out.println("Warenkorb-Preview");
 		out.println("</td>\n</tr>\n</table>");
 	}
