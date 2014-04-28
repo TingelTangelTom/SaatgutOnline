@@ -113,7 +113,7 @@ System.out.println("sprache = " + locale.getLanguage());
 System.out.println("spracheId = " + session.getAttribute("spracheId"));
 			}
 		} catch (SQLException e) {
-			System.out.println("SELECT-Anweisung nicht ausgeführt!");
+			System.out.println("SELECT-Anweisung konnte nicht ausgeführt werden!");
 			e.printStackTrace();
 		}
 	}
