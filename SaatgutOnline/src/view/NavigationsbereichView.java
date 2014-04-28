@@ -2,30 +2,20 @@ package view;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import model.KategorieModel;
 
 public class NavigationsbereichView
 {
-
-	
-	private HttpServletResponse response;
 	private PrintWriter out;
 	
-	/**
-	 * Konstruktor der Klasse KopfbereichView.</br>
-	 * Erzeugt einen PrintWriter aus response.
-	 * 
-	 * @param response
-	 * response aus dem KopfbereichController als <i>HttpServletResponse</i>.
-	 * 
-	 */
-	public NavigationsbereichView(HttpServletResponse response)
+	public NavigationsbereichView(HttpServletRequest request, HttpServletResponse response)
 	{
-		this.response = response;
-		
-		this.response.setContentType("text/html");
-		
+		response.setContentType("text/html");
 		try
 		{
 			this.out = response.getWriter();
@@ -38,21 +28,35 @@ public class NavigationsbereichView
 
 	public void outNavigationsabereichAnfang()
 	{
-		out.println("<tr>\n<td class=\"navigation\">"); // oeffnet Navigationsbereich
-		/*
-		 * Ich habe den vertical-align eingesetzt, damit die Navigation und die Main jeweils oben links beginnen!
-		 */
+		this.out.println("<tr>\n<td class=\"navigation\">"); // oeffnet Navigationsbereich		
 	}
-	
-	public void outNavigationsbereichInhalt()
-	{
-		out.println("Navigationsbereich");
-	}
-	
 	
 	public void outNavigationsbereichEnde()
 	{
-		out.println("</td>"); // schliesst Navigationsbereich
-		out.println("<td class=\"inhalt\">"); // oeffnet Hauptbereich
+		this.out.println("</td>\n<td class=\"inhalt\">");
+	}
+	
+	public void outKategorienListeAnfang()
+	{
+		this.out.println("<form action=\"\" method=\"POST\"><table>");
+	}
+	
+	public void outKategorienListeEnde()
+	{
+		this.out.println("</table></form>");
+	}
+	
+	public void outHauptKategorieAnzeigen(KategorieModel kategorieModel)
+	{
+		this.out.println("<tr>\n<td colspan=\"2\">");
+		this.out.println("<input type=\"submit\" name=\"hauptkategorie\" value=\""+ kategorieModel.getKategorieName() + "\"");
+		this.out.println("</td>\n</tr>");
+	}
+	
+	public void outUnterKategorieAnzeigen(KategorieModel kategorieModel)
+	{
+		this.out.println("<tr>\n<td></td><td>-");
+		this.out.println("<input type=\"submit\" name=\"unterkategorie\" value=\""+ kategorieModel.getKategorieName() + "\"");
+		this.out.println("</td>\n</tr>");
 	}
 }

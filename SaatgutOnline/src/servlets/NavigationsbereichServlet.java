@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import view.NavigationsbereichView;
+import controller.NavigationsbereichController;
 
 /**
  * Servlet implementation class NavigationsbereichController
@@ -24,7 +24,6 @@ public class NavigationsbereichServlet extends HttpServlet
 	public NavigationsbereichServlet()
 	{
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -33,17 +32,9 @@ public class NavigationsbereichServlet extends HttpServlet
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		// NavigationsbereichView erzeugen
-		NavigationsbereichView navigationsbereichView = new NavigationsbereichView(response);
+		NavigationsbereichController navigationsbereichController = new NavigationsbereichController(request, response);
 		
-		// Navigationsbereich oeffnen
-		navigationsbereichView.outNavigationsabereichAnfang();
-		
-		// Inhalte des Navigationsbereiches ausgeben
-		navigationsbereichView.outNavigationsbereichInhalt();
-		
-		//Navigationsbereich schliessen
-		navigationsbereichView.outNavigationsbereichEnde();
+		navigationsbereichController.outNavigationsbereichAnzeigen();		
 	}
 
 	/**
@@ -52,7 +43,7 @@ public class NavigationsbereichServlet extends HttpServlet
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
 			IOException
-	{
+	{	
 		doGet(request, response);
 	}
 
