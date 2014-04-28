@@ -34,32 +34,24 @@ public class KopfbereichServlet extends HttpServlet
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		/*
-		 * Hier ein FollowMe fuer meine Vorgehensweise.
-		 * Bitte klauen, was gefaellt! =D
-		 */
+		// DEBUG-Ausgabe für Session-Inhalte
+		//TODO Debug-Ausgabe entfernen!
+		{
+		System.out.println("\n---Session-Inhalte---");
+		Enumeration<String> sessionParamaters = request.getSession().getAttributeNames();
+		while (sessionParamaters.hasMoreElements())
+		{
+			String name = sessionParamaters.nextElement();
+			System.out.println(name + " = " + request.getSession().getAttribute(name));			
+		}
+		System.out.println("---------------------");
+		}
 		
-		/*
-		 * Schritt 1:
-		 * Controller initialisieren.
-		 * 
-		 * Ich schicke die response mit, da ich die spaeter fuer den
-		 * PrintWriter im View brauche.
-		 * 
-		 * --> weiter in KopfbereichController
-		 */
+		
+		
 		KopfbereichController kopfbereichController = new KopfbereichController(request, response);
-		
 	
-		/*
-		 * SCHRITT 7:
-		 * 
-		 * Alles komplett ausgeben.
-		 * 
-		 * --> ENDE! =D
-		 */
 		kopfbereichController.outKopfbereichAnzeigen();
-		
 		
 		
 		// Navigationsbereich einbinden
@@ -74,19 +66,21 @@ public class KopfbereichServlet extends HttpServlet
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
 			IOException
 	{
+			
+		// DEBUG-Ausgabe für POST-Array
+		//TODO Debug-Ausgabe entfernen!
+		{
 		System.out.println("\n---KopfbereichServlet---");
-		System.out.println("POST-Attribut(e) angenommen:");
-		
+		System.out.println("POST-Attribut(e) angenommen:");		
 		Enumeration<String> paramaters = request.getParameterNames();
 		while (paramaters.hasMoreElements())
 		{
 			String name = paramaters.nextElement();
 			String value = request.getParameter(name);
 			System.out.println(name + " = " + value);			
-		}
-		
+		}		
 		System.out.println("------------------------");
-		
+		}
 		
 		doGet(request, response);
 	}

@@ -1,45 +1,19 @@
 package controller;
 
-import java.util.Locale;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import view.KopfbereichView;
 
 public class KopfbereichController
 {
-	private KopfbereichView kopfbereichView;
-	private Locale locale;
+	private KopfbereichView kopfbereichView;	
 		
 	public KopfbereichController(HttpServletRequest request, HttpServletResponse response)
-	{
-		/*
-		 * SCHRITT 2:
-		 * 
-		 * View erzeugen.
-		 * Die response wird einfach durchgeschliffen und
-		 * direkt an den View-Konstruktor weitergegeben.
-		 * 
-		 *  --> weiter im KopfbereichView
-		 */
+	{	
 		this.kopfbereichView = new KopfbereichView(request, response);
-		
-		HttpSession session = request.getSession();
-		this.locale = (Locale)session.getAttribute("sprache");
 	}
 
-	/*
-	 * SCHRITT 5:
-	 * 
-	 * Nun die Module zusammenfuegen zur Gesamtausgabe.
-	 * 
-	 * Hier kommen dann auch die ganzen Switches, ifs und elsen rein.
-	 * Der Controller entscheidet, welche Module in das auszugebende Patchwork kommen.
-	 * 
-	 * -->weiter im KopfbereichServlet
-	 */
 	public void outKopfbereichAnzeigen()
 	{					
 		this.kopfbereichView.outKopfbereichAnfang();
@@ -61,16 +35,6 @@ public class KopfbereichController
 		this.kopfbereichView.outWarenkorbPreview();
 		
 		this.kopfbereichView.outInhaltsframeNeueSpalte();
-		
-//		// Sprache ermitteln und entsprechende Sprachwahl anbieten
-//		if(this.locale.getLanguage() != null && this.locale.getLanguage() == "de")
-//		{
-//			this.kopfbereichView.outSprachwahlEn();
-//		}
-//		else
-//		{
-//			this.kopfbereichView.outSprachwahlDe();
-//		}
 		
 		this.kopfbereichView.outSprachwahl();
 		
