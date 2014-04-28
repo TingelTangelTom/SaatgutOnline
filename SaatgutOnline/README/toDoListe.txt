@@ -1,0 +1,37 @@
+Christoph
+- Session-Filter
+- Anmeldung
+- Registrierung
+- E-Mail
+
+
+Tom
+- Kopfbereich CSS - kriegt er nicht hin... =(
+- Sprache_id einfügen - ERLEDIGT!
+- Navigation - in Bearbeitung, Auswahl steht, yeah! =D
+- Warenkorb
+- Texte (DB) übersetzen
+- Bestellvorgang
+- Suchfeld im Kopfbereich einfügen
+- Loginbereich --> Logoutbereich
+
+
+Simon
+- Produktinfo Seite
+- Produktliste Seite
+- Angebotsseite
+- Suchfunktion
+- SQL-Datei
+- (Tom sagt:) bitte Sortierreihenfolge aus Tabelle "kategorie" entfernen -> kriege ich nicht genutzt... 
+
+
+Anja
+- Kontaktformular
+- Fussbereich
+
+
+Benjamin
+--> ist bis auf Weiteres aus dem Spiel - der Arme ist krank... =(
+
+
+Kundenmaske?????
