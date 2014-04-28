@@ -1,0 +1,31 @@
+Christoph
+- Session-Filter
+- Anmeldung
+- Registrierung
+- E-Mail
+
+
+Tom
+- Kopfbereich CSS
+- Sprache_id einfügen
+- Navigation
+- Warenkorb
+
+
+Simon
+- Produktinfo Seite
+- Produktliste Seite
+- Angebotsseite
+- Suchfunktion
+- SQL-Datei
+
+Anja
+- Kontaktformular
+- Fussbereich
+
+
+Benjamin
+- Bestellvorgang
+
+
+Kundenmaske?????
