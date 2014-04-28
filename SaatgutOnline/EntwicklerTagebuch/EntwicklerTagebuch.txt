@@ -1,9 +1,18 @@
 EntwicklungsTagebuch f�r das JavaEE-Projekt "SaatgutOnline"
 
+- - - - - - - - - - - - - - - - - - - - - - - - - -
+ACHTUNG: DIESER BLOCK SOLL immer GANZ OBEN STEHEN!
+- - - - - - - - - - - - - - - - - - - - - - - - - -
+
+Bitte offene Fragen hier posten:
+
+Bitte in den Filter noch die sprache_id einbauen
+
+
 
 
 --------------------------------------
-21:25h (Tom) - Änderungen im Framework
+27.April ,21:25h (Tom) - Änderungen im Framework
 --------------------------------------
 
 Wie ich grade feststellen musste, wurden im IndexPlatzhalterservlet (das ja irgendwie so eine Art Vorlage ist) bis eben grade
@@ -103,15 +112,7 @@ Hoffe, ihr habt brav alle alles durchgelesen, hehe, und einen sch�nen, bunten 
 
 
 	
-- - - - - - - - - - - - - - - - - - - - - - - - - -
-ACHTUNG: DIESER BLOCK SOLL immer GANZ UNTEN STEHEN!
-- - - - - - - - - - - - - - - - - - - - - - - - - -
 
-Bitte offene Fragen hier posten:
-
-Bitte in den Filter noch die sprache_id einbauen
-
-Stehen aktuelle Anregungen nicht immer oben?
 
 
 

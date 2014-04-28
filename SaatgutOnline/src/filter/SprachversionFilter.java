@@ -54,7 +54,7 @@ public class SprachversionFilter implements Filter
 			switch (sprachwahl)
 			{
 			case "de":
-				locale = Locale.GERMAN;
+				locale = Locale.GERMAN;			
 				break;
 			case "en":
 				locale = Locale.ENGLISH;

@@ -75,25 +75,7 @@ public class KopfbereichController
 		this.kopfbereichView.outInhaltsframeEnde();
 		this.kopfbereichView.outKopfbereichEnde();	
 	}
-	
-	
-//	/**
-//	 * Inhalte des Kopfbereichs
-//	 */
-//	public void outKopfbereichInhalt()
-//	{
-//		this.outKopfbereichAnfang();
-//		
-//				
-//		this.outLogo();			
-//		out.println("</td>\n<td>");		
-//		this.outSchriftzug();		
-//		out.println("</td>\n<td>");		
-//		this.outLoginBereich();		
-//		
-//		
-//		this.outKopfbereichEnde();
-//	}
+
 
 	
 	
