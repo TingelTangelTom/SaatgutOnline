@@ -85,9 +85,11 @@ System.out.println("Sprachauswahl per SprachversionFilter erfolgt.");
 			session.setAttribute("sprache", locale);
 			spracheIdInSessionLegen(session, locale);
 		}
-				
-		chain.doFilter(request, response);
+System.out.println("---pre-processing  ende---");
 
+
+		chain.doFilter(request, response);
+	
 	}
 
 	/**

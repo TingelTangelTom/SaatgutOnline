@@ -85,7 +85,7 @@ public class KopfbereichServlet extends HttpServlet
 			System.out.println(name + " = " + value);			
 		}
 		
-		System.out.println("");
+		System.out.println("------------------------");
 		
 		
 		doGet(request, response);
