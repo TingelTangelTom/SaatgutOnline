@@ -98,8 +98,6 @@ System.out.println("----------------------------------");
 		
 		if(getMethode && this.request.getParameter("kategorie") != null)
 		{
-			System.out.println("post --> true && kategorie != null --> true");
-			
 			Integer geklickteKategorie = Integer.parseInt(this.request.getParameter("kategorie"));
 						
 			if(this.geklickteKategorien.contains(geklickteKategorie))
