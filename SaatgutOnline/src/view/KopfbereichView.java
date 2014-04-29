@@ -28,8 +28,8 @@ public class KopfbereichView
 		}
 
 		HttpSession session = request.getSession();
+		
 		Locale locale = (Locale) session.getAttribute("sprache");
-
 		this.resourceBundle = PropertyResourceBundle.getBundle("I18N." + locale.getLanguage() + "."
 				+ getClass().getSimpleName(), locale);	
 	}
@@ -69,11 +69,11 @@ public class KopfbereichView
 
 	public void outLoginBereich()
 	{		
-		this.out.println("<table>");
-		this.out.println("<form action=\"\" method=\"POST\">");
+		this.out.println("<table>");		
 		this.out.println("<tr>\n<td>");
 		this.out.println(this.resourceBundle.getString("NUTZERNAME"));
 		this.out.println("</td>\n<td colspan=\"2\">");
+		this.out.println("<form action=\"\" method=\"POST\">");
 		this.out.println("<input type=\"text\" name=\"nutzername\" size=\"25\">");
 		this.out.println("</td>\n</tr>\n<tr>\n<td>");
 		this.out.println(this.resourceBundle.getString("PASSWORT"));
@@ -81,14 +81,14 @@ public class KopfbereichView
 		this.out.println("<input type=\"password\" name=\"passwort\" size=\"15\">");
 		this.out.println("</td>\n<td>");
 		this.out.println("<input type=\"submit\" name=\"anmelden\" value=\""+ this.resourceBundle.getString("ANMELDEN") +"\">");
+		this.out.println("</form>");
 		this.out.println("</td>\n</tr><tr>\n<td></td>\n<td colspan=\"2\">");
 		//TODO mit Mailfunktion verbinden! 
 		this.out.println("<a href=\"/SaatgutOnline/NoFunctionServlet\">" + this.resourceBundle.getString("PASSWORT_VERGESSEN") + "</a>");
 		//TODO remove
 		this.out.println(" (nf)");
 		
-		this.out.println("</td>\n</tr>");
-		this.out.println("</form>");
+		this.out.println("</td>\n</tr>");		
 		this.out.println("</table>");
 	}
 
