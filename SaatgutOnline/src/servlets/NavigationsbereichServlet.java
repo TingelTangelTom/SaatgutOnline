@@ -43,8 +43,10 @@ public class NavigationsbereichServlet extends HttpServlet
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
 			IOException
-	{	
-		doGet(request, response);
+	{			
+			NavigationsbereichController navigationsbereichController = new NavigationsbereichController(request, response);
+			
+			navigationsbereichController.outNavigationsbereichAnzeigen();			
 	}
 
 }

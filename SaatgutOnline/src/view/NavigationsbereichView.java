@@ -49,19 +49,14 @@ public class NavigationsbereichView
 	{		
 		this.out.println("<tr>\n<td colspan=\"2\">");
 		
-		this.out.println("<a href=\"/SaatgutOnline/ProduktlisteServlet?kategorie="
+		//TODO remove
+		this.out.println("<a href=\"/SaatgutOnline/IndexPlatzhalter?kategorie="
+				
+//		this.out.println("<a href=\"/SaatgutOnline/ProduktlisteServlet?kategorie="
 				+ kategorieModel.getKategorieId()				
 				+ "\">\n"
 				+ kategorieModel.getKategorieName()
 				+ "\n</a>");
-		
-		
-//		this.out.println("<form action=\"\" method=\"POST\">");
-//		this.out.println("<input type=\"submit\" name=\"hauptkategorie_name\" value=\""+ kategorieModel.getKategorieName() + "\">");
-//		this.out.println("<input type=\"hidden\" name=\"hauptkategorie_id\" value=\"" + kategorieModel.getKategorieId() + "\">");
-//		this.out.println("<input type=\"hidden\" name=\"elternkategorie_id\" value=\"" + kategorieModel.getElternKategorieId() + "\">");
-//		this.out.println("</form>");
-		
 		this.out.println("</td>\n</tr>");
 	}
 	
@@ -73,19 +68,15 @@ public class NavigationsbereichView
 		this.out.println("&nbsp;");
 		
 		this.out.println("</td>\n<td>");
-		this.out.println("<a href=\"/SaatgutOnline/ProduktlisteServlet?kategorie="
+		
+		//TODO remove
+		this.out.println("<a href=\"/SaatgutOnline/IndexPlatzhalter?kategorie="
+		
+//		this.out.println("<a href=\"/SaatgutOnline/ProduktlisteServlet?kategorie="
 				+ kategorieModel.getKategorieId()				
 				+ "\">\n"
 				+ kategorieModel.getKategorieName()
 				+ "\n</a>");
-		
-//		this.out.println("<form action=\"\" method=\"POST\">");
-//		this.out.println("<input type=\"submit\" name=\"unterkategorie_name\" value=\""+ kategorieModel.getKategorieName() + "\">");
-//		this.out.println("<input type=\"hidden\" name=\"unterkategorie_id\" value=\"" + kategorieModel.getKategorieId() + "\">");
-//		this.out.println("<input type=\"hidden\" name=\"elternkategorie_id\" value=\"" + kategorieModel.getElternKategorieId() + "\">");
-//		this.out.println("</form>");
-		
-		
 		this.out.println("</td>\n</tr>");
 	}
 }

@@ -32,7 +32,7 @@ System.out.println("\n---NavigationsbereichController---");
 		this.session = request.getSession();
 		this.navigationsbereichView = new NavigationsbereichView(request, response);
 		this.kategorienArrayList = kategorienAusDB();
-		this.geklickteKategorienStringOrganisieren();
+		this.geklickteKategorienOrganisieren();
 
 		
 //TODO Debug-Ausgabe loeschen!!
@@ -59,6 +59,7 @@ System.out.println("----------------------------------");
 			if(this.kategorieModel.getElternKategorieId() == 0)
 			{				
 				this.navigationsbereichView.outHauptKategorieAnzeigen(this.kategorieModel);
+				
 				this.hauptKategorie = this.kategorieModel.getKategorieId();
 				
 				if(this.geklickteKategorien.contains(this.hauptKategorie))
@@ -82,37 +83,37 @@ System.out.println("----------------------------------");
 	
 	
 	@SuppressWarnings("unchecked")
-	private void geklickteKategorienStringOrganisieren()
+	private void geklickteKategorienOrganisieren()
 	{
-		if(this.session.getAttribute("kategorien") == null)
+		if(this.session.getAttribute("geklickteKategorien") == null)
 		{
 			this.geklickteKategorien = new ArrayList<Integer>();
 		}
 		else
 		{
-			this.geklickteKategorien = (ArrayList<Integer>) this.session.getAttribute("kategorien");
+			this.geklickteKategorien = (ArrayList<Integer>) this.session.getAttribute("geklickteKategorien");
 		}
 		
 		if(this.request.getParameter("kategorie") != null)
 		{
-			Integer kategorie = Integer.parseInt(this.request.getParameter("kategorie"));
+			Integer geklickteKategorie = Integer.parseInt(this.request.getParameter("kategorie"));
 						
-			if(geklickteKategorien.contains(kategorie))
+			if(this.geklickteKategorien.contains(geklickteKategorie))
 			{
-				geklickteKategorien.remove(kategorie);
+				this.geklickteKategorien.remove(geklickteKategorie);
 				
 				//TODO remove
 				System.out.println("remove geklickte Kategorie");
 			}
 			else
 			{
-				geklickteKategorien.add(kategorie);
+				this.geklickteKategorien.add(geklickteKategorie);
 
 				//TODO remove
 				System.out.println("add geklickte Kategorie");
 			}
 			
-			this.session.setAttribute("kategorien", geklickteKategorien);
+			this.session.setAttribute("geklickteKategorien", this.geklickteKategorien);
 		}
 	}
 	
