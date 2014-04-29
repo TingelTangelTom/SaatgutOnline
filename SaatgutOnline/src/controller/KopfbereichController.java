@@ -36,6 +36,10 @@ public class KopfbereichController
 		
 		this.kopfbereichView.outInhaltsframeNeueSpalte();
 		
+		this.kopfbereichView.outSuchfeld();
+		
+		this.kopfbereichView.outInhaltsframeNeueSpalte();
+		
 		this.kopfbereichView.outSprachwahl();
 		
 		this.kopfbereichView.outInhaltsframeEnde();

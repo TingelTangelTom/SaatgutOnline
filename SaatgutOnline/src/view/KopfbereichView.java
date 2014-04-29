@@ -70,9 +70,9 @@ public class KopfbereichView
 		out.println("<table>");
 		out.println("<form action=\"\" method=\"POST\">");
 		out.println("<tr>\n<td>" + this.resourceBundle.getString("NUTZERNAME")
-				+ "</td><td colspan=\"2\"><input name=\"nutzername\" type=\"text\" size=\"25\">\n</td>\n</tr>");
+				+ "</td><td colspan=\"2\"><input type=\"text\" name=\"nutzername\" size=\"25\">\n</td>\n</tr>");
 		out.println("<tr>\n<td>\n" + this.resourceBundle.getString("PASSWORT")
-				+ "</td><td><input name=\"passwort\" type=\"password\" size=\"15\"></td>");
+				+ "</td><td><input type=\"password\" name=\"passwort\" size=\"15\"></td>");
 		out.println("<td>\n<input name=\"login\" value=\"" + this.resourceBundle.getString("ANMELDEN")
 				+ "\" type=\"submit\">\n</td>\n</tr>");
 		out.println("<tr>\n<td></td><td colspan=\"2\">\n<a href=\"http://localhost:8080/SaatgutOnline/NoFunctionServlet\">"
@@ -117,6 +117,19 @@ public class KopfbereichView
 	{
 		out.println("<table>\n<tr>\n<td>");
 		out.println("Warenkorb-Preview");
+		out.println("</td>\n</tr>\n</table>");
+	}
+	
+	public void outSuchfeld()
+	{
+		out.println("<table>\n<tr>\n<td>");
+//		out.println("");
+		out.println("<form action=\"\" method=\"POST\">");
+		out.println("<input type=\"text\" name=\"suchbegriff\" size=\"15\">");
+		out.println("</td>\n<td>");
+		out.println("<input type=\"submit\" name=\"suche\" value=\"" + this.resourceBundle.getString("SUCHEN") + "\">");
+		out.println("</form>");
+//		out.println("");
 		out.println("</td>\n</tr>\n</table>");
 	}
 
