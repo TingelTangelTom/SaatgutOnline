@@ -46,22 +46,26 @@ public class NavigationsbereichView
 	}
 	
 	public void outHauptKategorieAnzeigen(KategorieModel kategorieModel)
-	{
-		this.out.println("<tr>\n<td colspan=\"2\">\n<form action=\"\" method=\"POST\">");		
+	{		
+		this.out.println("<tr>\n<td colspan=\"2\">");
+		this.out.println("<form action=\"\" method=\"POST\">");
 		this.out.println("<input type=\"submit\" name=\"hauptkategorie_name\" value=\""+ kategorieModel.getKategorieName() + "\">");
 		this.out.println("<input type=\"hidden\" name=\"hauptkategorie_id\" value=\"" + kategorieModel.getKategorieId() + "\">");
 		this.out.println("<input type=\"hidden\" name=\"elternkategorie_id\" value=\"" + kategorieModel.getElternKategorieId() + "\">");
-		this.out.println("</form>\n</td>\n</tr>");
+		this.out.println("</form>");
+		this.out.println("</td>\n</tr>");
 	}
 	
 	public void outUnterKategorieAnzeigen(KategorieModel kategorieModel)
-	{
-		this.out.println("<tr>\n<td colspan=\"2\">\n<form action=\"\" method=\"POST\">");
+	{			
+		this.out.println("<tr>\n<td colspan=\"2\">");
+		this.out.println("<form action=\"\" method=\"POST\">");
 		//TODO remove next line - format properly in CSS!
 		this.out.println("-");
 		this.out.println("<input type=\"submit\" name=\"unterkategorie_name\" value=\""+ kategorieModel.getKategorieName() + "\">");
 		this.out.println("<input type=\"hidden\" name=\"unterkategorie_id\" value=\"" + kategorieModel.getKategorieId() + "\">");
 		this.out.println("<input type=\"hidden\" name=\"elternkategorie_id\" value=\"" + kategorieModel.getElternKategorieId() + "\">");
-		this.out.println("</form>\n</td>\n</tr>");
+		this.out.println("</form>");
+		this.out.println("</td>\n</tr>");
 	}
 }
