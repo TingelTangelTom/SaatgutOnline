@@ -9,6 +9,33 @@ Bitte offene Fragen hier posten:
 ERLEDIGT! --- Bitte in den Filter noch die sprache_id einbauen
 
 
+--------------------------------------------------------------
+29.April, 18:30h (Tom) - Probleme mit dem Produktliste-Bereich
+--------------------------------------------------------------
+
+Hey Simon!
+
+Mach mal den Navi-View und den ProduktlistenView auf.
+
+Irgendwas stimmt da nicht: beim Start des PL-Servlets wird im PL-View in Zeile 30 (habe ich zunächst auskommentiert) 
+
+		PropertyResourceBundle.getBundle("I18N." + locale.getLanguage() + "." + getClass().getSimpleName(), locale);
+		
+eine Execption geworfen - aber nur, wenn im Navi-View in Zeile 55 + 75 das PL-Servlet verlinkt wird.
+
+Wenn man die Zeilen auskommentiert und dafür Zeilen 53 + 73 reinnimmt, und Zeile 30 im PL-View auch, kann man das PL-Servlet starten...
+
+Check ich nicht!! =(
+Hab grad eineinhalb Stunden nach dem Fehler gesucht, aber nix gefunden. Beim derzeitigen Stand muss Wolfgang morgen den Fehler finden.
+
+
+Außerdem ist mir aufgefallen, dass, wenn dass PL-Servlet eingebunden ist (Zeilen 55 + 75 im Navi-View aktiv und
+Zeile 30 PL-View auskommentiert), die komplette Seite einen kleinen Sprung nach rechts macht, sobald man "banana tree", bzw.
+"Bananenstauden" anklickt! Alles springt wieder zurück, wenn man "Palmen" bzw. "palms" anklickt. Formatierungsfehler?
+
+Ruf eben durch, wenn du soweit bist!
+
+
 
 -------------------------------------------------------------
 28.April, 12:25h (Tom) - Erweiterung des SprachversionFilters
