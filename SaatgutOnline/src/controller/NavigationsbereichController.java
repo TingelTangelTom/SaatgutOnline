@@ -17,9 +17,9 @@ public class NavigationsbereichController
 	private NavigationsbereichView navigationsbereichView;
 	private HttpSession session;
 	private HttpServletRequest request;
-	private int hauptKategorie = 0;	
+	private int hauptKategorieId = 0;	
 	private KategorieModel kategorieModel;	
-	private ArrayList<Integer> geklickteKategorien;
+	private ArrayList<Integer> geklickteKategorienInSession;
 	private ArrayList<KategorieModel> kategorienArrayList = new ArrayList<KategorieModel>();
 	private boolean getMethode;
 
@@ -43,7 +43,7 @@ System.out.println("----------------------------------");
 
 	public void outNavigationsbereichAnzeigen()
 	{
-		this.navigationsbereichView.outNavigationsabereichAnfang();
+		this.navigationsbereichView.outNavigationsbereichAnfang();
 		this.navigationsbereichView.outKategorienListeAnfang();
 		
 		this.outKategorienListeAnzeigen();
@@ -62,9 +62,9 @@ System.out.println("----------------------------------");
 			{				
 				this.navigationsbereichView.outHauptKategorieAnzeigen(this.kategorieModel);
 				
-				this.hauptKategorie = this.kategorieModel.getKategorieId();
+				this.hauptKategorieId = this.kategorieModel.getKategorieId();
 				
-				if(this.geklickteKategorien.contains(this.hauptKategorie))
+				if(this.geklickteKategorienInSession.contains(this.hauptKategorieId))
 				{
 					for (int j = 0; j < kategorienArrayList.size(); j++)
 					{
@@ -72,7 +72,7 @@ System.out.println("----------------------------------");
 						
 						if(this.kategorieModel.getElternKategorieId() != 0)
 						{
-							if(this.kategorieModel.getElternKategorieId() == this.hauptKategorie)
+							if(this.kategorieModel.getElternKategorieId() == this.hauptKategorieId)
 							{													
 								this.navigationsbereichView.outUnterKategorieAnzeigen(this.kategorieModel);					
 							}
@@ -86,36 +86,30 @@ System.out.println("----------------------------------");
 	
 	@SuppressWarnings("unchecked")
 	private void geklickteKategorienOrganisieren()
-	{
+	{		
 		if(this.session.getAttribute("geklickteKategorien") == null)
 		{
-			this.geklickteKategorien = new ArrayList<Integer>();
+			this.geklickteKategorienInSession = new ArrayList<Integer>();
 		}
 		else
 		{
-			this.geklickteKategorien = (ArrayList<Integer>) this.session.getAttribute("geklickteKategorien");
+			this.geklickteKategorienInSession = (ArrayList<Integer>) this.session.getAttribute("geklickteKategorien");
 		}
 		
 		if(getMethode && this.request.getParameter("kategorie") != null)
-		{
-			Integer geklickteKategorie = Integer.parseInt(this.request.getParameter("kategorie"));
+		{			
+			Integer geklickteKategorieAusGetMethode = Integer.parseInt(this.request.getParameter("kategorie"));
 						
-			if(this.geklickteKategorien.contains(geklickteKategorie))
+			if(this.geklickteKategorienInSession.contains(geklickteKategorieAusGetMethode))
 			{
-				this.geklickteKategorien.remove(geklickteKategorie);
-				
-				//TODO remove
-				System.out.println("remove geklickte Kategorie");
+				this.geklickteKategorienInSession.remove(geklickteKategorieAusGetMethode);				
 			}
 			else
 			{
-				this.geklickteKategorien.add(geklickteKategorie);
-
-				//TODO remove
-				System.out.println("add geklickte Kategorie");
+				this.geklickteKategorienInSession.add(geklickteKategorieAusGetMethode);
 			}
 			
-			this.session.setAttribute("geklickteKategorien", this.geklickteKategorien);
+			this.session.setAttribute("geklickteKategorien", this.geklickteKategorienInSession);
 		}
 	}
 	
@@ -133,11 +127,7 @@ System.out.println("----------------------------------");
 					+ "FROM kategorie AS k INNER JOIN kategorie_beschreibung AS kb "
 					+ "ON k.kategorie_id = kb.kategorie_id "
 					+ "WHERE sprache_id = '" + spracheId + "' "
-//					+ "WHERE sprache_id = '2' "
 					+ "ORDER BY k.sortier_reihenfolge";
-			
-//TODO Debug-Ausgabe loeschen!!			
-System.out.println(query);
 			
 			Statement statement = DatenbankController.verbindung.createStatement();
 			ResultSet resultset = statement.executeQuery(query);

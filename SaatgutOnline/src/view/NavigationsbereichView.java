@@ -25,7 +25,7 @@ public class NavigationsbereichView
 		}		
 	}
 
-	public void outNavigationsabereichAnfang()
+	public void outNavigationsbereichAnfang()
 	{
 		this.out.println("<tr>\n<td class=\"navigation\">"); // oeffnet Navigationsbereich		
 	}
@@ -50,9 +50,9 @@ public class NavigationsbereichView
 		this.out.println("<tr>\n<td colspan=\"2\">");
 		
 		//TODO remove
-		this.out.println("<a href=\"/SaatgutOnline/IndexPlatzhalter?kategorie="
+//		this.out.println("<a href=\"/SaatgutOnline/IndexPlatzhalter?kategorie="
 				
-//		this.out.println("<a href=\"/SaatgutOnline/ProduktlisteServlet?kategorie="
+		this.out.println("<a href=\"/SaatgutOnline/ProduktlisteServlet?kategorie="
 				+ kategorieModel.getKategorieId()				
 				+ "\">\n"
 				+ kategorieModel.getKategorieName()
@@ -70,9 +70,9 @@ public class NavigationsbereichView
 		this.out.println("</td>\n<td>");
 		
 		//TODO remove
-		this.out.println("<a href=\"/SaatgutOnline/IndexPlatzhalter?kategorie="
+//		this.out.println("<a href=\"/SaatgutOnline/IndexPlatzhalter?kategorie="
 		
-//		this.out.println("<a href=\"/SaatgutOnline/ProduktlisteServlet?kategorie="
+		this.out.println("<a href=\"/SaatgutOnline/ProduktlisteServlet?kategorie="
 				+ kategorieModel.getKategorieId()				
 				+ "\">\n"
 				+ kategorieModel.getKategorieName()
