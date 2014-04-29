@@ -21,13 +21,15 @@ public class NavigationsbereichController
 	private KategorieModel kategorieModel;	
 	private ArrayList<Integer> geklickteKategorien;
 	private ArrayList<KategorieModel> kategorienArrayList = new ArrayList<KategorieModel>();
+	private boolean getMethode;
 
 
-	public NavigationsbereichController(HttpServletRequest request, HttpServletResponse response)
+	public NavigationsbereichController(HttpServletRequest request, HttpServletResponse response, boolean postMethode)
 	{
 //TODO Debug-Ausgabe loeschen!!		
 System.out.println("\n---NavigationsbereichController---");
 		
+		this.getMethode = postMethode;
 		this.request = request;
 		this.session = request.getSession();
 		this.navigationsbereichView = new NavigationsbereichView(request, response);
@@ -94,8 +96,10 @@ System.out.println("----------------------------------");
 			this.geklickteKategorien = (ArrayList<Integer>) this.session.getAttribute("geklickteKategorien");
 		}
 		
-		if(this.request.getParameter("kategorie") != null)
+		if(getMethode && this.request.getParameter("kategorie") != null)
 		{
+			System.out.println("post --> true && kategorie != null --> true");
+			
 			Integer geklickteKategorie = Integer.parseInt(this.request.getParameter("kategorie"));
 						
 			if(this.geklickteKategorien.contains(geklickteKategorie))
