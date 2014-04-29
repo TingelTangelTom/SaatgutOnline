@@ -40,7 +40,7 @@ public class ProduktlisteView {
 		this.output += "<table class=\"produktinfo\"><tr><td>"
 				+ "<tr><td rowspan=\"5\">Cell 1</td><td colspan=\"3\">" + this.produktModel.getName() + "</td></tr>" // Titel
 				+ "<tr><td colspan=\"3\">" + this.produktModel.getName() + "</td></tr>" // Titel
-				+ "<tr><td colspan=\"3\">Text</td></tr>"		
+				+ "<tr><td colspan=\"3\">" + this.produktModel.getBeschreibung() + "</td></tr>"		
 				+ "<tr><td>Menge</td><td>Auf Lager</td><td>Warenkorb</td></tr>" // Titel
 				+ "<tr><td colspan=\"3\">Preise inklusive</td></tr>" // Produktbeschreibung
 				+ "<tr><td colspan=\"2\">Warenkorb</td></tr>" // Button Warenkorb
