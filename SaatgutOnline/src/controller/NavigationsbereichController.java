@@ -93,9 +93,9 @@ System.out.println("----------------------------------");
 			this.geklickteKategorien = (ArrayList<Integer>) this.session.getAttribute("kategorien");
 		}
 		
-		if(this.request.getParameter("hauptkategorie_id") != null)
+		if(this.request.getParameter("kategorie") != null)
 		{
-			Integer kategorie = Integer.parseInt(this.request.getParameter("hauptkategorie_id"));
+			Integer kategorie = Integer.parseInt(this.request.getParameter("kategorie"));
 						
 			if(geklickteKategorien.contains(kategorie))
 			{
