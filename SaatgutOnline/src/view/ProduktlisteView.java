@@ -17,6 +17,7 @@ public class ProduktlisteView {
 	private HtmlOutput htmlOutput;
 	private String output;
 	private ArrayList<ProduktModel> produktliste;
+	private String kategorie;
 	
 	public ProduktlisteView(HttpServletRequest request) {
 		
@@ -24,6 +25,7 @@ public class ProduktlisteView {
 		this.produktModel = new ProduktModel();
 		this.htmlOutput = new HtmlOutput(request);
 		this.produktliste = new ArrayList<>();
+		this.kategorie = request.getParameter("kategorie");
 		HttpSession session = request.getSession();
 		Locale locale = (Locale)session.getAttribute("sprache");
 //		PropertyResourceBundle.getBundle("I18N." + locale.getLanguage() + "." + getClass().getSimpleName(), locale);
@@ -32,14 +34,15 @@ public class ProduktlisteView {
 	//texte.getString("WILLKOMMEN");
 	public String anzeigenProduktliste() {	
 		this.output = "<table class=\"produktinfo\">";
-		this.produktliste = this.produktController.getProduktliste(1);
+		this.produktliste = this.produktController.getProduktliste(this.kategorie);
 		this.output = "<table class=\"produktinfo\"><tr><td>";
+		
 		for (int i = 0; i < this.produktliste.size(); i++) {
-		this.produktModel = this.produktliste.get(i);	
-		this.output += "<table class=\"produktinfo\"><tr><td>"
-				+ "<tr><td rowspan=\"5\">Cell 1</td><td colspan=\"3\">" + this.produktModel.getName() + "</td></tr>" // Titel
-				+ "<tr><td colspan=\"3\">" + this.produktModel.getName() + "</td></tr>" // Titel
-				+ "<tr><td colspan=\"3\">" + this.produktModel.getBeschreibung() + "</td></tr>"		
+			ProduktModel produktModel = this.produktliste.get(i);	
+			this.output += "<table class=\"produktinfo\"><tr><td>"
+				+ "<tr><td rowspan=\"5\">Cell 1</td><td colspan=\"3\">" + this.produktliste.size() + " " + produktModel.getId() + " "+ produktModel.getName() + "</td></tr>" // Titel
+				+ "<tr><td colspan=\"3\">" + produktModel.getName() + "</td></tr>" // Titel
+				+ "<tr><td colspan=\"3\">" + produktModel.getBeschreibung() + "</td></tr>"		
 				+ "<tr><td>Menge</td><td>Auf Lager</td><td>Warenkorb</td></tr>" // Titel
 				+ "<tr><td colspan=\"3\">Preise inklusive</td></tr>" // Produktbeschreibung
 				+ "<tr><td colspan=\"2\">Warenkorb</td></tr>" // Button Warenkorb
@@ -49,6 +52,7 @@ public class ProduktlisteView {
 				+ "<input type=\"hidden\" name=\"produkt\" value=\"\">"
 				+ "<input type=\"image\" name=\"absenden\" value=\"senden\" src=\"resources/bilder/flags_iso/24/us.png\">"
 				+ "</td></tr></table>";	
+			produktModel = null;
 		}
 		this.output += "</td></tr></table>";	
 

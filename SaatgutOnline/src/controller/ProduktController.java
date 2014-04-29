@@ -42,18 +42,22 @@ public class ProduktController {
 		DatenbankController.getVerbindung();
 		
 		try {
+			
+			System.out.println("getProdukt holt Produkt mit der ID: " + id);
 			String query = "SELECT p.produkt_id, p.produkt_bestand, pb.produkt_name, pb.produkt_beschreibung,"
 						+ "pb.produkt_suchbegriffe, pb.produkt_angesehen, p.produkt_preis, p.produkt_gewicht,"
-						+ "p.produkt_steuer_id, p.produkt_datum_hinzugefuegt, p.produkt_datum_geaendert FROM "
-						+ "produkt AS p INNER JOIN produktbeschreibung AS pb ON p.produkt_id = pb.produkt_id "
-						+ "WHERE pb.sprache_id = '" + this.sprache_id + "' AND p.produkt_id = '" + id + "' ORDER "
-						+ "BY pb.produkt_name";
+						+ "p.produkt_steuer_id, p.produkt_datum_hinzugefuegt, p.produkt_datum_geaendert "
+						+ "FROM produkt AS p "
+						+ "INNER JOIN produktbeschreibung AS pb ON p.produkt_id = pb.produkt_id "
+						+ "WHERE pb.sprache_id = '" + this.sprache_id + "' AND p.produkt_id = '" + id + "' "
+						+ "ORDER BY pb.produkt_name";
 
 		
 			Statement statement = DatenbankController.verbindung.createStatement();
 			ResultSet resultset = statement.executeQuery(query);
 			while(resultset.next()){
 				this.produktModel.setId(resultset.getInt(1));
+				System.out.println("ProduktID " + resultset.getInt(1) + " wurde gespeichert!");
 				this.produktModel.setBestand(resultset.getInt(2));
 				this.produktModel.setName(resultset.getString(3));
 				this.produktModel.setBeschreibung(resultset.getString(4));
@@ -64,7 +68,6 @@ public class ProduktController {
 				this.produktModel.setSteuerId(resultset.getInt(9));
 				this.produktModel.setHinzugefeugt(resultset.getDate(10));
 				this.produktModel.setGeaendert(resultset.getDate(11));
-				this.produktModel.setSteuerId(resultset.getInt(9));
 			}	
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -87,9 +90,13 @@ public class ProduktController {
 		
 		try {
 			
-			String query = "SELECT pf.produktfelder_name AS name, pfz.produktfelder_wert AS wert FROM produktfelder AS pf "
-							+ "LEFT JOIN produktfelder_zuordnung AS pfz ON pfz.produktfelder_id = pf.produktfelder_id WHERE pfz.produkt_id = '1' AND "
-							+ "pfz.produktfelder_wert<>'' AND (pf.sprache_id= '" + this.sprache_id + "' AND pf.sprache_id = '" + this.sprache_id + "') ORDER BY pf.sortier_reihenfolge";
+			String query = "SELECT pf.produktfelder_name AS name, pfz.produktfelder_wert AS wert "
+							+ "FROM produktfelder AS pf "
+							+ "LEFT JOIN produktfelder_zuordnung AS pfz ON pfz.produktfelder_id = pf.produktfelder_id "
+							+ "WHERE pfz.produkt_id = '" + id + "' "
+							+ "AND pfz.produktfelder_wert<>'' "
+							+ "AND (pf.sprache_id= '" + this.sprache_id + "' AND pf.sprache_id = '" + this.sprache_id + "') "
+							+ "ORDER BY pf.sortier_reihenfolge";
 			
 			Statement statement = DatenbankController.verbindung.createStatement();
 			ResultSet resultset = statement.executeQuery(query);
@@ -107,19 +114,20 @@ public class ProduktController {
 		}
 
 		this.produktModel.setMerkmale(merkmale);
-
+		System.out.println("Nochmaliger Test der ProduktId. Sie lautet: " + this.produktModel.getId());
 		return this.produktModel;
 	}
 
-	public ArrayList<ProduktModel> getProduktliste(int kategorie_id) {
+	public ArrayList<ProduktModel> getProduktliste(String kategorie_id) {
 		
 		DatenbankController.getVerbindung();
 		ArrayList<Integer> kategorie_ids = new ArrayList<>();
-		if(this.kategorie == null) {
+		ArrayList<ProduktModel> produkte = new ArrayList<>();
+		//if(this.kategorie == null) {
 			this.kategorie = "1";
-		}
+		//}
 		try {
-			System.out.println("--> Kategorie: " + this.kategorie);
+			System.out.println("Gewählte Kategorie: " + this.kategorie);
 			Statement statement = DatenbankController.verbindung.createStatement();
 			String kategorie_query = "SELECT kategorie_id FROM kategorie WHERE eltern_id = '" + this.kategorie + "' OR (kategorie_id = '" + this.kategorie + "' AND eltern_id = 0)";
 			
@@ -134,25 +142,30 @@ public class ProduktController {
 		}
 		
 		for (int i = 0; i < kategorie_ids.size(); i++) {				
-			String produkt_query = "SELECT produkt_id FROM produkt WHERE kategorie_id = '" + kategorie_ids.get(i) +"'";
-			System.out.println("gefunden" + kategorie_ids.get(i));
+			String produkt_query = "SELECT produkt_id, produkt_bestand FROM produkt WHERE kategorie_id = '" + kategorie_ids.get(i) +"'";
 			try {
 			Statement statement2 = DatenbankController.verbindung.createStatement();
 			ResultSet produkt_resultset = statement2.executeQuery(produkt_query);
-		
-			//this.produktliste.add(this.getProdukt(kategorie_ids.get(i)));
 			
 			while(produkt_resultset.next()){
-				System.out.println("Produkt ID. " + produkt_resultset.getInt(1));
-				this.produktliste.add(this.getProdukt(produkt_resultset.getInt(1)));
+				//System.out.println("Produkt ID. " + produkt_resultset.getInt(1));
+				//System.out.println("Bestand. " + produkt_resultset.getInt(2));
+				
+				//System.out.println(this.produktModel.getBestand());
+				produkte.add(this.getProdukt(produkt_resultset.getInt(1)));
+				//System.out.println("Produkt " + produkt_resultset.getInt(1) + " hinzugefügt");
 			}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 
 		}
+		System.out.println("Gespeicherte Produkte: ");
+		for (int i = 0; i < produkte.size(); i++) {
+			System.out.println(produkte.get(i).getId());
+		}
 
-		return this.produktliste;
+		return produkte;
 	}
 	
 	public double getProduktSteuersatz(int id, int sprache_id) {
