@@ -15,7 +15,7 @@ import controller.ImpressumController;
 /**
  * Servlet implementation class ImpressumServlet
  */
-@WebServlet(description = "Impressum", urlPatterns = { "/ImpressumServlet" })
+@WebServlet(description = "Impressum", urlPatterns = { "/Impressum" })
 public class ImpressumServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -24,7 +24,6 @@ public class ImpressumServlet extends HttpServlet {
 	 */
 	public ImpressumServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -55,5 +54,4 @@ public class ImpressumServlet extends HttpServlet {
 			throws ServletException, IOException {
 		doGet(request, response);
 	}
-
 }
