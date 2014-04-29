@@ -49,7 +49,7 @@ public class NavigationsbereichView
 	{		
 		this.out.println("<tr>\n<td colspan=\"2\">");
 		
-		this.out.println("<a href=\"/SaatgutOnline/ProduktinfoServlet?kategorie="
+		this.out.println("<a href=\"/SaatgutOnline/ProduktlisteServlet?kategorie="
 				+ kategorieModel.getKategorieId()				
 				+ "\">\n"
 				+ kategorieModel.getKategorieName()
@@ -73,7 +73,7 @@ public class NavigationsbereichView
 		this.out.println("&nbsp;");
 		
 		this.out.println("</td>\n<td>");
-		this.out.println("<a href=\"/SaatgutOnline/ProduktinfoServlet?kategorie="
+		this.out.println("<a href=\"/SaatgutOnline/ProduktlisteServlet?kategorie="
 				+ kategorieModel.getKategorieId()				
 				+ "\">\n"
 				+ kategorieModel.getKategorieName()
