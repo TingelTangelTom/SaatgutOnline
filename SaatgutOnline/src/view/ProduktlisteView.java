@@ -1,16 +1,15 @@
 package view;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Locale;
 import java.util.PropertyResourceBundle;
 
-import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import model.ProduktModel;
 import controller.HtmlOutput;
 import controller.ProduktController;
-import model.ProduktModel;
 
 public class ProduktlisteView {
 	private ProduktController produktController;
