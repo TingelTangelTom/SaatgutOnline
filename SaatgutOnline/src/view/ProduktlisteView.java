@@ -27,7 +27,7 @@ public class ProduktlisteView {
 		this.produktliste = new ArrayList<>();
 		HttpSession session = request.getSession();
 		Locale locale = (Locale)session.getAttribute("sprache");
-		PropertyResourceBundle.getBundle("I18N." + locale.getLanguage() + "." + getClass().getSimpleName(), locale);
+//		PropertyResourceBundle.getBundle("I18N." + locale.getLanguage() + "." + getClass().getSimpleName(), locale);
 	}
 
 	//texte.getString("WILLKOMMEN");
