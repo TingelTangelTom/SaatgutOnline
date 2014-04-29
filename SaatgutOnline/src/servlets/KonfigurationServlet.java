@@ -9,13 +9,13 @@ import javax.servlet.http.HttpServlet;
  * Servlet implementation class Konfiguration
  */
 @WebServlet("/Konfiguration")
-public class Konfiguration extends HttpServlet {
+public class KonfigurationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Konfiguration() {
+    public KonfigurationServlet() {
         super();
     }
 
@@ -30,5 +30,7 @@ public class Konfiguration extends HttpServlet {
 		getServletContext().setAttribute("datenbank", konfiguration.getInitParameter("datenbank"));
 		getServletContext().setAttribute("dbBenutzer", konfiguration.getInitParameter("dbBenutzer"));
 		getServletContext().setAttribute("dbPasswort", konfiguration.getInitParameter("dbPasswort"));
+		getServletContext().setAttribute("BenutzernameRegel", konfiguration.getInitParameter("BenutzernameRegel"));
+		getServletContext().setAttribute("PasswortRegel", konfiguration.getInitParameter("PasswortRegel"));
 	}
 }

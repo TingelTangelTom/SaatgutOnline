@@ -63,16 +63,12 @@ public class SessionFilter implements Filter {
 		    // Keine gueltige Session vorhanden. Neue erstellen:
 		    session = ((HttpServletRequest) request).getSession();
 		    
-		    // neue Sesison, daher Standard "nicht angemeldet" zuweisen
+		    // neue Sesison, daher den Standard "nicht angemeldet" zuweisen
 		    session.setAttribute( "angemeldet", false);	
 		    
 		} else {
 		    // Gueltige Session gefunden
 		}
-		
-		
-		
-		
 		
 		
 		chain.doFilter(request, response);
