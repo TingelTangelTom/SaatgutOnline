@@ -15,12 +15,9 @@ public class AGBView {
 		try {
 			out = response.getWriter();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return;
 		}
 		out.println(agbText);
 	}
-	
-
 }
