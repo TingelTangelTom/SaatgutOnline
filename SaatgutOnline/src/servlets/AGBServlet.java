@@ -24,7 +24,6 @@ public class AGBServlet extends HttpServlet {
 	 */
 	public AGBServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**

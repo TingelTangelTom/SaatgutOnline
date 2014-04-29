@@ -19,7 +19,7 @@ public class AGBController {
 
 		// Datenbankabfrage : Aktuellste AGB ausgeben
 		try {
-			String query = "SELECT AGB_Text FROM agb ORDER BY AGB_Datum DESC LIMIT 1";
+			String query = "SELECT agb_txt FROM agb ORDER BY agb_datum_hinzugefuegt DESC LIMIT 1";
 
 			Statement statement = DatenbankController.verbindung.createStatement();
 			ResultSet resultset = statement.executeQuery(query);
@@ -29,7 +29,6 @@ public class AGBController {
 				 new AGBView(request, response, agbText);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
