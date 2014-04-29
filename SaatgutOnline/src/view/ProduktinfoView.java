@@ -49,7 +49,7 @@ public class ProduktinfoView {
 				+ "<form action='' method='POST'>"
 				+ "<input type=\"hidden\" name=\"menge\" value=\"3\">"
 				+ "<input type=\"hidden\" name=\"produkt\" value=\"" + this.produktModel + "\">"
-				+ "<input type=\"image\" name=\"absenden\" value=\"senden\" src=\"resources/bilder/flags_iso/24/us.png\">"
+				+ "<input type=\"image\" name=\"absenden\" value=\"senden\"> absenden"
 				+ "</td></tr></table>";	
 
 		return output;
