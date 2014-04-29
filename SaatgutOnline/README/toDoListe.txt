@@ -6,15 +6,15 @@ Christoph
 
 
 Tom
-- Kopfbereich CSS - kriegt er nicht hin... =(
-- Sprache_id einfügen - ERLEDIGT!
-- Navigation - ERLEDIGT!
+- UNERLEDIGT! - Kopfbereich CSS (kriegt er nicht hin...)
+- ERLEDIGT! - Sprache_id einfügen
+- ERLEDIGT! - Navigation 
 - Warenkorb (+MiniView)
 - Texte (DB) übersetzen
 - Bestellvorgang
-- Suchfeld im Kopfbereich einfügen
+- ERLEDIGT! - Suchfeld im Kopfbereich einfügen
 - Loginbereich --> Logoutbereich
-- Assertions recherchieren (bedingte Kompilierung)
+- Assertions recherchieren (bedingte Compilierung)
 
 
 Simon
@@ -30,8 +30,6 @@ Anja
 - Fussbereich
 
 
-Benjamin
---> ist bis auf Weiteres aus dem Spiel - der Arme ist krank... =(
 
 
 Kundenmaske?????
