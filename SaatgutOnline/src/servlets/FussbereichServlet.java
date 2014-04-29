@@ -33,8 +33,20 @@ public class FussbereichServlet extends HttpServlet
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		// DEBUG-Ausgabe für Session-Inhalte
+		
+		// DEBUG-Ausgabe für request-Parameter
 		//TODO remove
+		{
+		System.out.println("\n---(POST/GET) request-Parameter---");		
+		Enumeration<String> paramaters = request.getParameterNames();
+		while (paramaters.hasMoreElements())
+		{
+			String name = paramaters.nextElement();
+			String value = request.getParameter(name);
+			System.out.println(name + " = " + value);			
+		}		
+		System.out.println("----------------------------------");
+		}		
 		{
 		System.out.println("\n---Session-Inhalte---");
 		Enumeration<String> sessionParamaters = request.getSession().getAttributeNames();
@@ -59,6 +71,10 @@ public class FussbereichServlet extends HttpServlet
 		// Fussbereich schliessen
 		fussbereichView.outFussbereichEnde();
 		
+
+		
+		
+		
 	}
 
 	/**
@@ -67,22 +83,7 @@ public class FussbereichServlet extends HttpServlet
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
 			IOException
-	{
-		// DEBUG-Ausgabe für POST-Array
-		//TODO remove
-		{
-		System.out.println("\n---KopfbereichServlet---");
-		System.out.println("POST-Attribut(e) angenommen:");		
-		Enumeration<String> paramaters = request.getParameterNames();
-		while (paramaters.hasMoreElements())
-		{
-			String name = paramaters.nextElement();
-			String value = request.getParameter(name);
-			System.out.println(name + " = " + value);			
-		}		
-		System.out.println("------------------------");
-		}
-		
+	{		
 		doGet(request, response);
 	}
 
