@@ -17,12 +17,11 @@ Tom
 
 
 Simon
-- Produktinfo Seite
+- Produktinfo Seite fertig (ohne Layout)
 - Produktliste Seite
 - Angebotsseite
 - Suchfunktion
 - SQL-Datei
-- (Tom sagt:) bitte Sortierreihenfolge aus Tabelle "kategorie" entfernen -> kriege ich nicht genutzt... 
 
 
 Anja
