@@ -55,7 +55,7 @@ public class AnmeldungFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		 ServletContext context = getFilterConfig().getServletContext();
 		// Wurden Formulardaten uebertragen?
-		if(request.getParameter("login") != null)
+		if(request.getParameter("anmelden") != null)
 		{
 			System.out.println("LOGIN erfolgt!");
 			System.out.println("Benutzername: " + request.getParameter("benutzername"));
