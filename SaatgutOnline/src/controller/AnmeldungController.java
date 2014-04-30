@@ -36,7 +36,13 @@ public class AnmeldungController {
 		this.passwort = request.getParameter("passwort");
 		this.context = context;
 		
-		boolean status = anmeldedatenPruefen();
+		try {
+			((HttpServletResponse) response).sendRedirect(((HttpServletResponse) response).encodeRedirectURL("NoOperationServlet"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+//		boolean status = anmeldedatenPruefen();
 	}
 
 	private boolean anmeldedatenPruefen() {
@@ -53,6 +59,7 @@ public class AnmeldungController {
 				e.printStackTrace();
 			}
 		}
+		
 		
 		// Teil 2: Anmeldedaten mit der Datenbank abgleichen
 		
