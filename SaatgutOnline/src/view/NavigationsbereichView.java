@@ -48,8 +48,8 @@ public class NavigationsbereichView
 	public void outHauptKategorieAnzeigen(KategorieModel kategorieModel)
 	{		
 		this.out.println("<tr>\n<td colspan=\"2\">");
-		this.out.println("<a href=\"/SaatgutOnline/IndexPlatzhalter?kategorie=" //Ausweichaufruf
-//		this.out.println("<a href=\"/SaatgutOnline/Produktliste?kategorie="
+//		this.out.println("<a href=\"/SaatgutOnline/IndexPlatzhalter?kategorie=" //Ausweichaufruf
+		this.out.println("<a href=\"/SaatgutOnline/Produktliste?kategorie="
 				+ kategorieModel.getKategorieId()				
 				+ "\">\n"
 				+ kategorieModel.getKategorieName()
@@ -65,8 +65,8 @@ public class NavigationsbereichView
 		this.out.println("&nbsp;");
 		
 		this.out.println("</td>\n<td>");
-		this.out.println("<a href=\"/SaatgutOnline/IndexPlatzhalter?kategorie=" // Ausweichaufruf
-//		this.out.println("<a href=\"/SaatgutOnline/Produktliste?kategorie="
+//		this.out.println("<a href=\"/SaatgutOnline/IndexPlatzhalter?kategorie=" // Ausweichaufruf
+		this.out.println("<a href=\"/SaatgutOnline/Produktliste?kategorie="
 				+ kategorieModel.getKategorieId()				
 				+ "\">\n"
 				+ kategorieModel.getKategorieName()
