@@ -39,7 +39,7 @@
     </init-param>
     <init-param>
     	<param-name>PasswortRegel</param-name>
-    	<param-value>>^[a-z0-9_-]{3,15}$</param-value>
+    	<param-value>>8^[a-z0-9_-]{3,15}$</param-value>
     </init-param>
     
     <load-on-startup>0</load-on-startup>
