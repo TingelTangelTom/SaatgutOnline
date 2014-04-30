@@ -16,6 +16,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 /**
  * Servlet Filter implementation class SessionVerwaltung
@@ -58,19 +59,21 @@ public class SessionFilter implements Filter {
 		
 		// pr�fen, ob eine gueltige Session vorhanden ist
 		
-		HttpSession session = ((HttpServletRequest) request).getSession(false);
-		if (session == null) {
-		    // Keine gueltige Session vorhanden. Neue erstellen:
-		    session = ((HttpServletRequest) request).getSession();
-		    
-		    // neue Sesison, daher den Standard "nicht angemeldet" zuweisen
-		    session.setAttribute( "angemeldet", false);	
-		    
-		} else {
-		    // Gueltige Session gefunden
+		if (request instanceof HttpServletRequest) {
+			HttpSession session = ((HttpServletRequest) request).getSession(false);
+			if (session == null) {
+			    // Keine gueltige Session vorhanden. Neue erstellen:
+			    System.out.println("Session abgelaufen, neue erstellt");
+				session = ((HttpServletRequest) request).getSession();
+			    
+			    // neue Sesison, daher den Standard "nicht angemeldet" zuweisen
+			    session.setAttribute( "angemeldet", false);	
+			    
+			} else {
+			    // Gueltige Session gefunden
+			}
 		}
-		
-		
+			
 		chain.doFilter(request, response);
 	}
 
