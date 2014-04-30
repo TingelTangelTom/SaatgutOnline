@@ -8,8 +8,15 @@ Bitte offene Fragen hier posten:
 
 ERLEDIGT! --- Bitte in den Filter noch die sprache_id einbauen
 -------
+--------------------------------------------------------
+30.April, 21:03h (Simon) - Datenbank!!!
+--------------------------------------------------------
 
-
+Ist das richtig so?
+Programm läuft auf jeden Fall
+Root element :datenbank
+com.sun.org.apache.xerces.internal.dom.DeepNodeListImpl@1f870b40
+com.sun.org.apache.xerces.internal.dom.DeepNodeListImpl@5af3a6eb
 
 --------------------------------------------------------
 30.April, 17:30h (Tom) - Überall NullPointerEcpetions!!!
