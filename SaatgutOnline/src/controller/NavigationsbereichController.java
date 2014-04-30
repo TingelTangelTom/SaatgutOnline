@@ -37,18 +37,18 @@ public class NavigationsbereichController
 		this.geklickteKategorienOrganisieren();
 	}
 
-	public void outNavigationsbereichAnzeigen()
+	public void navigationsbereichAnzeigen()
 	{
 		this.navigationsbereichView.outNavigationsbereichAnfang();
 		this.navigationsbereichView.outKategorienListeAnfang();
 		
-		this.outKategorienListeAnzeigen();
+		this.kategorienListeAnzeigen();
 
 		this.navigationsbereichView.outKategorienListeEnde();
 		this.navigationsbereichView.outNavigationsbereichEnde();
 	}
 	
-	private void outKategorienListeAnzeigen()
+	private void kategorienListeAnzeigen()
 	{			
 		for (int i = 0; i < kategorienArrayList.size(); i++)
 		{			

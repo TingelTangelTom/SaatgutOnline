@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE datenbank [ 
+<!ELEMENT datenbank (dbHost, dbPort, dbName, dbBenutzer, dbPasswort)> 
+  <!ELEMENT dbHost  (#PCDATA)> 
+  <!ELEMENT dbPort  (#PCDATA)> 
+  <!ELEMENT dbName  (#PCDATA)> 
+  <!ELEMENT  dbBenutzer  (#PCDATA)> 
+  <!ELEMENT  dbPasswort  (#PCDATA)> 
+]> 
+
+<datenbank>
+	<dbHost>localhost</dbHost>
+	<dbPort>3306</dbPort>
+	<dbName>saatgutonline</dbName>
+	<dbBenutzer>root</dbBenutzer>
+	<dbPasswort>root</dbPasswort>
+</datenbank>
