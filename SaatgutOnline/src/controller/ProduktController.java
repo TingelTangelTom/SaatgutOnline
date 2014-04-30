@@ -47,10 +47,10 @@ public class ProduktController {
 		try {
 			
 			String query = "SELECT p.produkt_id, p.produkt_bestand, pb.produkt_name, pb.produkt_beschreibung,"
-						+ "pb.produkt_suchbegriffe, pb.produkt_angesehen, p.produkt_preis, p.produkt_gewicht,"
+						+ "pb.produkt_suchbegriffe, p.produkt_angesehen, p.produkt_preis, p.produkt_gewicht,"
 						+ "p.produkt_steuer_id, p.produkt_datum_hinzugefuegt, p.produkt_datum_geaendert "
 						+ "FROM produkt AS p "
-						+ "INNER JOIN produktbeschreibung AS pb ON p.produkt_id = pb.produkt_id "
+						+ "INNER JOIN produkt_beschreibung AS pb ON p.produkt_id = pb.produkt_id "
 						+ "WHERE pb.sprache_id = '" + this.sprache_id + "' AND p.produkt_id = '" + id + "'";
 
 		
@@ -144,10 +144,10 @@ public class ProduktController {
 			e.printStackTrace();
 		}
 		
-		String spaltenwahl;
+		String spaltenwahl = null;
 	        switch (sortierspalte) {
 	          case "pn":
-	        	  spaltenwahl = "p.produkt_name";
+	        	  spaltenwahl = "pb.produkt_name";
 	            break;
 	          case "pk":
 	        	  spaltenwahl = "p.kategorie";
@@ -164,6 +164,9 @@ public class ProduktController {
 	          case "pd":
 	        	  spaltenwahl = "p.produkt_datum_hinzugefuegt";
 	            break;
+	          default:
+	        	  spaltenwahl = "pb.produkt_name";
+	        	break;
 	        }
 	      
 		
@@ -171,8 +174,8 @@ public class ProduktController {
 			
 			String produkt_query = "SELECT p.produkt_id, pb.produkt_name "
 					+ "FROM produkt AS p "
-					+ "INNER JOIN produktbeschreibung AS pb ON p.produkt_id = pb.produkt_id "
-					+ "WHERE pb.sprache_id = '" + this.sprache_id + "' AND  p.kategorie_id = '" + kategorie_ids.get(i) + "'";
+					+ "INNER JOIN produkt_beschreibung AS pb ON p.produkt_id = pb.produkt_id "
+					+ "WHERE pb.sprache_id = '" + this.sprache_id + "' AND  p.kategorie_id = '" + kategorie_ids.get(i) + "' ORDER BY " + spaltenwahl + " " + this.sortierung;
 
 			
 			try {
