@@ -31,7 +31,6 @@ a:focus { text-decoration:none; font-weight:bold; color:#BEBEBE; }
 .fussbereich a:active { text-decoration:none; font-weight:bold; color:#000000; }
 .fussbereich a:focus { text-decoration:none; font-weight:bold; color:#000000; }
 
-
 .kopfbereich {
   	font-family: Verdana, Arial;
   	font-size:11px;
@@ -50,6 +49,12 @@ a:focus { text-decoration:none; font-weight:bold; color:#BEBEBE; }
 	vertical-align: top;
 	background: GREY;
 }
+
+.navigation_aktuell a:link { text-decoration:none; font-weight:bold; color:WHITE; }
+.navigation_aktuell a:visited { text-decoration:none; font-weight:bold; color:WHITE; }
+.navigation_aktuell a:hover { text-decoration:none; font-weight:bold; color:WHITE; }
+.navigation_aktuell a:active { text-decoration:none; font-weight:bold; color:WHITE; }
+.navigation_aktuell a:focus { text-decoration:none; font-weight:bold; color:WHITE; }
 
 .inhalt {
 	font-family: Verdana, Arial;
@@ -91,30 +96,3 @@ a:focus { text-decoration:none; font-weight:bold; color:#BEBEBE; }
 	height:12px;
 	border: px solid #000000;
 }
-
-/*
-.kopflogo {
-	width: 200px;
-	height: 100px;
-	border: 0px solid #000000;		
-}
-
-.kopfschriftzug {
-	font-weight: bold;
-	text-align: justify;
-	font-size:40px;
-	width: 200px;
-	border: 0px solid #000000;
-}
-
-.kopflogin {	
-	width: 300px;	
-	border: 0px solid #000000;
-}
-
-.kopfsprachwahl {	
-	
-	width: 200px;	
-	border: 0px solid #000000;
-}
-*/

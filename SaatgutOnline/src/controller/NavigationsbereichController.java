@@ -19,17 +19,20 @@ public class NavigationsbereichController
 	private HttpServletRequest request;
 	private int hauptKategorieId = 0;	
 	private KategorieModel kategorieModel;	
-	private ArrayList<Integer> geklickteKategorienInSession;
+	private ArrayList<Integer> geklickteKategorienSession;
+	private Integer geklickteKategorieGet;
+	private int aktuelleKategorieSession;
 	private ArrayList<KategorieModel> kategorienArrayList = new ArrayList<KategorieModel>();
 	private boolean getMethode;
+	
 
 
-	public NavigationsbereichController(HttpServletRequest request, HttpServletResponse response, boolean postMethode)
+	public NavigationsbereichController(HttpServletRequest request, HttpServletResponse response, boolean getMethode)
 	{
 //TODO Debug-Ausgabe loeschen!!		
 System.out.println("\n---NavigationsbereichController---");
 		
-		this.getMethode = postMethode;
+		this.getMethode = getMethode;
 		this.request = request;
 		this.session = request.getSession();
 		this.navigationsbereichView = new NavigationsbereichView(request, response);
@@ -59,12 +62,23 @@ System.out.println("----------------------------------");
 			this.kategorieModel = this.kategorienArrayList.get(i);
 			
 			if(this.kategorieModel.getElternKategorieId() == 0)
-			{				
-				this.navigationsbereichView.outHauptKategorieAnzeigen(this.kategorieModel);
-				
+			{
+				//TODO remove
+				System.out.println("Haupt: "+this.aktuelleKategorieSession +" == "+ this.kategorieModel.getKategorieId());
+				if(this.aktuelleKategorieSession == this.kategorieModel.getKategorieId())
+				{
+					this.navigationsbereichView.outHauptKategorieAktuellAnzeigen(kategorieModel);
+					//TODO remove
+					System.out.println("****JA haupt****" + kategorieModel.getKategorieId());
+				}
+				else
+				{				
+					this.navigationsbereichView.outHauptKategorieAnzeigen(this.kategorieModel);
+				}
+		
 				this.hauptKategorieId = this.kategorieModel.getKategorieId();
 				
-				if(this.geklickteKategorienInSession.contains(this.hauptKategorieId))
+				if(this.geklickteKategorienSession.contains(this.hauptKategorieId))
 				{
 					for (int j = 0; j < kategorienArrayList.size(); j++)
 					{
@@ -73,8 +87,19 @@ System.out.println("----------------------------------");
 						if(this.kategorieModel.getElternKategorieId() != 0)
 						{
 							if(this.kategorieModel.getElternKategorieId() == this.hauptKategorieId)
-							{													
-								this.navigationsbereichView.outUnterKategorieAnzeigen(this.kategorieModel);					
+							{				
+								//TODO remove
+								System.out.println("Unter: "+this.aktuelleKategorieSession +" == "+ this.kategorieModel.getKategorieId());
+								if(this.aktuelleKategorieSession == this.kategorieModel.getKategorieId())
+								{
+									this.navigationsbereichView.outUnterKategorieAktuellAnzeigen(kategorieModel);
+									//TODO remove
+									System.out.println("****JA unter****" + kategorieModel.getKategorieId());
+								}
+								else
+								{
+									this.navigationsbereichView.outUnterKategorieAnzeigen(this.kategorieModel);
+								}
 							}
 						}
 					}
@@ -89,28 +114,49 @@ System.out.println("----------------------------------");
 	{		
 		if(this.session.getAttribute("geklickteKategorien") == null)
 		{
-			this.geklickteKategorienInSession = new ArrayList<Integer>();
+			this.geklickteKategorienSession = new ArrayList<Integer>();	
 		}
 		else
 		{
-			this.geklickteKategorienInSession = (ArrayList<Integer>) this.session.getAttribute("geklickteKategorien");
+			this.geklickteKategorienSession = (ArrayList<Integer>) this.session.getAttribute("geklickteKategorien");			
 		}
+		
+		if(this.session.getAttribute("aktuelleKategorie") == null)
+		{
+			this.aktuelleKategorieSession = 0;
+		}
+		else
+		{
+			this.aktuelleKategorieSession = (int) this.session.getAttribute("aktuelleKategorie");
+		}
+		
+		
 		
 		if(getMethode && this.request.getParameter("kategorie") != null)
 		{			
-			Integer geklickteKategorieAusGetMethode = Integer.parseInt(this.request.getParameter("kategorie"));
-						
-			if(this.geklickteKategorienInSession.contains(geklickteKategorieAusGetMethode))
+			this.geklickteKategorieGet = Integer.parseInt(this.request.getParameter("kategorie"));
+			this.aktuelleKategorieSession = this.geklickteKategorieGet;
+			
+			if(this.geklickteKategorienSession.contains(this.geklickteKategorieGet))
 			{
-				this.geklickteKategorienInSession.remove(geklickteKategorieAusGetMethode);				
+				this.geklickteKategorienSession.remove(this.geklickteKategorieGet);				
 			}
 			else
 			{
-				this.geklickteKategorienInSession.add(geklickteKategorieAusGetMethode);
+				this.geklickteKategorienSession.add(this.geklickteKategorieGet);
 			}
 			
-			this.session.setAttribute("geklickteKategorien", this.geklickteKategorienInSession);
+			this.session.setAttribute("geklickteKategorien", this.geklickteKategorienSession);
+			
+			// letzte geklickte Kategorie in Session hinterlegen			
+			this.session.setAttribute("aktuelleKategorie", this.aktuelleKategorieSession);
 		}
+		
+
+		
+		
+		
+		
 	}
 	
 

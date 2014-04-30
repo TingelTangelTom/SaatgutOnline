@@ -47,11 +47,7 @@ public class NavigationsbereichView
 	
 	public void outHauptKategorieAnzeigen(KategorieModel kategorieModel)
 	{		
-		this.out.println("<tr>\n<td colspan=\"2\">");
-		
-		//TODO remove
-//		this.out.println("<a href=\"/SaatgutOnline/IndexPlatzhalter?kategorie="
-				
+		this.out.println("<tr>\n<td colspan=\"2\">");		
 		this.out.println("<a href=\"/SaatgutOnline/Produktliste?kategorie="
 				+ kategorieModel.getKategorieId()				
 				+ "\">\n"
@@ -67,11 +63,37 @@ public class NavigationsbereichView
 		//TODO remove next line - format properly in CSS!
 		this.out.println("&nbsp;");
 		
-		this.out.println("</td>\n<td>");
+		this.out.println("</td>\n<td>");		
+		this.out.println("<a href=\"/SaatgutOnline/Produktliste?kategorie="
+				+ kategorieModel.getKategorieId()				
+				+ "\">\n"
+				+ kategorieModel.getKategorieName()
+				+ "\n</a>");
+		this.out.println("</td>\n</tr>");
+	}
+	
+	
+	
+	public void outHauptKategorieAktuellAnzeigen(KategorieModel kategorieModel)
+	{		
+		this.out.println("<tr class=\"navigation_aktuell\">\n<td colspan=\"2\">");		
+		this.out.println("<a href=\"/SaatgutOnline/Produktliste?kategorie="
+				+ kategorieModel.getKategorieId()				
+				+ "\">\n"
+				+ kategorieModel.getKategorieName()
+				+ "\n</a>");
+		this.out.println("</td>\n</tr>");		
+	}
+	
+	
+	public void outUnterKategorieAktuellAnzeigen(KategorieModel kategorieModel)
+	{			
+		this.out.println("<tr class=\"navigation_aktuell\">\n<td>");
 		
-		//TODO remove
-//		this.out.println("<a href=\"/SaatgutOnline/IndexPlatzhalter?kategorie="
+		//TODO remove next line - format properly in CSS!
+		this.out.println("&nbsp;");
 		
+		this.out.println("</td>\n<td>");				
 		this.out.println("<a href=\"/SaatgutOnline/Produktliste?kategorie="
 				+ kategorieModel.getKategorieId()				
 				+ "\">\n"

@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import view.ProduktlisteView;
-import controller.DatenbankController;
 
 /**
  * Servlet implementation class ProduktlisteServlet
