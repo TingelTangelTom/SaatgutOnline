@@ -83,10 +83,10 @@ public class KopfbereichView
 		this.out.println("<input type=\"submit\" name=\"anmelden\" value=\""+ this.resourceBundle.getString("ANMELDEN") +"\">");
 		this.out.println("</form>");
 		this.out.println("</td>\n</tr><tr>\n<td></td>\n<td colspan=\"2\">");
-		//TODO mit Mailfunktion verbinden! 
-		this.out.println("<a href=\"/SaatgutOnline/NoFunctionServlet\">" + this.resourceBundle.getString("PASSWORT_VERGESSEN") + "</a>");
+		//FIXME mit Mailfunktion verbinden! 
+		this.out.println("<a href=\"/SaatgutOnline/NoOperation\">" + this.resourceBundle.getString("PASSWORT_VERGESSEN") + "</a>");
 		//TODO remove
-		this.out.println(" (nf)");
+		this.out.println(" (noOp)");
 		
 		this.out.println("</td>\n</tr>");		
 		this.out.println("</table>");
