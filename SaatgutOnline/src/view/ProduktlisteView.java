@@ -1,6 +1,9 @@
 package view;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Locale;
 import java.util.PropertyResourceBundle;
 
@@ -36,14 +39,31 @@ public class ProduktlisteView {
 	public String anzeigenProduktliste() {	
 		
 		this.produktliste = this.produktController.getProduktliste(this.kategorie);
-		this.output = "<table class=\"produktinfo\"><tr><td>";
+
+	      Collections.sort(this.produktliste); // autoListe aufsteigend sortieren
+	      for (ProduktModel aktuellesAuto : this.produktliste) {
+	        System.out.println(aktuellesAuto.getName()); // Farbe: gruen, Leistung: 50
+	        System.out.println("-----");
+	                                  // Farbe: rot, Leistung: 55
+	                                  // Farbe: schwarz, Leistung: 75
+	      }
+	      Collections.reverse(this.produktliste); // andersrum sortieren (75,55,50)
+	      for (ProduktModel aktuellesAuto : this.produktliste) {
+	        System.out.println(aktuellesAuto.getName());
+	        System.out.println("------");
+	      } 
+
+		this.output = "<table class=\"produktinfo\">"
+				+ "<tr><td align=\"right\">sortieren: Name "
+				+ "<a href=\"/SaatgutOnline/Produktliste?kategorie=1&sort=1&typ=name\">absteigend</a> - aufsteigend | Preis absteigend - aufsteigend </td></tr><tr><td>"
+				+ "<tr><td align=\"right\"></td></tr>&nbsp;<tr><td>";
 		for (int i = 0; i < this.produktliste.size(); i++) {
 			ProduktModel produktModel = this.produktliste.get(i);
 			this.output += "<table width=\"100%\" border=\"0\">"
 			+ "<tr>"
-			+ "<td rowspan=\"4\"><img src=\"/resources/bilder/phoenix_canariensis.jpg\" alt=\"Phoenix Canariensis\"></td>"
+			+ "<td rowspan=\"4\" style=\"width: 110px;\"><img src=\"resources/bilder/phoenix_canariensis.jpg\" width=\"100\" height=\"100\" alt=\"Phoenix Canariensis\"></td>"
 	    	+ "<td colspan=\"2\">" + produktModel.getName() + "</td>"
-	    	+ "<td rowspan=\"2\">" + produktModel.getPreisBrutto() + "</td>"
+	    	+ "<td align=\"right\" rowspan=\"2\">" + produktModel.getPreisBrutto() + "</td>"
 	    	+ "</tr>"
 	    	+ "<tr>"
     		+ "<td colspan=\"2\">" + produktModel.getKategorie_id() + "</td>"
@@ -54,7 +74,9 @@ public class ProduktlisteView {
     		+ "<tr>"
     		+ "<td>Keine Ahnung</td>"
     		+ "<td>Auf Lager</td>"
-    		+ "<td>Warenkorb</td>"
+    		+ "<td align=\"right\">Warenkorb</td>"
+    		+ "</tr>"    		
+    		+ "<tr><td colspan=\"4\">&nbsp;</td>"
     		+ "</tr>"
     		+ "</table>";
 		}
