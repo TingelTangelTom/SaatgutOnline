@@ -45,7 +45,7 @@ public class ProduktlisteView {
 */
 		this.output = "<table class=\"produktinfo\">"
 				+ "<tr><td align=\"right\">sortieren: Name "
-				+ "<a href=\"/SaatgutOnline/Produktliste?kategorie=1&sort=1&typ=name\">absteigend</a> - aufsteigend | Preis absteigend - aufsteigend </td></tr><tr><td>"
+				+ "<a href=\"/SaatgutOnline/Produktliste?kategorie=1&p_anzeige=true,3,0,2\">absteigend</a> - aufsteigend | Preis absteigend - aufsteigend </td></tr><tr><td>"
 				+ "<tr><td align=\"right\"></td></tr>&nbsp;<tr><td>";
 		for (int i = 0; i < this.produktliste.size(); i++) {
 			ProduktModel produktModel = this.produktliste.get(i);
@@ -56,7 +56,7 @@ public class ProduktlisteView {
 	    	+ "<td align=\"right\" rowspan=\"2\">" + produktModel.getPreisBrutto() + "</td>"
 	    	+ "</tr>"
 	    	+ "<tr>"
-    		+ "<td colspan=\"2\">" + produktModel.getKategorie_id() + "</td>"
+    		+ "<td colspan=\"2\">" + produktModel.getKategorieId() + "</td>"
     		+ "</tr>"
     		+ "<tr>"
     		+ "<td colspan=\"3\">" + produktModel.getBeschreibung() + "</td>"

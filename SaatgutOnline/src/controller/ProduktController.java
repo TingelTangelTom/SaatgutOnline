@@ -20,6 +20,11 @@ public class ProduktController {
 	private HashMap<String, String> merkmale;
 	private int sprache_id;
 	private String kategorie;
+	private String sortierung;
+	private String anzahlProdukte;
+	private String limitVon;
+	private String limitBis;
+	private String produktanzeigeParameter;
 	
 	public ProduktController(HttpServletRequest request) {
 		super();
@@ -29,6 +34,8 @@ public class ProduktController {
 		this.merkmale = new HashMap<String, String>();
 		this.sprache_id = (int)session.getAttribute("spracheId");
 		this.kategorie = request.getParameter("kategorie");
+		this.produktanzeigeParameter = request.getParameter("p_anzeige");
+		this.getSortierung();
 		
 	}
 
@@ -52,17 +59,15 @@ public class ProduktController {
 			ResultSet resultset = statement.executeQuery(query);
 			while(resultset.next()){
 				this.produktModel = new ProduktModel();
-				
 				this.produktModel.setId(resultset.getInt(1));
-				System.out.println("ProduktID " + resultset.getInt(1) + " wurde gespeichert!");
 				this.produktModel.setBestand(resultset.getInt(2));
 				this.produktModel.setName(resultset.getString(3));
 				this.produktModel.setBeschreibung(resultset.getString(4));
 				this.produktModel.setSuchbegriffe(resultset.getString(5));
 				this.produktModel.setAngesehen(resultset.getInt(6));
-				this.produktModel.setPreisNetto(resultset.getInt(7));
+				this.produktModel.setPreisNetto(resultset.getDouble(7));
 				this.produktModel.setGewicht(resultset.getInt(8));
-				this.produktModel.setSteuerId(resultset.getInt(9));
+				this.produktModel.setSteuerBetrag(resultset.getDouble(9));
 				this.produktModel.setHinzugefeugt(resultset.getDate(10));
 				this.produktModel.setGeaendert(resultset.getDate(11));
 			}	
@@ -71,19 +76,23 @@ public class ProduktController {
 		}
 		
 		try {
-			String query = "SELECT steuersatz FROM steuersatz WHERE steuersatz_id = " + this.produktModel.getSteuersatz_id();
+			String query = "SELECT steuersatz FROM steuersatz WHERE steuersatz_id = " + this.produktModel.getSteuerBetrag();
 			
 			Statement statement = DatenbankController.verbindung.createStatement();
 			ResultSet resultset = statement.executeQuery(query);
+			
 			if(resultset.next()){
 				steuersatz = resultset.getDouble(1);
 			}
+			
+			this.produktModel.setSteuerSatz(steuersatz);
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-		this.produktModel.setSteuersatz(steuersatz);
-		this.produktModel.setPreisBrutto(this.produktModel.getPreisNetto() * this.produktModel.getSteuersatz() / 100 + this.produktModel.getPreisNetto());
+		this.produktModel.setPreisBrutto(this.produktModel.getPreisNetto() * this.produktModel.getSteuerSatz() / 100 + this.produktModel.getPreisNetto());
+		this.produktModel.setSteuerBetrag(this.produktModel.getPreisBrutto() + this.produktModel.getPreisNetto());
 		
 		try {
 			
@@ -111,7 +120,7 @@ public class ProduktController {
 		}
 
 		this.produktModel.setMerkmale(merkmale);
-		System.out.println("Nochmaliger Test der ProduktId. Sie lautet: " + this.produktModel.getId());
+		
 		return this.produktModel;
 	}
 
@@ -120,9 +129,7 @@ public class ProduktController {
 		DatenbankController.getVerbindung();
 		ArrayList<Integer> kategorie_ids = new ArrayList<>();
 		ArrayList<ProduktModel> produkte = new ArrayList<>();
-		//if(this.kategorie == null) {
-			//this.kategorie = "1";
-		//}
+
 		try {
 			System.out.println("Gewählte Kategorie: " + this.kategorie);
 			Statement statement = DatenbankController.verbindung.createStatement();
@@ -165,10 +172,28 @@ public class ProduktController {
 		}
 		return produkte;
 	}
-	
-	public double getProduktSteuersatz(int id, int sprache_id) {
-		
-		return steuersatz;
+
+	public void getSortierung () {
+		String parameter = this.produktanzeigeParameter;
+		System.out.println("Sortierung: " + parameter);
+		if(parameter.equals("")) {
+			this.sortierung = "ASC";
+			this.anzahlProdukte = "3";
+			this.limitVon = "1";
+			this.limitBis = "4";
+		} else {
+			String[] parameterAufteilung = sortierung.split(",");
+			if(parameterAufteilung[0].equalsIgnoreCase("true")) {
+				this.sortierung = "ASC";
+			} else {
+				this.sortierung = "DESC";
+			}
+			this.sortierung = parameterAufteilung[0];
+			this.anzahlProdukte = parameterAufteilung[1];
+			this.limitVon = parameterAufteilung[2];
+			this.limitBis = parameterAufteilung[3];
+		}
+
 	}
 
 }
