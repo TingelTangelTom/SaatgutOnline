@@ -1,23 +1,15 @@
 package view;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Locale;
 import java.util.PropertyResourceBundle;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
 import model.ProduktModel;
-import controller.HtmlOutput;
 import controller.ProduktController;
 
 public class ProduktlisteView {
 	private ProduktController produktController;
-	private ProduktModel produktModel;
-	private HtmlOutput htmlOutput;
 	private String output;
 	private ArrayList<ProduktModel> produktliste;
 	private String kategorie;
@@ -25,8 +17,6 @@ public class ProduktlisteView {
 	public ProduktlisteView(HttpServletRequest request) {
 		
 		this.produktController = new ProduktController(request);
-		this.produktModel = new ProduktModel();
-		this.htmlOutput = new HtmlOutput(request);
 		this.produktliste = new ArrayList<>();
 		this.kategorie = request.getParameter("kategorie");
 
@@ -39,7 +29,7 @@ public class ProduktlisteView {
 	public String anzeigenProduktliste() {	
 		
 		this.produktliste = this.produktController.getProduktliste(this.kategorie);
-
+/*
 	      Collections.sort(this.produktliste); // autoListe aufsteigend sortieren
 	      for (ProduktModel aktuellesAuto : this.produktliste) {
 	        System.out.println(aktuellesAuto.getName()); // Farbe: gruen, Leistung: 50
@@ -52,7 +42,7 @@ public class ProduktlisteView {
 	        System.out.println(aktuellesAuto.getName());
 	        System.out.println("------");
 	      } 
-
+*/
 		this.output = "<table class=\"produktinfo\">"
 				+ "<tr><td align=\"right\">sortieren: Name "
 				+ "<a href=\"/SaatgutOnline/Produktliste?kategorie=1&sort=1&typ=name\">absteigend</a> - aufsteigend | Preis absteigend - aufsteigend </td></tr><tr><td>"
@@ -81,21 +71,7 @@ public class ProduktlisteView {
     		+ "</table>";
 		}
 		this.output += "</td></tr></table>";	
-			/*this.output += "<table class=\"produktinfo\"><tr><td>"
-				+ "<tr><td rowspan=\"5\">Cell 1</td><td colspan=\"3\">" + this.produktliste.size() + " " + produktModel.getId() + " "+ produktModel.getName() + "</td></tr>" // Titel
-				+ "<tr><td colspan=\"3\">" + produktModel.getName() + "</td></tr>" // Titel
-				+ "<tr><td colspan=\"3\">" + produktModel.getBeschreibung() + "</td></tr>"		
-				+ "<tr><td>Menge</td><td>Auf Lager</td><td>Warenkorb</td></tr>" // Titel
-				+ "<tr><td colspan=\"3\">Preise inklusive</td></tr>" // Produktbeschreibung
-				+ "<tr><td colspan=\"2\">Warenkorb</td></tr>" // Button Warenkorb
-				+ "<tr><td colspan=\"2\">" // Button Warenkorb"
-				+ "<form action='' method='POST'>"
-				+ "<input type=\"hidden\" name=\"menge\" value=\"3\">"
-				+ "<input type=\"hidden\" name=\"produkt\" value=\"\">"
-				+ "<input type=\"image\" name=\"absenden\" value=\"senden\" src=\"resources/bilder/flags_iso/24/us.png\">"
-				+ "</td></tr></table>";	
-			produktModel = null;
-			*/
+
 		return output;
 	}
 

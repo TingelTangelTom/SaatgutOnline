@@ -4,7 +4,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,12 +16,9 @@ import model.ProduktModel;
 public class ProduktController {
 	
 	private ProduktModel produktModel;
-	private ProduktController produktController;
 	private double steuersatz;
-	//private double preisBrutto;
 	private HashMap<String, String> merkmale;
 	private int sprache_id;
-	private ArrayList<ProduktModel> produktliste;
 	private String kategorie;
 	
 	public ProduktController(HttpServletRequest request) {
@@ -31,7 +27,6 @@ public class ProduktController {
 		HttpSession session = request.getSession();
 		this.produktModel = new ProduktModel();
 		this.merkmale = new HashMap<String, String>();
-		this.produktliste = new ArrayList<>();
 		this.sprache_id = (int)session.getAttribute("spracheId");
 		this.kategorie = request.getParameter("kategorie");
 		
