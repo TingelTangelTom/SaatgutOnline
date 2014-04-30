@@ -18,6 +18,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import controller.EMailController;
+
 @WebServlet("/KontaktFormular")
 public class KontaktFormular extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -37,37 +39,20 @@ public class KontaktFormular extends HttpServlet {
 			e.printStackTrace();
 			return;
 		}
+		
+		EMailController eMailController = new EMailController();
+		eMailController.sendeEmail(request.getParameter("E-Mail"), 
+				request.getParameter("Betreff"), "kontakt@saatgutonline.de", 
+				request.getParameter("Nachricht"), request.getParameter("Anrede"), 
+				request.getParameter("Vorname"), request.getParameter("Nachname"));
 
-//		Properties props = System.getProperties();
-//		props.setProperty("mail.smtp.host", "localhost");
-//		props.setProperty("mail.transport.protocol", "smtp");
-//
-//		Session session = Session.getDefaultInstance(props, null);
-//		MimeMessage message = new MimeMessage(session);
-//
-//		try {
-//			message.setFrom(new InternetAddress(request.getParameter("E-Mail")));
-//			message.addRecipient(Message.RecipientType.TO,
-//					new InternetAddress("kontakt@saatgutonline.de"));
-//			message.setSubject(request.getParameter("Betreff"));
-//			message.setSentDate(new Date());
-//			message.setContent("<h1>Kontaktanfrage</h1><br/>" + "Nachricht von" + " " 
-//					+ request.getParameter("Anrede") + " " 
-//					+ request.getParameter("Vorname") + " " 
-//					+ request.getParameter("Nachname")
-//					+ "<br><b>E-Mail: </b>" + request.getParameter("E-Mail") 
-//					+ "<br><b>Betreff: </b>" + request.getParameter("Betreff") 
-//					+ "<br><b>Nachricht: </b>" + request.getParameter("Nachricht"), "text/html");
-//			Transport.send(message);
-//		} catch (AddressException e) {
-//			e.printStackTrace();
-//		} catch (MessagingException e) {
-//			e.printStackTrace();
-//		}
+
 		out.println("Vielen Dank für ihre Nachricht.");
 		out.println("<a href=\"/SaatgutOnline/IndexPlatzhalter\">Hauptseite</a>"); 
 								// TODO : Link aktualisieren
 	}
+	
+
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
