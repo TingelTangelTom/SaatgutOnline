@@ -24,6 +24,7 @@ public class ProduktController {
 	private String anzahlProdukte;
 	private String limitVon;
 	private String limitBis;
+	private String sortierspalte;
 	
 	public ProduktController(HttpServletRequest request) {
 		super();
@@ -45,14 +46,13 @@ public class ProduktController {
 		
 		try {
 			
-			System.out.println("getProdukt holt Produkt mit der ID: " + id);
 			String query = "SELECT p.produkt_id, p.produkt_bestand, pb.produkt_name, pb.produkt_beschreibung,"
 						+ "pb.produkt_suchbegriffe, pb.produkt_angesehen, p.produkt_preis, p.produkt_gewicht,"
 						+ "p.produkt_steuer_id, p.produkt_datum_hinzugefuegt, p.produkt_datum_geaendert "
 						+ "FROM produkt AS p "
 						+ "INNER JOIN produktbeschreibung AS pb ON p.produkt_id = pb.produkt_id "
-						+ "WHERE pb.sprache_id = '" + this.sprache_id + "' AND p.produkt_id = '" + id + "' "
-						+ "ORDER BY pb.produkt_name";
+						+ "WHERE pb.sprache_id = '" + this.sprache_id + "' AND p.produkt_id = '" + id + "'";
+
 		
 			Statement statement = DatenbankController.verbindung.createStatement();
 			ResultSet resultset = statement.executeQuery(query);
@@ -144,15 +144,44 @@ public class ProduktController {
 			e.printStackTrace();
 		}
 		
-		for (int i = 0; i < kategorie_ids.size(); i++) {				
-			String produkt_query = "SELECT produkt_id, produkt_bestand FROM produkt WHERE kategorie_id = '" + kategorie_ids.get(i) +"'";
+		String spaltenwahl;
+	        switch (sortierspalte) {
+	          case "pn":
+	        	  spaltenwahl = "p.produkt_name";
+	            break;
+	          case "pk":
+	        	  spaltenwahl = "p.kategorie";
+	            break;
+	          case "pb":
+	        	  spaltenwahl = "p.produkt_bestand";
+	            break;
+	          case "pa":
+	        	  spaltenwahl = "p.angesehen";
+	            break;
+	          case "pp":
+	        	  spaltenwahl = "p.produkt_preis";
+	            break;
+	          case "pd":
+	        	  spaltenwahl = "p.produkt_datum_hinzugefuegt";
+	            break;
+	        }
+	      
+		
+		for (int i = 0; i < kategorie_ids.size(); i++) {	
+			
+			String produkt_query = "SELECT p.produkt_id, pb.produkt_name "
+					+ "FROM produkt AS p "
+					+ "INNER JOIN produktbeschreibung AS pb ON p.produkt_id = pb.produkt_id "
+					+ "WHERE pb.sprache_id = '" + this.sprache_id + "' AND  p.kategorie_id = '" + kategorie_ids.get(i) + "'";
+
+			
 			try {
+				
 			Statement statement2 = DatenbankController.verbindung.createStatement();
 			ResultSet produkt_resultset = statement2.executeQuery(produkt_query);
-			
+
 			while(produkt_resultset.next()){
-				System.out.println("Produkt ID. " + produkt_resultset.getInt(1));
-				System.out.println("Bestand. " + produkt_resultset.getInt(2));
+				System.out.println("Produkt ID hinzugefügt: " + produkt_resultset.getInt(1));
 				
 				//System.out.println(this.produktModel.getBestand());
 				produkte.add(this.getProdukt(produkt_resultset.getInt(1)));
@@ -165,6 +194,7 @@ public class ProduktController {
 
 		}
 		System.out.println("Gespeicherte Produkte: ");
+		
 		for (int i = 0; i < produkte.size(); i++) {
 			System.out.println(produkte.get(i).getId());
 			
@@ -179,6 +209,7 @@ public class ProduktController {
 			this.anzahlProdukte = "3";
 			this.limitVon = "1";
 			this.limitBis = "4";
+			this.sortierspalte = "pb.produkt_name";
 		} else {
 			String[] parameterAufteilung = sortierung.split(",");
 			if(parameterAufteilung[0].equalsIgnoreCase("true")) {
@@ -190,7 +221,12 @@ public class ProduktController {
 			this.anzahlProdukte = parameterAufteilung[1];
 			this.limitVon = parameterAufteilung[2];
 			this.limitBis = parameterAufteilung[3];
+			this.limitBis = parameterAufteilung[4];
 		}
+		System.out.println(this.sortierung);
+		System.out.println(this.anzahlProdukte);
+		System.out.println(this.limitVon);
+		System.out.println(this.limitBis);
 
 	}
 
