@@ -52,7 +52,7 @@ public class ProduktController {
 						+ "WHERE pb.sprache_id = '" + this.sprache_id + "' AND p.produkt_id = '" + id + "' "
 						+ "ORDER BY pb.produkt_name";
 
-		
+			this.produktModel = new ProduktModel();
 			Statement statement = DatenbankController.verbindung.createStatement();
 			ResultSet resultset = statement.executeQuery(query);
 			while(resultset.next()){
@@ -148,8 +148,8 @@ public class ProduktController {
 			ResultSet produkt_resultset = statement2.executeQuery(produkt_query);
 			
 			while(produkt_resultset.next()){
-				//System.out.println("Produkt ID. " + produkt_resultset.getInt(1));
-				//System.out.println("Bestand. " + produkt_resultset.getInt(2));
+				System.out.println("Produkt ID. " + produkt_resultset.getInt(1));
+				System.out.println("Bestand. " + produkt_resultset.getInt(2));
 				
 				//System.out.println(this.produktModel.getBestand());
 				produkte.add(this.getProdukt(produkt_resultset.getInt(1)));
