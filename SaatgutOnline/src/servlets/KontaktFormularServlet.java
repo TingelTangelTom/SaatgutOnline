@@ -1,0 +1,57 @@
+package servlets;
+
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import controller.AGBController;
+import controller.DatenbankController;
+import controller.KontaktFormularController;
+
+/**
+ * Servlet implementation class KontaktFormularServlet
+ */
+@WebServlet(description = "Kontakt Formular", urlPatterns = { "/Kontakt" })
+public class KontaktFormularServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	
+	//TODO : 
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public KontaktFormularServlet() {
+        super();
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		DatenbankController.getVerbindung();
+		// Kopfbereich (und damit auch Navigationsbereich) einbinden
+		RequestDispatcher rd = getServletContext().getRequestDispatcher("/Kopfbereich");
+		rd.include(request, response);
+
+		// Inhalte ausgeben (per view!)
+		KontaktFormularController kontaktFormularController = new KontaktFormularController(request, response);
+
+		// Fussbereich einbinden
+		rd = getServletContext().getRequestDispatcher("/Fussbereich");
+		rd.include(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+
+}
