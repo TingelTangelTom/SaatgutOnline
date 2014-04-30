@@ -98,22 +98,22 @@ public class NavigationsbereichController
 	@SuppressWarnings("unchecked")
 	private void geklickteKategorienOrganisieren()
 	{		
-		if(this.session.getAttribute("geklickteKategorien") == null)
-		{
-			this.geklickteKategorienSession = new ArrayList<Integer>();	
-		}
-		else
+		if(this.session.getAttribute("geklickteKategorien") != null)
 		{
 			this.geklickteKategorienSession = (ArrayList<Integer>) this.session.getAttribute("geklickteKategorien");			
 		}
-		
-		if(this.session.getAttribute("aktuelleKategorie") == null)
+		else
 		{
-			this.aktuelleKategorieSession = 0;
+			this.geklickteKategorienSession = new ArrayList<Integer>();	
+		}
+		
+		if(this.session.getAttribute("aktuelleKategorie") != null)
+		{
+			this.aktuelleKategorieSession = (int) this.session.getAttribute("aktuelleKategorie");
 		}
 		else
 		{
-			this.aktuelleKategorieSession = (int) this.session.getAttribute("aktuelleKategorie");
+			this.aktuelleKategorieSession = 0;			
 		}
 		
 		
