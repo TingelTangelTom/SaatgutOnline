@@ -9,46 +9,42 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-
   <servlet>
     <servlet-name>Konfiguration</servlet-name>
     <servlet-class>servlets.KonfigurationServlet</servlet-class>
     <init-param>
-     <param-name>dbHost</param-name>
-     <param-value>localhost</param-value>
+      <param-name>dbHost</param-name>
+      <param-value>localhost</param-value>
     </init-param>
     <init-param>
-     <param-name>dbPort</param-name>
-     <param-value>3306</param-value>
+      <param-name>dbPort</param-name>
+      <param-value>3306</param-value>
     </init-param>
     <init-param>
-     <param-name>datenbank</param-name>
-     <param-value>saatgutonline</param-value>
+      <param-name>datenbank</param-name>
+      <param-value>saatgutonline</param-value>
     </init-param>
     <init-param>
-     <param-name>dbBenutzer</param-name>
-     <param-value>root</param-value>
+      <param-name>dbBenutzer</param-name>
+      <param-value>root</param-value>
     </init-param>
     <init-param>
-     <param-name>dbPasswort</param-name>
-     <param-value>root</param-value>
+      <param-name>dbPasswort</param-name>
+      <param-value>root</param-value>
     </init-param>
     <init-param>
-     <param-name>BenutzernameRegel</param-name>
-     <param-value>>^[a-z0-9_-]{3,15}$</param-value>
+      <param-name>BenutzernameRegel</param-name>
+      <param-value>>^[a-z0-9_-]{3,15}$</param-value>
     </init-param>
     <init-param>
-     <param-name>PasswortRegel</param-name>
-     <param-value>>^[a-z0-9_-]{3,15}$</param-value>
+      <param-name>PasswortRegel</param-name>
+      <param-value>>^[a-z0-9_-]{3,15}$</param-value>
     </init-param>
-    
     <load-on-startup>0</load-on-startup>
   </servlet>
-  
-<absolute-ordering>
-     <name>SessionFilter</name>
-     <name>SprachversionFilter</name>
-     <name>AnmeldungFilter</name>
-</absolute-ordering>
-  
+  <absolute-ordering>
+    <name>SessionFilter</name>
+    <name>SprachversionFilter</name>
+    <name>AnmeldungFilter</name>
+  </absolute-ordering>
 </web-app>
