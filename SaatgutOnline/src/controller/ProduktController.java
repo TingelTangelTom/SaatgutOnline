@@ -51,11 +51,12 @@ public class ProduktController {
 						+ "INNER JOIN produktbeschreibung AS pb ON p.produkt_id = pb.produkt_id "
 						+ "WHERE pb.sprache_id = '" + this.sprache_id + "' AND p.produkt_id = '" + id + "' "
 						+ "ORDER BY pb.produkt_name";
-
-			this.produktModel = new ProduktModel();
+		
 			Statement statement = DatenbankController.verbindung.createStatement();
 			ResultSet resultset = statement.executeQuery(query);
 			while(resultset.next()){
+				this.produktModel = new ProduktModel();
+				
 				this.produktModel.setId(resultset.getInt(1));
 				System.out.println("ProduktID " + resultset.getInt(1) + " wurde gespeichert!");
 				this.produktModel.setBestand(resultset.getInt(2));
@@ -124,7 +125,7 @@ public class ProduktController {
 		ArrayList<Integer> kategorie_ids = new ArrayList<>();
 		ArrayList<ProduktModel> produkte = new ArrayList<>();
 		//if(this.kategorie == null) {
-			this.kategorie = "1";
+			//this.kategorie = "1";
 		//}
 		try {
 			System.out.println("Gewählte Kategorie: " + this.kategorie);
@@ -154,6 +155,7 @@ public class ProduktController {
 				//System.out.println(this.produktModel.getBestand());
 				produkte.add(this.getProdukt(produkt_resultset.getInt(1)));
 				//System.out.println("Produkt " + produkt_resultset.getInt(1) + " hinzugefügt");
+								
 			}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -163,8 +165,8 @@ public class ProduktController {
 		System.out.println("Gespeicherte Produkte: ");
 		for (int i = 0; i < produkte.size(); i++) {
 			System.out.println(produkte.get(i).getId());
+			
 		}
-
 		return produkte;
 	}
 	

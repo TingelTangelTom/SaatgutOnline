@@ -34,14 +34,14 @@ public class ProduktinfoView {
 		this.produktModel = this.produktController.getProdukt(1);
 		this.merkmale = this.produktModel.getMerkmale();
 		
-		output = "<table class=\"produktinfo\">"
+		this.output = "<table class=\"produktinfo\">"
 				+ "<tr><td rowspan=\"3\">Cell 1</td><td>" + this.produktModel.getName() + "</td></tr>" // Titel
 				+ "<tr><td>" + this.produktModel.getName() + "</td></tr>" // Titel
 				+ "<tr><td><table class=\"produktinfo\">";
 				for(String name : merkmale.keySet()) {
 					output += "<tr><td>" + name + "</td><td>" + merkmale.get(name) +"</td></tr>"; // Eigenschaft 1
 				}
-		output += "</table></td></tr>"		
+		this.output += "</table></td></tr>"		
 				+ "<tr><td colspan=\"2\">" + htmlOutput.outPreisformat(this.produktModel.getPreisBrutto()) + " " + htmlOutput.outPreisverordnung(this.produktModel.getSteuersatz()) + "</td></tr>" // Titel
 				+ "<tr><td colspan=\"2\">" + this.produktModel.getBeschreibung() + "</td></tr>" // Produktbeschreibung
 				+ "<tr><td colspan=\"2\">Warenkorb</td></tr>" // Button Warenkorb
@@ -52,7 +52,7 @@ public class ProduktinfoView {
 				+ "<input type=\"image\" name=\"absenden\" value=\"senden\"> absenden"
 				+ "</td></tr></table>";	
 
-		return output;
+		return this.output;
 	}
 
 }

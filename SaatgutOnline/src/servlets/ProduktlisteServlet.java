@@ -37,7 +37,7 @@ public class ProduktlisteServlet extends HttpServlet {
 		this.produktliste = new ProduktlisteView(request);
 		
 		response.setCharacterEncoding("ISO-8859-15"); // Sonst wird das Euro-Symbol nicht angezeigt
-		DatenbankController.getVerbindung();
+	
 		// Kopfbereich (und damit auch Navigationsbereich) einbinden
 		RequestDispatcher rd = getServletContext().getRequestDispatcher("/Kopfbereich");
 		rd.include(request, response);
