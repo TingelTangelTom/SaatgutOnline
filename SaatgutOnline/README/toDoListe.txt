@@ -14,7 +14,7 @@ Tom
 - Bestellvorgang
 - ERLEDIGT! - Suchfeld im Kopfbereich einfügen
 - Loginbereich --> Logoutbereich
-- Assertions recherchieren (bedingte Compilierung)
+
 
 
 Simon
