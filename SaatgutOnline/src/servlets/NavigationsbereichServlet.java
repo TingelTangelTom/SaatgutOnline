@@ -34,7 +34,7 @@ public class NavigationsbereichServlet extends HttpServlet
 	{
 		NavigationsbereichController navigationsbereichController = new NavigationsbereichController(request, response, true);
 		
-		navigationsbereichController.outNavigationsbereichAnzeigen();		
+		navigationsbereichController.navigationsbereichAnzeigen();		
 	}
 
 	/**
@@ -46,7 +46,7 @@ public class NavigationsbereichServlet extends HttpServlet
 	{			
 			NavigationsbereichController navigationsbereichController = new NavigationsbereichController(request, response, false);
 			
-			navigationsbereichController.outNavigationsbereichAnzeigen();			
+			navigationsbereichController.navigationsbereichAnzeigen();			
 	}
 
 }
