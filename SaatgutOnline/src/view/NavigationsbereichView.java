@@ -52,7 +52,7 @@ public class NavigationsbereichView
 		//TODO remove
 //		this.out.println("<a href=\"/SaatgutOnline/IndexPlatzhalter?kategorie="
 				
-		this.out.println("<a href=\"/SaatgutOnline/ProduktlisteServlet?kategorie="
+		this.out.println("<a href=\"/SaatgutOnline/Produktliste?kategorie="
 				+ kategorieModel.getKategorieId()				
 				+ "\">\n"
 				+ kategorieModel.getKategorieName()
@@ -72,7 +72,7 @@ public class NavigationsbereichView
 		//TODO remove
 //		this.out.println("<a href=\"/SaatgutOnline/IndexPlatzhalter?kategorie="
 		
-		this.out.println("<a href=\"/SaatgutOnline/ProduktlisteServlet?kategorie="
+		this.out.println("<a href=\"/SaatgutOnline/Produktliste?kategorie="
 				+ kategorieModel.getKategorieId()				
 				+ "\">\n"
 				+ kategorieModel.getKategorieName()
