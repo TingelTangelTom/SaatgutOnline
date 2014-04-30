@@ -24,7 +24,6 @@ public class ProduktController {
 	private String anzahlProdukte;
 	private String limitVon;
 	private String limitBis;
-	private String produktanzeigeParameter;
 	
 	public ProduktController(HttpServletRequest request) {
 		super();
@@ -34,8 +33,8 @@ public class ProduktController {
 		this.merkmale = new HashMap<String, String>();
 		this.sprache_id = (int)session.getAttribute("spracheId");
 		this.kategorie = request.getParameter("kategorie");
-		this.produktanzeigeParameter = request.getParameter("p_anzeige");
-		this.getSortierung();
+		
+		this.getSortierung(request);
 		
 	}
 
@@ -173,10 +172,9 @@ public class ProduktController {
 		return produkte;
 	}
 
-	public void getSortierung () {
-		String parameter = this.produktanzeigeParameter;
-		System.out.println("Sortierung: " + parameter);
-		if(parameter.equals("")) {
+	public void getSortierung (HttpServletRequest request) {
+
+		if(request.getParameter("p_anzeige") == null) {
 			this.sortierung = "ASC";
 			this.anzahlProdukte = "3";
 			this.limitVon = "1";
