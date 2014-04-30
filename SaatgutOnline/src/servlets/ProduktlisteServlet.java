@@ -17,7 +17,7 @@ import controller.DatenbankController;
 /**
  * Servlet implementation class ProduktlisteServlet
  */
-@WebServlet("/ProduktlisteServlet")
+@WebServlet("/Produktliste")
 public class ProduktlisteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ProduktlisteView produktliste;
