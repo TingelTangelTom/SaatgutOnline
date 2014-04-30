@@ -29,19 +29,12 @@ public class NavigationsbereichController
 
 	public NavigationsbereichController(HttpServletRequest request, HttpServletResponse response, boolean getMethode)
 	{
-//TODO Debug-Ausgabe loeschen!!		
-System.out.println("\n---NavigationsbereichController---");
-		
 		this.getMethode = getMethode;
 		this.request = request;
 		this.session = request.getSession();
 		this.navigationsbereichView = new NavigationsbereichView(request, response);
 		this.kategorienArrayList = kategorienAusDB();
 		this.geklickteKategorienOrganisieren();
-
-		
-//TODO Debug-Ausgabe loeschen!!
-System.out.println("----------------------------------");
 	}
 
 	public void outNavigationsbereichAnzeigen()
@@ -63,13 +56,10 @@ System.out.println("----------------------------------");
 			
 			if(this.kategorieModel.getElternKategorieId() == 0)
 			{
-				//TODO remove
-				System.out.println("Haupt: "+this.aktuelleKategorieSession +" == "+ this.kategorieModel.getKategorieId());
+
 				if(this.aktuelleKategorieSession == this.kategorieModel.getKategorieId())
 				{
 					this.navigationsbereichView.outHauptKategorieAktuellAnzeigen(kategorieModel);
-					//TODO remove
-					System.out.println("****JA haupt****" + kategorieModel.getKategorieId());
 				}
 				else
 				{				
@@ -88,13 +78,9 @@ System.out.println("----------------------------------");
 						{
 							if(this.kategorieModel.getElternKategorieId() == this.hauptKategorieId)
 							{				
-								//TODO remove
-								System.out.println("Unter: "+this.aktuelleKategorieSession +" == "+ this.kategorieModel.getKategorieId());
 								if(this.aktuelleKategorieSession == this.kategorieModel.getKategorieId())
 								{
 									this.navigationsbereichView.outUnterKategorieAktuellAnzeigen(kategorieModel);
-									//TODO remove
-									System.out.println("****JA unter****" + kategorieModel.getKategorieId());
 								}
 								else
 								{
@@ -146,21 +132,13 @@ System.out.println("----------------------------------");
 				this.geklickteKategorienSession.add(this.geklickteKategorieGet);
 			}
 			
-			this.session.setAttribute("geklickteKategorien", this.geklickteKategorienSession);
-			
-			// letzte geklickte Kategorie in Session hinterlegen			
+			this.session.setAttribute("geklickteKategorien", this.geklickteKategorienSession);			
 			this.session.setAttribute("aktuelleKategorie", this.aktuelleKategorieSession);
 		}
-		
-
-		
-		
-		
 		
 	}
 	
 
-	
 	private ArrayList<KategorieModel> kategorienAusDB()
 	{
 		DatenbankController.getVerbindung();
@@ -196,10 +174,4 @@ System.out.println("----------------------------------");
 
 		return kategorienArrayList;
 	}
-	
-	
-
-	
-
-
 }
