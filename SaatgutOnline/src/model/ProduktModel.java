@@ -2,9 +2,12 @@ package model;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 
-public class ProduktModel {
+
+
+public class ProduktModel implements Comparable<ProduktModel> {
 	private int id;
 	private int kategorieId;
 	private int bestand;
@@ -145,4 +148,9 @@ public class ProduktModel {
 		this.merkmale = merkmale;
 	}
 	
+	@Override
+    public int compareTo(ProduktModel produktModel) {
+      return ((String)name).compareTo((String)produktModel.name);
+      // return ((String)farbe).compareTo((String)o.farbe); // alternativ nach farbe sortieren
+    }
 }
