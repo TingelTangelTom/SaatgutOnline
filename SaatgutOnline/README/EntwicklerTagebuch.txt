@@ -7,6 +7,17 @@ ACHTUNG: DIESER BLOCK SOLL immer GANZ OBEN STEHEN!
 Bitte offene Fragen hier posten:
 
 ERLEDIGT! --- Bitte in den Filter noch die sprache_id einbauen
+-------
+
+
+
+--------------------------------------------------------
+30.April, 17:30h (Tom) - Überall NullPointerEcpetions!!!
+--------------------------------------------------------
+
+SIMON: Beim Aufruf des PL_Servlets schmeißt das ProduktModel ne NPC durch die compareTo()-Methode.
+
+CHRISTOF: Wenn der Login-Button gedrückt wird, gibts ein RegEx-Problem im Controller mit dem String benutzerRegel --> NPC
 
 
 --------------------------------------------------------------
