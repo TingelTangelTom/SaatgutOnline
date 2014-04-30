@@ -32,7 +32,7 @@ public class NavigationsbereichServlet extends HttpServlet
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		NavigationsbereichController navigationsbereichController = new NavigationsbereichController(request, response);
+		NavigationsbereichController navigationsbereichController = new NavigationsbereichController(request, response, true);
 		
 		navigationsbereichController.outNavigationsbereichAnzeigen();		
 	}
@@ -43,8 +43,10 @@ public class NavigationsbereichServlet extends HttpServlet
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
 			IOException
-	{	
-		doGet(request, response);
+	{			
+			NavigationsbereichController navigationsbereichController = new NavigationsbereichController(request, response, false);
+			
+			navigationsbereichController.outNavigationsbereichAnzeigen();			
 	}
 
 }

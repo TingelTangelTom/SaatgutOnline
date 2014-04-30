@@ -25,7 +25,7 @@ public class NavigationsbereichView
 		}		
 	}
 
-	public void outNavigationsabereichAnfang()
+	public void outNavigationsbereichAnfang()
 	{
 		this.out.println("<tr>\n<td class=\"navigation\">"); // oeffnet Navigationsbereich		
 	}
@@ -48,24 +48,35 @@ public class NavigationsbereichView
 	public void outHauptKategorieAnzeigen(KategorieModel kategorieModel)
 	{		
 		this.out.println("<tr>\n<td colspan=\"2\">");
-		this.out.println("<form action=\"\" method=\"POST\">");
-		this.out.println("<input type=\"submit\" name=\"hauptkategorie_name\" value=\""+ kategorieModel.getKategorieName() + "\">");
-		this.out.println("<input type=\"hidden\" name=\"hauptkategorie_id\" value=\"" + kategorieModel.getKategorieId() + "\">");
-		this.out.println("<input type=\"hidden\" name=\"elternkategorie_id\" value=\"" + kategorieModel.getElternKategorieId() + "\">");
-		this.out.println("</form>");
+		
+		//TODO remove
+//		this.out.println("<a href=\"/SaatgutOnline/IndexPlatzhalter?kategorie="
+				
+		this.out.println("<a href=\"/SaatgutOnline/Produktliste?kategorie="
+				+ kategorieModel.getKategorieId()				
+				+ "\">\n"
+				+ kategorieModel.getKategorieName()
+				+ "\n</a>");
 		this.out.println("</td>\n</tr>");
 	}
 	
 	public void outUnterKategorieAnzeigen(KategorieModel kategorieModel)
 	{			
-		this.out.println("<tr>\n<td colspan=\"2\">");
-		this.out.println("<form action=\"\" method=\"POST\">");
+		this.out.println("<tr>\n<td>");
+		
 		//TODO remove next line - format properly in CSS!
-		this.out.println("-");
-		this.out.println("<input type=\"submit\" name=\"unterkategorie_name\" value=\""+ kategorieModel.getKategorieName() + "\">");
-		this.out.println("<input type=\"hidden\" name=\"unterkategorie_id\" value=\"" + kategorieModel.getKategorieId() + "\">");
-		this.out.println("<input type=\"hidden\" name=\"elternkategorie_id\" value=\"" + kategorieModel.getElternKategorieId() + "\">");
-		this.out.println("</form>");
+		this.out.println("&nbsp;");
+		
+		this.out.println("</td>\n<td>");
+		
+		//TODO remove
+//		this.out.println("<a href=\"/SaatgutOnline/IndexPlatzhalter?kategorie="
+		
+		this.out.println("<a href=\"/SaatgutOnline/Produktliste?kategorie="
+				+ kategorieModel.getKategorieId()				
+				+ "\">\n"
+				+ kategorieModel.getKategorieName()
+				+ "\n</a>");
 		this.out.println("</td>\n</tr>");
 	}
 }

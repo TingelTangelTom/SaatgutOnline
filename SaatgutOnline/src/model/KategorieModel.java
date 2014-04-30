@@ -2,11 +2,9 @@ package model;
 
 public class KategorieModel
 {
-
 	private int kategorieId;
 	private String kategorieName;
 	private int elternKategorieId;
-	private int sortierReihenfolge;
 	
 	public int getKategorieId()
 	{
@@ -31,16 +29,5 @@ public class KategorieModel
 	public void setElternKategorieId(int elternKategorieId)
 	{
 		this.elternKategorieId = elternKategorieId;
-	}
-	public int getSortierReihenfolge()
-	{
-		return sortierReihenfolge;
-	}
-	public void setSortierReihenfolge(int sortierReihenfolge)
-	{
-		this.sortierReihenfolge = sortierReihenfolge;
-	}
-	
-	
-	
+	}		
 }

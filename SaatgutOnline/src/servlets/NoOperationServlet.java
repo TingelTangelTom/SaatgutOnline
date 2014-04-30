@@ -12,15 +12,15 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class NoFunctionServlet
  */
-@WebServlet("/NoFunctionServlet")
-public class NoFunctionServlet extends HttpServlet
+@WebServlet("/NoOperation")
+public class NoOperationServlet extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public NoFunctionServlet()
+	public NoOperationServlet()
 	{
 		super();
 	}
@@ -33,7 +33,7 @@ public class NoFunctionServlet extends HttpServlet
 	{
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		out.println("FUNKTION NICHT IMPLEMENTIERT!");
+		out.println("No Operation!");
 	}
 
 	/**
