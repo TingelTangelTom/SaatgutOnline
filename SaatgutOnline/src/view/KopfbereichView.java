@@ -71,10 +71,10 @@ public class KopfbereichView
 	{		
 		this.out.println("<table>");		
 		this.out.println("<tr>\n<td>");
-		this.out.println(this.resourceBundle.getString("NUTZERNAME"));
+		this.out.println(this.resourceBundle.getString("BENUTZERNAME"));
 		this.out.println("</td>\n<td colspan=\"2\">");
 		this.out.println("<form action=\"\" method=\"POST\">");
-		this.out.println("<input type=\"text\" name=\"nutzername\" size=\"25\">");
+		this.out.println("<input type=\"text\" name=\"benutzername\" size=\"25\">");
 		this.out.println("</td>\n</tr>\n<tr>\n<td>");
 		this.out.println(this.resourceBundle.getString("PASSWORT"));
 		this.out.println("</td>\n<td>");
