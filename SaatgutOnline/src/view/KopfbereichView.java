@@ -80,7 +80,7 @@ public class KopfbereichView
 		this.out.println("</td>\n<td>");
 		this.out.println("<input type=\"password\" name=\"passwort\" size=\"15\">");
 		this.out.println("</td>\n<td>");
-		this.out.println("<input type=\"submit\" name=\"anmelden\" value=\""+ this.resourceBundle.getString("ANMELDEN") +"\">");
+		this.out.println("<input type=\"submit\" name=\"anmelden\" value=\""+ this.resourceBundle.getString("ANMELDEN") +"\">");		
 		this.out.println("</form>");
 		this.out.println("</td>\n</tr><tr>\n<td></td>\n<td colspan=\"2\">");
 		//FIXME mit Mailfunktion verbinden! 
@@ -133,7 +133,7 @@ public class KopfbereichView
 	{		
 		this.out.println("<table>");
 		this.out.println("<tr>\n<td>");
-		this.out.println("Warenkorb-Preview");
+		this.out.println("<a href=\"/SaatgutOnline/Warenkorb\">" + this.resourceBundle.getString("WARENKORB") + "-Preview</a>");
 		this.out.println("</td>\n</tr>");
 		this.out.println("</table>");
 	}
