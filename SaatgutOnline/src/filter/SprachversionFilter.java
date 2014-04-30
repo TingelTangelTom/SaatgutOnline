@@ -21,7 +21,7 @@ import controller.DatenbankController;
 /**
  * Servlet Filter implementation class SprachversionFilter
  */
-@WebFilter(filterName = "SprachversionFilter", urlPatterns = { "/NoOp*" }) //FIXME : URL_Pattern ändern!
+@WebFilter(filterName = "SprachversionFilter", urlPatterns = { "/*" }) //FIXME : URL_Pattern ändern!
 public class SprachversionFilter implements Filter
 {
 	/**
