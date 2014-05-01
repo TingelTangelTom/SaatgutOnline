@@ -39,9 +39,15 @@ public class ProduktinfoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		//TODO
 		this.produktinfoView = new ProduktinfoView(request);
-		int produktID = Integer.parseInt(request.getParameter("produkt"));
+		int produktID;
+		if(request.getParameter("produkt") != null) {
+			produktID = Integer.parseInt(request.getParameter("produkt"));
+		} else {
+			produktID = 1;
+		}
+		
 		response.setCharacterEncoding("ISO-8859-15"); // Sonst wird das Euro-Symbol nicht angezeigt
 		
 		// Kopfbereich (und damit auch Navigationsbereich) einbinden
