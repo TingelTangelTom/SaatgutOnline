@@ -119,9 +119,9 @@ public class SprachversionFilter implements Filter
 			if(resultSet.next()){
 				session.setAttribute("spracheId", resultSet.getInt("sprache_id"));
 				
-//TODO remove				
-System.out.println("sprache = " + locale.getLanguage());
-System.out.println("spracheId = " + session.getAttribute("spracheId"));
+				//TODO remove				
+				System.out.println("sprache = " + locale.getLanguage());
+				System.out.println("spracheId = " + session.getAttribute("spracheId"));
 
 			}
 		} catch (SQLException e) {
