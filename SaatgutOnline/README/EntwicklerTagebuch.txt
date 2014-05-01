@@ -13,6 +13,16 @@ Bitte offene Fragen hier posten:
 01.Mai, 13:09 (Anja) - DB-Controller
 --------------------------------------------------------
 
+PS: Da ich nicht ganz sicher bin ob ich das alles richtig gemacht hab:
+(Weil eben lief noch alles, jetzt garnix mehr :(  )
+Ich hab alle änderungen mit nem TODO versehen, 
+wenn es also an meinen Änderungen liegt, das irgendwas nicht funzt,
+Dürft ihr das gerne ändern und den TODO anpassen!
+
+--------------------------------------------------------
+01.Mai, 13:09 (Anja) - DB-Controller
+--------------------------------------------------------
+
 Hab meine DB-Controller mal angepasst, ich denk das ist richtig so.
 eclipse meckert jedenfalls nicht :)
 
