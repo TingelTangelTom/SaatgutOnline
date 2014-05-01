@@ -38,7 +38,7 @@ public class KopfbereichView
 	{
 		this.out.println("<!doctype html>\n"
 				+ "<html>\n<head>\n"
-				+ "<meta charset='UTF-8'>\n"
+				+ "<meta charset=\"ISO-8859-15\">\n"
 				+ "<link type=\"text/css\" href=\"resources/css/seitenlayout.css\" rel=\"stylesheet\" />\n"
 				+ "<title></title>\n" + "</head>\n<body>");
 		this.out.println("<table class=\"kopfbereich\">");
