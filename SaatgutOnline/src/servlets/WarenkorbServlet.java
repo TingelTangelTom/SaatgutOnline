@@ -39,7 +39,8 @@ public class WarenkorbServlet extends HttpServlet
 		rd.include(request, response);
 	
 		//TODO remove
-		System.out.println("*****Warenkorb per GET");
+		System.out.println("\n"
+				+ "*****Warenkorb per GET");
 		WarenkorbController warenkorbController = new WarenkorbController(request, response);
 		
 		warenkorbController.warenkorbAnzeigen();
@@ -64,21 +65,28 @@ public class WarenkorbServlet extends HttpServlet
 		RequestDispatcher rd = getServletContext().getRequestDispatcher("/Kopfbereich");
 		rd.include(request, response);
 				
-		//Produkt-Dummy erzeugen	
-		ProduktModel produktModel = new ProduktModel();
-		produktModel.setId(325);
-		produktModel.setKategorieId(4);
-		produktModel.setBestand(69);
-		produktModel.setName("Produkt-Dummy");
-		produktModel.setBestellnummer("987654321");
-		produktModel.setPreisNetto(123.45);
-		produktModel.setPreisBrutto(234.56);
-		produktModel.setGewicht(9.87);	
-		int bestellmenge = 7;
+
+	
+		
+		
+		ProduktModel produktModel2 = new ProduktModel();
+		produktModel2.setId(4);
+		produktModel2.setKategorieId(9);
+		produktModel2.setBestand(69);
+		produktModel2.setName("Produkt-Dummy2");
+		produktModel2.setBestellnummer("987654321");
+		produktModel2.setPreisNetto(123.45);
+		produktModel2.setPreisBrutto(234.56);
+		produktModel2.setGewicht(9.87);
+		
+		int bestellmenge2 = 13;		
+		
+		
+		
 		
 		//TODO remove
-		System.out.println("*****Warenkorb per POST");
-		WarenkorbController warenkorbController = new WarenkorbController(request, response, produktModel, bestellmenge);
+		System.out.println("\n*****Warenkorb per POST");
+		WarenkorbController warenkorbController = new WarenkorbController(request, response, produktModel2, bestellmenge2);
 		
 		warenkorbController.warenkorbAnzeigen();
 		

@@ -55,11 +55,11 @@ public class WarenkorbView
 		out.println("</td>\n<td>");
 		out.println(this.resourceBundle.getString("GEWICHT"));
 		out.println("</td>\n<td>");
-		out.println(this.resourceBundle.getString("EINZELPREIS"));
+		out.println(this.resourceBundle.getString("EINZELPREIS_POSITION"));
 		out.println("</td>\n<td>");
 		out.println(this.resourceBundle.getString("MENGE"));
 		out.println("</td>\n<td>");
-		out.println(this.resourceBundle.getString("GESAMTPREIS"));
+		out.println(this.resourceBundle.getString("GESAMTPREIS_POSITION"));
 		out.println("</td>\n<td>");
 		out.println("<form action=\"Warenkorb\" method=\"GET\">");
 		out.println(this.resourceBundle.getString("POSITION_ENTFERNEN"));
@@ -67,7 +67,7 @@ public class WarenkorbView
 		out.println("<tr>\n<td colspan=\"7\">\n</td>\n</tr>");
 	}
 
-	public void outWarenkorbEnde(double gesamtgewicht, double gesamtpreis)
+	public void outWarenkorbEnde(double gesamtgewicht, double zwischensumme)
 	{
 		out.println("<tr>\n<td colspan=\"7\">\n</td>\n</tr>");
 		out.println("<tr>\n<td colspan=\"2\">");
@@ -75,9 +75,9 @@ public class WarenkorbView
 		out.println(gesamtgewicht);
 		out.println("</td>\n<td colspan=\"2\">");		
 		out.println("</td>\n<td>");
-		out.println(gesamtpreis);
+		out.println(zwischensumme);
 		out.println("</td>\n<td>");
-		out.println(this.resourceBundle.getString("ZWISCHENSUMME"));
+		out.println(this.resourceBundle.getString("ZWISCHENSUMME_BESTELLUNG"));
 		out.println("</td>\n</tr>\n<tr>\n<td colspan=\"7\">");
 		out.println("</td>\n</tr>\n<tr>\n<td>");
 		out.println("<input type=\"submit\" name=\"aktualisieren\" value=\"" + this.resourceBundle.getString("AKTUALISIEREN") + "\">");
@@ -118,14 +118,20 @@ public class WarenkorbView
 		out.println(produktModel.getGewicht());
 		out.println("</td>\n<td>");
 		out.println(produktModel.getPreisBrutto());
-		out.println("</td>\n<td>");		
-		out.println("<input type=\"hidden\" name=\"menge_id\" value=\"" + produktModel.getId() + "\">");
+		out.println("</td>\n<td>");				
 		out.println("<input type=\"text\" name=\"menge_" + produktModel.getId() + "\" value=\""+ menge +"\" size=2");
 		out.println("</td>\n<td>");
 		out.println(zwischensumme);
 		out.println("</td>\n<td>");
 		out.println("<input type=\"checkbox\" name=\"entfernen\" value=\"" + produktModel.getId() + "\">");
 		out.println("</td>\n</tr>");		
+	}
+	
+	public void outLeererWarenkorb()
+	{
+		out.println("<tr>\n<td colspan=\"7\">");
+		out.println("Keine Produkte im Warenkorb");
+		out.println("</td>\n</tr>");
 	}
 
 }
