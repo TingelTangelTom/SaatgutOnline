@@ -25,8 +25,6 @@ public class ImpressumController {
 	private String impressum_copyright;
 
 	public ImpressumController(HttpServletRequest request, HttpServletResponse response) {
-		// private Connection verbindung;
-		DatenbankController.getDbName(); // TODO : Richtig so? (vorher: DatenbankController.getVerbindung(); )
 
 		// Datenbankabfrage : Impressum ausgeben
 		try {
@@ -46,14 +44,9 @@ public class ImpressumController {
 				wirtschafts_id = resultset.getString("wirtschafts_id");
 				impressum_copyright = resultset.getString("impressum_copyright");
 
-				// System.out.println(unternehmen_adresse + unternehmen_telefon +
-				// unternehmen_fax +unternehmen_email + unternehmen_geschaeftsfuehrung +
-				// register_nr + register_nr + umsatzsteuer_id + wirtschafts_id +
-				// impressum_copyright);
-
 				new ImpressumView(request, response, unternehmen_adresse, unternehmen_telefon,
-						unternehmen_fax, unternehmen_email, unternehmen_geschaeftsfuehrung, register_nr,
-						umsatzsteuer_id, wirtschafts_id, impressum_copyright);
+						unternehmen_fax, unternehmen_email, unternehmen_geschaeftsfuehrung, registergericht,
+						register_nr, umsatzsteuer_id, wirtschafts_id, impressum_copyright);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
