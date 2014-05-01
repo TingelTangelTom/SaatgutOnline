@@ -30,6 +30,5 @@ public class ImpressumView {
 				+ "<br><br>Registergericht: " + registergericht + ", " + register_nr 
 				+ "<br>Umsatzsteuer-IdNr.: " + umsatzsteuer_id + "<br>Wirtschafts-IdNr.: " 
 				+ wirtschafts_id + "<br><br>" +  impressum_copyright);
-
 	}
 }

@@ -22,6 +22,8 @@ public class KontaktFormular extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		//TODO : Wo muss der Inhalt dieser Datei hin? Contoller? View? KontaktFormularVerarbeitungController? oderso?
+		//TODO : Ist der hier noch nötig? (Für die Ausgabe in der E-Mail???)
 		response.setContentType("text/html");
 		PrintWriter out;
 		try {
@@ -31,13 +33,16 @@ public class KontaktFormular extends HttpServlet {
 			return;
 		}
 		
+		//Daten aus Kontakformular als E-Mail senden
 		EMailController eMailController = new EMailController();
 		eMailController.sendeEmail(request.getParameter("E-Mail"), 
 				request.getParameter("Betreff"), "kontakt@saatgutonline.de", 
 				request.getParameter("Nachricht"), request.getParameter("Anrede"), 
 				request.getParameter("Vorname"), request.getParameter("Nachname"));
+				//TODO : Ausgabe in E-Mail mit Tabelle Formatieren
 
 
+		//Ausgabe nach senden
 		out.println("Vielen Dank für ihre Nachricht.");
 		out.println("<a href=\"/SaatgutOnline/IndexPlatzhalter\">Startseite</a>"); 
 		
