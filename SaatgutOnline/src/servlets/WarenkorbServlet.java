@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.ProduktModel;
 import controller.WarenkorbController;
 
 /**
@@ -38,9 +37,7 @@ public class WarenkorbServlet extends HttpServlet
 		RequestDispatcher rd = getServletContext().getRequestDispatcher("/Kopfbereich");
 		rd.include(request, response);
 	
-		//TODO remove
-		System.out.println("\n"
-				+ "*****Warenkorb per GET");
+		
 		WarenkorbController warenkorbController = new WarenkorbController(request, response);
 		
 		warenkorbController.warenkorbAnzeigen();
@@ -61,39 +58,7 @@ public class WarenkorbServlet extends HttpServlet
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
 			IOException
 	{
-		// Kopfbereich ausgeben
-		RequestDispatcher rd = getServletContext().getRequestDispatcher("/Kopfbereich");
-		rd.include(request, response);
-				
-
-	
-		
-		
-		ProduktModel produktModel2 = new ProduktModel();
-		produktModel2.setId(4);
-		produktModel2.setKategorieId(9);
-		produktModel2.setBestand(69);
-		produktModel2.setName("Produkt-Dummy2");
-		produktModel2.setBestellnummer("987654321");
-		produktModel2.setPreisNetto(123.45);
-		produktModel2.setPreisBrutto(234.56);
-		produktModel2.setGewicht(9.87);
-		
-		int bestellmenge2 = 13;		
-		
-		
-		
-		
-		//TODO remove
-		System.out.println("\n*****Warenkorb per POST");
-		WarenkorbController warenkorbController = new WarenkorbController(request, response, produktModel2, bestellmenge2);
-		
-		warenkorbController.warenkorbAnzeigen();
-		
-		
-		// Fussbereich einbinden
-		rd = getServletContext().getRequestDispatcher("/Fussbereich");
-		rd.include(request, response);	
+		doGet(request, response);
 	}
 
 }

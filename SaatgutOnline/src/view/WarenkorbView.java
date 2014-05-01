@@ -39,9 +39,7 @@ public class WarenkorbView
 	}
 
 	public void outWarenkorbAnfang()
-	{
-		
-		
+	{				
 		// TODO remove border='1'		
 		out.println("<table border='1'>");
 		
@@ -105,7 +103,7 @@ public class WarenkorbView
 		out.println("</table>");
 	}
 	
-	public void outWarenkorbInhalt(ProduktModel produktModel, int menge, double zwischensumme)
+	public void outWarenkorbInhalt(ProduktModel produktModel, int menge, BigDecimal gesamtpreisPosition)
 	{
 		out.println("<tr>\n<td>");
 		
@@ -122,12 +120,12 @@ public class WarenkorbView
 		out.println("</td>\n<td>");				
 		out.println("<input type=\"text\" name=\"menge_" + produktModel.getId() + "\" value=\""+ menge +"\" size=2");
 		out.println("</td>\n<td>");
-		out.println(zwischensumme);
+		out.println(gesamtpreisPosition);
 		out.println("</td>\n<td>");
-		out.println("<input type=\"checkbox\" name=\"entfernen\" value=\"" + produktModel.getId() + "\">");
+		out.println("<input type=\"checkbox\" name=\"entfernen_"+ produktModel.getId() + "\" value=\"true\">");
 		out.println("</td>\n</tr>");		
 	}
-	
+		
 	public void outLeererWarenkorb()
 	{
 		out.println("<tr>\n<td colspan=\"7\">");

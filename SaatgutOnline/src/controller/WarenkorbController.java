@@ -17,67 +17,21 @@ public class WarenkorbController
 	private Hashtable<ProduktModel, Integer> warenkorb;
 	private WarenkorbView warenkorbView;
 	
-	//TODO remove
-	private ProduktModel produktModel;
-	private int bestellmenge;
-	
-	
 	// GET-Kostruktor
 	public WarenkorbController(HttpServletRequest request, HttpServletResponse response)
-	{
-		this.session = request.getSession();
+	{		
+		//TODO remove
+		System.out.println("---WarenkorbController---");
 		
-		//TODO remove			
+		this.session = request.getSession();
+		this.warenkorbView = new WarenkorbView(request, response);
 		this.warenkorbAusSessionHolen();
 		this.warenkorbAktualisieren(request);
-		if(this.warenkorb.isEmpty()  && request.getParameter("leeren") == null)
-		{
-			System.out.println("***jap");
-			this.produktModel = new ProduktModel();
-			this.produktModel.setId(325);
-			this.produktModel.setKategorieId(4);
-			this.produktModel.setBestand(69);
-			this.produktModel.setName("Produkt-Dummy");
-			this.produktModel.setBestellnummer("987654321");
-			this.produktModel.setPreisNetto(123.45);
-			this.produktModel.setPreisBrutto(234.56);
-			this.produktModel.setGewicht(9.87);	
-			
-			bestellmenge = 7;
-			warenkorb.put(produktModel, bestellmenge);				
-		}
-		this.warenkorbInSessionSchreiben();
-		
-		
+		this.warenkorbInSessionSchreiben();		
 
-//		this.warenkorbAusSessionHolen();
-		
-		
-		
-		this.warenkorbView = new WarenkorbView(request, response);
-		
-		
-		
-		
-	}
-	
-	// POST-Konstruktor
-	public WarenkorbController(HttpServletRequest request, HttpServletResponse response, ProduktModel produktModel, int bestellmenge)
-	{
-		
 		//TODO remove
-		this.produktModel = produktModel;		
-		this.bestellmenge = bestellmenge;
-		
-		this.session = request.getSession();
-		this.warenkorbAusSessionHolen();		
-		this.warenkorb.put(produktModel, bestellmenge);		
-		this.warenkorbView = new WarenkorbView(request, response);
-		this.warenkorbInSessionSchreiben();
+		System.out.println("-------------------------");				
 	}
-	
-	
-	
 	
 	
 	public void warenkorbAnzeigen()
@@ -92,15 +46,18 @@ public class WarenkorbController
 			Enumeration<ProduktModel> produkte = this.warenkorb.keys();
 			while(produkte.hasMoreElements())
 			{
-				ProduktModel produkt = produkte.nextElement();				
-				int menge = this.warenkorb.get(produkt);
+				ProduktModel anzuzeigendesProduktModel = produkte.nextElement();				
+				int menge = this.warenkorb.get(anzuzeigendesProduktModel);
 				
-				double gesamtpreis_position = menge * produkt.getPreisBrutto();
+				double gesamtpreisPosition = menge * anzuzeigendesProduktModel.getPreisBrutto();
 				
-				this.warenkorbView.outWarenkorbInhalt(produkt, menge, gesamtpreis_position);
+				BigDecimal bdGesamtpreisPosition = new BigDecimal(gesamtpreisPosition);		
+				bdGesamtpreisPosition = bdGesamtpreisPosition.setScale(2,BigDecimal.ROUND_HALF_UP);
+				
+				this.warenkorbView.outWarenkorbInhalt(anzuzeigendesProduktModel, menge, bdGesamtpreisPosition);
 			
-				zwischensumme += gesamtpreis_position;
-				gesamtgewicht += produkt.getGewicht();
+				zwischensumme += gesamtpreisPosition;
+				gesamtgewicht += anzuzeigendesProduktModel.getGewicht();
 			}			
 		}
 		else
@@ -108,10 +65,10 @@ public class WarenkorbController
 			this.warenkorbView.outLeererWarenkorb();
 		}
 		
-		BigDecimal bdZwischensumme = new BigDecimal(zwischensumme);		
-		bdZwischensumme = bdZwischensumme.setScale(2,BigDecimal.ROUND_HALF_UP);
+		BigDecimal bdZwischensumme = new BigDecimal(zwischensumme);
+		BigDecimal bdGesamtgewicht = new BigDecimal(gesamtgewicht);
 		
-		BigDecimal bdGesamtgewicht = new BigDecimal(gesamtgewicht);		
+		bdZwischensumme = bdZwischensumme.setScale(2,BigDecimal.ROUND_HALF_UP);
 		bdGesamtgewicht = bdGesamtgewicht.setScale(2,BigDecimal.ROUND_HALF_UP);
 
 		this.warenkorbView.outWarenkorbEnde(bdGesamtgewicht, bdZwischensumme);
@@ -136,47 +93,130 @@ public class WarenkorbController
 		this.session.setAttribute("warenkorb", warenkorb);
 	}
 	
+	
 	private void warenkorbAktualisieren(HttpServletRequest request)
 	{
-		
-		if(request.getParameter("leeren") != null)
+		// Wird ein Produkt an den WK übergeben?
+		if(request.getParameter("produkt") != null)
 		{
-			//TODO remove
-			System.out.println("Warenkorb wird geleert");
+			// Produkt aus der DB holen
+			int id = Integer.parseInt(request.getParameter("produkt"));			
+			ProduktController produktController = new ProduktController(request);
+			ProduktModel produktModelAusDatenbank = new ProduktModel();
+			produktModelAusDatenbank = produktController.getProdukt(id);
 			
-			this.warenkorb.clear();						
+			// Liegt das Produkt noch nicht im WK?
+			Enumeration<ProduktModel> warenkorbInhalt = this.warenkorb.keys();
+			if(warenkorbInhalt.hasMoreElements())
+			{
+				boolean produktNichtImWarenkorb = true;
+				
+				// WK-Inhalte mit Produkt vergleichen
+				while(warenkorbInhalt.hasMoreElements())
+				{
+					ProduktModel produktImWarenkorb = warenkorbInhalt.nextElement();
+					if(produktModelAusDatenbank.getId() == produktImWarenkorb.getId())
+					{						
+						produktNichtImWarenkorb = false;
+					}					
+				}
+				
+				if(produktNichtImWarenkorb)
+				{
+					this.warenkorb.put(produktModelAusDatenbank, Integer.parseInt(request.getParameter("menge")));
+				}				
+			}
+			else
+			{
+				this.warenkorb.put(produktModelAusDatenbank, Integer.parseInt(request.getParameter("menge")));
+			}
 		}
 		else
-		{		
+		{					
+			// Wurde 'aktualisieren' gewaehlt?
 			if(request.getParameter("aktualisieren") != null)
 			{
 				//TODO remove
 				System.out.println("Warenkorb wird aktualisert...");
 				
-				Enumeration<String> parameters = request.getParameterNames();			
+				ProduktModel produktModelImWarenkorb;
+				Enumeration<ProduktModel> produktModelsImWarenkorb;
+				Enumeration<String> parameters;
+				String[] splittedParameter;
+				String parameter;
+				
+				// Menge aktualisieren
+				parameters = request.getParameterNames();			
 				while (parameters.hasMoreElements())
 				{
-					String parameter = parameters.nextElement();
+					parameter = parameters.nextElement();
 					String value = request.getParameter(parameter);
 					
 					if(parameter.startsWith("menge"))
 					{							
-						String[] splittedParameter = parameter.split("[_]");
+						splittedParameter = parameter.split("[_]");
 					
-						Enumeration<ProduktModel> produkte = this.warenkorb.keys();
-						while(produkte.hasMoreElements())
+						produktModelsImWarenkorb = this.warenkorb.keys();
+						while(produktModelsImWarenkorb.hasMoreElements())
 						{
-							ProduktModel produkt = produkte.nextElement();
-							if(produkt.getId() == Integer.parseInt(splittedParameter[1]))
+							produktModelImWarenkorb = produktModelsImWarenkorb.nextElement();
+							if(produktModelImWarenkorb.getId() == Integer.parseInt(splittedParameter[1]))
 							{
-								this.warenkorb.put(produkt, Integer.parseInt(value));
+								this.warenkorb.put(produktModelImWarenkorb, Integer.parseInt(value));
 							}
 						}
-					}						
+					}										
+				}
+				
+				// Postitionen entfernen
+				parameters = request.getParameterNames();
+				while (parameters.hasMoreElements())
+				{
+					parameter = parameters.nextElement();
+					
+					if(parameter.startsWith("entfernen"))
+					{
+						splittedParameter = parameter.split("[_]");
+						
+						produktModelsImWarenkorb = this.warenkorb.keys();
+						while(produktModelsImWarenkorb.hasMoreElements())
+						{
+							produktModelImWarenkorb = produktModelsImWarenkorb.nextElement();
+							if(produktModelImWarenkorb.getId() == Integer.parseInt(splittedParameter[1]))
+							{
+								this.warenkorb.remove(produktModelImWarenkorb);
+							}
+						}
+					}
+					
+				}
+				
+				
+			}
+			else
+			{			
+				// Wurde 'leeren' gewaehlt?
+				if(request.getParameter("leeren") != null)
+				{
+					//TODO remove
+					System.out.println("Warenkorb wird geleert");
+					
+					this.warenkorb.clear();						
 				}
 			}
+					
 		}
+		
+		
 	}
+
+
+	@Override
+	public boolean equals(Object obj)
+	{
+		return super.equals(obj);
+	}
+
 	
 	
 
