@@ -26,7 +26,7 @@ public class ImpressumController {
 
 	public ImpressumController(HttpServletRequest request, HttpServletResponse response) {
 		// private Connection verbindung;
-		DatenbankController.getVerbindung();
+		DatenbankController.getDbName(); // TODO : Richtig so? (vorher: DatenbankController.getVerbindung(); )
 
 		// Datenbankabfrage : Impressum ausgeben
 		try {
