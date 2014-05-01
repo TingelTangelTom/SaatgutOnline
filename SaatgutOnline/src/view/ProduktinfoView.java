@@ -17,6 +17,7 @@ public class ProduktinfoView {
 	private HtmlOutput htmlOutput;
 	private String output;
 	private HashMap<String, String> merkmale;
+	private static int warenkorbmenge;
 	
 	public ProduktinfoView(HttpServletRequest request) {
 		
@@ -33,6 +34,7 @@ public class ProduktinfoView {
 	public String anzeigenProduktinfo(int id) {	
 		this.produktModel = this.produktController.getProdukt(id);
 		this.merkmale = this.produktModel.getMerkmale();
+		warenkorbmenge = 1;
 		
 		this.output = "<table class=\"produktinfo\">"
 				+ "<tr><td rowspan=\"3\">Cell 1</td><td>" + this.produktModel.getName() + "</td></tr>" // Titel
@@ -46,12 +48,12 @@ public class ProduktinfoView {
 				+ "<tr><td colspan=\"2\">" + this.produktModel.getBeschreibung() + "</td></tr>" // Produktbeschreibung
 				+ "<tr><td colspan=\"2\">Warenkorb</td></tr>" // Button Warenkorb
 				+ "<tr><td colspan=\"2\">" // Button Warenkorb"
-				+ "<form action='/SaatgutOnline/Warenkorb' method='POST'>"
-				+ "<input type=\"hidden\" name=\"menge\" value=\"3\">"
+				+ "<form action=\"/SaatgutOnline/Warenkorb\" method=\"POST\">"
+				+ "<input type=\"hidden\" name=\"menge\" value=\"" + warenkorbmenge + "\">"
 				+ "<input type=\"hidden\" name=\"produkt\" value=\"" + this.produktModel.getId() + "\">"
 				+ "<input type=\"image\" name=\"absenden\" value=\"senden\">absenden</form>"
 				+ "</td></tr></table>";	
-
+System.out.println("Warenkorbmenge: " +warenkorbmenge);
 		return this.output;
 	}
 

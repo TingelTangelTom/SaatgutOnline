@@ -19,6 +19,7 @@ public class ProduktlisteView {
 	private String output;
 	private ArrayList<ProduktModel> produktliste;
 	private String kategorie;
+	private static int warenkorbmenge;
 	
 	public ProduktlisteView(HttpServletRequest request) {
 		
@@ -48,13 +49,13 @@ public class ProduktlisteView {
 
 		
 		this.produktliste = this.produktController.getProduktliste(this.kategorie, request);
-		
+		warenkorbmenge = 1;
 		//TODO Comparator einfügen
 		this.output = "<table class=\"produktinfo\">"
 				+ "<tr><td align=\"right\">sortieren: Name "
 				+ "<a href=\"/SaatgutOnline/Produktliste?kategorie=1&p_anzeige=pn,3,0\"><img src=\"resources/bilder/icons/pfeil_hoch_runter.gif\" width=\"5\" height=\"10\" border=\"0\" alt=\"Sortierung\"></a> | "
 				+ "Preis "
-				+ "<a href=\"/SaatgutOnline/Produktliste?kategorie=1&p_anzeige=pp,3,0\"><img src=\"resources/bilder/icons/pfeil_hoch_runter.gif\" width=\"5\" height=\"10\" border=\"0\" alt=\"Sortierung\"></a> | "
+				+ "<a href=\"/SaatgutOnline/Produktliste?kategorie=1&p_anzeige=pp,3,0\"><img src=\"resources/bilder/icons/pfeil_hoch_runter.gif\" width=\"5\" height=\"10\" border=\"0\" alt=\"Sortierung\"></a>"
 				+ "</td></tr><tr><td>"
 				+ "<tr><td align=\"right\"></td></tr>&nbsp;<tr><td>";
 		for (int i = 0; i < this.produktliste.size(); i++) {
@@ -75,9 +76,10 @@ public class ProduktlisteView {
     		+ "<td>Keine Ahnung</td>"
     		+ "<td>Auf Lager</td>"
     		+ "<td align=\"right\">"
-    		+ "<form action=\"\" method=\"POST\">"
+    		+ "<form action=\"/SaatgutOnline/Warenkorb\" method=\"POST\">"
+    		+ "<input type=\"hidden\" name=\"menge\" value=\"" + warenkorbmenge + "\">"
+			+ "<input type=\"hidden\" name=\"produkt\" value=\"" + produktModel.getId() + "\">"
     		+ "<input type=\"image\" src=\"resources/bilder/icons/warenkorb.gif\" alt=\"Warenkorb\">"
-    		+ "<input type=\"hidden\" name=\"sprache\" value=\"en\""
     		+ "</form>"
     		+ "</td></tr>"    		
     		+ "<tr><td colspan=\"4\">&nbsp;</td>"
