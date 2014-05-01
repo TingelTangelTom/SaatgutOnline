@@ -81,15 +81,24 @@ public class KopfbereichView
 		this.out.println("<input type=\"password\" name=\"passwort\" size=\"15\">");
 		this.out.println("</td>\n<td>");
 		this.out.println("<input type=\"submit\" name=\"anmelden\" value=\""+ this.resourceBundle.getString("ANMELDEN") +"\">");				
-		this.out.println("</td>\n</tr>\n<tr>\n<td></td>\n<td colspan=\"2\">");
+		this.out.println("</td>\n</tr>\n<tr>\n<td>\n</td>\n<td colspan=\"2\">");
 		//FIXME mit Mailfunktion verbinden! 
 		this.out.println("<a href=\"/SaatgutOnline/NoOperation\">\n" + this.resourceBundle.getString("PASSWORT_VERGESSEN") + "?\n</a>");
 		//TODO remove
 		this.out.println(" (noOp)");
-		
+		this.out.println("</td>\n</tr>\n<tr>\n<td>\n</td>\n<td colspan=\"2\">");
+		//FIXME mit Registrierung verbinden! 
+		this.out.println("<a href=\"/SaatgutOnline/NoOperation\">\n" + this.resourceBundle.getString("REGISTRIEREN") + "\n</a>");
+		//TODO remove
+		this.out.println(" (noOp)");
 		this.out.println("</td>\n</tr>");		
 		this.out.println("</table>");
 		this.out.println("</form>");
+	}
+	
+	public void outLogoutBereich()
+	{
+		
 	}
 
 	public void outLogo()
