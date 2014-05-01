@@ -62,7 +62,7 @@ public class ProduktController {
 			
 			String query = "SELECT p.produkt_id, p.produkt_bestand, pb.produkt_name, pb.produkt_beschreibung,"
 						+ "pb.produkt_suchbegriffe, p.produkt_angesehen, p.produkt_preis, p.produkt_gewicht,"
-						+ "p.produkt_steuer_id, p.produkt_datum_hinzugefuegt, p.produkt_datum_geaendert, p.bestellnummer "
+						+ "p.produkt_steuer_id, p.produkt_datum_hinzugefuegt, p.produkt_datum_geaendert, p.produkt_bestellnummer "
 						+ "FROM produkt AS p "
 						+ "INNER JOIN produkt_beschreibung AS pb ON p.produkt_id = pb.produkt_id "
 						+ "WHERE pb.sprache_id = '" + this.sprache_id + "' AND p.produkt_id = '" + id + "'";
@@ -230,7 +230,7 @@ public class ProduktController {
 			String[] parameterAufteilung = parameter.split(",");
 			
 			//  Wenn sortierung_sortierspalte bereits auf demselben Wert steht, wechselt die Sortierreihenfolge
-			if(parameterAufteilung[0] == session.getAttribute("sortierung_sortierspalte")) {
+			if(parameterAufteilung[0].equals(session.getAttribute("sortierung_sortierspalte"))) {
 				if(parameterAufteilung[0] == "DESC") {
 					session.setAttribute("sortierung_reihenfolge", "ASC");
 				} else {
