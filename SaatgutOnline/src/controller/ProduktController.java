@@ -87,6 +87,12 @@ public class ProduktController {
 			e.printStackTrace();
 		}
 		
+		getProduktMerkmale(id);
+		getSteuerinformationen(id);
+
+		return this.produktModel;
+	}
+	private void getSteuerinformationen(int id) {
 		try {
 			String query = "SELECT steuersatz FROM steuersatz WHERE steuersatz_id = " + this.produktModel.getSteuerBetrag();
 			
@@ -101,13 +107,9 @@ public class ProduktController {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
+		
 		this.produktModel.setPreisBrutto(this.produktModel.getPreisNetto() * this.produktModel.getSteuerSatz() / 100 + this.produktModel.getPreisNetto());
 		this.produktModel.setSteuerBetrag(this.produktModel.getPreisBrutto() - this.produktModel.getPreisNetto());
-		
-		getProduktMerkmale(id);
-
-		return this.produktModel;
 	}
 	
 	/**
@@ -118,7 +120,7 @@ public class ProduktController {
 	 * @param id - ID des Produktes, über die in der Datenbank gesucht wird
 	 */
 	
-	public void getProduktMerkmale(int id) {
+	private void getProduktMerkmale(int id) {
 			
 		HashMap<String, String> merkmale = new HashMap<String, String>();
 		String name;

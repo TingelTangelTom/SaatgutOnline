@@ -58,7 +58,7 @@ public class ProduktlisteView {
 				+ "Preis "
 				+ "<a href=\"/SaatgutOnline/Produktliste?kategorie=1&p_anzeige=pp,3,0\"><img src=\"resources/bilder/icons/pfeil_hoch_runter.gif\" width=\"5\" height=\"10\" border=\"0\" alt=\"Sortierung\"></a>"
 				+ "</td></tr>"
-				+ "<tr><td colspan=\"2\" align=\"right\">&nbsp;</td></tr><tr><td>";
+				+ "<tr><td colspan=\"2\"  style=\"background-image:url(resources/bilder/icons/trennlinie.gif);height: 2px; background-repeat:repeat-x;\">&nbsp;</td></tr><tr><td>";
 		for (int i = 0; i < this.produktliste.size(); i++) {
 			ProduktModel produktModel = this.produktliste.get(i);
 			this.output += "<table width=\"100%\" border=\"0\">"
