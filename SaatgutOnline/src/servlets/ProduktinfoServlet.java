@@ -16,13 +16,14 @@ import javax.servlet.http.HttpServletResponse;
 
 
 
+
 import view.ProduktinfoView;
 
 
 /**
  * Servlet implementation class Anzeige
  */
-@WebServlet("/ProduktinfoServlet")
+@WebServlet("/Produktinfo")
 public class ProduktinfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ProduktinfoView produktinfoView;
@@ -40,7 +41,7 @@ public class ProduktinfoServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		this.produktinfoView = new ProduktinfoView(request);
-		
+		int produktID = Integer.parseInt(request.getParameter("produkt"));
 		response.setCharacterEncoding("ISO-8859-15"); // Sonst wird das Euro-Symbol nicht angezeigt
 		
 		// Kopfbereich (und damit auch Navigationsbereich) einbinden
@@ -49,7 +50,7 @@ public class ProduktinfoServlet extends HttpServlet {
 				
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		out.print(this.produktinfoView.anzeigenProduktinfo());
+		out.print(this.produktinfoView.anzeigenProduktinfo(produktID));
 
 		// Fussbereich einbinden
 		rd = getServletContext().getRequestDispatcher("/Fussbereich");

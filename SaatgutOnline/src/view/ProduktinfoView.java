@@ -30,8 +30,8 @@ public class ProduktinfoView {
 	}
 
 	//texte.getString("WILLKOMMEN");
-	public String anzeigenProduktinfo() {	
-		this.produktModel = this.produktController.getProdukt(1);
+	public String anzeigenProduktinfo(int id) {	
+		this.produktModel = this.produktController.getProdukt(id);
 		this.merkmale = this.produktModel.getMerkmale();
 		
 		this.output = "<table class=\"produktinfo\">"

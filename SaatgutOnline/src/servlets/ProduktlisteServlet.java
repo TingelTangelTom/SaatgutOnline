@@ -34,15 +34,18 @@ public class ProduktlisteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		this.produktliste = new ProduktlisteView(request);
-		
-		response.setCharacterEncoding("ISO-8859-15"); // Sonst wird das Euro-Symbol nicht angezeigt
-	
+		//TODO Funktioniert nicht
+		response.setContentType("text/html; charset=UTF-8");
+	    response.setCharacterEncoding("ISO-8859-15");
+	    	    
 		// Kopfbereich (und damit auch Navigationsbereich) einbinden
 		RequestDispatcher rd = getServletContext().getRequestDispatcher("/Kopfbereich");
 		rd.include(request, response);
-				
-		response.setContentType("text/html");
+ 		
 		PrintWriter out = response.getWriter();
+		
+		response.setContentType("text/html; charset=UTF-8");
+	    response.setCharacterEncoding("ISO-8859-15");
 		out.print(this.produktliste.anzeigenProduktliste(request));
 
 		// Fussbereich einbinden

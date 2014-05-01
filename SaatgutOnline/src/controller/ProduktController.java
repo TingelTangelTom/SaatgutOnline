@@ -174,7 +174,7 @@ public class ProduktController {
 		System.out.println("Anzahl: " + session.getAttribute("sortierung_produktanzahl"));
 		System.out.println("Limit: " + session.getAttribute("sortierung_limit_von"));
 
-		String produkt_query = "SELECT p.produkt_id, pb.produkt_name "
+		String produkt_query = "SELECT p.produkt_id "
 								+ "FROM produkt AS p "
 								+ "INNER JOIN produkt_beschreibung AS pb ON p.produkt_id = pb.produkt_id "
 								+ "WHERE pb.sprache_id = '" + this.sprache_id + "' "

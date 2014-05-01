@@ -1,15 +1,19 @@
 package controller;
 
+
 import java.text.MessageFormat;
 import java.text.NumberFormat;
 import java.util.Locale;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-public class HtmlOutput {
+public class HtmlOutput extends HttpServlet{
+
+	private static final long serialVersionUID = 1L;
 	private Locale locale;
 	private HttpSession session;
 	
@@ -20,6 +24,30 @@ public class HtmlOutput {
 		
 	}
 	
+/*
+		                      
+		    System.out.println("doGet... TestNumberFormat !");
+		    
+		    response.setContentType("text/html");
+		    response.setCharacterEncoding("ISO-8859-15");   
+		    PrintWriter out = response.getWriter();
+		    String title    = "TestNumberFormat Beispiel";
+
+		    double test = 1234.5666;
+		    NumberFormat formatter = NumberFormat.getCurrencyInstance();
+		    
+		    out.println( ServletUtilities.headWithTitle(title) +
+		                "<body bgcolor=\"#FDF5E6\">\n" +
+		                "<center>\n" +
+		                "<h1>" + title + "</h1>" +
+		                "Unicode: &#8364 HTML: &
+		\n" +  // wird im Forum nicht richtig dargestellt  #8364 und euro;
+		                "Betrag: " + formatter.format(test) + "\n" +
+		                "</center>\n" +
+		                "</body>\n" +
+		                "</html>" );
+		  }
+*/
 	public String outPreisformat(double preis) {
 		
 		NumberFormat waehrungsFormat = NumberFormat.getCurrencyInstance(this.locale);
@@ -38,4 +66,11 @@ public class HtmlOutput {
 		return MessageFormat.format(resourceBundle.getString("PREISTEXT"), prozent);
 		
 	}
+	
+	public String outKurzeProduktbeschreibung(String beschreibung, int zeichen, int id) {
+		String kurzeBeschreibung = beschreibung.substring(0,zeichen);
+		kurzeBeschreibung += "<a href=\"/SaatgutOnline/Produktinfo?produkt=" + id + "\"><b>...(mehr)</b></a>";
+		return kurzeBeschreibung;
+	}
+
 }
