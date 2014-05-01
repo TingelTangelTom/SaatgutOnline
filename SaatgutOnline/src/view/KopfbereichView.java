@@ -50,18 +50,18 @@ public class KopfbereichView
 		this.out.println("</td>\n</tr>"); // schliesst Kopfbereich
 	}
 
-	public void outInhaltsframeAnfang()
+	public void outInhaltsRahmenAnfang()
 	{
 		this.out.println("<table>");
 		this.out.println("<tr>\n<td>");
 	}
 
-	public void outInhaltsframeNeueSpalte()
+	public void outInhaltsRahmenNeueSpalte()
 	{
 		this.out.println("</td>\n<td>");
 	}
 
-	public void outInhaltsframeEnde()
+	public void outInhaltsRahmenEnde()
 	{
 		this.out.println("</td>\n</tr>");
 		this.out.println("</table>");
@@ -80,10 +80,11 @@ public class KopfbereichView
 		this.out.println("</td>\n<td>");
 		this.out.println("<input type=\"password\" name=\"passwort\" size=\"15\">");
 		this.out.println("</td>\n<td>");
-		this.out.println("<input type=\"submit\" name=\"anmelden\" value=\""+ this.resourceBundle.getString("ANMELDEN") +"\">");				
-		this.out.println("</td>\n</tr><tr>\n<td></td>\n<td colspan=\"2\">");
+		//TODO NoOp entfernen!
+		this.out.println("<input type=\"submit\" name=\"anmelden\" value=\""+ this.resourceBundle.getString("ANMELDEN") +" (NoOP)\">");				
+		this.out.println("</td>\n</tr>\n<tr>\n<td></td>\n<td colspan=\"2\">");
 		//FIXME mit Mailfunktion verbinden! 
-		this.out.println("<a href=\"/SaatgutOnline/NoOperation\">" + this.resourceBundle.getString("PASSWORT_VERGESSEN") + "</a>");
+		this.out.println("<a href=\"/SaatgutOnline/NoOperation\">\n" + this.resourceBundle.getString("PASSWORT_VERGESSEN") + "?\n</a>");
 		//TODO remove
 		this.out.println(" (noOp)");
 		
@@ -129,11 +130,11 @@ public class KopfbereichView
 		this.out.println("</table>");
 	}
 
-	public void outWarenkorbPreview()
+	public void outWarenkorbLink()
 	{		
 		this.out.println("<table>");
 		this.out.println("<tr>\n<td>");
-		this.out.println("<a href=\"/SaatgutOnline/Warenkorb\">" + this.resourceBundle.getString("WARENKORB") + "-Preview</a>");
+		this.out.println("<a href=\"/SaatgutOnline/Warenkorb\">\n" + this.resourceBundle.getString("ZUM_WARENKORB") + "\n</a>");
 		this.out.println("</td>\n</tr>");
 		this.out.println("</table>");
 	}
@@ -145,10 +146,10 @@ public class KopfbereichView
 		this.out.println("<form action=\"\" method=\"GET\">");
 		this.out.println("<input type=\"text\" name=\"suchbegriff\" size=\"20\">");
 		this.out.println("</td>\n<td>");
-		this.out.println("<input type=\"submit\" name=\"suche\" value=\"" + this.resourceBundle.getString("SUCHEN") + "\">");
+		//TODO NoOp entfernen!
+		this.out.println("<input type=\"submit\" name=\"suche\" value=\"" + this.resourceBundle.getString("SUCHEN") + "(NoOp)\">");
 		this.out.println("</form>");
 		this.out.println("</td>\n</tr>");
 		this.out.println("</table>");
-	}
-
+	}	
 }

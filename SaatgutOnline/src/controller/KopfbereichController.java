@@ -7,7 +7,7 @@ import view.KopfbereichView;
 
 public class KopfbereichController
 {
-	private KopfbereichView kopfbereichView;	
+	private KopfbereichView kopfbereichView;
 		
 	public KopfbereichController(HttpServletRequest request, HttpServletResponse response)
 	{	
@@ -17,32 +17,34 @@ public class KopfbereichController
 	public void outKopfbereichAnzeigen()
 	{					
 		this.kopfbereichView.outKopfbereichAnfang();
-		this.kopfbereichView.outInhaltsframeAnfang();
+		
+		this.kopfbereichView.outInhaltsRahmenAnfang();
 		
 		this.kopfbereichView.outLogo();
 		
-		this.kopfbereichView.outInhaltsframeNeueSpalte();
+		this.kopfbereichView.outInhaltsRahmenNeueSpalte();
 		
 		this.kopfbereichView.outSchriftzug();
 		
-		this.kopfbereichView.outInhaltsframeNeueSpalte();
+		this.kopfbereichView.outInhaltsRahmenNeueSpalte();
 		
 		//TODO LogoutBereich-Verzweigung einfuegen
 			this.kopfbereichView.outLoginBereich();
 		
-		this.kopfbereichView.outInhaltsframeNeueSpalte();
+		this.kopfbereichView.outInhaltsRahmenNeueSpalte();
 		
-		this.kopfbereichView.outWarenkorbPreview();
-		
-		this.kopfbereichView.outInhaltsframeNeueSpalte();
+		this.kopfbereichView.outWarenkorbLink();
+						
+		this.kopfbereichView.outInhaltsRahmenNeueSpalte();
 		
 		this.kopfbereichView.outSuchfeld();
 		
-		this.kopfbereichView.outInhaltsframeNeueSpalte();
+		this.kopfbereichView.outInhaltsRahmenNeueSpalte();
 		
 		this.kopfbereichView.outSprachwahl();
 		
-		this.kopfbereichView.outInhaltsframeEnde();
+		this.kopfbereichView.outInhaltsRahmenEnde();
+		
 		this.kopfbereichView.outKopfbereichEnde();	
 	}
 

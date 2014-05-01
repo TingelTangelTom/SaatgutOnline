@@ -45,10 +45,7 @@ public class WarenkorbServlet extends HttpServlet
 		
 		// Fussbereich einbinden
 		rd = getServletContext().getRequestDispatcher("/Fussbereich");
-		rd.include(request, response);			
-		
-		
-		
+		rd.include(request, response);					
 	}
 
 	/**

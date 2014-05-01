@@ -39,10 +39,8 @@ public class WarenkorbView
 	}
 
 	public void outWarenkorbAnfang()
-	{				
-		// TODO remove border='1'		
-		this.out.println("<table border='1'>");
-		
+	{					
+		this.out.println("<table>");		
 		this.out.println("<tr>\n<td colspan=\"7\">");
 		this.out.println(this.resourceBundle.getString("WARENKORB"));
 		this.out.println("</td>\n</tr>");
@@ -66,15 +64,15 @@ public class WarenkorbView
 		this.out.println("<tr>\n<td colspan=\"7\">\n</td>\n</tr>");
 	}
 
-	public void outWarenkorbEnde(BigDecimal gesamtgewicht, BigDecimal zwischensumme)
+	public void outWarenkorbEnde(BigDecimal bdGesamtgewicht, BigDecimal bdZwischensumme)
 	{
 		this.out.println("<tr>\n<td colspan=\"7\">\n</td>\n</tr>");
 		this.out.println("<tr>\n<td colspan=\"2\">");
 		this.out.println("</td>\n<td>");
-		this.out.println(gesamtgewicht);
+		this.out.println(bdGesamtgewicht);
 		this.out.println("</td>\n<td colspan=\"2\">");		
 		this.out.println("</td>\n<td>");
-		this.out.println(zwischensumme);
+		this.out.println(bdZwischensumme);
 		this.out.println("</td>\n<td>");
 		this.out.println(this.resourceBundle.getString("ZWISCHENSUMME_BESTELLUNG"));
 		this.out.println("</td>\n</tr>\n<tr>\n<td colspan=\"7\">");

@@ -26,9 +26,9 @@ public class WarenkorbController
 		this.session = request.getSession();
 		this.warenkorbView = new WarenkorbView(request, response);
 		this.warenkorbAusSessionHolen();
-		this.warenkorbOrganisieren(request);
-		this.warenkorbInSessionSchreiben();		
-
+		this.warenkorbAktualisieren(request);
+		this.warenkorbInSessionLegen();
+		
 		//TODO remove
 		System.out.println("-------------------------");				
 	}
@@ -37,10 +37,11 @@ public class WarenkorbController
 	public void warenkorbAnzeigen()
 	{
 		double gesamtgewicht = 0;
-		double zwischensumme = 0;
+		double zwischensumme = 0;		
 		
 		this.warenkorbView.outWarenkorbAnfang();
 				
+		
 		if(! this.warenkorb.isEmpty())
 		{
 			Enumeration<ProduktModel> produkte = this.warenkorb.keys();
@@ -51,6 +52,7 @@ public class WarenkorbController
 				
 				double gesamtpreisPosition = menge * anzuzeigendesProduktModel.getPreisBrutto();
 				
+				//kaufmaennisch runden
 				BigDecimal bdGesamtpreisPosition = new BigDecimal(gesamtpreisPosition);		
 				bdGesamtpreisPosition = bdGesamtpreisPosition.setScale(2,BigDecimal.ROUND_HALF_UP);
 				
@@ -65,13 +67,14 @@ public class WarenkorbController
 			this.warenkorbView.outLeererWarenkorb();
 		}
 		
+		//kaufmaennisch runden
 		BigDecimal bdZwischensumme = new BigDecimal(zwischensumme);
 		BigDecimal bdGesamtgewicht = new BigDecimal(gesamtgewicht);
 		
 		bdZwischensumme = bdZwischensumme.setScale(2,BigDecimal.ROUND_HALF_UP);
 		bdGesamtgewicht = bdGesamtgewicht.setScale(2,BigDecimal.ROUND_HALF_UP);
-
-		this.warenkorbView.outWarenkorbEnde(bdGesamtgewicht, bdZwischensumme);
+		
+		this.warenkorbView.outWarenkorbEnde(bdGesamtgewicht, bdZwischensumme);		
 	}	
 	
 	
@@ -88,13 +91,13 @@ public class WarenkorbController
 		}				
 	}
 	
-	private void warenkorbInSessionSchreiben()
+	private void warenkorbInSessionLegen()
 	{
 		this.session.setAttribute("warenkorb", warenkorb);
 	}
 	
 	
-	private void warenkorbOrganisieren(HttpServletRequest request)
+	private void warenkorbAktualisieren(HttpServletRequest request)
 	{
 		// Wurde Produkt an WK übergeben?
 		if(request.getParameter("produkt") != null)
@@ -216,11 +219,5 @@ public class WarenkorbController
 				}
 			}					
 		}		
-	}
-	
-	private void warenkorbPreviewAktualisieren()
-	{
-		
-	}
-	
+	}	
 }
