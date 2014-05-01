@@ -48,7 +48,7 @@ public class ProduktinfoView {
 				+ "<tr><td colspan=\"2\">" // Button Warenkorb"
 				+ "<form action='/SaatgutOnline/Warenkorb' method='POST'>"
 				+ "<input type=\"hidden\" name=\"menge\" value=\"3\">"
-				+ "<input type=\"hidden\" name=\"produkt\" value=\"" + this.produktModel + "\">"
+				+ "<input type=\"hidden\" name=\"produkt\" value=\"" + this.produktModel.getId() + "\">"
 				+ "<input type=\"image\" name=\"absenden\" value=\"senden\">absenden</form>"
 				+ "</td></tr></table>";	
 
