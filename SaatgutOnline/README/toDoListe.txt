@@ -35,7 +35,7 @@ Anja
 	- Versandkosten (Versand & Zahlung)
 	- Datenschutz : FERTIG (In Datenbank(txt) Übertragungsstandard aktualisieren)
 	- Sitemap
-	- Copyright
+	- Copyright : FERTIG (Jedenfalls wenn ich das richtig verstanden hab)
 - Zurück oder Startseite Buttons oder Links in Impressum, Datenschutz und co.?
 - Wiederrufsbelehrung extra??
 - Internationalisierung

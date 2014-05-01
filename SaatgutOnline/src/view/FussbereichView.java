@@ -58,6 +58,6 @@ public class FussbereichView
 				      + "<a href=\"/SaatgutOnline/Datenschutz\">Datenschutz</a> | "
 				      + "<a href=\"/SaatgutOnline/Kontakt\">Kontakt</a> | "
 				      + "<a href=\"/SaatgutOnline/Sitemap\">Sitemap</a> | "
-				      + "<a href=\"/SaatgutOnline/Copyright\">Copyright</a></footer>");
+				      + "&copy Copyright 2014 by SaatgutOnline GmbH</footer>");
 	}
 }
