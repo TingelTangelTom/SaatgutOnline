@@ -9,7 +9,7 @@ Tom
 - UNERLEDIGT! - Kopfbereich CSS (kriegt er nicht hin...)
 - ERLEDIGT! - Sprache_id einfügen
 - ERLEDIGT! - Navigation 
-- Warenkorb (+MiniView)
+- auf dem besten Wege... - Warenkorb (+MiniView)
 - Texte (DB) übersetzen
 - Bestellvorgang
 - ERLEDIGT! - Suchfeld im Kopfbereich einfügen
