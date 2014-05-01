@@ -36,8 +36,8 @@ public class SprachversionFilter implements Filter
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,
 			ServletException
 	{
-//TODO remove
-System.out.println("\n---SprachversionsFilter---");
+		//TODO remove
+		System.out.println("\n---SprachversionsFilter---");
 
 		if(request instanceof HttpServletRequest)
 		{
@@ -52,8 +52,8 @@ System.out.println("\n---SprachversionsFilter---");
 			if(session.getAttribute("sprache") == null)
 			{	
 				
-	//TODO remove			
-	System.out.println("Keine Sprache in der Session hinterlegt.");
+				//TODO remove			
+				System.out.println("Keine Sprache in der Session hinterlegt.");
 	
 				locale = request.getLocale();
 				
@@ -68,36 +68,37 @@ System.out.println("\n---SprachversionsFilter---");
 			/*
 			 * falls Sprachwahl erfolgt, entsprechende locale in die Session schreiben
 			 */
-			if (((HttpServletRequest) request).getParameter("sprache") != null)
+			if(request instanceof HttpServletRequest)
 			{
-				
-	// TODO remove			
-	System.out.println("Sprachauswahl per SprachversionFilter erfolgt.");			
-				
-				String sprachwahl = ((HttpServletRequest) request).getParameter("sprache");
-				switch (sprachwahl)
+				if (((HttpServletRequest) request).getParameter("sprache") != null)
 				{
-				case "de":
-					locale = Locale.GERMAN;			
-					break;
-				case "en":
-					locale = Locale.ENGLISH;
-					break;
-				default:
-					locale = Locale.ENGLISH;
-					break;
-				}			
-				session.setAttribute("sprache", locale);
-				spracheIdInSessionLegen(session, locale);
+					
+					// TODO remove			
+					System.out.println("Sprachauswahl per SprachversionFilter erfolgt.");			
+					
+					String sprachwahl = ((HttpServletRequest) request).getParameter("sprache");
+					switch (sprachwahl)
+					{
+					case "de":
+						locale = Locale.GERMAN;			
+						break;
+					case "en":
+						locale = Locale.ENGLISH;
+						break;
+					default:
+						locale = Locale.ENGLISH;
+						break;
+					}			
+					session.setAttribute("sprache", locale);
+					spracheIdInSessionLegen(session, locale);
+				}
 			}
 		}
-
-//TODO remove		
-System.out.println("---pre-processing  ende---");
-
+		
+		//TODO remove		
+		System.out.println("---pre-processing  ende---");
 
 		chain.doFilter(request, response);
-	
 	}
 
 	/**
