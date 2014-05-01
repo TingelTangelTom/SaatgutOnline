@@ -96,16 +96,16 @@ public class WarenkorbController
 	
 	private void warenkorbAktualisieren(HttpServletRequest request)
 	{
-		// Wird ein Produkt an den WK übergeben?
+		// Wurde Produkt an WK übergeben?
 		if(request.getParameter("produkt") != null)
 		{
-			// Produkt aus der DB holen
+			// Produkt aus DB holen
 			int id = Integer.parseInt(request.getParameter("produkt"));			
 			ProduktController produktController = new ProduktController(request);
 			ProduktModel produktModelAusDatenbank = new ProduktModel();
 			produktModelAusDatenbank = produktController.getProdukt(id);
 			
-			// Liegt das Produkt noch nicht im WK?
+			// Liegt Produkt noch nicht im WK?
 			Enumeration<ProduktModel> warenkorbInhalt = this.warenkorb.keys();
 			if(warenkorbInhalt.hasMoreElements())
 			{
@@ -128,6 +128,7 @@ public class WarenkorbController
 			}
 			else
 			{
+				//in WK legen wenn WK leer
 				this.warenkorb.put(produktModelAusDatenbank, Integer.parseInt(request.getParameter("menge")));
 			}
 		}
@@ -176,7 +177,7 @@ public class WarenkorbController
 					}										
 				}
 				
-				// Postitionen entfernen
+				// Bestellpostitionen entfernen
 				parameters = request.getParameterNames();
 				while (parameters.hasMoreElements())
 				{
@@ -195,11 +196,8 @@ public class WarenkorbController
 								this.warenkorb.remove(produktModelImWarenkorb);
 							}
 						}
-					}
-					
+					}					
 				}
-				
-				
 			}
 			else
 			{			
@@ -211,24 +209,7 @@ public class WarenkorbController
 					
 					this.warenkorb.clear();						
 				}
-			}
-					
-		}
-		
-		
+			}					
+		}		
 	}
-
-
-	@Override
-	public boolean equals(Object obj)
-	{
-		return super.equals(obj);
-	}
-
-	
-	
-
-	
-	
-		
 }
