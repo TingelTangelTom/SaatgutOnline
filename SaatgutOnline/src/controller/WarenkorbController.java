@@ -162,7 +162,15 @@ public class WarenkorbController
 							produktModelImWarenkorb = produktModelsImWarenkorb.nextElement();
 							if(produktModelImWarenkorb.getId() == Integer.parseInt(splittedParameter[1]))
 							{
-								this.warenkorb.put(produktModelImWarenkorb, Integer.parseInt(value));
+								// entfernen wenn Menge = 0
+								if(Integer.parseInt(value) == 0)
+								{
+									this.warenkorb.remove(produktModelImWarenkorb);
+								}
+								else
+								{
+									this.warenkorb.put(produktModelImWarenkorb, Integer.parseInt(value));
+								}
 							}
 						}
 					}										
