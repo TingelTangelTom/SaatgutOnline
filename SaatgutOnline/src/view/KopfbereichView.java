@@ -97,8 +97,18 @@ public class KopfbereichView
 	}
 	
 	public void outLogoutBereich()
-	{
-		
+	{		
+		this.out.println("<table>");
+		this.out.println("<tr>\n<td>");
+		this.out.println(this.resourceBundle.getString("ANGEMELDET_ALS"));		
+		this.out.println("</td>\n</tr>\n<tr>\n<td>");		
+		//FIXME benutzername einsetzen!
+		this.out.println(this.resourceBundle.getString("BENUTZERNAME"));		
+		this.out.println("</td>\n</tr>\n<tr><td>\n</tr><tr>\n<td>");
+		// FIXME Link anpassen und NoOp entfernen!
+		this.out.println("<a href=\"/SaatgutOnline/NoOperation\">\n" + this.resourceBundle.getString("ABMELDEN") + "\n</a>");		
+		this.out.println("</td>\n</tr>");		
+		this.out.println("</table>");		
 	}
 
 	public void outLogo()

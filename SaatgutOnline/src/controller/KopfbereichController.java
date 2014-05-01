@@ -2,16 +2,19 @@ package controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import view.KopfbereichView;
 
 public class KopfbereichController
 {
 	private KopfbereichView kopfbereichView;
+	private HttpSession session;
 		
 	public KopfbereichController(HttpServletRequest request, HttpServletResponse response)
 	{	
 		this.kopfbereichView = new KopfbereichView(request, response);
+		this.session = request.getSession();
 	}
 
 	public void outKopfbereichAnzeigen()
@@ -28,8 +31,14 @@ public class KopfbereichController
 		
 		this.kopfbereichView.outInhaltsRahmenNeueSpalte();
 		
-		//TODO LogoutBereich-Verzweigung einfuegen
+		if((boolean) this.session.getAttribute("angemeldet"))
+		{
+			this.kopfbereichView.outLogoutBereich();
+		}
+		else
+		{
 			this.kopfbereichView.outLoginBereich();
+		}
 		
 		this.kopfbereichView.outInhaltsRahmenNeueSpalte();
 		
