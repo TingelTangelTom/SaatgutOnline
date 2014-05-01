@@ -64,7 +64,7 @@ public class ProduktlisteView {
 			+ "<tr>"
 			+ "<td rowspan=\"4\" style=\"width: 110px;\"><img src=\"resources/bilder/phoenix_canariensis.jpg\" width=\"100\" height=\"100\" alt=\"Phoenix Canariensis\"></td>"
 	    	+ "<td colspan=\"2\">" + produktModel.getName() + "</td>"
-	    	+ "<td align=\"right\" rowspan=\"2\">" + this.htmlOutput.outPreisformat(produktModel.getPreisBrutto()) + "</td>"
+	    	+ "<td align=\"right\" rowspan=\"2\">" + this.htmlOutput.outPreisformat(produktModel.getPreisBrutto()) + "<br>" + this.htmlOutput.outPreisverordnung(produktModel.getSteuerSatz()) + "</td>"
 	    	+ "</tr>"
 	    	+ "<tr>"
     		+ "<td colspan=\"2\">" + this.resourceBundle.getString("BESTELLNUMMER") + " " + produktModel.getBestellnummer() + "</td>"
@@ -75,13 +75,18 @@ public class ProduktlisteView {
     		+ "<tr>"
     		+ "<td>Keine Ahnung</td>"
     		+ "<td>Auf Lager</td>"
-    		+ "<td align=\"right\">"
-    		+ "<form action=\"/SaatgutOnline/Warenkorb\" method=\"POST\">"
+    		+ "<td align=\"right\">";
+			if(produktModel.getBestand() == 0) {
+				this.output += this.resourceBundle.getString("NICHTVORRAETIG");
+				System.out.println("Vorrätig: " + this.resourceBundle.getString("NICHTVORRAETIG"));
+			} else {
+				this.output += "<form action=\"/SaatgutOnline/Warenkorb\" method=\"POST\">"
     		+ "<input type=\"hidden\" name=\"menge\" value=\"" + warenkorbmenge + "\">"
 			+ "<input type=\"hidden\" name=\"produkt\" value=\"" + produktModel.getId() + "\">"
     		+ "<input type=\"image\" src=\"resources/bilder/icons/warenkorb.gif\" alt=\"Warenkorb\">"
-    		+ "</form>"
-    		+ "</td></tr>"    		
+    		+ "</form>";
+			}
+			this.output += "</td></tr>"    		
     		+ "<tr><td colspan=\"4\">&nbsp;</td>"
     		+ "</tr>"
     		+ "</table>";

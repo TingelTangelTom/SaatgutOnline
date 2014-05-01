@@ -103,7 +103,7 @@ public class ProduktController {
 		}
 
 		this.produktModel.setPreisBrutto(this.produktModel.getPreisNetto() * this.produktModel.getSteuerSatz() / 100 + this.produktModel.getPreisNetto());
-		this.produktModel.setSteuerBetrag(this.produktModel.getPreisBrutto() + this.produktModel.getPreisNetto());
+		this.produktModel.setSteuerBetrag(this.produktModel.getPreisBrutto() - this.produktModel.getPreisNetto());
 		
 		getProduktMerkmale(id);
 
@@ -179,8 +179,8 @@ public class ProduktController {
 								+ "INNER JOIN produkt_beschreibung AS pb ON p.produkt_id = pb.produkt_id "
 								+ "WHERE pb.sprache_id = '" + this.sprache_id + "' "
 								+ "AND  p.kategorie_id IN (SELECT kategorie_id FROM kategorie WHERE eltern_id = '" + this.kategorie + "' OR (kategorie_id = '" + this.kategorie + "' AND eltern_id = 0)) "
-								+ "ORDER BY " + session.getAttribute("sortierung_sortierspalte") + " " + session.getAttribute("sortierung_reihenfolge") + ""
-								+ " LIMIT " + session.getAttribute("sortierung_limit_von") + "," + session.getAttribute("sortierung_produktanzahl");
+								+ "ORDER BY " + session.getAttribute("sortierung_sortierspalte") + " " + session.getAttribute("sortierung_reihenfolge") + " "
+								+ "LIMIT " + session.getAttribute("sortierung_limit_von") + "," + session.getAttribute("sortierung_produktanzahl");
 		
 		try {
 			

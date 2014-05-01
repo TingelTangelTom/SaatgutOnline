@@ -63,7 +63,7 @@ public class HtmlOutput extends HttpServlet{
 		String prozent = prozentFormat.format(mwst / 100);
 		ResourceBundle resourceBundle = PropertyResourceBundle.getBundle("I18N." + this.locale.getLanguage() + ".ProduktinfoView", this.locale); // Pfad muss noch angepasst werden
 		
-		return MessageFormat.format(resourceBundle.getString("PREISTEXT"), prozent);
+		return MessageFormat.format(resourceBundle.getString("PREISTEXT"), prozent) + " <a href=\"/SaatgutOnline/Versandkosten\"><b>" + resourceBundle.getString("VERSANDKOSTEN") + "</b></a>";
 		
 	}
 	
@@ -72,5 +72,5 @@ public class HtmlOutput extends HttpServlet{
 		kurzeBeschreibung += "<a href=\"/SaatgutOnline/Produktinfo?produkt=" + id + "\"><b>...(mehr)</b></a>";
 		return kurzeBeschreibung;
 	}
-
+	
 }
