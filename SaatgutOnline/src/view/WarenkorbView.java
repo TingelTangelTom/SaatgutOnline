@@ -2,6 +2,7 @@ package view;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
 import java.util.Locale;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
@@ -67,7 +68,7 @@ public class WarenkorbView
 		out.println("<tr>\n<td colspan=\"7\">\n</td>\n</tr>");
 	}
 
-	public void outWarenkorbEnde(double gesamtgewicht, double zwischensumme)
+	public void outWarenkorbEnde(BigDecimal gesamtgewicht, BigDecimal zwischensumme)
 	{
 		out.println("<tr>\n<td colspan=\"7\">\n</td>\n</tr>");
 		out.println("<tr>\n<td colspan=\"2\">");
@@ -130,7 +131,7 @@ public class WarenkorbView
 	public void outLeererWarenkorb()
 	{
 		out.println("<tr>\n<td colspan=\"7\">");
-		out.println("Keine Produkte im Warenkorb");
+		out.println(this.resourceBundle.getString("WARENKORB_LEER"));
 		out.println("</td>\n</tr>");
 	}
 

@@ -1,5 +1,6 @@
 package controller;
 
+import java.math.BigDecimal;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
@@ -100,22 +101,21 @@ public class WarenkorbController
 			
 				zwischensumme += gesamtpreis_position;
 				gesamtgewicht += produkt.getGewicht();
-				
-				
-
 			}			
 		}
 		else
 		{
 			this.warenkorbView.outLeererWarenkorb();
 		}
+		
+		BigDecimal bdZwischensumme = new BigDecimal(zwischensumme);		
+		bdZwischensumme = bdZwischensumme.setScale(2,BigDecimal.ROUND_HALF_UP);
+		
+		BigDecimal bdGesamtgewicht = new BigDecimal(gesamtgewicht);		
+		bdGesamtgewicht = bdGesamtgewicht.setScale(2,BigDecimal.ROUND_HALF_UP);
 
-		this.warenkorbView.outWarenkorbEnde(Double.valueOf(Math.round((gesamtgewicht)*100)/100.0), Double.valueOf(Math.round((zwischensumme)*100)/100.0));
+		this.warenkorbView.outWarenkorbEnde(bdGesamtgewicht, bdZwischensumme);
 	}	
-	
-	
-	
-	
 	
 	
 	@SuppressWarnings("unchecked")
