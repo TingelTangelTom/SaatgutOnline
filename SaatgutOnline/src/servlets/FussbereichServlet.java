@@ -49,10 +49,10 @@ public class FussbereichServlet extends HttpServlet
 		//TODO remove
 		{
 		System.out.println("\n----(GET) request-Parameter----");		
-		Enumeration<String> paramaters = request.getParameterNames();
-		while (paramaters.hasMoreElements())
+		Enumeration<String> parameters = request.getParameterNames();
+		while (parameters.hasMoreElements())
 		{
-			String name = paramaters.nextElement();
+			String name = parameters.nextElement();
 			String value = request.getParameter(name);
 			System.out.println(name + " = " + value);			
 		}		
