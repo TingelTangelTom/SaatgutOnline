@@ -9,6 +9,12 @@ Bitte offene Fragen hier posten:
 
 //ERLEDIGT! --- Bitte in den Filter noch die sprache_id einbauen
 -------
+--------------------------------------------------------
+01.Mai, 12:48(Christof) - DB-Controller
+--------------------------------------------------------
+
+Im Model KundeModel.java findet ihr ein Anwendungsbeispiel für den DatenbankController.
+
 
 --------------------------------------------------------
 01.Mai, 12:14(Christof) - DB-Controller

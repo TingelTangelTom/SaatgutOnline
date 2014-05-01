@@ -68,6 +68,9 @@ public class DatenbankController {
 	public static void setDbName(String dbName) {
 		DatenbankController.dbName = dbName;
 	}
+	public static String getDbName() {
+		return DatenbankController.dbName;
+	}
 	public static void setDbBenutzer(String dbBenutzer) {
 		DatenbankController.dbBenutzer = dbBenutzer;
 	}
