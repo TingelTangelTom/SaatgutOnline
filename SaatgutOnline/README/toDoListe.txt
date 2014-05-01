@@ -27,7 +27,11 @@ Simon
 
 Anja
 - Kontaktformular
+	- E-Mail Ausgabe Formatieren (Tabelle)
 - Fussbereich
+	- Impressum : FERTIG
+	- AGB : Ausgabe muss noch Formatiert werden (HTML in Datenbank)
+	- Internationalisierung
 
 
 
