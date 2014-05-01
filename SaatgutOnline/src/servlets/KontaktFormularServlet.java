@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import controller.AGBController;
 import controller.DatenbankController;
 import controller.KontaktFormularController;
 
@@ -19,8 +18,6 @@ import controller.KontaktFormularController;
 @WebServlet(description = "Kontakt Formular", urlPatterns = { "/Kontakt" })
 public class KontaktFormularServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	//TODO : 
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -34,7 +31,7 @@ public class KontaktFormularServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		DatenbankController.getVerbindung();
+		DatenbankController.getDbName(); // TODO : Richtig so? (vorher: DatenbankController.getVerbindung(); )
 		// Kopfbereich (und damit auch Navigationsbereich) einbinden
 		RequestDispatcher rd = getServletContext().getRequestDispatcher("/Kopfbereich");
 		rd.include(request, response);

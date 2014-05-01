@@ -2,16 +2,7 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Date;
-import java.util.Properties;
 
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -48,12 +39,10 @@ public class KontaktFormular extends HttpServlet {
 
 
 		out.println("Vielen Dank für ihre Nachricht.");
-		out.println("<a href=\"/SaatgutOnline/IndexPlatzhalter\">Hauptseite</a>"); 
-								// TODO : Link aktualisieren
+		out.println("<a href=\"/SaatgutOnline/IndexPlatzhalter\">Startseite</a>"); 
+		
 	}
 	
-
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
