@@ -80,8 +80,7 @@ public class KopfbereichView
 		this.out.println("</td>\n<td>");
 		this.out.println("<input type=\"password\" name=\"passwort\" size=\"15\">");
 		this.out.println("</td>\n<td>");
-		//TODO NoOp entfernen!
-		this.out.println("<input type=\"submit\" name=\"anmelden\" value=\""+ this.resourceBundle.getString("ANMELDEN") +" (NoOP)\">");				
+		this.out.println("<input type=\"submit\" name=\"anmelden\" value=\""+ this.resourceBundle.getString("ANMELDEN") +"\">");				
 		this.out.println("</td>\n</tr>\n<tr>\n<td></td>\n<td colspan=\"2\">");
 		//FIXME mit Mailfunktion verbinden! 
 		this.out.println("<a href=\"/SaatgutOnline/NoOperation\">\n" + this.resourceBundle.getString("PASSWORT_VERGESSEN") + "?\n</a>");
@@ -146,8 +145,7 @@ public class KopfbereichView
 		this.out.println("<form action=\"\" method=\"GET\">");
 		this.out.println("<input type=\"text\" name=\"suchbegriff\" size=\"20\">");
 		this.out.println("</td>\n<td>");
-		//TODO NoOp entfernen!
-		this.out.println("<input type=\"submit\" name=\"suche\" value=\"" + this.resourceBundle.getString("SUCHEN") + "(NoOp)\">");
+		this.out.println("<input type=\"submit\" name=\"suche\" value=\"" + this.resourceBundle.getString("SUCHEN") + "\">");
 		this.out.println("</form>");
 		this.out.println("</td>\n</tr>");
 		this.out.println("</table>");
