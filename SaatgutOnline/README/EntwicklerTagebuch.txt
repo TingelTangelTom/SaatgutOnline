@@ -10,6 +10,14 @@ Bitte offene Fragen hier posten:
 //ERLEDIGT! --- Bitte in den Filter noch die sprache_id einbauen
 -------
 --------------------------------------------------------
+01.Mai, 13:09 (Anja) - DB-Controller
+--------------------------------------------------------
+
+Hab meine DB-Controller mal angepasst, ich denk das ist richtig so.
+eclipse meckert jedenfalls nicht :)
+
+
+--------------------------------------------------------
 01.Mai, 12:48(Christof) - DB-Controller
 --------------------------------------------------------
 
