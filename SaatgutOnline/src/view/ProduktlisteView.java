@@ -24,28 +24,28 @@ public class ProduktlisteView {
 		Locale locale = (Locale)session.getAttribute("sprache");
 		PropertyResourceBundle.getBundle("I18N." + locale.getLanguage() + "." + getClass().getSimpleName(), locale);
 	}
-
+	//TODO Internationalisierung einbauen
 	//texte.getString("WILLKOMMEN");
-	public String anzeigenProduktliste() {	
+	
+	/**
+	 * Diese Methode gibt einen <code>String</code> zurück , welcher den HTML-Code in der <code>ProduktlisteServlet</code> ausgibt.
+	 * 
+	 * @return <code>String</code> - HTML-Code
+	 * 
+	 * @see servlet.ProduktlisteServlet
+	 * 
+	 */
+	
+	public String anzeigenProduktliste(HttpServletRequest request) {	
 		
-		this.produktliste = this.produktController.getProduktliste(this.kategorie);
-/*
-	      Collections.sort(this.produktliste); // autoListe aufsteigend sortieren
-	      for (ProduktModel aktuellesAuto : this.produktliste) {
-	        System.out.println(aktuellesAuto.getName()); // Farbe: gruen, Leistung: 50
-	        System.out.println("-----");
-	                                  // Farbe: rot, Leistung: 55
-	                                  // Farbe: schwarz, Leistung: 75
-	      }
-	      Collections.reverse(this.produktliste); // andersrum sortieren (75,55,50)
-	      for (ProduktModel aktuellesAuto : this.produktliste) {
-	        System.out.println(aktuellesAuto.getName());
-	        System.out.println("------");
-	      } 
-*/
+		this.produktliste = this.produktController.getProduktliste(this.kategorie, request);
+		//TODO Comparator einfügen
 		this.output = "<table class=\"produktinfo\">"
 				+ "<tr><td align=\"right\">sortieren: Name "
-				+ "<a href=\"/SaatgutOnline/Produktliste?kategorie=1&p_anzeige=true,3,0,2\">absteigend</a> - aufsteigend | Preis absteigend - aufsteigend </td></tr><tr><td>"
+				+ "<a href=\"/SaatgutOnline/Produktliste?kategorie=1&p_anzeige=pn,3,0\"><img src=\"resources/bilder/icons/pfeil_hoch_runter.gif\" width=\"5\" height=\"10\" border=\"0\" alt=\"Home\"></a> | "
+				+ "Preis "
+				+ "<a href=\"/SaatgutOnline/Produktliste?kategorie=1&p_anzeige=pp,3,0\"><img src=\"resources/bilder/icons/pfeil_hoch_runter.gif\" width=\"5\" height=\"10\" border=\"0\" alt=\"Home\"></a> | "
+				+ "</td></tr><tr><td>"
 				+ "<tr><td align=\"right\"></td></tr>&nbsp;<tr><td>";
 		for (int i = 0; i < this.produktliste.size(); i++) {
 			ProduktModel produktModel = this.produktliste.get(i);

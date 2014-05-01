@@ -43,7 +43,7 @@ public class ProduktlisteServlet extends HttpServlet {
 				
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		out.print(this.produktliste.anzeigenProduktliste());
+		out.print(this.produktliste.anzeigenProduktliste(request));
 
 		// Fussbereich einbinden
 		rd = getServletContext().getRequestDispatcher("/Fussbereich");
