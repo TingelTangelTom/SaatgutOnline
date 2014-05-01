@@ -3,7 +3,6 @@ package view;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.KategorieModel;
@@ -12,7 +11,7 @@ public class NavigationsbereichView
 {
 	private PrintWriter out;
 	
-	public NavigationsbereichView(HttpServletRequest request, HttpServletResponse response)
+	public NavigationsbereichView(HttpServletResponse response)
 	{
 		response.setContentType("text/html");
 		try

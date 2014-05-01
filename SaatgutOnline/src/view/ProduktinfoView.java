@@ -42,14 +42,14 @@ public class ProduktinfoView {
 					output += "<tr><td>" + name + "</td><td>" + merkmale.get(name) +"</td></tr>"; // Eigenschaft 1
 				}
 		this.output += "</table></td></tr>"		
-				+ "<tr><td colspan=\"2\">" + htmlOutput.outPreisformat(this.produktModel.getPreisBrutto()) + " " + htmlOutput.outPreisverordnung(this.produktModel.getSteuersatz()) + "</td></tr>" // Titel
+				+ "<tr><td colspan=\"2\">" + htmlOutput.outPreisformat(this.produktModel.getPreisBrutto()) + " " + htmlOutput.outPreisverordnung(this.produktModel.getSteuerSatz()) + "</td></tr>" // Titel
 				+ "<tr><td colspan=\"2\">" + this.produktModel.getBeschreibung() + "</td></tr>" // Produktbeschreibung
 				+ "<tr><td colspan=\"2\">Warenkorb</td></tr>" // Button Warenkorb
 				+ "<tr><td colspan=\"2\">" // Button Warenkorb"
-				+ "<form action='' method='POST'>"
+				+ "<form action='/SaatgutOnline/Warenkorb' method='POST'>"
 				+ "<input type=\"hidden\" name=\"menge\" value=\"3\">"
 				+ "<input type=\"hidden\" name=\"produkt\" value=\"" + this.produktModel + "\">"
-				+ "<input type=\"image\" name=\"absenden\" value=\"senden\"> absenden"
+				+ "<input type=\"image\" name=\"absenden\" value=\"senden\">absenden</form>"
 				+ "</td></tr></table>";	
 
 		return this.output;

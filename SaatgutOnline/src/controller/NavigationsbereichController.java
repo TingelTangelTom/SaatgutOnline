@@ -32,7 +32,7 @@ public class NavigationsbereichController
 		this.getMethode = getMethode;
 		this.request = request;
 		this.session = request.getSession();
-		this.navigationsbereichView = new NavigationsbereichView(request, response);
+		this.navigationsbereichView = new NavigationsbereichView(response);
 		this.kategorienArrayList = kategorienAusDB();
 		this.geklickteKategorienOrganisieren();
 	}
