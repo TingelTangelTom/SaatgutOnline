@@ -3,7 +3,6 @@ package filter;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Locale;
 
 import javax.servlet.Filter;
@@ -110,14 +109,14 @@ System.out.println("---pre-processing  ende---");
 	
 	private void spracheIdInSessionLegen(HttpSession session, Locale locale)
 	{
-		DatenbankController.getVerbindung();
+		String query = "SELECT sprache_id FROM sprache WHERE name = \"" + locale.getLanguage() + "\"";
+		
+		ResultSet resultSet = DatenbankController.sendeSqlRequest(query);
+		
 		try {
-			String query = "SELECT sprache_id FROM sprache WHERE name = \"" + locale.getLanguage() + "\"";
-			
-			Statement statement = DatenbankController.verbindung.createStatement();
-			ResultSet resultset = statement.executeQuery(query);
-			if(resultset.next()){
-				session.setAttribute("spracheId", resultset.getInt("sprache_id"));
+	
+			if(resultSet.next()){
+				session.setAttribute("spracheId", resultSet.getInt("sprache_id"));
 				
 //TODO remove				
 System.out.println("sprache = " + locale.getLanguage());
@@ -125,7 +124,7 @@ System.out.println("spracheId = " + session.getAttribute("spracheId"));
 
 			}
 		} catch (SQLException e) {
-			System.out.println("SELECT-Anweisung konnte nicht ausgeführt werden!");
+			System.out.println("DB-Fehler: Resultset Scprachfilter");
 			e.printStackTrace();
 		}
 	}

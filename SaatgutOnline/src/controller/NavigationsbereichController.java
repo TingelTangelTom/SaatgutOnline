@@ -2,7 +2,6 @@ package controller;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -141,10 +140,7 @@ public class NavigationsbereichController
 
 	private ArrayList<KategorieModel> kategorienAusDB()
 	{
-		DatenbankController.getVerbindung();
-
-		try
-		{
+		
 			int spracheId = (int) this.session.getAttribute("spracheId");
 			
 			String query = "SELECT k.kategorie_id, k.eltern_id, kb.kategorie_name "
@@ -153,24 +149,26 @@ public class NavigationsbereichController
 					+ "WHERE sprache_id = '" + spracheId + "' "
 					+ "ORDER BY k.sortier_reihenfolge";
 			
-			Statement statement = DatenbankController.verbindung.createStatement();
-			ResultSet resultset = statement.executeQuery(query);
-			while (resultset.next())
+			ResultSet resultSet = DatenbankController.sendeSqlRequest(query);
+			
+			try
 			{
-				this.kategorieModel = new KategorieModel();
-				
-				this.kategorieModel.setKategorieId(resultset.getInt("kategorie_id"));
-				this.kategorieModel.setKategorieName(resultset.getString("kategorie_name"));
-				this.kategorieModel.setElternKategorieId(resultset.getInt("eltern_id"));
-				
-				
-				kategorienArrayList.add(this.kategorieModel);
+				while (resultSet.next())
+				{
+					this.kategorieModel = new KategorieModel();
+					
+					this.kategorieModel.setKategorieId(resultSet.getInt("kategorie_id"));
+					this.kategorieModel.setKategorieName(resultSet.getString("kategorie_name"));
+					this.kategorieModel.setElternKategorieId(resultSet.getInt("eltern_id"));
+					
+					kategorienArrayList.add(this.kategorieModel);
+				}
+			} catch (SQLException e)
+			{
+				System.out.println("DB-Fehler: ResultSet NavigationsbereichController");
+				e.printStackTrace();
 			}
-		} catch (SQLException e)
-		{
-			System.out.println("Datenbankzugriff nicht erfolgt!");
-			e.printStackTrace();
-		}
+		
 
 		return kategorienArrayList;
 	}
