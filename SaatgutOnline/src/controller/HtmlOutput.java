@@ -71,6 +71,6 @@ public class HtmlOutput extends HttpServlet{
 		String kurzeBeschreibung = beschreibung.substring(0,zeichen);
 		kurzeBeschreibung += "<a href=\"/SaatgutOnline/Produktinfo?produkt=" + id + "\"><b>...(mehr)</b></a>";
 		return kurzeBeschreibung;
-	}
-	
+	}	
+
 }

@@ -52,12 +52,13 @@ public class ProduktlisteView {
 		warenkorbmenge = 1;
 		//TODO Comparator einfügen
 		this.output = "<table class=\"produktinfo\">"
+				+ "<tr><td align=\"left\">Kategoriename</td></tr>"
 				+ "<tr><td align=\"right\">sortieren: Name "
 				+ "<a href=\"/SaatgutOnline/Produktliste?kategorie=1&p_anzeige=pn,3,0\"><img src=\"resources/bilder/icons/pfeil_hoch_runter.gif\" width=\"5\" height=\"10\" border=\"0\" alt=\"Sortierung\"></a> | "
 				+ "Preis "
 				+ "<a href=\"/SaatgutOnline/Produktliste?kategorie=1&p_anzeige=pp,3,0\"><img src=\"resources/bilder/icons/pfeil_hoch_runter.gif\" width=\"5\" height=\"10\" border=\"0\" alt=\"Sortierung\"></a>"
-				+ "</td></tr><tr><td>"
-				+ "<tr><td align=\"right\"></td></tr>&nbsp;<tr><td>";
+				+ "</td></tr>"
+				+ "<tr><td colspan=\"2\" align=\"right\">&nbsp;</td></tr><tr><td>";
 		for (int i = 0; i < this.produktliste.size(); i++) {
 			ProduktModel produktModel = this.produktliste.get(i);
 			this.output += "<table width=\"100%\" border=\"0\">"
@@ -73,8 +74,7 @@ public class ProduktlisteView {
     		+ "<td colspan=\"3\">" + this.htmlOutput.outKurzeProduktbeschreibung(produktModel.getBeschreibung(), 300, produktModel.getId()) + "</td>"
     		+ "</tr>"
     		+ "<tr>"
-    		+ "<td>Keine Ahnung</td>"
-    		+ "<td>Auf Lager</td>"
+    		+ "<td colspan=\"2\"><a href=\"/SaatgutOnline/Produktinfo?produkt=" + produktModel.getId() + "\"><b>Details</b></a></td>"
     		+ "<td align=\"right\">";
 			if(produktModel.getBestand() == 0) {
 				this.output += this.resourceBundle.getString("NICHTVORRAETIG");
