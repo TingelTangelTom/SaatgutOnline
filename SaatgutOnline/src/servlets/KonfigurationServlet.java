@@ -70,7 +70,7 @@ public class KonfigurationServlet extends HttpServlet {
 					DatenbankController.setDbPort(element.getElementsByTagName("dbPort").item(0).getTextContent());
 					DatenbankController.setDbName(element.getElementsByTagName("dbName").item(0).getTextContent());
 					DatenbankController.setDbBenutzer(element.getElementsByTagName("dbBenutzer").item(0).getTextContent());
-					DatenbankController.setDbPasswort(element.getElementsByTagName("dbPaswort").item(0).getTextContent());
+					DatenbankController.setDbPasswort(element.getElementsByTagName("dbPasswort").item(0).getTextContent());
 				}
 			}
 		
