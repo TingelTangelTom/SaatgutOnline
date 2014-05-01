@@ -9,7 +9,14 @@ Bitte offene Fragen hier posten:
 
 //ERLEDIGT! --- Bitte in den Filter noch die sprache_id einbauen
 -------
+--------------------------------------------------------
+01.Mai, 11:27(Simon) - DB-Controller
+--------------------------------------------------------
 
+WARNUNG / INFO: Den Datenbank-Controller jetzt online zu stellen, war eine ganz schlechte Idee.
+Da alle damit arbeiten und er deswegen überall verbaut ist, funktioniert jetzt gar nichts mehr.
+Ich habe zwar alles umgeändert, aber die anderen noch nicht! Und in fremden Dateien darf ich ja nix ändern!
+Und jetzt?
 
 --------------------------------------------------------
 01.Mai, 10:51(Christof) - DB-Controller
