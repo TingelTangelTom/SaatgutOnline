@@ -14,8 +14,6 @@ public class AGBController {
 	private String agbText;
 
 	public AGBController(HttpServletRequest request, HttpServletResponse response) {
-		// private Connection verbindung;
-		DatenbankController.getDbName(); // TODO : Richtig so? (vorher: DatenbankController.getVerbindung(); )
 
 		// Datenbankabfrage : Aktuellste AGB ausgeben
 		try {
