@@ -89,7 +89,8 @@ public class ProduktlisteView {
 			this.output += "</td></tr>"    		
     		+ "<tr><td colspan=\"4\">&nbsp;</td>"
     		+ "</tr>"
-    		+ "</table>";
+    		+ "</table>"
+			+ "</td></tr><tr><td colspan=\"2\"  style=\"background-image:url(resources/bilder/icons/trennlinie.gif);height: 1px; background-repeat:repeat-x;\">&nbsp;</td></tr><tr><td>";
 		}
 		this.output += "</td></tr></table>";	
 

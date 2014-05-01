@@ -180,10 +180,58 @@ public class ProduktController {
 								+ "FROM produkt AS p "
 								+ "INNER JOIN produkt_beschreibung AS pb ON p.produkt_id = pb.produkt_id "
 								+ "WHERE pb.sprache_id = '" + this.sprache_id + "' "
-								+ "AND  p.kategorie_id IN (SELECT kategorie_id FROM kategorie WHERE eltern_id = '" + this.kategorie + "' OR (kategorie_id = '" + this.kategorie + "' AND eltern_id = 0)) "
+								+ "AND  p.kategorie_id IN (SELECT kategorie_id FROM kategorie WHERE eltern_id = '" + kategorie_id + "' OR (kategorie_id = '" + kategorie_id + "' AND eltern_id = 0)) "
 								+ "ORDER BY " + session.getAttribute("sortierung_sortierspalte") + " " + session.getAttribute("sortierung_reihenfolge") + " "
 								+ "LIMIT " + session.getAttribute("sortierung_limit_von") + "," + session.getAttribute("sortierung_produktanzahl");
+				/*
+		case report.type
+        when 'P' then amount SELECT kategorie_id FROM kategorie WHERE eltern_id = '" + this.kategorie + "' OR (kategorie_id = '" + this.kategorie + "' AND eltern_id = 0)
+        when 'N' then -amount SELECT kategorie_id FROM kategorie WHERE eltern_id = '" + this.kategorie + "' OR (kategorie_id = '" + this.kategorie + "' AND eltern_id = 0)
+    end as amount
+    
+    
+
+	
+
+SELECT 
+        id
+        , IF(type = 'P', amount, amount * -1) as amount
+FROM    report
+
+
+CASE
+WHEN (SELECT eltern_id FROM produkt WHERE produkt_id=2) > 0 THEN (SELECT kategorie_id FROM kategorie WHERE eltern_id = '" + this.kategorie + "' OR (kategorie_id = '" + this.kategorie + "' AND eltern_id = 0))
+ELSE (SELECT kategorie_id FROM kategorie WHERE kategorie_id = '" + this.kategorie + "')
+END) as myorder
 		
+IF(eltern_id > 0, SELECT kategorie_id FROM kategorie WHERE (eltern_id = '" + this.kategorie + "' OR (kategorie_id = '" + this.kategorie + "' AND eltern_id = 0)), SELECT kategorie_id FROM kategorie WHERE kategorie_id = '" + this.kategorie + "')
+		
+CASE
+    WHEN (SELECT eltern_id FROM kategorie WHERE kategorie_id = '" + kategorie_id + "') = 0 THEN SELECT kategorie_id FROM kategorie WHERE eltern_id = '" + this.kategorie + "' OR (kategorie_id = '" + this.kategorie + "' AND eltern_id = 0)
+    ELSE kategorie_id
+END CASE
+
+
+IF Bedingung THEN Anweisung(en)
+[ELSEIF Bedingung THEN  � Anweisung(en)]
+[ELSE Anweisung(en)]
+END IF
+*/
+
+		
+		if(kategorie_id == null) {
+			kategorie_id = "1";
+		}
+		
+		String produkt_query2 = "SELECT p.produkt_id "
+				+ "FROM produkt AS p "
+				+ "INNER JOIN produkt_beschreibung AS pb ON p.produkt_id = pb.produkt_id "
+				+ "WHERE pb.sprache_id = '" + this.sprache_id + "' "
+				+ "AND  p.kategorie_id IN (SELECT kategorie_id FROM kategorie WHERE eltern_id = '" + kategorie_id + "' OR (kategorie_id = '" + kategorie_id + "' AND eltern_id = 0)) "
+				+ "ORDER BY " + session.getAttribute("sortierung_sortierspalte") + " " + session.getAttribute("sortierung_reihenfolge") + " "
+				+ "LIMIT " + session.getAttribute("sortierung_limit_von") + "," + session.getAttribute("sortierung_produktanzahl") + "";
+
+
 		try {
 			
 			ResultSet produkt_resultset = DatenbankController.sendeSqlRequest(produkt_query); 
@@ -199,6 +247,7 @@ public class ProduktController {
 		
 		return produkte;
 	}
+	
 	//TODO Javadoc param bearbeiten
 	/**
 	 * Die Methode <code>getSortierung (HttpServletRequest request)</code> legt fest, 
