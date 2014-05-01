@@ -70,7 +70,7 @@ public class WarenkorbServlet extends HttpServlet
 		produktModel.setKategorieId(4);
 		produktModel.setBestand(69);
 		produktModel.setName("Produkt-Dummy");
-//		produktModel.setMerkmale("-keine-");
+		produktModel.setBestellnummer("987654321");
 		produktModel.setPreisNetto(123.45);
 		produktModel.setPreisBrutto(234.56);
 		produktModel.setGewicht(9.87);	
