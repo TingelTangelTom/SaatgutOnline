@@ -117,7 +117,7 @@ public class NavigationsbereichController
 		
 		
 		
-		if(getMethode && this.request.getParameter("kategorie") != null)
+		if(getMethode && this.request.getParameter("kategorie") != null && this.request.getParameter("p_anzeige") == null)
 		{			
 			this.geklickteKategorieGet = Integer.parseInt(this.request.getParameter("kategorie"));
 			this.aktuelleKategorieSession = this.geklickteKategorieGet;
