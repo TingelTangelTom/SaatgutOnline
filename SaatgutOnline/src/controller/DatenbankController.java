@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DatenbankController {
-	public 	static Connection verbindung;
+	public static Connection verbindung;
 	private static String dbHost;
 	private static String dbPort;
 	private static String dbName;

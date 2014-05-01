@@ -64,8 +64,6 @@ public class KonfigurationServlet extends HttpServlet {
 			for (int i=0; i <nodeListe.getLength(); i++) {
 				Node node = nodeListe.item(i);
 				
-				System.out.println("\nAktuelles Element: " + node.getNodeName());
-				
 				if (node.getNodeType() == Node.ELEMENT_NODE) {
 					Element element = (Element) node;
 					DatenbankController.setDbHost(element.getElementsByTagName("dbHost").item(0).getTextContent());

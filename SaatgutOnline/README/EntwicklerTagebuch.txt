@@ -9,6 +9,23 @@ Bitte offene Fragen hier posten:
 
 //ERLEDIGT! --- Bitte in den Filter noch die sprache_id einbauen
 -------
+
+--------------------------------------------------------
+01.Mai, 12:14(Christof) - DB-Controller
+--------------------------------------------------------
+
+Simon, irgendwann muss man es ja nun machen. Und je eher desto besser, weil die Menge an Code,
+die man anpassen muss, mit der Zeit eher steigt als abnimmt.
+Wie gesagt kann man ja einfach 2 Dateien umbenennen,
+um vorläufig wie bisher weiterzuarbeiten. Und für einen Fachinformatiker dürfe das nicht 
+allzu schwer sein, woll?
+Hier nochmal der Hinweis auf die Klasse >>>DatenbankControllerAlt<<< !
+
+Ich hab noch ein paar Änderungen für die DB, aber ich sammel erst mal...
+
+LG
+C.
+
 --------------------------------------------------------
 01.Mai, 11:27(Simon) - DB-Controller
 --------------------------------------------------------
