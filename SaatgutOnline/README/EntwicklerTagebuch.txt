@@ -9,6 +9,17 @@ Bitte offene Fragen hier posten:
 
 //ERLEDIGT! --- Bitte in den Filter noch die sprache_id einbauen
 -------
+
+--------------------------------------------------------
+01.Mai, 13:09 (Christof) - DB-Controller
+--------------------------------------------------------
+
+Anja, bei Dir ist eigentlich alles ok, es funzt nur deswegen noch nicht,
+weil Toms Code noch angepasst werden muss. Der gehört ja immer mit zum
+Gesamt-Framework...
+Die Zeile "DatenbankController.getDbName(); // TODO : Richtig so? (vorher: DatenbankController.getVerbindung(); )"
+kannst Du einfach komplett entfernen.
+
 --------------------------------------------------------
 01.Mai, 13:09 (Anja) - DB-Controller
 --------------------------------------------------------
