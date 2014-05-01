@@ -26,7 +26,7 @@ public class WarenkorbController
 		this.session = request.getSession();
 		this.warenkorbView = new WarenkorbView(request, response);
 		this.warenkorbAusSessionHolen();
-		this.warenkorbAktualisieren(request);
+		this.warenkorbOrganisieren(request);
 		this.warenkorbInSessionSchreiben();		
 
 		//TODO remove
@@ -94,7 +94,7 @@ public class WarenkorbController
 	}
 	
 	
-	private void warenkorbAktualisieren(HttpServletRequest request)
+	private void warenkorbOrganisieren(HttpServletRequest request)
 	{
 		// Wurde Produkt an WK übergeben?
 		if(request.getParameter("produkt") != null)
@@ -118,13 +118,18 @@ public class WarenkorbController
 					if(produktModelAusDatenbank.getId() == produktImWarenkorb.getId())
 					{						
 						produktNichtImWarenkorb = false;
+						int mengeImWarenkorb = this.warenkorb.get(produktImWarenkorb);
+						int neuHinzugefuegteMenge = Integer.parseInt(request.getParameter("menge"));
+						int neueMenge = mengeImWarenkorb + neuHinzugefuegteMenge;
+						this.warenkorb.put(produktImWarenkorb, neueMenge);
 					}					
 				}
 				
 				if(produktNichtImWarenkorb)
 				{
 					this.warenkorb.put(produktModelAusDatenbank, Integer.parseInt(request.getParameter("menge")));
-				}				
+				}
+				
 			}
 			else
 			{
