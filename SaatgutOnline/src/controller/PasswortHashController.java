@@ -17,9 +17,9 @@ public class PasswortHashController
     public static final String PBKDF2_ALGORITHMUS = "PBKDF2WithHmacSHA1";
 
     // The following constants may be changed without breaking existing hashes.
-    public static final int SALT_BYTE_GROESSE = 24;
-    public static final int HASH_BYTE_GROESSE = 24;
-    public static final int PBKDF2_ITERATIONEN = 1000;
+    public static final int SALT_BYTE_GROESSE = 128;
+    public static final int HASH_BYTE_GROESSE = 128;
+    public static final int PBKDF2_ITERATIONEN = 10_000;
 
     public static final int ITERATION_INDEX = 0;
     public static final int SALT_INDEX = 1;
@@ -171,7 +171,7 @@ public class PasswortHashController
         {
             // Print out 10 hashes
             for(int i = 0; i < 10; i++)
-                System.out.println(PasswortHashController.erstelleHash("p\r\nassw0Rd!"));
+                System.out.println(PasswortHashController.erstelleHash("filly"));
 
             // Test password validation
             boolean failure = false;

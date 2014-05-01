@@ -1,5 +1,14 @@
 package servlets;
 
+/**
+ * @author Christof Weigandt
+ * @version 0.1
+ * Dieses Konfigurations-Servlet wird einmalig beim Serverstart ausgeführt.
+ * Die Konfigurationseinstellungen aus WebContent\resources\xml\Konfiguration.xml
+ * werden geparst und den entsprechenden Variablen zugewiesen.
+ * 
+ */
+
 import java.io.File;
 import java.io.IOException;
 
@@ -17,12 +26,11 @@ import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
+import controller.DatenbankController;
+
 import java.io.File;
 
-/**
- *  Konfigurations-Servlet, wird bei Serverstart geladen
- *  und parst Daten aus der Konfiguration.xml
- */
+
 @WebServlet("/Konfiguration")
 public class KonfigurationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -31,8 +39,8 @@ public class KonfigurationServlet extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-	
-    public KonfigurationServlet() {
+    
+	public KonfigurationServlet() {
         super();
     }
 
@@ -45,43 +53,38 @@ public class KonfigurationServlet extends HttpServlet {
 		
 		File xmlDatei = new File(getServletContext().getRealPath("\\resources\\xml\\Konfiguration.xml"));
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder dBuilder = null;
+		
 		try {
-			dBuilder = dbFactory.newDocumentBuilder();
+			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+			Document dokument = dBuilder.parse(xmlDatei);
+			dokument.getDocumentElement().normalize();	// TODO optional!!!
+	 
+			NodeList nodeListe = dokument.getElementsByTagName("datenbank");
+		
+			for (int i=0; i <nodeListe.getLength(); i++) {
+				Node node = nodeListe.item(i);
+				
+				System.out.println("\nAktuelles Element: " + node.getNodeName());
+				
+				if (node.getNodeType() == Node.ELEMENT_NODE) {
+					Element element = (Element) node;
+					DatenbankController.setDbHost(element.getElementsByTagName("dbHost").item(0).getTextContent());
+					DatenbankController.setDbPort(element.getElementsByTagName("dbPort").item(0).getTextContent());
+					DatenbankController.setDbName(element.getElementsByTagName("dbName").item(0).getTextContent());
+					DatenbankController.setDbBenutzer(element.getElementsByTagName("dbBenutzer").item(0).getTextContent());
+					DatenbankController.setDbPasswort(element.getElementsByTagName("dbPaswort").item(0).getTextContent());
+				}
+			}
+		
 		} catch (ParserConfigurationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		Document dokument = null;
-		try {
-			dokument = dBuilder.parse(xmlDatei);
-		} catch (SAXException e) {
+		}catch (SAXException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	 
-		//optional, but recommended
-		//read this - http://stackoverflow.com/questions/13786607/normalization-in-dom-parsing-with-java-how-does-it-work
-//		dokument.getDocumentElement().normalize();
-	 
-		System.out.println("Root element :" + dokument.getDocumentElement().getNodeName());
-		System.out.println(dokument.getElementsByTagName("dbHost"));
-		System.out.println(dokument.getElementsByTagName("dbHost"));
-		
-//		dokument.getDocumentElement().
-		
-		
-		//		NodeList nList = dokument.getElementsByTagName("staff");
-		
-		getServletContext().setAttribute("dbHost", konfiguration.getInitParameter("dbHost"));
-		getServletContext().setAttribute("dbPort", konfiguration.getInitParameter("dbPort"));
-		getServletContext().setAttribute("datenbank", konfiguration.getInitParameter("datenbank"));
-		getServletContext().setAttribute("dbBenutzer", konfiguration.getInitParameter("dbBenutzer"));
-		getServletContext().setAttribute("dbPasswort", konfiguration.getInitParameter("dbPasswort"));
-		getServletContext().setAttribute("BenutzernameRegel", konfiguration.getInitParameter("BenutzernameRegel"));
-		getServletContext().setAttribute("PasswortRegel", konfiguration.getInitParameter("PasswortRegel"));
 	}
 }

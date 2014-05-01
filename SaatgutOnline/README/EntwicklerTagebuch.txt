@@ -6,8 +6,23 @@ ACHTUNG: DIESER BLOCK SOLL immer GANZ OBEN STEHEN!
 
 Bitte offene Fragen hier posten:
 
-ERLEDIGT! --- Bitte in den Filter noch die sprache_id einbauen
+
+//ERLEDIGT! --- Bitte in den Filter noch die sprache_id einbauen
 -------
+
+
+--------------------------------------------------------
+01.Mai, 10:51(Christof) - DB-Controller
+--------------------------------------------------------
+
+ACHTUNG: Der Datenbank-Controller ist neu. Wer noch keine Lust/Zeit hat, diesen zu verwenden,
+kann sich lokal vorübergehend den DatenbankControllerAlt in DatenbankController umbenennen.
+Ihr braucht jetzt nur noch die statische Methode public static ResultSet sendeSqlRequest (String query)
+aufzurufen.
+Die Db-Konfig-Daten kommen ueber das KonfigurationServlet, geparst mit frischen Parser-Informationen 
+aus der Konfiguration.xml.
+
+
 --------------------------------------------------------
 30.April, 21:03h (Simon) - Datenbank!!!
 --------------------------------------------------------
@@ -17,6 +32,8 @@ Programm läuft auf jeden Fall
 Root element :datenbank
 com.sun.org.apache.xerces.internal.dom.DeepNodeListImpl@1f870b40
 com.sun.org.apache.xerces.internal.dom.DeepNodeListImpl@5af3a6eb
+
+Anmerkung von Christof: siehe Eintrag oben, die XML-Debug-Ausgabe hat sich jetzt erledigt :)
 
 --------------------------------------------------------
 30.April, 17:30h (Tom) - Überall NullPointerEcpetions!!!
