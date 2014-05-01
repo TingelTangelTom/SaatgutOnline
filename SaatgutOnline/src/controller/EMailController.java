@@ -54,13 +54,11 @@ public class EMailController {
 	public void sendeEmail (String emailadresseAbsender, String betreff, 
 			String emailadresseEmpfaenger, String nachricht, String anrede, String vorname, String nachname) {
 		
-		nachricht = 	"<h1>Kontaktanfrage</h1><br/>" + "Nachricht von" + " " 
-									+ anrede + " " 
-									+ vorname + " " 
-									+ nachname
-									+ "<br><b>E-Mail: </b>" + emailadresseAbsender
-									+ "<br><b>Betreff: </b>" + betreff
-									+ "<br><b>Nachricht: </b>" + nachricht;
+		nachricht = 	"<h1>Kontaktanfrage</h1>" 
+									+ "Nachricht von" + " " + anrede + " " + vorname + " " + nachname + "<br>"
+									+ "<table><tr><td><b>E-Mail: </b></td>" + "<td>" + emailadresseAbsender + "</td></tr>"
+									+ "<br><tr><td><b>Betreff: </b></td>" + "<td>" + betreff + "</td></tr>"
+									+ "<br><tr><td><b>Nachricht: </b></td>" + "<td>" + nachricht + "</td></tr><table>";
 		
 		sendeEmail (emailadresseAbsender, betreff, emailadresseEmpfaenger, nachricht);
 	}

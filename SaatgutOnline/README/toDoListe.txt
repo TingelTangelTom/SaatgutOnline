@@ -27,12 +27,20 @@ Simon
 
 Anja
 - Kontaktformular
-	- E-Mail Ausgabe Formatieren (Tabelle)
+	- E-Mail Ausgabe Formatieren (Tabelle) : FERTIG
+	- E-Mail Validierung
 - Fussbereich
 	- Impressum : FERTIG
-	- AGB : Ausgabe muss noch Formatiert werden (HTML in Datenbank)
-	- Internationalisierung
-
+	- AGB : FERTIG (Ausgabe muss noch Formatiert werden (HTML in Datenbank))
+	- Versandkosten (Versand & Zahlung)
+	- Datenschutz : FERTIG (In Datenbank(txt) Übertragungsstandard aktualisieren)
+	- Sitemap
+	- Copyright
+- Zurück oder Startseite Buttons oder Links in Impressum, Datenschutz und co.?
+- Wiederrufsbelehrung extra??
+- Internationalisierung
+- Alle Seitenquelltexte mit /n versehen !!
+- Variablen : private??? Müssen noch durchgesehen und aktualisiert werden!
 
 
 

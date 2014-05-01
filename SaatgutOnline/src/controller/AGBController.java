@@ -29,7 +29,6 @@ public class AGBController {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 }

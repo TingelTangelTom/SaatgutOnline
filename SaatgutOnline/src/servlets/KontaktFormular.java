@@ -39,8 +39,6 @@ public class KontaktFormular extends HttpServlet {
 				request.getParameter("Betreff"), "kontakt@saatgutonline.de", 
 				request.getParameter("Nachricht"), request.getParameter("Anrede"), 
 				request.getParameter("Vorname"), request.getParameter("Nachname"));
-				//TODO : Ausgabe in E-Mail mit Tabelle Formatieren
-
 
 		//Ausgabe nach senden
 		out.println("Vielen Dank für ihre Nachricht.");
