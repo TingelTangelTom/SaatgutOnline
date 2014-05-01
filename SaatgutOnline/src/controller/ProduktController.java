@@ -2,7 +2,7 @@ package controller;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -30,10 +30,6 @@ public class ProduktController {
 	private double steuersatz;
 	private int sprache_id;
 	private String kategorie;
-	private String sortierung;
-	private String anzahlProdukte;
-	private String limitVon;
-	private String sortierspalte;
 	
 	public ProduktController(HttpServletRequest request) {
 		super();
@@ -66,7 +62,7 @@ public class ProduktController {
 			
 			String query = "SELECT p.produkt_id, p.produkt_bestand, pb.produkt_name, pb.produkt_beschreibung,"
 						+ "pb.produkt_suchbegriffe, p.produkt_angesehen, p.produkt_preis, p.produkt_gewicht,"
-						+ "p.produkt_steuer_id, p.produkt_datum_hinzugefuegt, p.produkt_datum_geaendert "
+						+ "p.produkt_steuer_id, p.produkt_datum_hinzugefuegt, p.produkt_datum_geaendert, p.bestellnummer "
 						+ "FROM produkt AS p "
 						+ "INNER JOIN produkt_beschreibung AS pb ON p.produkt_id = pb.produkt_id "
 						+ "WHERE pb.sprache_id = '" + this.sprache_id + "' AND p.produkt_id = '" + id + "'";
@@ -85,6 +81,7 @@ public class ProduktController {
 				this.produktModel.setSteuerBetrag(resultset.getDouble(9));
 				this.produktModel.setHinzugefeugt(resultset.getDate(10));
 				this.produktModel.setGeaendert(resultset.getDate(11));
+				this.produktModel.setBestellnummer(resultset.getString(12));
 			}	
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -164,21 +161,26 @@ public class ProduktController {
 	 * 
 	 */
 
-	public ArrayList<ProduktModel> getProduktliste(String kategorie_id) {
+	public ArrayList<ProduktModel> getProduktliste(String kategorie_id, HttpServletRequest request) {
 		
+		HttpSession session = ((HttpServletRequest) request).getSession(); 
 		ArrayList<ProduktModel> produkte = new ArrayList<>();
 		
 		if(this.kategorie == null) {
 			this.kategorie = "1";
 		}
-		System.out.println("Kategorie: " + this.kategorie);
+		System.out.println("Sessionwerte Sortierung");
+		System.out.println("Reihenfolge: " + session.getAttribute("sortierung_reihenfolge"));
+		System.out.println("Anzahl: " + session.getAttribute("sortierung_produktanzahl"));
+		System.out.println("Limit: " + session.getAttribute("sortierung_limit_von"));
+
 		String produkt_query = "SELECT p.produkt_id, pb.produkt_name "
 								+ "FROM produkt AS p "
 								+ "INNER JOIN produkt_beschreibung AS pb ON p.produkt_id = pb.produkt_id "
 								+ "WHERE pb.sprache_id = '" + this.sprache_id + "' "
 								+ "AND  p.kategorie_id IN (SELECT kategorie_id FROM kategorie WHERE eltern_id = '" + this.kategorie + "' OR (kategorie_id = '" + this.kategorie + "' AND eltern_id = 0)) "
-								+ "ORDER BY " + this.sortierspalte + " " + this.sortierung + ""
-								+ " LIMIT " + this.limitVon + "," + this.anzahlProdukte;
+								+ "ORDER BY " + session.getAttribute("sortierung_sortierspalte") + " " + session.getAttribute("sortierung_reihenfolge") + ""
+								+ " LIMIT " + session.getAttribute("sortierung_limit_von") + "," + session.getAttribute("sortierung_produktanzahl");
 		
 		try {
 			
@@ -213,52 +215,62 @@ public class ProduktController {
 	 */
 
 	public void getSortierung (HttpServletRequest request) {
+		HttpSession session = ((HttpServletRequest) request).getSession();
 		String parameter = request.getParameter("p_anzeige");
-		if(request.getParameter("p_anzeige") == null) {
-			
-			this.sortierung = "ASC";
-			this.anzahlProdukte = "3";
-			this.limitVon = "0";
-			this.sortierspalte = "pb.produkt_name";
-			
-		} else {
-			
+		System.out.println("Parameter Sortierung per GET");
+		System.out.println(request.getParameter("p_anzeige"));
+		if(session.getAttribute("sortierung_reihenfolge") == null) {
+			session.setAttribute("sortierung_reihenfolge", "ASC");
+			session.setAttribute("sortierung_produktanzahl", 3);
+			session.setAttribute("sortierung_limit_von", 0);
+			session.setAttribute("sortierung_sortierspalte", "pn");
+		} 
+		
+		if(parameter != null) {
 			String[] parameterAufteilung = parameter.split(",");
-			if(this.sortierung != null) {
-				this.sortierung = "DESC";
-			} else {
-				this.sortierung = "ASC";
+			
+			//  Wenn sortierung_sortierspalte bereits auf demselben Wert steht, wechselt die Sortierreihenfolge
+			if(parameterAufteilung[0] == session.getAttribute("sortierung_sortierspalte")) {
+				if(parameterAufteilung[0] == "DESC") {
+					session.setAttribute("sortierung_reihenfolge", "ASC");
+				} else {
+					session.setAttribute("sortierung_reihenfolge", "DESC");					
+				}
 			}
-	        switch (parameterAufteilung[3]) {
+			
+			switch (parameterAufteilung[0]) {
 	          case "pn":
-	        	  this.sortierspalte = "pb.produkt_name";
+	        	  session.setAttribute("sortierung_sortierspalte", "pb.produkt_name");
 	            break;
 	          case "pk":
-	        	  this.sortierspalte = "p.kategorie";
+	        	  session.setAttribute("sortierung_sortierspalte", "p.kategorie");	        	  
 	            break;
 	          case "pb":
-	        	  this.sortierspalte = "p.produkt_bestand";
+	        	  session.setAttribute("sortierung_sortierspalte", "p.produkt_bestand");	        	  
 	            break;
 	          case "pa":
-	        	  this.sortierspalte = "p.angesehen";
+	        	  session.setAttribute("sortierung_sortierspalte", "p.angesehen");	        	  
 	            break;
 	          case "pp":
-	        	  this.sortierspalte = "p.produkt_preis";
+	        	  session.setAttribute("sortierung_sortierspalte", "p.produkt_preis");	
 	            break;
 	          case "pd":
-	        	  this.sortierspalte = "p.produkt_datum_hinzugefuegt";
+	        	  session.setAttribute("sortierung_sortierspalte", "p.produkt_datum_hinzugefuegt");	
 	            break;
 	          default:
-	        	  this.sortierspalte = "pb.produkt_name";
-	        	break;
-	        	
+	        	  session.setAttribute("sortierung_sortierspalte", "pb.produkt_name");	
+	        	break;	
 	        }
-	        System.out.println("Parameter - Sortierung: " + this.sortierung);
-			this.anzahlProdukte = parameterAufteilung[1];
-			this.limitVon = parameterAufteilung[2];
-
+			
+			if(parameterAufteilung[1] != session.getAttribute("sortierung_produktanzahl")) {
+				session.setAttribute("sortierung_produktanzahl", parameterAufteilung[1]);
+			}
+			
+			if(parameterAufteilung[2] != session.getAttribute("sortierung_limit_von")) {
+				session.setAttribute("sortierung_limit_von", parameterAufteilung[2]);
+			}
+			
 		}
-
 
 	}
 
