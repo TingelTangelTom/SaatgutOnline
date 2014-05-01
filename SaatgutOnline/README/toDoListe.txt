@@ -6,10 +6,13 @@ Christoph
 
 
 Tom
-- UNERLEDIGT! - Kopfbereich CSS (kriegt er nicht hin...)
+- AUFGEGEBEN! - Kopfbereich CSS
 - ERLEDIGT! - Sprache_id einfügen
 - ERLEDIGT! - Navigation 
-- auf dem besten Wege... - Warenkorb (+MiniView)
+- auf dem besten Wege... - Warenkorb
+	- zurück zum Einkauf
+	- zur Kasse
+- AUFGEGEBEN - WarenekorbPreview
 - Texte (DB) übersetzen
 - Bestellvorgang
 - ERLEDIGT! - Suchfeld im Kopfbereich einfügen
