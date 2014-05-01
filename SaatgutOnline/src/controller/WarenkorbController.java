@@ -212,4 +212,10 @@ public class WarenkorbController
 			}					
 		}		
 	}
+	
+	private void warenkorbPreviewAktualisieren()
+	{
+		
+	}
+	
 }

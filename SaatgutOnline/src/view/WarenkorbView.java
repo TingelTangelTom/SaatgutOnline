@@ -41,96 +41,96 @@ public class WarenkorbView
 	public void outWarenkorbAnfang()
 	{				
 		// TODO remove border='1'		
-		out.println("<table border='1'>");
+		this.out.println("<table border='1'>");
 		
-		out.println("<tr>\n<td colspan=\"7\">");
-		out.println(this.resourceBundle.getString("WARENKORB"));
-		out.println("</td>\n</tr>");
-		out.println("<tr>\n<td colspan=\"7\">\n</tr>");
-		out.println("<tr>\n<td>");
-		out.println(this.resourceBundle.getString("NAME"));
-		out.println("</td>\n<td>");
-		out.println(this.resourceBundle.getString("BESTELLNUMMER"));
-		out.println("</td>\n<td>");
-		out.println(this.resourceBundle.getString("GEWICHT"));
-		out.println("</td>\n<td>");
-		out.println(this.resourceBundle.getString("EINZELPREIS_POSITION"));
-		out.println("</td>\n<td>");
-		out.println(this.resourceBundle.getString("MENGE"));
-		out.println("</td>\n<td>");
-		out.println(this.resourceBundle.getString("GESAMTPREIS_POSITION"));
-		out.println("</td>\n<td>");
-		out.println("<form action=\"Warenkorb\" method=\"GET\">");
-		out.println(this.resourceBundle.getString("POSITION_ENTFERNEN"));
-		out.println("</td>\n</tr>");
-		out.println("<tr>\n<td colspan=\"7\">\n</td>\n</tr>");
+		this.out.println("<tr>\n<td colspan=\"7\">");
+		this.out.println(this.resourceBundle.getString("WARENKORB"));
+		this.out.println("</td>\n</tr>");
+		this.out.println("<tr>\n<td colspan=\"7\">\n</tr>");
+		this.out.println("<tr>\n<td>");
+		this.out.println(this.resourceBundle.getString("NAME"));
+		this.out.println("</td>\n<td>");
+		this.out.println(this.resourceBundle.getString("BESTELLNUMMER"));
+		this.out.println("</td>\n<td>");
+		this.out.println(this.resourceBundle.getString("GEWICHT"));
+		this.out.println("</td>\n<td>");
+		this.out.println(this.resourceBundle.getString("EINZELPREIS_POSITION"));
+		this.out.println("</td>\n<td>");
+		this.out.println(this.resourceBundle.getString("MENGE"));
+		this.out.println("</td>\n<td>");
+		this.out.println(this.resourceBundle.getString("GESAMTPREIS_POSITION"));
+		this.out.println("</td>\n<td>");
+		this.out.println("<form action=\"Warenkorb\" method=\"GET\">");
+		this.out.println(this.resourceBundle.getString("POSITION_ENTFERNEN"));
+		this.out.println("</td>\n</tr>");
+		this.out.println("<tr>\n<td colspan=\"7\">\n</td>\n</tr>");
 	}
 
 	public void outWarenkorbEnde(BigDecimal gesamtgewicht, BigDecimal zwischensumme)
 	{
-		out.println("<tr>\n<td colspan=\"7\">\n</td>\n</tr>");
-		out.println("<tr>\n<td colspan=\"2\">");
-		out.println("</td>\n<td>");
-		out.println(gesamtgewicht);
-		out.println("</td>\n<td colspan=\"2\">");		
-		out.println("</td>\n<td>");
-		out.println(zwischensumme);
-		out.println("</td>\n<td>");
-		out.println(this.resourceBundle.getString("ZWISCHENSUMME_BESTELLUNG"));
-		out.println("</td>\n</tr>\n<tr>\n<td colspan=\"7\">");
-		out.println("</td>\n</tr>\n<tr>\n<td>");
-		out.println("<input type=\"submit\" name=\"aktualisieren\" value=\"" + this.resourceBundle.getString("AKTUALISIEREN") + "\">");
-		out.println("</form>");
-		out.println("</td>\n<td colspan=\"2\">");
-		out.println("<form action=\"Warenkorb\" method=\"GET\">");
-		out.println("<input type=\"submit\" name=\"leeren\" value=\"" + this.resourceBundle.getString("WARENKORB_LEEREN") + "\">");
-		out.println("</form>");
-		out.println("</td>\n<td colspan=\"2\">");
+		this.out.println("<tr>\n<td colspan=\"7\">\n</td>\n</tr>");
+		this.out.println("<tr>\n<td colspan=\"2\">");
+		this.out.println("</td>\n<td>");
+		this.out.println(gesamtgewicht);
+		this.out.println("</td>\n<td colspan=\"2\">");		
+		this.out.println("</td>\n<td>");
+		this.out.println(zwischensumme);
+		this.out.println("</td>\n<td>");
+		this.out.println(this.resourceBundle.getString("ZWISCHENSUMME_BESTELLUNG"));
+		this.out.println("</td>\n</tr>\n<tr>\n<td colspan=\"7\">");
+		this.out.println("</td>\n</tr>\n<tr>\n<td>");
+		this.out.println("<input type=\"submit\" name=\"aktualisieren\" value=\"" + this.resourceBundle.getString("AKTUALISIEREN") + "\">");
+		this.out.println("</form>");
+		this.out.println("</td>\n<td colspan=\"2\">");
+		this.out.println("<form action=\"Warenkorb\" method=\"GET\">");
+		this.out.println("<input type=\"submit\" name=\"leeren\" value=\"" + this.resourceBundle.getString("WARENKORB_LEEREN") + "\">");
+		this.out.println("</form>");
+		this.out.println("</td>\n<td colspan=\"2\">");
 		
 		// FIXME action anpassen und NoOp entfernen!
-		out.println("<form action=\"NoOperation\" method=\"GET\">");
-		out.println("<input type=\"submit\" name=\"weiter\" value=\"" + this.resourceBundle.getString("WEITER") + " NoOP\">");
-		out.println("</form>");
+		this.out.println("<form action=\"NoOperation\" method=\"GET\">");
+		this.out.println("<input type=\"submit\" name=\"weiter\" value=\"" + this.resourceBundle.getString("WEITER") + " NoOP\">");
+		this.out.println("</form>");
 
-		out.println("</td>\n<td colspan=\"2\">");		
+		this.out.println("</td>\n<td colspan=\"2\">");		
 		
 		// FIXME action anpassen und NoOp entfernen!
-		out.println("<form action=\"NoOperation\" method=\"GET\">");
-		out.println("<input type=\"submit\" name=\"kasse\" value=\"" + this.resourceBundle.getString("KASSE") + " NoOP\">");
-		out.println("</form>");
+		this.out.println("<form action=\"NoOperation\" method=\"GET\">");
+		this.out.println("<input type=\"submit\" name=\"kasse\" value=\"" + this.resourceBundle.getString("KASSE") + " NoOP\">");
+		this.out.println("</form>");
 		
-		out.println("</td>\n</tr>");
-		out.println("</table>");
+		this.out.println("</td>\n</tr>");
+		this.out.println("</table>");
 	}
 	
 	public void outWarenkorbInhalt(ProduktModel produktModel, int menge, BigDecimal gesamtpreisPosition)
 	{
-		out.println("<tr>\n<td>");
-		
-		//TODO Link zur ProduktInfo realisieren!
-//		out.println("<a href\"SaatgutOnline/ProduktInfo?produkt_id=" + produktModel.getId() +"\">");
-		out.println(produktModel.getName());
-		
-		out.println("</td>\n<td>");
-		out.println(produktModel.getBestellnummer());
-		out.println("</td>\n<td>");
-		out.println(produktModel.getGewicht());
-		out.println("</td>\n<td>");
-		out.println(produktModel.getPreisBrutto());
-		out.println("</td>\n<td>");				
-		out.println("<input type=\"text\" name=\"menge_" + produktModel.getId() + "\" value=\""+ menge +"\" size=2");
-		out.println("</td>\n<td>");
-		out.println(gesamtpreisPosition);
-		out.println("</td>\n<td>");
-		out.println("<input type=\"checkbox\" name=\"entfernen_"+ produktModel.getId() + "\" value=\"true\">");
-		out.println("</td>\n</tr>");		
+		this.out.println("<tr>\n<td>");		
+		this.out.println("<a href=\"/SaatgutOnline/Produktinfo?produkt="
+				+ produktModel.getId()				
+				+ "\">\n"
+				+ produktModel.getName()
+				+ "\n</a>");
+		this.out.println("</td>\n<td>");
+		this.out.println(produktModel.getBestellnummer());
+		this.out.println("</td>\n<td>");
+		this.out.println(produktModel.getGewicht());
+		this.out.println("</td>\n<td>");
+		this.out.println(produktModel.getPreisBrutto());
+		this.out.println("</td>\n<td>");				
+		this.out.println("<input type=\"text\" name=\"menge_" + produktModel.getId() + "\" value=\""+ menge +"\" size=2");
+		this.out.println("</td>\n<td>");
+		this.out.println(gesamtpreisPosition);
+		this.out.println("</td>\n<td>");
+		this.out.println("<input type=\"checkbox\" name=\"entfernen_"+ produktModel.getId() + "\" value=\"true\">");
+		this.out.println("</td>\n</tr>");		
 	}
 		
 	public void outLeererWarenkorb()
 	{
-		out.println("<tr>\n<td colspan=\"7\">");
-		out.println(this.resourceBundle.getString("WARENKORB_LEER"));
-		out.println("</td>\n</tr>");
+		this.out.println("<tr>\n<td colspan=\"7\">");
+		this.out.println(this.resourceBundle.getString("WARENKORB_LEER"));
+		this.out.println("</td>\n</tr>");
 	}
 
 }
