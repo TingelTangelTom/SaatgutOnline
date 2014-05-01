@@ -9,21 +9,30 @@ import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+
+
+
 import model.ProduktModel;
 
 
-
+/**
+ * 
+ * Der ProduktController liefert Rückgabewerte für <code>ProduktlisteView</code>
+ * und <code>ProduktinfoView</code>. Ausserdem stellt er Methoden zur Verfügung, 
+ * welche für das Bearbeiten der Rückgabewerte benötigt werden.
+ * 
+ * @author Simon Ankele
+ *
+ */
 public class ProduktController {
 	
 	private ProduktModel produktModel;
 	private double steuersatz;
-	private HashMap<String, String> merkmale;
 	private int sprache_id;
 	private String kategorie;
 	private String sortierung;
 	private String anzahlProdukte;
 	private String limitVon;
-	private String limitBis;
 	private String sortierspalte;
 	
 	public ProduktController(HttpServletRequest request) {
@@ -31,7 +40,6 @@ public class ProduktController {
 		
 		HttpSession session = request.getSession();
 		this.produktModel = new ProduktModel();
-		this.merkmale = new HashMap<String, String>();
 		this.sprache_id = (int)session.getAttribute("spracheId");
 		this.kategorie = request.getParameter("kategorie");
 		
@@ -39,10 +47,20 @@ public class ProduktController {
 		
 	}
 
-	// Testabfrage
+	/**
+	 * Liest aus der Datenbank einen bestimmtes Produkt (<code>ProduktModel</code>) aus,
+	 * welches über die Produkt ID gesucht wird.
+	 * 
+	 * @param  id - ID des Produktes, über die in der Datenbank gesucht wird
+	 *              
+	 * @return <code>ProduktModel</code> - Liefert ein Produkt mit allen Inhalten zurück
+	 * 
+	 * @see model#ProduktModel
+	 * 
+	 * @
+	 */
+	
 	public ProduktModel getProdukt(int id) {
-		
-		DatenbankController.getVerbindung();
 		
 		try {
 			
@@ -52,10 +70,8 @@ public class ProduktController {
 						+ "FROM produkt AS p "
 						+ "INNER JOIN produkt_beschreibung AS pb ON p.produkt_id = pb.produkt_id "
 						+ "WHERE pb.sprache_id = '" + this.sprache_id + "' AND p.produkt_id = '" + id + "'";
-
-		
-			Statement statement = DatenbankController.verbindung.createStatement();
-			ResultSet resultset = statement.executeQuery(query);
+			
+			ResultSet resultset = DatenbankController.sendeSqlRequest(query);
 			while(resultset.next()){
 				this.produktModel = new ProduktModel();
 				this.produktModel.setId(resultset.getInt(1));
@@ -77,8 +93,7 @@ public class ProduktController {
 		try {
 			String query = "SELECT steuersatz FROM steuersatz WHERE steuersatz_id = " + this.produktModel.getSteuerBetrag();
 			
-			Statement statement = DatenbankController.verbindung.createStatement();
-			ResultSet resultset = statement.executeQuery(query);
+			ResultSet resultset = DatenbankController.sendeSqlRequest(query);
 			
 			if(resultset.next()){
 				steuersatz = resultset.getDouble(1);
@@ -93,143 +108,157 @@ public class ProduktController {
 		this.produktModel.setPreisBrutto(this.produktModel.getPreisNetto() * this.produktModel.getSteuerSatz() / 100 + this.produktModel.getPreisNetto());
 		this.produktModel.setSteuerBetrag(this.produktModel.getPreisBrutto() + this.produktModel.getPreisNetto());
 		
+		getProduktMerkmale(id);
+
+		return this.produktModel;
+	}
+	
+	/**
+	 * Diese Methode setzt im <code>ProduktModel</code> die Merkmale des Produktes. 
+	 * 
+	 * @param name - Beschreibung des Merkmals
+	 * @param wert - der Wert des Merkmals
+	 * @param id - ID des Produktes, über die in der Datenbank gesucht wird
+	 */
+	
+	public void getProduktMerkmale(int id) {
+			
+		HashMap<String, String> merkmale = new HashMap<String, String>();
+		String name;
+		String wert;
+		String query = "SELECT pf.produktfelder_name AS name, pfz.produktfelder_wert AS wert "
+						+ "FROM produktfelder AS pf "
+						+ "LEFT JOIN produktfelder_zuordnung AS pfz ON pfz.produktfelder_id = pf.produktfelder_id "
+						+ "WHERE pfz.produkt_id = '" + id + "' "
+						+ "AND pfz.produktfelder_wert<>'' "
+						+ "AND (pf.sprache_id= '" + this.sprache_id + "' AND pf.sprache_id = '" + this.sprache_id + "') "
+						+ "ORDER BY pf.sortier_reihenfolge";
+		
 		try {
 			
-			String query = "SELECT pf.produktfelder_name AS name, pfz.produktfelder_wert AS wert "
-							+ "FROM produktfelder AS pf "
-							+ "LEFT JOIN produktfelder_zuordnung AS pfz ON pfz.produktfelder_id = pf.produktfelder_id "
-							+ "WHERE pfz.produkt_id = '" + id + "' "
-							+ "AND pfz.produktfelder_wert<>'' "
-							+ "AND (pf.sprache_id= '" + this.sprache_id + "' AND pf.sprache_id = '" + this.sprache_id + "') "
-							+ "ORDER BY pf.sortier_reihenfolge";
-			
-			Statement statement = DatenbankController.verbindung.createStatement();
-			ResultSet resultset = statement.executeQuery(query);
-			
-			String name;
-			String wert;
-			
+			ResultSet resultset = DatenbankController.sendeSqlRequest(query);
+
 			while (resultset.next()){
 				name = resultset.getString(1);
 				wert = resultset.getString(2);
-				this.merkmale.put(name, wert);
+				merkmale.put(name, wert);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
-		this.produktModel.setMerkmale(merkmale);
 		
-		return this.produktModel;
+		this.produktModel.setMerkmale(merkmale);
 	}
+	
+	/**
+	 * Diese Methode erstellt eine ArrayList mit Produkten (ProduktModel).
+	 * Jedes Produkt hat eine Kategorie ID. Dadurch lässt sich feststellen, 
+	 * ob sich ein Produkt in einer Unterkategorie oder in der Hauptkategorie befindet. 
+	 * Falls die Kategorie eine Hauptkategorie ist, werden alle Produkte der 
+	 * Hauptkategorie und der dazugehörigen Unterkategorien in die ArrayList geschrieben.
+	 * <code>getProdukt()</code>
+	 *  
+	 * @param  kategorie_id				Die Kategorie ID ist im Produkt hinterlegt
+	 *            
+	 * @return <code>ArrayList</code> 	Liefert eine ArrayList mit Produkten zurück
+	 * 
+	 */
 
 	public ArrayList<ProduktModel> getProduktliste(String kategorie_id) {
 		
-		DatenbankController.getVerbindung();
-		ArrayList<Integer> kategorie_ids = new ArrayList<>();
 		ArrayList<ProduktModel> produkte = new ArrayList<>();
-
+		
+		if(this.kategorie == null) {
+			this.kategorie = "1";
+		}
+		System.out.println("Kategorie: " + this.kategorie);
+		String produkt_query = "SELECT p.produkt_id, pb.produkt_name "
+								+ "FROM produkt AS p "
+								+ "INNER JOIN produkt_beschreibung AS pb ON p.produkt_id = pb.produkt_id "
+								+ "WHERE pb.sprache_id = '" + this.sprache_id + "' "
+								+ "AND  p.kategorie_id IN (SELECT kategorie_id FROM kategorie WHERE eltern_id = '" + this.kategorie + "' OR (kategorie_id = '" + this.kategorie + "' AND eltern_id = 0)) "
+								+ "ORDER BY " + this.sortierspalte + " " + this.sortierung + ""
+								+ " LIMIT " + this.limitVon + "," + this.anzahlProdukte;
+		
 		try {
-			System.out.println("Gewählte Kategorie: " + this.kategorie);
-			Statement statement = DatenbankController.verbindung.createStatement();
-			String kategorie_query = "SELECT kategorie_id FROM kategorie WHERE eltern_id = '" + this.kategorie + "' OR (kategorie_id = '" + this.kategorie + "' AND eltern_id = 0)";
 			
-			ResultSet kategorie_resultset = statement.executeQuery(kategorie_query);
-			
-			while(kategorie_resultset.next()){
-				System.out.println("Kategorie ID. " + kategorie_resultset.getInt(1));
-				kategorie_ids.add(kategorie_resultset.getInt(1));
+			ResultSet produkt_resultset = DatenbankController.sendeSqlRequest(produkt_query); 
+
+			while(produkt_resultset.next()){
+				
+				produkte.add(this.getProdukt(produkt_resultset.getInt(1)));
+								
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
-		String spaltenwahl = null;
-	        switch (sortierspalte) {
-	          case "pn":
-	        	  spaltenwahl = "pb.produkt_name";
-	            break;
-	          case "pk":
-	        	  spaltenwahl = "p.kategorie";
-	            break;
-	          case "pb":
-	        	  spaltenwahl = "p.produkt_bestand";
-	            break;
-	          case "pa":
-	        	  spaltenwahl = "p.angesehen";
-	            break;
-	          case "pp":
-	        	  spaltenwahl = "p.produkt_preis";
-	            break;
-	          case "pd":
-	        	  spaltenwahl = "p.produkt_datum_hinzugefuegt";
-	            break;
-	          default:
-	        	  spaltenwahl = "pb.produkt_name";
-	        	break;
-	        }
-	      
-		
-		for (int i = 0; i < kategorie_ids.size(); i++) {	
-			
-			String produkt_query = "SELECT p.produkt_id, pb.produkt_name "
-					+ "FROM produkt AS p "
-					+ "INNER JOIN produkt_beschreibung AS pb ON p.produkt_id = pb.produkt_id "
-					+ "WHERE pb.sprache_id = '" + this.sprache_id + "' AND  p.kategorie_id = '" + kategorie_ids.get(i) + "' ORDER BY " + spaltenwahl + " " + this.sortierung;
-
-			
-			try {
-				
-			Statement statement2 = DatenbankController.verbindung.createStatement();
-			ResultSet produkt_resultset = statement2.executeQuery(produkt_query);
-
-			while(produkt_resultset.next()){
-				System.out.println("Produkt ID hinzugefügt: " + produkt_resultset.getInt(1));
-				
-				//System.out.println(this.produktModel.getBestand());
-				produkte.add(this.getProdukt(produkt_resultset.getInt(1)));
-				//System.out.println("Produkt " + produkt_resultset.getInt(1) + " hinzugefügt");
-								
-			}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-
-		}
-		System.out.println("Gespeicherte Produkte: ");
-		
-		for (int i = 0; i < produkte.size(); i++) {
-			System.out.println(produkte.get(i).getId());
-			
-		}
 		return produkte;
 	}
+	//TODO Javadoc param bearbeiten
+	/**
+	 * Die Methode <code>getSortierung (HttpServletRequest request)</code> legt fest, 
+	 * wie Produkte in der Produktliste-Anschau angezeigt werden. Festgelegt wird, 
+	 * wieviele Produkte pro Seite angezeigt werden sollen, welche Sortierreihenfolge 
+	 * sie haben (DESC | ASC), ab welchem Produkt die Anzeige stattfinden soll und nach 
+	 * welchem Kriterium die Anzeige ausgegeben werden soll (Name, Preis, Bestand, Datum, 
+	 * Kategorie und beliebte Produkte).
+	 * 
+	 * @param request
+	 * @param sortierung - ASC | DESC
+	 * @param anzahlProdukte - wieviele Produkte angezeigt werden sollen
+	 * @param sortierung - ab welchem Produkt in der Produktliste die Ausgabe starten soll
+	 * @param limitVon - nach welchem Kriterium sortiert werden soll
+	 * 
+	 */
 
 	public void getSortierung (HttpServletRequest request) {
-
+		String parameter = request.getParameter("p_anzeige");
 		if(request.getParameter("p_anzeige") == null) {
+			
 			this.sortierung = "ASC";
 			this.anzahlProdukte = "3";
-			this.limitVon = "1";
-			this.limitBis = "4";
+			this.limitVon = "0";
 			this.sortierspalte = "pb.produkt_name";
+			
 		} else {
-			String[] parameterAufteilung = sortierung.split(",");
-			if(parameterAufteilung[0].equalsIgnoreCase("true")) {
-				this.sortierung = "ASC";
-			} else {
+			
+			String[] parameterAufteilung = parameter.split(",");
+			if(this.sortierung != null) {
 				this.sortierung = "DESC";
+			} else {
+				this.sortierung = "ASC";
 			}
-			this.sortierung = parameterAufteilung[0];
+	        switch (parameterAufteilung[3]) {
+	          case "pn":
+	        	  this.sortierspalte = "pb.produkt_name";
+	            break;
+	          case "pk":
+	        	  this.sortierspalte = "p.kategorie";
+	            break;
+	          case "pb":
+	        	  this.sortierspalte = "p.produkt_bestand";
+	            break;
+	          case "pa":
+	        	  this.sortierspalte = "p.angesehen";
+	            break;
+	          case "pp":
+	        	  this.sortierspalte = "p.produkt_preis";
+	            break;
+	          case "pd":
+	        	  this.sortierspalte = "p.produkt_datum_hinzugefuegt";
+	            break;
+	          default:
+	        	  this.sortierspalte = "pb.produkt_name";
+	        	break;
+	        	
+	        }
+	        System.out.println("Parameter - Sortierung: " + this.sortierung);
 			this.anzahlProdukte = parameterAufteilung[1];
 			this.limitVon = parameterAufteilung[2];
-			this.limitBis = parameterAufteilung[3];
-			this.limitBis = parameterAufteilung[4];
+
 		}
-		System.out.println(this.sortierung);
-		System.out.println(this.anzahlProdukte);
-		System.out.println(this.limitVon);
-		System.out.println(this.limitBis);
+
 
 	}
 

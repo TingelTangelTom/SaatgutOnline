@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 
-import controller.DatenbankController;
+
 import view.ProduktinfoView;
 
 
@@ -42,7 +42,7 @@ public class ProduktinfoServlet extends HttpServlet {
 		this.produktinfoView = new ProduktinfoView(request);
 		
 		response.setCharacterEncoding("ISO-8859-15"); // Sonst wird das Euro-Symbol nicht angezeigt
-		DatenbankController.getVerbindung();
+		
 		// Kopfbereich (und damit auch Navigationsbereich) einbinden
 		RequestDispatcher rd = getServletContext().getRequestDispatcher("/Kopfbereich");
 		rd.include(request, response);
