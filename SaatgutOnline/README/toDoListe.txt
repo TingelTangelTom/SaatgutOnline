@@ -16,7 +16,7 @@ Tom
 - Texte (DB) übersetzen
 - Bestellvorgang
 - ERLEDIGT! - Suchfeld im Kopfbereich einfügen
-- Loginbereich --> Logoutbereich
+- ERLEDIGT! - Loginbereich --> Logoutbereich
 
 
 
