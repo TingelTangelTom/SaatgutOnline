@@ -126,7 +126,7 @@ table.produktliste {
   	font-weight:bold;
   	color: green;
   	text-align: right;
-  	height: 100%;
+  	height: 35%;
 }
 
 .produktliste td.preisverordnung {
@@ -135,7 +135,7 @@ table.produktliste {
   	font-weight:normal;
   	text-align: right;
   	vertical-align: top;
-	width: 100%;
+	width: 35%;
 }
 
 .produktliste td.bild {
@@ -149,7 +149,7 @@ table.produktliste {
   	font-weight:bold;
   	text-align: left;
   	vertical-align: top;
-	width: 50%;
+	width: 65%;
 }
 
 .produktliste td.bestellnummer {
@@ -158,7 +158,7 @@ table.produktliste {
   	font-weight:normal;
   	text-align: left;
   	vertical-align: top;
-	width: 50%;
+	width: 65%;
 }
 
 .produktliste td.beschreibung {
