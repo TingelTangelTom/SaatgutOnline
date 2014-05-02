@@ -50,13 +50,23 @@ public class HtmlAusgabe extends HttpServlet{
 */
 	public String outPreisformat(double preis) {
 		
-		NumberFormat waehrungsFormat = NumberFormat.getCurrencyInstance(this.locale);
+		NumberFormat waehrungsFormat = NumberFormat.getCurrencyInstance(Locale.GERMAN);
 		String waehrung = waehrungsFormat.format(preis);
 
 		return waehrung;
 		
 	}
 	
+	/**
+	 * 
+	 * Diese Methode gibt einen rechtskonformen Text als<code>String</code> für die Preisangabe zurück.
+	 * Er setzt sich aus der Angabe der Mehrwertsteuer und einem sichtbaren Link für die Versandkosten zusammen
+	 * @param mwst - Prozentwert der Mehrwertsteuer
+	 * @return <code>String</code>
+	 * 
+	 * @see model#HtmlAusgabe
+	 * 
+	 */
 	public String outPreisverordnung(double mwst) {
 		
 		NumberFormat prozentFormat = NumberFormat.getPercentInstance(this.locale);

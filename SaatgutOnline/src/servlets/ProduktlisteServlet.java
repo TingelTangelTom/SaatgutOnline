@@ -35,7 +35,7 @@ public class ProduktlisteServlet extends HttpServlet {
 		
 		this.produktliste = new ProduktlisteView(request);
 		//TODO Funktioniert nicht
-		response.setContentType("text/html; charset=UTF-8");
+		response.setContentType("text/html");
 	    response.setCharacterEncoding("ISO-8859-15");
 	    	    
 		// Kopfbereich (und damit auch Navigationsbereich) einbinden
@@ -44,7 +44,7 @@ public class ProduktlisteServlet extends HttpServlet {
  		
 		PrintWriter out = response.getWriter();
 		
-		response.setContentType("text/html; charset=UTF-8");
+		response.setContentType("text/html");
 	    response.setCharacterEncoding("ISO-8859-15");
 		out.print(this.produktliste.anzeigenProduktliste(request));
 
