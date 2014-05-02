@@ -22,11 +22,11 @@ public class KontaktFormularVerarbeitungController {
 				request, response);
 		if (emailController.validiereEmail(request.getParameter("E-Mail"))) {
 			kontaktFormularVerarbeitungView.outKontaktVerarbeitungView();
-			System.out.println("Klappt :)");
+			System.out.println("Klappt :)"); //TODO : remove
 		} 
 		else {
 			kontaktFormularVerarbeitungView.outKontaktVerarbeitungViewUngueltig();
-			System.out.println("Klappt nicht :(");
+			System.out.println("Klappt nicht :("); //TODO : remove
 		}
 		
 	}

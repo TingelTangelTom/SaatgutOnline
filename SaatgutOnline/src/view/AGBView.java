@@ -24,7 +24,6 @@ public class AGBView {
 		}
 		out.println(agbText);
 		out.println("<br><br><a href=\"" + urlController.urlAusSessionHolen("Fussbereich") + "\">&#11013 Zurück</a>");
-		//FIXME : Richtigen Link einsetzen
 		//TODO : Ich hätte den Link gerne in schwarz :)
 	}
 }

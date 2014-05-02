@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import controller.KontaktFormularController;
+import controller.UrlController;
 
 /**
  * Servlet implementation class KontaktFormularServlet
@@ -34,6 +35,10 @@ public class KontaktFormularServlet extends HttpServlet {
 		RequestDispatcher rd = getServletContext().getRequestDispatcher("/Kopfbereich");
 		rd.include(request, response);
 
+		
+		UrlController urlController = new UrlController(request);
+		urlController.urlInSessionLegen();
+		
 		// Inhalte ausgeben (per view!)
 		KontaktFormularController kontaktFormularController = new KontaktFormularController(request, response);
 

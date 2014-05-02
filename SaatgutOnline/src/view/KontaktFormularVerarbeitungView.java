@@ -6,11 +6,17 @@ import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import controller.UrlController;
+
 public class KontaktFormularVerarbeitungView {
+	
+	UrlController urlController;
 	
 	private PrintWriter out;
 	
 	public KontaktFormularVerarbeitungView(HttpServletRequest request, HttpServletResponse response) {
+		
+		this.urlController = new UrlController(request);
 		
 		response.setContentType("text/html");
 		try {
@@ -25,13 +31,15 @@ public class KontaktFormularVerarbeitungView {
 	public void outKontaktVerarbeitungView() {
 		//Ausgabe nach senden
 		out.println("Vielen Dank für ihre Nachricht.");
-		out.println("<a href=\"/SaatgutOnline/IndexPlatzhalter\">Startseite</a>"); 
+		out.println("<a href=\"" + this.urlController.urlAusSessionHolen("Produktseite") +"\">Startseite</a>");
+		out.println("<br><br><a href=\"" + this.urlController.urlAusSessionHolen("Fussbereich") + "\">&#11013 Zurück</a>");
 	}
 	
 	public void outKontaktVerarbeitungViewUngueltig() {
 		//Ausgabe nach senden
 		out.println("Ihre E-Mail-Adresse ist ungültig.<br>Geben sie eine gültige E-Mail-Adresse ein.");
-		out.println("<a href=\"/SaatgutOnline/Kontakt\">>&#11013 Zurück</a>"); 
+		out.println("<br><br><a href=\"" + this.urlController.urlAusSessionHolen("Fussbereich") + "\">&#11013 Zurück</a>"); 
+		
 	}
 	
 }
