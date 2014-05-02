@@ -29,6 +29,7 @@ public class ProduktController {
 	private ProduktModel produktModel;
 	private double steuersatz;
 	private int sprache_id;
+	private String kategorie_id;
 	
 	public ProduktController(HttpServletRequest request) {
 		super();
@@ -145,6 +146,30 @@ public class ProduktController {
 		}
 		
 		this.produktModel.setMerkmale(merkmale);
+	}
+	
+	public String getKategoriename (String kategorie_id) {
+		String kategoriename = null;
+		
+		String query = "SELECT kb.kategorie_name "
+				+ "FROM kategorie AS k "
+				+ "INNER JOIN kategorie_beschreibung AS kb ON k.kategorie_id = kb.kategorie_id "
+				+ "WHERE kb.sprache_id = '" + this.sprache_id + "'";
+		
+		try {
+			
+			ResultSet resultset = DatenbankController.sendeSqlRequest(query);
+
+			while (resultset.next()){
+				
+				kategoriename = resultset.getString(1);
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return kategoriename;
 	}
 	
 	/**

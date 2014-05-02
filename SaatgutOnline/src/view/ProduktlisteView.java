@@ -33,7 +33,6 @@ public class ProduktlisteView {
 		
 	}
 	
-	
 	/**
 	 * Diese Methode gibt einen <code>String</code> zurück , welcher den HTML-Code in der <code>ProduktlisteServlet</code> ausgibt.
 	 * 
@@ -50,8 +49,10 @@ public class ProduktlisteView {
 		this.produktliste = this.produktController.getProduktliste(this.kategorie, request);
 		warenkorbmenge = 1;
 		//TODO Comparator einfügen
+		//TODO Kategoriename und Unterkategoriename
+		System.out.println("-----> Kategorie: " + this.kategorie);
 		this.output = "<table class=\"produktinfo\">"
-				+ "<tr><td align=\"left\">Kategoriename</td></tr>"
+				+ "<tr><td align=\"left\">" + this.produktController.getKategoriename(this.kategorie) + "Kategoriename</td></tr>"
 				+ "<tr><td align=\"right\">sortieren: Name "
 				+ "<a href=\"/SaatgutOnline/Produktliste?kategorie=1&p_anzeige=pn,3,0\"><img src=\"resources/bilder/icons/pfeil_hoch_runter.gif\" width=\"5\" height=\"10\" border=\"0\" alt=\"Sortierung\"></a> | "
 				+ "Preis "
