@@ -76,7 +76,7 @@ public class ProduktController {
 				this.produktModel.setBeschreibung(resultset.getString(4));
 				this.produktModel.setSuchbegriffe(resultset.getString(5));
 				this.produktModel.setAngesehen(resultset.getInt(6));
-				this.produktModel.setPreisNetto(resultset.getDouble(7));
+				this.produktModel.setPreisNetto(runden(resultset.getDouble(7), 2));
 				this.produktModel.setVpe(resultset.getInt(8));
 				this.produktModel.setSteuerBetrag(resultset.getDouble(9));
 				this.produktModel.setHinzugefeugt(resultset.getDate(10));
@@ -108,8 +108,8 @@ public class ProduktController {
 			e.printStackTrace();
 		}
 		
-		this.produktModel.setPreisBrutto(this.produktModel.getPreisNetto() * this.produktModel.getSteuerSatz() / 100 + this.produktModel.getPreisNetto());
-		this.produktModel.setSteuerBetrag(this.produktModel.getPreisBrutto() - this.produktModel.getPreisNetto());
+		this.produktModel.setPreisBrutto(runden(this.produktModel.getPreisNetto() * this.produktModel.getSteuerSatz() / 100 + this.produktModel.getPreisNetto(), 2));
+		this.produktModel.setSteuerBetrag(runden(this.produktModel.getPreisBrutto() - this.produktModel.getPreisNetto(), 2));
 	}
 	
 	/**
@@ -334,5 +334,10 @@ END IF
 		}
 
 	}
+	
+	public static double runden(double wert, int stellen) {
+		double gerundet = Math.round(wert * Math.pow(10d, stellen));
+		return gerundet / Math.pow(10d, stellen);
+	} 
 
 }
