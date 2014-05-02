@@ -3,6 +3,7 @@ package view;
 
 import java.text.MessageFormat;
 import java.text.NumberFormat;
+import java.util.Currency;
 import java.util.Locale;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
@@ -51,10 +52,13 @@ public class HtmlAusgabe extends HttpServlet{
 	public String outPreisformat(double preis) {
 		
 		NumberFormat waehrungsFormat = NumberFormat.getCurrencyInstance(this.locale);
-		String waehrung = waehrungsFormat.format(preis);
-
-		return waehrung;
+		waehrungsFormat.setCurrency(Currency.getInstance("EUR"));
 		
+		
+
+
+		return waehrungsFormat.format(preis);
+
 	}
 	
 	/**

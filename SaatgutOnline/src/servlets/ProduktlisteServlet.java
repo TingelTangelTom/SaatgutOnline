@@ -36,7 +36,7 @@ public class ProduktlisteServlet extends HttpServlet {
 		this.produktliste = new ProduktlisteView(request);
 		//TODO Funktioniert nicht
 		response.setContentType("text/html");
-	    response.setCharacterEncoding("ISO-8859-15");
+	    response.setCharacterEncoding("UTF-8");
 	    	    
 		// Kopfbereich (und damit auch Navigationsbereich) einbinden
 		RequestDispatcher rd = getServletContext().getRequestDispatcher("/Kopfbereich");
