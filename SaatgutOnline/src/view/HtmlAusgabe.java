@@ -1,112 +1,76 @@
 package view;
 
-public class HtmlAusgabe
-{
-	/*
-	 * Hier mal eine Idee zu einer Html-Ausgabe-Klasse.
-	 * 
-	 * Ich habe zwei Varianten angedacht:
-	 * 
-	 * 
-	 * 1. Ausgabe per statischer Konstanten:
-	 * So kann man die Html-Code-Schnippsel einfach im View per zB.
-	 *  
-	 * out.println(Html.NEUE_SPALTE);
-	 * 
-	 * einbinden.
-	 * 
-	 * 
-	 * 
-	 * 2. Ausgabe per Methode:
-	 * Hier muss zunächst ein HtmlAusgabe-Objekt erzeugt werden,
-	 * 
-	 * (zB. HtmlAusgabe htmlAusgabe = new HtmlAusgabe;)
-	 * 
-	 * um auf die Methoden zugreifen zu koennen.
-	 * 
-	 * Diese returnen dann den Schnippsel als String.
-	 * Im View wurde das dann so aussehen:
-	 * 
-	 * out.println(htmAusgabe.htmlNeueZeile());
-	 * 
-	 * Denke, sowas wuerde sich eher fuer komplexere Bauereien eignen,
-	 * wie zB. in der htmlTabelleOeffnen()-Methode dargestellt.
-	 */
-	
-	
-	
-	
-	/**
-	 * Schliesst eine Spalte und oeffnet eine neue Spalte.
-	 */
-	public static final String NEUE_SPALTE = "</td>\n<td>";
-	
-	/**
-	 * Schliesst eine Zeile und oeffnet eine neue Zeile.
-	 */
-	public static final String NEUE_ZEILE = "</tr>\n<tr>";
-	
-	/**
-	 * Schliesst eine Zeile, schliesst eine Spalte und</br>
-	 * oeffnet eine neue Zeile, oeffnet eine neue Spalte.
-	 */
-	public static final String NEUE_ZEILE_NEUE_SPALTE = "</td>\n</tr>\n<tr>\n<td>";
-	
-	/**
-	 * Schliesst die letzte Spalte, die letzte Zeile und die Tabelle.
-	 */
-	public static final String TABELLE_SCHLIESSEN = "</td>\n</tr>\n</table>";
-	
-	
-	
-	/**
-	 * Schliesst eine Spalte und oeffnet eine neue Spalte.	
-	 * @return Der entsprechende Html-Code als String
-	 */
-	public String htmlNeueSpalte()
-	{
-		return "</td>\n<td>";
-	}
 
-	/**
-	 * Schliesst eine Zeile und oeffnet eine neue Zeile.
-	 * @return Der Html-Code als String
-	 */
-	public String htmlNeueZeile()
-	{
-		return "</tr>\n<tr>";
+import java.text.MessageFormat;
+import java.text.NumberFormat;
+import java.util.Locale;
+import java.util.PropertyResourceBundle;
+import java.util.ResourceBundle;
+
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+public class HtmlAusgabe extends HttpServlet{
+
+	private static final long serialVersionUID = 1L;
+	private Locale locale;
+	private HttpSession session;
+	
+	public HtmlAusgabe(HttpServletRequest request) {
+		
+		this.session = request.getSession();
+		this.locale = (Locale)session.getAttribute("sprache");
+		
 	}
 	
-	/**
-	 * Schliesst eine Zeile, schliesst eine Spalte und</br>
-	 * oeffnet eine neue Zeile, oeffnet eine neue Spalte.
-	 * @return Der Html-Code als String
-	 */
-	public String htmlNeueZeileNeueSpalte()
-	{
-		return "</td>\n</tr>\n<tr>\n<td>";
+/*
+		                      
+		    System.out.println("doGet... TestNumberFormat !");
+		    
+		    response.setContentType("text/html");
+		    response.setCharacterEncoding("ISO-8859-15");   
+		    PrintWriter out = response.getWriter();
+		    String title    = "TestNumberFormat Beispiel";
+
+		    double test = 1234.5666;
+		    NumberFormat formatter = NumberFormat.getCurrencyInstance();
+		    
+		    out.println( ServletUtilities.headWithTitle(title) +
+		                "<body bgcolor=\"#FDF5E6\">\n" +
+		                "<center>\n" +
+		                "<h1>" + title + "</h1>" +
+		                "Unicode: &#8364 HTML: &
+		\n" +  // wird im Forum nicht richtig dargestellt  #8364 und euro;
+		                "Betrag: " + formatter.format(test) + "\n" +
+		                "</center>\n" +
+		                "</body>\n" +
+		                "</html>" );
+		  }
+*/
+	public String outPreisformat(double preis) {
+		
+		NumberFormat waehrungsFormat = NumberFormat.getCurrencyInstance(this.locale);
+		String waehrung = waehrungsFormat.format(preis);
+
+		return waehrung;
+		
 	}
 	
-	/**
-	 * Schliesst die letzte Spalte, die letzte Zeile und die Tabelle.
-	 * @return Der Html-Code als String
-	 */
-	public String htmlTabelleSchliessen()
-	{
-		return "</td>\n</tr>\n</table>";
+	public String outPreisverordnung(double mwst) {
+		
+		NumberFormat prozentFormat = NumberFormat.getPercentInstance(this.locale);
+		String prozent = prozentFormat.format(mwst / 100);
+		ResourceBundle resourceBundle = PropertyResourceBundle.getBundle("I18N." + this.locale.getLanguage() + ".ProduktinfoView", this.locale); // Pfad muss noch angepasst werden
+		
+		return MessageFormat.format(resourceBundle.getString("PREISTEXT"), prozent) + " <a href=\"/SaatgutOnline/Versandkosten\"><b>" + resourceBundle.getString("VERSANDKOSTEN") + "</b></a>";
+		
 	}
 	
-	/**
-	 * Oeffnet eine Tabelle mit zugewiesenem CSS-Namen.
-	 * </br>(Keine Ahnung wie man das adäquat ausdrueckt...^^)
-	 * @param name
-	 * Der Name der class als String
-	 * @return
-	 * Der Html-Code als String
-	 */
-	public String htmlTabelleOeffnen(String className)
-	{
-		return "<table class='" + className + "'>\n";
-	}
-	
+	public String outKurzeProduktbeschreibung(String beschreibung, int zeichen, int id) {
+		String kurzeBeschreibung = beschreibung.substring(0,zeichen);
+		kurzeBeschreibung += "<a href=\"/SaatgutOnline/Produktinfo?produkt=" + id + "\"><b>...(mehr)</b></a>";
+		return kurzeBeschreibung;
+	}	
+
 }
