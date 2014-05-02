@@ -97,7 +97,7 @@ public class NavigationsbereichController
 	@SuppressWarnings("unchecked")
 	private void geklickteKategorienOrganisieren()
 	{		
-		UrlController urlController = new UrlController(this.request);
+		/*UrlController urlController = new UrlController(this.request);
 		String herkunft = urlController.urlAusSessionHolen("LetzteSeite");
 		
 		//TODO remove
@@ -109,7 +109,7 @@ public class NavigationsbereichController
 		{	
 			nichtInProduktListe = false;
 		}
-		
+		*/
 		
 		
 		if(this.session.getAttribute("geklickteKategorien") != null)
@@ -131,9 +131,9 @@ public class NavigationsbereichController
 		}
 		
 		
-		//FIXME BUG fixen!
+		//FIXME BUG fixen!&& nichtInProduktListe
 		if(ausGet				
-				&& nichtInProduktListe
+				
 				&& (this.request.getParameter("kategorie") != null)				
 				&& (this.request.getParameter("p_anzeige") == null))
 		{			
@@ -152,7 +152,7 @@ public class NavigationsbereichController
 			this.session.setAttribute("geklickteKategorien", this.geklickteKategorienSession);			
 			this.session.setAttribute("aktuelleKategorie", this.aktuelleKategorieSession);
 		}
-		nichtInProduktListe = true;
+		//nichtInProduktListe = true;
 		
 	}
 	
