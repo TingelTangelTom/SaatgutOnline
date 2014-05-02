@@ -31,6 +31,12 @@ a:focus { text-decoration:none; font-weight:bold; color:#BEBEBE; }
 .fussbereich a:active { text-decoration:none; font-weight:bold; color:#000000; }
 .fussbereich a:focus { text-decoration:none; font-weight:bold; color:#000000; }
 
+.produktliste a:link { text-decoration:none; font-weight:bold; color:#E3E3E3; }
+.produktliste a:visited { text-decoration:none; font-weight:bold; color:#000000; }
+.produktliste a:hover { text-decoration:none; font-weight:bold; color:#000000; }
+.produktliste a:active { text-decoration:none; font-weight:bold; color:#000000; }
+.produktliste a:focus { text-decoration:none; font-weight:bold; color:#000000; }
+
 .kopfbereich {
   	font-family: Verdana, Arial;
   	font-size:11px;

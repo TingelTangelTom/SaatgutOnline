@@ -50,7 +50,7 @@ public class ProduktlisteView {
 		this.produktliste = this.produktController.getProduktliste(this.kategorie, request);
 		warenkorbmenge = 1;
 		//TODO Comparator einfügen
-		this.output = "<table class=\"produktinfo\">"
+		this.output = "<table class=\"produktliste\">"
 				+ "<tr><td align=\"left\">Kategoriename</td></tr>"
 				+ "<tr><td align=\"right\">sortieren: Name "
 				+ "<a href=\"/SaatgutOnline/Produktliste?kategorie=1&p_anzeige=pn,3,0\"><img src=\"resources/bilder/icons/pfeil_hoch_runter.gif\" width=\"5\" height=\"10\" border=\"0\" alt=\"Sortierung\"></a> | "
@@ -64,7 +64,7 @@ public class ProduktlisteView {
 			+ "<tr>"
 			+ "<td rowspan=\"4\" style=\"width: 110px;\"><img src=\"resources/bilder/phoenix_canariensis.jpg\" width=\"100\" height=\"100\" alt=\"Phoenix Canariensis\"></td>"
 	    	+ "<td colspan=\"2\">" + produktModel.getName() + "</td>"
-	    	+ "<td align=\"right\" rowspan=\"2\">" + this.htmlOutput.outPreisformat(produktModel.getPreisBrutto()) + "<br>" + this.htmlOutput.outPreisverordnung(produktModel.getSteuerSatz()) + "</td>"
+	    	+ "<td class=\"preis\" align=\"right\" rowspan=\"2\">" + this.htmlOutput.outPreisformat(produktModel.getPreisBrutto()) + "<br>" + this.htmlOutput.outPreisverordnung(produktModel.getSteuerSatz()) + "</td>"
 	    	+ "</tr>"
 	    	+ "<tr>"
     		+ "<td colspan=\"2\">" + this.resourceBundle.getString("BESTELLNUMMER") + " " + produktModel.getBestellnummer() + "</td>"
