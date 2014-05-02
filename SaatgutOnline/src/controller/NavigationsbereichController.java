@@ -22,13 +22,13 @@ public class NavigationsbereichController
 	private Integer geklickteKategorieGet;
 	private int aktuelleKategorieSession;
 	private ArrayList<KategorieModel> kategorienArrayList = new ArrayList<KategorieModel>();
-	private boolean getMethode;
+	private boolean ausGet;
 	
 
 
 	public NavigationsbereichController(HttpServletRequest request, HttpServletResponse response, boolean getMethode)
 	{
-		this.getMethode = getMethode;
+		this.ausGet = getMethode;
 		this.request = request;
 		this.session = request.getSession();
 		this.navigationsbereichView = new NavigationsbereichView(response);
@@ -97,6 +97,21 @@ public class NavigationsbereichController
 	@SuppressWarnings("unchecked")
 	private void geklickteKategorienOrganisieren()
 	{		
+		UrlController urlController = new UrlController(this.request);
+		String herkunft = urlController.urlAusSessionHolen("LetzteSeite");
+		
+		//TODO remove
+		System.out.println("Herkunft = "+herkunft);
+		
+		boolean nichtInProduktListe = true;
+		
+		if(! herkunft.contains("/Produktliste"))
+		{	
+			nichtInProduktListe = false;
+		}
+		
+		
+		
 		if(this.session.getAttribute("geklickteKategorien") != null)
 		{
 			this.geklickteKategorienSession = (ArrayList<Integer>) this.session.getAttribute("geklickteKategorien");			
@@ -116,8 +131,11 @@ public class NavigationsbereichController
 		}
 		
 		
-		
-		if(getMethode && this.request.getParameter("kategorie") != null && this.request.getParameter("p_anzeige") == null)
+		//FIXME BUG fixen!
+		if(ausGet				
+				&& nichtInProduktListe
+				&& (this.request.getParameter("kategorie") != null)				
+				&& (this.request.getParameter("p_anzeige") == null))
 		{			
 			this.geklickteKategorieGet = Integer.parseInt(this.request.getParameter("kategorie"));
 			this.aktuelleKategorieSession = this.geklickteKategorieGet;
@@ -134,6 +152,7 @@ public class NavigationsbereichController
 			this.session.setAttribute("geklickteKategorien", this.geklickteKategorienSession);			
 			this.session.setAttribute("aktuelleKategorie", this.aktuelleKategorieSession);
 		}
+		nichtInProduktListe = true;
 		
 	}
 	
