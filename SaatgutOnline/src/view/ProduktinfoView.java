@@ -37,42 +37,46 @@ public class ProduktinfoView {
 		this.merkmale = this.produktModel.getMerkmale();
 		warenkorbmenge = 1;
 		
-		this.output = "<table width=\"200\" border=\"0\">\n"
+		this.output = "<table class=\"produktinfo\">\n"
 					+ "<tr>\n"
-					+ "<td><img src=\"resources/bilder/phoenix_canariensis.jpg\" width=\"100\" height=\"100\" alt=\"Phoenix Canariensis\"></td>\n"
+					+ "<td class=\"produktinfo bild\"><img src=\"resources/bilder/palme.jpg\" alt=\"Phoenix Canariensis\"></td>\n"
 					+ "<td>\n"
-					+ "<table width=\"200\" border=\"0\">\n"
+					
+					+ "<table class=\"produktinfo mittlerespalte\">\n"
 					+ "<tr>\n"
-					+ "<td>" + this.htmlAusgabe.outLinkProduktinfo(produktModel.getName(), produktModel.getId()) + "</td>\n"
+					+ "<td class=\"produktinfo titel\">" + this.htmlAusgabe.outLinkProduktinfo(produktModel.getName(), produktModel.getId()) + "</td>\n"
 					+ "</tr>\n"
 					+ "<tr>\n"
-					+ "<td>" + this.produktModel.getVpe() + "</td>\n"
+					+ "<td class=\"produktinfo\">" + this.produktModel.getVpe() + "</td>\n"
 					+ "</tr>\n"
 					+ "<tr>\n"
-					+ "<td>" + this.resourceBundle.getString("BESTELLNUMMER") + " " + produktModel.getBestellnummer() + "</td>\n"
+					+ "<td class=\"produktinfo bestellnummer\">" + this.resourceBundle.getString("BESTELLNUMMER") + " " + produktModel.getBestellnummer() + "</td>\n"
 					+ "</tr>\n"
 					+ "<tr>\n"
-					+ "<td>\n"
-					+ "<table>\n";
+					+ "<td class=\"produktinfo\">\n"
+					+ "<table class=\"produktmerkmale\">\n";
 					for(String name : merkmale.keySet()) {
-						output += "<tr><td>" + name + "</td><td>" + merkmale.get(name) +"</td></tr>"; // Eigenschaft 1
+						output += "<tr><td class=\"produktmerkmale name\">" + name + "</td><td class=\"produktmerkmale wert\">" + merkmale.get(name) +"</td></tr>"; // Eigenschaft 1
 					}
 		this.output	+= "</td>\n"
 					+ "</table>\n"
 					+ "</tr>\n"
 					+ "<tr>\n"
-					+ "<td>unter Merkmale</td>\n"
+					+ "<td class=\"produktinfo\">unter Merkmale</td>\n"
 					+ "</tr>\n"
-					+ "</table>\n</td>\n"
-					+ "<td>\n<table width=\"200\" border=\"0\">\n"
+					+ "</table>\n"
+					+ "</td>\n"
+					+ "<td class=\"produktinfo\">\n"
+					
+					+ "<table class=\"produktinfo rechtespalte\">\n"
 					+ "<tr>\n"
-					+ "<td>" + this.htmlAusgabe.outPreisformat(produktModel.getPreisBrutto()) + "</td>\n"
+					+ "<td class=\"produktinfo preis\">" + this.htmlAusgabe.outPreisformat(produktModel.getPreisBrutto()) + "</td>\n"
 					+ "</tr>\n"
 					+ "<tr>\n"
-					+ "<td>" + this.htmlAusgabe.outPreisverordnung(produktModel.getSteuerSatz()) + "</td>\n"
+					+ "<td class=\"produktinfo preisverordnung\">" + this.htmlAusgabe.outPreisverordnung(produktModel.getSteuerSatz()) + "</td>\n"
 					+ "</tr>\n"
 					+ "<tr>\n"
-					+ "<td>";
+					+ "<td class=\"produktinfo warenkorb\">";
 					if(produktModel.getBestand() == 0) {
 						this.output += this.resourceBundle.getString("NICHTVORRAETIG");
 					} else {
@@ -85,15 +89,17 @@ public class ProduktinfoView {
 		this.output	+= "</td>\n"
 					+ "</tr>\n"
 					+ "<tr>\n"
-					+ "<td>bla bla</td>\n"
+					+ "<td class=\"produktinfo preis\">bla bla</td>\n"
 					+ "</tr>\n"
-					+ "</table>\n</td>\n"
+					+ "</table>\n"
+					+ ""
+					+ "</td>\n"
 					+ "</tr>\n"
 					+ "<tr>\n"
-					+ "<td colspan=\"3\">" + this.produktModel.getBeschreibung() + "</td>\n"
+					+ "<td class=\"produktinfo beschreibung\" colspan=\"3\">" + this.produktModel.getBeschreibung() + "</td>\n"
 					+ "</tr>\n"
 					+ "<tr>\n"
-					+ "<td colspan=\"3\">zusätzliche Informationen</td>\n"
+					+ "<td class=\"produktinfo\" colspan=\"3\">zusätzliche Informationen</td>\n"
 					+ "</tr>\n"
 					+ "</table>\n";
 		/*
