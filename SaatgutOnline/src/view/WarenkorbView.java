@@ -43,10 +43,10 @@ public class WarenkorbView
 	public void outWarenkorbAnfang()
 	{					//TODO remove
 		this.out.println("<table>");		
-		this.out.println("<tr>\n<td colspan=\"7\">");
+		this.out.println("<tr>\n<td colspan=\"8\">");
 		this.out.println(this.resourceBundle.getString("WARENKORB"));
 		this.out.println("</td>\n</tr>");
-		this.out.println("<tr>\n<td colspan=\"7\">\n</tr>");
+		this.out.println("<tr>\n<td colspan=\"8\">\n</tr>");
 		this.out.println("<tr>\n<td>");
 		this.out.println(this.resourceBundle.getString("NAME"));
 		this.out.println("</td>\n<td>");
@@ -58,38 +58,14 @@ public class WarenkorbView
 		this.out.println("</td>\n<td>");
 		this.out.println(this.resourceBundle.getString("MENGE"));
 		this.out.println("</td>\n<td>");
+		this.out.println(this.resourceBundle.getString("BESTAND"));
+		this.out.println("</td>\n<td>");
 		this.out.println(this.resourceBundle.getString("GESAMTPREIS_POSITION"));
 		this.out.println("</td>\n<td>");
 		this.out.println("<form action=\"Warenkorb\" method=\"GET\">");
 		this.out.println(this.resourceBundle.getString("POSITION_ENTFERNEN"));
 		this.out.println("</td>\n</tr>");
 		this.out.println("<tr>\n<td colspan=\"7\">\n</td>\n</tr>");
-	}
-
-	public void outWarenkorbEnde(String zwischensummeFormatiert)
-	{
-		this.out.println("<tr>\n<td colspan=\"7\">\n</td>\n</tr>");
-		this.out.println("<tr>\n<td colspan=\"3\">");
-		this.out.println("</td>\n<td colspan=\"2\">");		
-		this.out.println("</td>\n<td>");
-		this.out.println(zwischensummeFormatiert);
-		this.out.println("</td>\n<td>");
-		this.out.println(this.resourceBundle.getString("ZWISCHENSUMME_BESTELLUNG"));
-		this.out.println("</td>\n</tr>\n<tr>\n<td colspan=\"7\">");
-		this.out.println("</td>\n</tr>\n<tr>\n<td>");
-		this.out.println("<input type=\"submit\" name=\"aktualisieren\" value=\"" + this.resourceBundle.getString("AKTUALISIEREN") + "\">");
-		this.out.println("</form>");
-		this.out.println("</td>\n<td colspan=\"2\">");
-		this.out.println("<a href=\"/SaatgutOnline/Warenkorb?leeren=true\">\n" + this.resourceBundle.getString("WARENKORB_LEEREN") + "\n</a>");		
-		this.out.println("</td>\n<td colspan=\"2\">");
-		this.out.println("<a href=\""+ this.urlController.urlAusSessionHolen("Produktseite") + "\">\n" + this.resourceBundle.getString("WEITER") + "\n</a>");
-		this.out.println("</td>\n<td colspan=\"2\">");		
-		
-		// FIXME link anpassen und NoOp entfernen!
-		this.out.println("<a href=\"/SaatgutOnline/NoOperation\">\n" + this.resourceBundle.getString("KASSE") + "\nNoOP</a>");
-		
-		this.out.println("</td>\n</tr>");
-		this.out.println("</table>");
 	}
 	
 	public void outWarenkorbInhalt(ProduktModel produktModel, int menge, String einzelpreisFormatiert, String gesamtpreisPositionFormatiert)
@@ -109,24 +85,54 @@ public class WarenkorbView
 		this.out.println("</td>\n<td>");				
 		this.out.println("<input type=\"text\" name=\"menge_" + produktModel.getId() + "\" value=\""+ menge +"\" size=2");
 		this.out.println("</td>\n<td>");
+		this.out.println(produktModel.getBestand());
+		this.out.println("</td>\n<td>");
 		this.out.println(gesamtpreisPositionFormatiert);
 		this.out.println("</td>\n<td>");
 		this.out.println("<input type=\"checkbox\" name=\"entfernen_"+ produktModel.getId() + "\" value=\"true\">");
 		this.out.println("</td>\n</tr>");		
 	}
-		
-	public void outLeererWarenkorb()
-	{
-		this.out.println("<tr>\n<td colspan=\"7\">");
-		this.out.println(this.resourceBundle.getString("WARENKORB_LEER"));
-		this.out.println("</td>\n</tr>");
-	}
-	
+
 	public void outMengeNichtImBestand()
 	{		
-		this.out.println("<tr>\n<td colspan=\"7\">\n</td>\n</tr>\n<tr>\n<td colspan=\"7\">");
+		this.out.println("<tr>\n<td colspan=\"8\">\n</td>\n</tr>\n<tr>\n<td colspan=\"7\">");
 		this.out.println(this.resourceBundle.getString("MENGE_NICHT_IM_BESTAND"));
 		this.out.println("</td>\n</tr>");		
 	}
+	
+	public void outLeererWarenkorb()
+	{
+		this.out.println("<tr>\n<td colspan=\"8\">");
+		this.out.println(this.resourceBundle.getString("WARENKORB_LEER"));
+		this.out.println("</td>\n</tr>");
+	}	
+
+	public void outWarenkorbEnde(String zwischensummeFormatiert)
+	{
+		this.out.println("<tr>\n<td colspan=\"8\">\n</td>\n</tr>");
+		this.out.println("<tr>\n<td colspan=\"4\">");
+		this.out.println("</td>\n<td colspan=\"2\">");
+		this.out.println(this.resourceBundle.getString("ZWISCHENSUMME_BESTELLUNG"));
+		this.out.println("</td>\n<td>");
+		this.out.println(zwischensummeFormatiert);
+		this.out.println("</td>\n<td>");		
+		this.out.println("</td>\n</tr>\n<tr>\n<td colspan=\"7\">");
+		this.out.println("</td>\n</tr>\n<tr>\n<td>");
+		this.out.println("<input type=\"submit\" name=\"aktualisieren\" value=\"" + this.resourceBundle.getString("AKTUALISIEREN") + "\">");
+		this.out.println("</form>");
+		this.out.println("</td>\n<td colspan=\"2\">");
+		this.out.println("<a href=\"/SaatgutOnline/Warenkorb?leeren=true\">\n" + this.resourceBundle.getString("WARENKORB_LEEREN") + "\n</a>");		
+		this.out.println("</td>\n<td colspan=\"2\">");
+		this.out.println("<a href=\""+ this.urlController.urlAusSessionHolen("Produktseite") + "\">\n" + this.resourceBundle.getString("WEITER") + "\n</a>");
+		this.out.println("</td>\n<td colspan=\"2\">");		
+		
+		// FIXME link anpassen und NoOp entfernen!
+		this.out.println("<a href=\"/SaatgutOnline/NoOperation\">\n" + this.resourceBundle.getString("KASSE") + "\nNoOP</a>");
+		
+		this.out.println("</td>\n</tr>");
+		this.out.println("</table>");
+	}
+	
+
 
 }

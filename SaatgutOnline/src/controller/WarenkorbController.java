@@ -55,7 +55,7 @@ public class WarenkorbController
 					menge = anzuzeigendesProduktModel.getBestand();
 					this.warenkorbView.outMengeNichtImBestand();
 				}
-
+				
 				double gesamtpreisPosition = menge * anzuzeigendesProduktModel.getPreisBrutto();
 				String einzelpreisFormatiert = htmlAusgabe.outPreisformat(anzuzeigendesProduktModel.getPreisBrutto());
 				String gesamtpreisPositionFormatiert = htmlAusgabe.outPreisformat(gesamtpreisPosition);
@@ -101,25 +101,24 @@ public class WarenkorbController
 			if (warenkorbInhalt.hasMoreElements())
 			{
 				boolean produktNichtImWarenkorb = true;
+				int hinzugefuegteMenge = Integer.parseInt(this.request.getParameter("menge"));
 
 				// WK-Inhalte mit Produkt vergleichen
 				while (warenkorbInhalt.hasMoreElements())
 				{
-					ProduktModel produktImWarenkorb = warenkorbInhalt.nextElement();
-					if (produktModelAusDatenbank.getId() == produktImWarenkorb.getId())
+					ProduktModel produktModelImWarenkorb = warenkorbInhalt.nextElement();
+					if (produktModelAusDatenbank.getId() == produktModelImWarenkorb.getId())
 					{
-						//TODO MENGE AUSLAGERN!!
 						produktNichtImWarenkorb = false;
-						int mengeImWarenkorb = this.warenkorb.get(produktImWarenkorb);
-						int hinzugefuegteMenge = Integer.parseInt(this.request.getParameter("menge"));
+						int mengeImWarenkorb = this.warenkorb.get(produktModelImWarenkorb);						
 						int neueMenge = mengeImWarenkorb + hinzugefuegteMenge;
-						this.warenkorb.put(produktImWarenkorb, neueMenge);
+						this.warenkorb.put(produktModelImWarenkorb, neueMenge);
 					}
 				}
 
 				if (produktNichtImWarenkorb)
 				{
-					this.warenkorb.put(produktModelAusDatenbank, Integer.parseInt(this.request.getParameter("menge")));
+					this.warenkorb.put(produktModelAusDatenbank, hinzugefuegteMenge);
 				}
 
 			} else
