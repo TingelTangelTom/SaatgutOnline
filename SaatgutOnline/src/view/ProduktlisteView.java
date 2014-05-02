@@ -8,13 +8,13 @@ import java.util.ResourceBundle;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import model.HtmlAusgabe;
 import model.ProduktModel;
-import controller.HtmlOutput;
 import controller.ProduktController;
 
 public class ProduktlisteView {
 	private ProduktController produktController;
-	private HtmlOutput htmlOutput;
+	private HtmlAusgabe htmlOutput;
 	private ResourceBundle resourceBundle;
 	private String output;
 	private ArrayList<ProduktModel> produktliste;
@@ -24,7 +24,7 @@ public class ProduktlisteView {
 	public ProduktlisteView(HttpServletRequest request) {
 		
 		this.produktController = new ProduktController(request);
-		this.htmlOutput = new HtmlOutput(request);
+		this.htmlOutput = new HtmlAusgabe(request);
 		this.produktliste = new ArrayList<>();
 		this.kategorie = request.getParameter("kategorie");
 

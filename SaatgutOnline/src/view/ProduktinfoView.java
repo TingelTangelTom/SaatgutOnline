@@ -7,14 +7,14 @@ import java.util.PropertyResourceBundle;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpServletRequest;
 
-import controller.HtmlOutput;
 import controller.ProduktController;
+import model.HtmlAusgabe;
 import model.ProduktModel;
 
 public class ProduktinfoView {
 	private ProduktController produktController;
 	private ProduktModel produktModel;
-	private HtmlOutput htmlOutput;
+	private HtmlAusgabe htmlOutput;
 	private String output;
 	private HashMap<String, String> merkmale;
 	private static int warenkorbmenge;
@@ -23,7 +23,7 @@ public class ProduktinfoView {
 		
 		this.produktController = new ProduktController(request);
 		this.produktModel = new ProduktModel();
-		this.htmlOutput = new HtmlOutput(request);
+		this.htmlOutput = new HtmlAusgabe(request);
 		
 		HttpSession session = request.getSession();
 		Locale locale = (Locale)session.getAttribute("sprache");

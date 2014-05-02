@@ -1,4 +1,4 @@
-package controller;
+package model;
 
 
 import java.text.MessageFormat;
@@ -11,13 +11,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-public class HtmlOutput extends HttpServlet{
+public class HtmlAusgabe extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
 	private Locale locale;
 	private HttpSession session;
 	
-	public HtmlOutput(HttpServletRequest request) {
+	public HtmlAusgabe(HttpServletRequest request) {
 		
 		this.session = request.getSession();
 		this.locale = (Locale)session.getAttribute("sprache");
