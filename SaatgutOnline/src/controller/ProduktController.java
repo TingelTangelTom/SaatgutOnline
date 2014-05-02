@@ -61,7 +61,7 @@ public class ProduktController {
 		try {
 			
 			String query = "SELECT p.produkt_id, p.produkt_bestand, pb.produkt_name, pb.produkt_beschreibung,"
-						+ "pb.produkt_suchbegriffe, p.produkt_angesehen, p.produkt_preis, p.produkt_gewicht,"
+						+ "pb.produkt_suchbegriffe, p.produkt_angesehen, p.produkt_preis, p.produkt_vpe,"
 						+ "p.produkt_steuer_id, p.produkt_datum_hinzugefuegt, p.produkt_datum_geaendert, p.produkt_bestellnummer "
 						+ "FROM produkt AS p "
 						+ "INNER JOIN produkt_beschreibung AS pb ON p.produkt_id = pb.produkt_id "
@@ -77,7 +77,7 @@ public class ProduktController {
 				this.produktModel.setSuchbegriffe(resultset.getString(5));
 				this.produktModel.setAngesehen(resultset.getInt(6));
 				this.produktModel.setPreisNetto(resultset.getDouble(7));
-				this.produktModel.setGewicht(resultset.getInt(8));
+				this.produktModel.setVpe(resultset.getInt(8));
 				this.produktModel.setSteuerBetrag(resultset.getDouble(9));
 				this.produktModel.setHinzugefeugt(resultset.getDate(10));
 				this.produktModel.setGeaendert(resultset.getDate(11));
