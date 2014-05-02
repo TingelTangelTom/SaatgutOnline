@@ -8,7 +8,6 @@ import java.util.ResourceBundle;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import model.HtmlAusgabe;
 import model.ProduktModel;
 import controller.ProduktController;
 

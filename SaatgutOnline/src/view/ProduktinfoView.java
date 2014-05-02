@@ -8,7 +8,6 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpServletRequest;
 
 import controller.ProduktController;
-import model.HtmlAusgabe;
 import model.ProduktModel;
 
 public class ProduktinfoView {
