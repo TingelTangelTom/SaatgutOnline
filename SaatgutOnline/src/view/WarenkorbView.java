@@ -80,18 +80,9 @@ public class WarenkorbView
 		this.out.println("<input type=\"submit\" name=\"aktualisieren\" value=\"" + this.resourceBundle.getString("AKTUALISIEREN") + "\">");
 		this.out.println("</form>");
 		this.out.println("</td>\n<td colspan=\"2\">");
-		this.out.println("<form action=\"Warenkorb\" method=\"GET\">");
-		this.out.println("<input type=\"submit\" name=\"leeren\" value=\"" + this.resourceBundle.getString("WARENKORB_LEEREN") + "\">");
-		this.out.println("</form>");
+		this.out.println("<a href=\"/SaatgutOnline/Warenkorb?leeren=true\">\n" + this.resourceBundle.getString("WARENKORB_LEEREN") + "\n</a>");		
 		this.out.println("</td>\n<td colspan=\"2\">");
-		
-		// FIXME action anpassen und NoOp entfernen!
-//		this.out.println("<form action=\"" + this.urlController.urlAusSessionHolen("Warenkorb") + "\" method=\"GET\">");
-//		this.out.println("<input type=\"submit\" name=\"weiter\" value=\"" + this.resourceBundle.getString("WEITER") + " NoOP\">");
-//		this.out.println("</form>");
 		this.out.println("<a href=\""+ this.urlController.urlAusSessionHolen("Warenkorb") + "\">\n" + this.resourceBundle.getString("WEITER") + "\n</a>");
-		
-
 		this.out.println("</td>\n<td colspan=\"2\">");		
 		
 		// FIXME action anpassen und NoOp entfernen!
@@ -114,8 +105,7 @@ public class WarenkorbView
 		this.out.println("</td>\n<td>");
 		this.out.println(produktModel.getBestellnummer());
 		this.out.println("</td>\n<td>");
-		//FIXME getVPE einfügen!
-//		this.out.println(produktModel.get);
+		this.out.println(produktModel.getVpe());
 		this.out.println("</td>\n<td>");
 		this.out.println(einzelpreisFormatiert);
 		this.out.println("</td>\n<td>");				
