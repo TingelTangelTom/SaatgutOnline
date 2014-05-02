@@ -22,9 +22,7 @@ public class WarenkorbController
 	public WarenkorbController(HttpServletRequest request, HttpServletResponse response)
 	{		
 		//TODO remove
-		System.out.println("---WarenkorbController---");
-		UrlController urlController = new UrlController(request);
-		urlController.urlInSessionLegen();
+		System.out.println("---WarenkorbController---");		
 		
 		this.request = request;
 		this.session = request.getSession();

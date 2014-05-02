@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import controller.UrlController;
 import controller.WarenkorbController;
 
 /**
@@ -37,9 +38,11 @@ public class WarenkorbServlet extends HttpServlet
 		RequestDispatcher rd = getServletContext().getRequestDispatcher("/Kopfbereich");
 		rd.include(request, response);
 	
+		// UrlController
+		UrlController urlController = new UrlController(request);
+		urlController.urlInSessionLegen();
 		
-		WarenkorbController warenkorbController = new WarenkorbController(request, response);
-		
+		WarenkorbController warenkorbController = new WarenkorbController(request, response);		
 		warenkorbController.warenkorbAnzeigen();
 		
 		
