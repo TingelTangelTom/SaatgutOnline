@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import controller.UrlController;
 import view.ProduktlisteView;
 
 /**
@@ -42,6 +43,11 @@ public class ProduktlisteServlet extends HttpServlet {
 		RequestDispatcher rd = getServletContext().getRequestDispatcher("/Kopfbereich");
 		rd.include(request, response);
  		
+		// UrlController
+		UrlController urlController = new UrlController(request);
+		urlController.urlInSessionLegen();
+		
+		
 		PrintWriter out = response.getWriter();
 		
 		response.setContentType("text/html");
