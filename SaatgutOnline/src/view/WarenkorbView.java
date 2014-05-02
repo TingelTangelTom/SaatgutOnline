@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import controller.UrlController;
 import model.ProduktModel;
 
 public class WarenkorbView
@@ -17,10 +18,12 @@ public class WarenkorbView
 	private PrintWriter out;
 	private ResourceBundle resourceBundle;
 	private HttpSession session;
+	private UrlController urlController;
 
 	public WarenkorbView(HttpServletRequest request, HttpServletResponse response)
 	{
 		this.session = request.getSession();
+		this.urlController = new UrlController(request);
 
 		response.setContentType("text/html");
 		try
@@ -83,9 +86,11 @@ public class WarenkorbView
 		this.out.println("</td>\n<td colspan=\"2\">");
 		
 		// FIXME action anpassen und NoOp entfernen!
-		this.out.println("<form action=\"NoOperation\" method=\"GET\">");
-		this.out.println("<input type=\"submit\" name=\"weiter\" value=\"" + this.resourceBundle.getString("WEITER") + " NoOP\">");
-		this.out.println("</form>");
+//		this.out.println("<form action=\"" + this.urlController.urlAusSessionHolen("Warenkorb") + "\" method=\"GET\">");
+//		this.out.println("<input type=\"submit\" name=\"weiter\" value=\"" + this.resourceBundle.getString("WEITER") + " NoOP\">");
+//		this.out.println("</form>");
+		this.out.println("<a href=\""+ this.urlController.urlAusSessionHolen("Warenkorb") + "\">\n" + this.resourceBundle.getString("WEITER") + "\n</a>");
+		
 
 		this.out.println("</td>\n<td colspan=\"2\">");		
 		
