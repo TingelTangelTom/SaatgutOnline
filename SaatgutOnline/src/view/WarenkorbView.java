@@ -42,7 +42,7 @@ public class WarenkorbView
 
 	public void outWarenkorbAnfang()
 	{					//TODO remove
-		this.out.println("<table border='1'>");		
+		this.out.println("<table>");		
 		this.out.println("<tr>\n<td colspan=\"7\">");
 		this.out.println(this.resourceBundle.getString("WARENKORB"));
 		this.out.println("</td>\n</tr>");
@@ -120,6 +120,13 @@ public class WarenkorbView
 		this.out.println("<tr>\n<td colspan=\"7\">");
 		this.out.println(this.resourceBundle.getString("WARENKORB_LEER"));
 		this.out.println("</td>\n</tr>");
+	}
+	
+	public void outMengeNichtImBestand()
+	{		
+		this.out.println("<tr>\n<td colspan=\"7\">\n</td>\n</tr>\n<tr>\n<td colspan=\"7\">");
+		this.out.println(this.resourceBundle.getString("MENGE_NICHT_IM_BESTAND"));
+		this.out.println("</td>\n</tr>");		
 	}
 
 }

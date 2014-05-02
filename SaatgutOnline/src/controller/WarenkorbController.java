@@ -49,6 +49,12 @@ public class WarenkorbController
 			{
 				ProduktModel anzuzeigendesProduktModel = produkte.nextElement();
 				int menge = this.warenkorb.get(anzuzeigendesProduktModel);
+				
+				if(menge > anzuzeigendesProduktModel.getBestand())
+				{
+					menge = anzuzeigendesProduktModel.getBestand();
+					this.warenkorbView.outMengeNichtImBestand();
+				}
 
 				double gesamtpreisPosition = menge * anzuzeigendesProduktModel.getPreisBrutto();
 				String einzelpreisFormatiert = htmlAusgabe.outPreisformat(anzuzeigendesProduktModel.getPreisBrutto());
