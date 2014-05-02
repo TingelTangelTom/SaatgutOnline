@@ -1,48 +1,56 @@
 package servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import controller.EMailController;
+import controller.KontaktFormularVerarbeitungController;
 
-@WebServlet("/KontaktFormular")
+@WebServlet("/KontaktFormularVerarbeitung")
 public class KontaktFormularVerarbeitungServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	//Konstruktor
 	public KontaktFormularVerarbeitungServlet() {
 		super();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		response.setContentType("text/html");
-		PrintWriter out;
-		try {
-			out = response.getWriter();
-		} catch (IOException e) {
-			e.printStackTrace();
-			return;
-		}
 		
-		//Daten aus Kontakformular als E-Mail senden
-		EMailController eMailController = new EMailController();
-		eMailController.sendeEmail(request.getParameter("E-Mail"), 
-				request.getParameter("Betreff"), "kontakt@saatgutonline.de", 
-				request.getParameter("Nachricht"), request.getParameter("Anrede"), 
-				request.getParameter("Vorname"), request.getParameter("Nachname"));
+		// Kopfbereich (und damit auch Navigationsbereich) einbinden
+		RequestDispatcher rd = getServletContext().getRequestDispatcher("/Kopfbereich");
+		rd.include(request, response);
 
-		//Ausgabe nach senden
-		out.println("Vielen Dank für ihre Nachricht.");
-		out.println("<a href=\"/SaatgutOnline/IndexPlatzhalter\">Startseite</a>"); 
-		
+		// Inhalte ausgeben (per view!)
+		KontaktFormularVerarbeitungController kontaktFormularVerarbeitungController = new KontaktFormularVerarbeitungController(request, response);
+
+		// Fussbereich einbinden
+		rd = getServletContext().getRequestDispatcher("/Fussbereich");
+		rd.include(request, response);
 	}
+		
+
+
+//		response.setContentType("text/html");
+//		PrintWriter out;
+//		try {
+//			out = response.getWriter();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//			return;
+//		}
+//		
+////TODO : Hier war der EmailController
+//
+////TODO : Hier war die Ausgabe nach senden
+//		
+//	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

@@ -27,7 +27,7 @@ import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
 import controller.DatenbankController;
-import controller.EMailController;
+import controller.EmailController;
 
 import java.io.File;
 

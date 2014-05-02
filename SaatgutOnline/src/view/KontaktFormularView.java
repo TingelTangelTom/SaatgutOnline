@@ -33,7 +33,7 @@ public class KontaktFormularView {
 		out.println("<h1>Kontakt</h1><p><label>SaatgutOnline GmbH<br>Am Waldrand 325<br>"
 			    + "12325 Palmenhausen<br>E-Mail kontakt@saatgutonline.de<br>Tel 049-098-764512-0<br>"
 			    + "Fax 049-098-764512-99 </label></p>"
-			    + "<form action=/SaatgutOnline/KontaktFormular>"
+			    + "<form action=/SaatgutOnline/KontaktFormularVerarbeitung>"
 			    + "<table width=\"200\" border=\"0\" cellpadding=\"1\" cellspacing=\"1\">"
 			    + "<tr><td>Anrede:</td><td><select name=\"Anrede\" id=\"Anrede\" title=\"Anrede\">"
 			    + "<option>Frau</option><option>Herr</option></select></td></tr>"
@@ -49,7 +49,5 @@ public class KontaktFormularView {
 			    + "<tr><td valign=\"top\">&nbsp;</td><td><div align=\"left\">"
 			    + "<input name=\"submit\" type=\"submit\" id=\"submit\" formmethod=\"POST\" value=\"Senden\"></div></td></tr></table></form>");
 	}
-	
-	
 	
 }
