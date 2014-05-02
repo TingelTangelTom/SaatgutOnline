@@ -36,10 +36,12 @@ Anja
 	- FERTIG : Impressum : FERTIG
 	- FERTIG : AGB : FERTIG (Ausgabe muss noch Formatiert werden (HTML in Datenbank))
 	- Versandkosten (Versand & Zahlung)
-	- FERTIG : Datenschutz : FERTIG (In Datenbank(txt) Übertragungsstandard aktualisieren)
+	- FERTIG : Datenschutz : FERTIG
 	- Sitemap
 	- FERTIG : Copyright : FERTIG
-- FERTIG : Zurück oder Startseite Buttons oder Links in Impressum, Datenschutz und co.? : FERTIG
+- Zurück oder Startseite Links in Impressum, Datenschutz und co.? : Ja, Links aktualisieren
+  (siehe AGBView)
+- Zurück Links in KontaktFormularVerarbeitungView
 - Wiederrufsbelehrung extra?? : NEIN
 - Internationalisierung
 - Alle Seitenquelltexte mit /n versehen !!
