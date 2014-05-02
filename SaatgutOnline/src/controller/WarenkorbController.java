@@ -53,7 +53,9 @@ public class WarenkorbController
 				if(menge > anzuzeigendesProduktModel.getBestand())
 				{
 					menge = anzuzeigendesProduktModel.getBestand();
+					this.warenkorb.put(anzuzeigendesProduktModel, menge);
 					this.warenkorbView.outMengeNichtImBestand();
+					
 				}
 				
 				double gesamtpreisPosition = menge * anzuzeigendesProduktModel.getPreisBrutto();
