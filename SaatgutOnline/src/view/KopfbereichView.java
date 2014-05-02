@@ -87,7 +87,7 @@ public class KopfbereichView
 		//TODO remove
 		this.out.println(" (noOp)");
 		this.out.println("</td>\n</tr>\n<tr>\n<td>\n</td>\n<td colspan=\"2\">");
-		this.out.println("<a href=\"/SaatgutOnline/Registrieren\">\n" + this.resourceBundle.getString("REGISTRIEREN") + "\n</a>");
+		this.out.println("<a href=\"/SaatgutOnline/Registrierung\">\n" + this.resourceBundle.getString("REGISTRIEREN") + "\n</a>");
 		this.out.println("</td>\n</tr>");		
 		this.out.println("</table>");
 		this.out.println("</form>");
