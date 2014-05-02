@@ -25,17 +25,14 @@ a:hover { text-decoration:none; font-weight:bold; color:#BEBEBE; }
 a:active { text-decoration:none; font-weight:bold; color:#BEBEBE; }
 a:focus { text-decoration:none; font-weight:bold; color:#BEBEBE; }
 
+
 .fussbereich a:link { text-decoration:none; font-weight:bold; color:#000000; }
 .fussbereich a:visited { text-decoration:none; font-weight:bold; color:#000000; }
 .fussbereich a:hover { text-decoration:none; font-weight:bold; color:#000000; }
 .fussbereich a:active { text-decoration:none; font-weight:bold; color:#000000; }
 .fussbereich a:focus { text-decoration:none; font-weight:bold; color:#000000; }
 
-.produktliste a:link { text-decoration:none; font-weight:bold; color:#E3E3E3; }
-.produktliste a:visited { text-decoration:none; font-weight:bold; color:#000000; }
-.produktliste a:hover { text-decoration:none; font-weight:bold; color:#000000; }
-.produktliste a:active { text-decoration:none; font-weight:bold; color:#000000; }
-.produktliste a:focus { text-decoration:none; font-weight:bold; color:#000000; }
+
 
 .kopfbereich {
   	font-family: Verdana, Arial;
@@ -104,6 +101,13 @@ a:focus { text-decoration:none; font-weight:bold; color:#BEBEBE; }
 	border: px solid #000000;
 }
 
+
+table.produktliste a:link {color: green; background: white; text-decoration:none;}
+table.produktliste a:visited {color: green; background: white; text-decoration: none;}
+table.produktliste a:hover {color: green; background: white; text-decoration:none;}
+table.produktliste a:active {color: green; background: white; text-decoration: none;}
+table.produktliste a:focus {color: green; background: white; text-decoration:none;}
+
 table.produktliste {
   	color: #000000;
   	width: 100%;
@@ -118,9 +122,20 @@ table.produktliste {
 .produktliste td.preis {
 	width: 100%;
 	font-family: Verdana, Arial;
-  	font-size:12px;
+  	font-size:13px;
   	font-weight:bold;
+  	color: green;
   	text-align: right;
+  	height: 100%;
+}
+
+.produktliste td.preisverordnung {
+	font-family: Verdana, Arial;
+	font-size:9px;
+  	font-weight:normal;
+  	text-align: right;
+  	vertical-align: top;
+	width: 100%;
 }
 
 .produktliste td.bild {
@@ -129,11 +144,12 @@ table.produktliste {
 
 .produktliste td.titel {
 	font-family: Verdana, Arial;
-	font-size:12px;
+	color: green;
+	font-size:13px;
   	font-weight:bold;
   	text-align: left;
   	vertical-align: top;
-	width: 100%;
+	width: 50%;
 }
 
 .produktliste td.bestellnummer {
@@ -142,15 +158,16 @@ table.produktliste {
   	font-weight:normal;
   	text-align: left;
   	vertical-align: top;
-	width: 100%;
+	width: 50%;
 }
 
 .produktliste td.beschreibung {
-	font-size:10px;
+	font-size:11px;
   	font-weight:normal;
   	text-align: justify;
   	vertical-align: top;
 	width: 100%;
 }
+
 
 

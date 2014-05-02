@@ -50,7 +50,7 @@ public class HtmlAusgabe extends HttpServlet{
 */
 	public String outPreisformat(double preis) {
 		
-		NumberFormat waehrungsFormat = NumberFormat.getCurrencyInstance(Locale.GERMAN);
+		NumberFormat waehrungsFormat = NumberFormat.getCurrencyInstance(this.locale);
 		String waehrung = waehrungsFormat.format(preis);
 
 		return waehrung;
