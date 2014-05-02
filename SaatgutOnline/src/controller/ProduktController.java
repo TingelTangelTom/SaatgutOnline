@@ -29,7 +29,6 @@ public class ProduktController {
 	private ProduktModel produktModel;
 	private double steuersatz;
 	private int sprache_id;
-	private String kategorie_id;
 	
 	public ProduktController(HttpServletRequest request) {
 		super();
@@ -37,7 +36,6 @@ public class ProduktController {
 		HttpSession session = request.getSession();
 		this.produktModel = new ProduktModel();
 		this.sprache_id = (int)session.getAttribute("spracheId");
-		
 		this.getSortierung(request);
 		
 	}
@@ -91,6 +89,11 @@ public class ProduktController {
 
 		return this.produktModel;
 	}
+	
+	/**
+	 * 
+	 * @param id - ID des Produktes, über die in der Datenbank gesucht wird
+	 */
 	private void getSteuerinformationen(int id) {
 		try {
 			String query = "SELECT steuersatz FROM steuersatz WHERE steuersatz_id = " + this.produktModel.getSteuerBetrag();

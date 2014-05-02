@@ -53,49 +53,48 @@ public class ProduktlisteView {
 		
 		//TODO Comparator einfügen
 		System.out.println("-----> Kategorie: " + this.kategorie);
-		this.output = "<table class=\"produktliste\">"
-				+ "<tr><td class=\"produktliste kategoriename\">" + this.htmlAusgabe.outKategoriename(this.kategorie) + "</td>"
+		this.output = "<table class=\"produktliste\">\n"
+				+ "<tr>\n<td class=\"produktliste kategoriename\">" + this.htmlAusgabe.outKategoriename(this.kategorie) + "</td>\n"
 				+ "<td class=\"produktliste sortierung\">sortieren: Name "
 				+ "<a href=\"/SaatgutOnline/Produktliste?kategorie=1&p_anzeige=pn,3,0\"><img src=\"resources/bilder/icons/pfeil_hoch_runter.gif\" width=\"5\" height=\"10\" border=\"0\" alt=\"Sortierung\"></a> | "
 				+ "Preis "
 				+ "<a href=\"/SaatgutOnline/Produktliste?kategorie=1&p_anzeige=pp,3,0\"><img src=\"resources/bilder/icons/pfeil_hoch_runter.gif\" width=\"5\" height=\"10\" border=\"0\" alt=\"Sortierung\"></a>"
-				+ "</td></tr>"
-				+ "<tr><td colspan=\"2\" style=\"background-image:url(resources/bilder/icons/trennlinie.gif);height: 2px; background-repeat:repeat-x;\">&nbsp;</td></tr>"
-				+ "<tr><td class=\"produktliste listenprodukt\" colspan=\"2\" >";
+				+ "</td>\n</tr>\n"
+				+ "<tr>\n<td colspan=\"2\" style=\"background-image:url(resources/bilder/icons/trennlinie.gif);height: 2px; background-repeat:repeat-x;\">&nbsp;</td>\n</tr>\n"
+				+ "<tr>\n<td class=\"produktliste listenprodukt\" colspan=\"2\" >\n";
 		for (int i = 0; i < this.produktliste.size(); i++) {
 			ProduktModel produktModel = this.produktliste.get(i);
-			this.output += "<table class=\"produktliste\">"
-			+ "<tr>"
-			+ "<td class=\"produktliste bild\" rowspan=\"4\"><img src=\"resources/bilder/phoenix_canariensis.jpg\" width=\"100\" height=\"100\" alt=\"Phoenix Canariensis\"></td>"
-	    	+ "<td class=\"produktliste titel\">" + produktModel.getName() + "</td>"
-	    	+ "<td class=\"produktliste preis\">" + this.htmlAusgabe.outPreisformat(produktModel.getPreisBrutto()) + "</td>"
-	    	+ "</tr>"
-	    	+ "<tr>"
-    		+ "<td class=\"produktliste bestellnummer\">" + this.resourceBundle.getString("BESTELLNUMMER") + " " + produktModel.getBestellnummer() + "</td><td class=\"produktliste preisverordnung\">" + this.htmlAusgabe.outPreisverordnung(produktModel.getSteuerSatz()) + "</td>"
-    		+ "</tr>"
-    		+ "<tr>"
-    		+ "<td class=\"produktliste beschreibung\" colspan=\"2\">" + this.htmlAusgabe.outKurzeProduktbeschreibung(produktModel.getBeschreibung(), 300, produktModel.getId()) + "</td>"
-    		+ "</tr>"
-    		+ "<tr>"
-    		+ "<td><a href=\"/SaatgutOnline/Produktinfo?produkt=" + produktModel.getId() + "\"><b>Details</b></a></td>"
+			this.output += "<table class=\"produktliste\">\n"
+			+ "<tr>\n"
+			+ "<td class=\"produktliste bild\" rowspan=\"4\"><img src=\"resources/bilder/phoenix_canariensis.jpg\" width=\"100\" height=\"100\" alt=\"Phoenix Canariensis\"></td>\n"
+	    	+ "<td class=\"produktliste titel\">" + htmlAusgabe.outLinkProduktinfo(produktModel.getName(), produktModel.getId()) + "</td>\n"
+	    	+ "<td class=\"produktliste preis\">" + this.htmlAusgabe.outPreisformat(produktModel.getPreisBrutto()) + "</td>\n"
+	    	+ "</tr>\n"
+	    	+ "<tr>\n"
+    		+ "<td class=\"produktliste bestellnummer\">" + this.resourceBundle.getString("BESTELLNUMMER") + " " + produktModel.getBestellnummer() + "</td><td class=\"produktliste preisverordnung\">" + this.htmlAusgabe.outPreisverordnung(produktModel.getSteuerSatz()) + "</td>\n"
+    		+ "</tr>\n"
+    		+ "<tr>\n"
+    		+ "<td class=\"produktliste beschreibung\" colspan=\"2\">" + this.htmlAusgabe.outKurzeProduktbeschreibung(produktModel.getBeschreibung(), 300, produktModel.getId()) + "</td>\n"
+    		+ "</tr>\n"
+    		+ "<tr>\n"
+    		+ "<td>" + htmlAusgabe.outLinkProduktinfo("Details", produktModel.getId()) + "</td>\n"
     		+ "<td align=\"right\">";
 			if(produktModel.getBestand() == 0) {
 				this.output += this.resourceBundle.getString("NICHTVORRAETIG");
-				System.out.println("Vorrätig: " + this.resourceBundle.getString("NICHTVORRAETIG"));
 			} else {
-				this.output += "<form action=\"/SaatgutOnline/Warenkorb\" method=\"POST\">"
-    		+ "<input type=\"hidden\" name=\"menge\" value=\"" + warenkorbmenge + "\">"
-			+ "<input type=\"hidden\" name=\"produkt\" value=\"" + produktModel.getId() + "\">"
-    		+ "<input type=\"image\" src=\"resources/bilder/icons/warenkorb.gif\" alt=\"Warenkorb\">"
-    		+ "</form>";
+				this.output += "<form action=\"/SaatgutOnline/Warenkorb\" method=\"POST\">\n"
+    		+ "<input type=\"hidden\" name=\"menge\" value=\"" + warenkorbmenge + "\">\n"
+			+ "<input type=\"hidden\" name=\"produkt\" value=\"" + produktModel.getId() + "\">\n"
+    		+ "<input type=\"image\" src=\"resources/bilder/icons/warenkorb.gif\" alt=\"Warenkorb\">\n"
+    		+ "</form>\n";
 			}
-			this.output += "</td></tr>"    		
-    		+ "<tr><td colspan=\"3\">&nbsp;</td>"
-    		+ "</tr><tr><td colspan=\"3\" style=\"background-image:url(resources/bilder/icons/trennlinie.gif);height: 1px; background-repeat:repeat-x;\">&nbsp;</td></tr>"
-    		+ "</table>"
+			this.output += "</td>\n</tr>\n"    		
+    		+ "<tr>\n<td colspan=\"3\">&nbsp;</td>\n"
+    		+ "</tr>\n<tr>\n<td colspan=\"3\" style=\"background-image:url(resources/bilder/icons/trennlinie.gif);height: 1px; background-repeat:repeat-x;\">&nbsp;</td>\n</tr>\n"
+    		+ "</table>\n"
 			+ "";
 		}
-		this.output += "</td></tr></table>";	
+		this.output += "</td>\n</tr>\n</table>\n";	
 
 		return output;
 	}

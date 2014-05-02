@@ -115,5 +115,17 @@ public class HtmlAusgabe extends HttpServlet{
 		
 		return kategoriename;
 	}
+	
+	
+	/**
+	 * 
+	 * @param linkString 
+	 * @param produkt_id
+	 * @return
+	 */
+	public String outLinkProduktinfo (String linkString, int produkt_id) {
+		
+		return "<a href=\"/SaatgutOnline/Produktinfo?produkt=" + produkt_id + "\">" + linkString + "</a>";
+	}
 
 }
