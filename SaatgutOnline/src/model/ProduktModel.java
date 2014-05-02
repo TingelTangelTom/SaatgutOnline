@@ -17,7 +17,7 @@ public class ProduktModel {
 	private int angesehen;
 	private double preisNetto;
 	private double preisBrutto;
-	private double gewicht;
+	private double vpe;
 	private double steuerSatz;
 	private double steuerBetrag;
 	private Date hinzugefeugt;
@@ -111,12 +111,12 @@ public class ProduktModel {
 		this.preisBrutto = preisBrutto;
 	}
 	
-	public double getGewicht() {
-		return gewicht;
+	public double getVpe() {
+		return vpe;
 	}
 	
-	public void setGewicht(double gewicht) {
-		this.gewicht = gewicht;
+	public void setVpe(double vpe) {
+		this.vpe = vpe;
 	}
 	
 	public double getSteuerSatz() {

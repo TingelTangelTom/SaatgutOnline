@@ -9,12 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import model.ProduktModel;
-import controller.HtmlOutput;
 import controller.ProduktController;
 
 public class ProduktlisteView {
 	private ProduktController produktController;
-	private HtmlOutput htmlOutput;
+	private HtmlAusgabe htmlOutput;
 	private ResourceBundle resourceBundle;
 	private String output;
 	private ArrayList<ProduktModel> produktliste;
@@ -24,7 +23,7 @@ public class ProduktlisteView {
 	public ProduktlisteView(HttpServletRequest request) {
 		
 		this.produktController = new ProduktController(request);
-		this.htmlOutput = new HtmlOutput(request);
+		this.htmlOutput = new HtmlAusgabe(request);
 		this.produktliste = new ArrayList<>();
 		this.kategorie = request.getParameter("kategorie");
 
@@ -61,20 +60,20 @@ public class ProduktlisteView {
 				+ "<tr><td colspan=\"2\"  style=\"background-image:url(resources/bilder/icons/trennlinie.gif);height: 2px; background-repeat:repeat-x;\">&nbsp;</td></tr><tr><td>";
 		for (int i = 0; i < this.produktliste.size(); i++) {
 			ProduktModel produktModel = this.produktliste.get(i);
-			this.output += "<table width=\"100%\" border=\"0\">"
+			this.output += "<table class=\"produktliste\">"
 			+ "<tr>"
-			+ "<td rowspan=\"4\" style=\"width: 110px;\"><img src=\"resources/bilder/phoenix_canariensis.jpg\" width=\"100\" height=\"100\" alt=\"Phoenix Canariensis\"></td>"
-	    	+ "<td colspan=\"2\">" + produktModel.getName() + "</td>"
-	    	+ "<td align=\"right\" rowspan=\"2\">" + this.htmlOutput.outPreisformat(produktModel.getPreisBrutto()) + "<br>" + this.htmlOutput.outPreisverordnung(produktModel.getSteuerSatz()) + "</td>"
+			+ "<td class=\"produktliste bild\" rowspan=\"4\"><img src=\"resources/bilder/phoenix_canariensis.jpg\" width=\"100\" height=\"100\" alt=\"Phoenix Canariensis\"></td>"
+	    	+ "<td class=\"produktliste titel\">" + produktModel.getName() + "</td>"
+	    	+ "<td class=\"produktliste preis\">" + this.htmlOutput.outPreisformat(produktModel.getPreisBrutto()) + "</td>"
 	    	+ "</tr>"
 	    	+ "<tr>"
-    		+ "<td colspan=\"2\">" + this.resourceBundle.getString("BESTELLNUMMER") + " " + produktModel.getBestellnummer() + "</td>"
+    		+ "<td class=\"produktliste bestellnummer\">" + this.resourceBundle.getString("BESTELLNUMMER") + " " + produktModel.getBestellnummer() + "</td><td class=\"produktliste preisverordnung\">" + this.htmlOutput.outPreisverordnung(produktModel.getSteuerSatz()) + "</td>"
     		+ "</tr>"
     		+ "<tr>"
-    		+ "<td colspan=\"3\">" + this.htmlOutput.outKurzeProduktbeschreibung(produktModel.getBeschreibung(), 300, produktModel.getId()) + "</td>"
+    		+ "<td class=\"produktliste beschreibung\" colspan=\"2\">" + this.htmlOutput.outKurzeProduktbeschreibung(produktModel.getBeschreibung(), 300, produktModel.getId()) + "</td>"
     		+ "</tr>"
     		+ "<tr>"
-    		+ "<td colspan=\"2\"><a href=\"/SaatgutOnline/Produktinfo?produkt=" + produktModel.getId() + "\"><b>Details</b></a></td>"
+    		+ "<td><a href=\"/SaatgutOnline/Produktinfo?produkt=" + produktModel.getId() + "\"><b>Details</b></a></td>"
     		+ "<td align=\"right\">";
 			if(produktModel.getBestand() == 0) {
 				this.output += this.resourceBundle.getString("NICHTVORRAETIG");
@@ -87,7 +86,7 @@ public class ProduktlisteView {
     		+ "</form>";
 			}
 			this.output += "</td></tr>"    		
-    		+ "<tr><td colspan=\"4\">&nbsp;</td>"
+    		+ "<tr><td colspan=\"3\">&nbsp;</td>"
     		+ "</tr>"
     		+ "</table>"
 			+ "</td></tr><tr><td colspan=\"2\"  style=\"background-image:url(resources/bilder/icons/trennlinie.gif);height: 1px; background-repeat:repeat-x;\">&nbsp;</td></tr><tr><td>";

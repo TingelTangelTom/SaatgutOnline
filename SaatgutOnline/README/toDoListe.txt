@@ -16,7 +16,7 @@ Tom
 - Texte (DB) übersetzen
 - Bestellvorgang
 - ERLEDIGT! - Suchfeld im Kopfbereich einfügen
-- Loginbereich --> Logoutbereich
+- ERLEDIGT! - Loginbereich --> Logoutbereich
 
 
 
@@ -30,20 +30,22 @@ Simon
 
 Anja
 - Kontaktformular
-	- E-Mail Ausgabe Formatieren (Tabelle) : FERTIG
+	- FERTIG : E-Mail Ausgabe Formatieren (Tabelle) : FERTIG
 	- E-Mail Validierung
 - Fussbereich
-	- Impressum : FERTIG
-	- AGB : FERTIG (Ausgabe muss noch Formatiert werden (HTML in Datenbank))
+	- FERTIG : Impressum : FERTIG
+	- FERTIG : AGB : FERTIG (Ausgabe muss noch Formatiert werden (HTML in Datenbank))
 	- Versandkosten (Versand & Zahlung)
-	- Datenschutz : FERTIG (In Datenbank(txt) Übertragungsstandard aktualisieren)
+	- FERTIG : Datenschutz : FERTIG (In Datenbank(txt) Übertragungsstandard aktualisieren)
 	- Sitemap
-	- Copyright : FERTIG (Jedenfalls wenn ich das richtig verstanden hab)
-- Zurück oder Startseite Buttons oder Links in Impressum, Datenschutz und co.?
-- Wiederrufsbelehrung extra??
+	- FERTIG : Copyright : FERTIG
+- FERTIG : Zurück oder Startseite Buttons oder Links in Impressum, Datenschutz und co.? : FERTIG
+- Wiederrufsbelehrung extra?? : NEIN
 - Internationalisierung
 - Alle Seitenquelltexte mit /n versehen !!
 - Variablen : private??? Müssen noch durchgesehen und aktualisiert werden!
+- In HTML alle ' durch escapte " ersetzen (z.b. bei action)
+
 
 
 

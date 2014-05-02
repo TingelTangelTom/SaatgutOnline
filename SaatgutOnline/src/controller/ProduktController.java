@@ -61,7 +61,7 @@ public class ProduktController {
 		try {
 			
 			String query = "SELECT p.produkt_id, p.produkt_bestand, pb.produkt_name, pb.produkt_beschreibung,"
-						+ "pb.produkt_suchbegriffe, p.produkt_angesehen, p.produkt_preis, p.produkt_gewicht,"
+						+ "pb.produkt_suchbegriffe, p.produkt_angesehen, p.produkt_preis, p.produkt_vpe,"
 						+ "p.produkt_steuer_id, p.produkt_datum_hinzugefuegt, p.produkt_datum_geaendert, p.produkt_bestellnummer "
 						+ "FROM produkt AS p "
 						+ "INNER JOIN produkt_beschreibung AS pb ON p.produkt_id = pb.produkt_id "
@@ -76,8 +76,8 @@ public class ProduktController {
 				this.produktModel.setBeschreibung(resultset.getString(4));
 				this.produktModel.setSuchbegriffe(resultset.getString(5));
 				this.produktModel.setAngesehen(resultset.getInt(6));
-				this.produktModel.setPreisNetto(resultset.getDouble(7));
-				this.produktModel.setGewicht(resultset.getInt(8));
+				this.produktModel.setPreisNetto(runden(resultset.getDouble(7), 2));
+				this.produktModel.setVpe(resultset.getInt(8));
 				this.produktModel.setSteuerBetrag(resultset.getDouble(9));
 				this.produktModel.setHinzugefeugt(resultset.getDate(10));
 				this.produktModel.setGeaendert(resultset.getDate(11));
@@ -108,8 +108,8 @@ public class ProduktController {
 			e.printStackTrace();
 		}
 		
-		this.produktModel.setPreisBrutto(this.produktModel.getPreisNetto() * this.produktModel.getSteuerSatz() / 100 + this.produktModel.getPreisNetto());
-		this.produktModel.setSteuerBetrag(this.produktModel.getPreisBrutto() - this.produktModel.getPreisNetto());
+		this.produktModel.setPreisBrutto(runden(this.produktModel.getPreisNetto() * this.produktModel.getSteuerSatz() / 100 + this.produktModel.getPreisNetto(), 2));
+		this.produktModel.setSteuerBetrag(runden(this.produktModel.getPreisBrutto() - this.produktModel.getPreisNetto(), 2));
 	}
 	
 	/**
@@ -334,5 +334,10 @@ END IF
 		}
 
 	}
+	
+	public static double runden(double wert, int stellen) {
+		double gerundet = Math.round(wert * Math.pow(10d, stellen));
+		return gerundet / Math.pow(10d, stellen);
+	} 
 
 }

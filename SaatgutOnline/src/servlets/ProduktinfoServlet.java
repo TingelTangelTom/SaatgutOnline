@@ -17,6 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 
 
 
+
+import controller.UrlController;
 import view.ProduktinfoView;
 
 
@@ -54,6 +56,10 @@ public class ProduktinfoServlet extends HttpServlet {
 		RequestDispatcher rd = getServletContext().getRequestDispatcher("/Kopfbereich");
 		rd.include(request, response);
 				
+		// UrlController
+		UrlController urlController = new UrlController(request);
+		urlController.urlInSessionLegen();
+		
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		out.print(this.produktinfoView.anzeigenProduktinfo(produktID));

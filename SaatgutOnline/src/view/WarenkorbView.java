@@ -2,7 +2,6 @@ package view;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.math.BigDecimal;
 import java.util.Locale;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
@@ -50,7 +49,7 @@ public class WarenkorbView
 		this.out.println("</td>\n<td>");
 		this.out.println(this.resourceBundle.getString("BESTELLNUMMER"));
 		this.out.println("</td>\n<td>");
-		this.out.println(this.resourceBundle.getString("GEWICHT"));
+		this.out.println(this.resourceBundle.getString("VERPACKUNGSEINHEIT"));
 		this.out.println("</td>\n<td>");
 		this.out.println(this.resourceBundle.getString("EINZELPREIS_POSITION"));
 		this.out.println("</td>\n<td>");
@@ -64,15 +63,13 @@ public class WarenkorbView
 		this.out.println("<tr>\n<td colspan=\"7\">\n</td>\n</tr>");
 	}
 
-	public void outWarenkorbEnde(BigDecimal bdGesamtgewicht, BigDecimal bdZwischensumme)
+	public void outWarenkorbEnde(String zwischensummeFormatiert)
 	{
 		this.out.println("<tr>\n<td colspan=\"7\">\n</td>\n</tr>");
-		this.out.println("<tr>\n<td colspan=\"2\">");
-		this.out.println("</td>\n<td>");
-		this.out.println(bdGesamtgewicht);
+		this.out.println("<tr>\n<td colspan=\"3\">");
 		this.out.println("</td>\n<td colspan=\"2\">");		
 		this.out.println("</td>\n<td>");
-		this.out.println(bdZwischensumme);
+		this.out.println(zwischensummeFormatiert);
 		this.out.println("</td>\n<td>");
 		this.out.println(this.resourceBundle.getString("ZWISCHENSUMME_BESTELLUNG"));
 		this.out.println("</td>\n</tr>\n<tr>\n<td colspan=\"7\">");
@@ -101,7 +98,7 @@ public class WarenkorbView
 		this.out.println("</table>");
 	}
 	
-	public void outWarenkorbInhalt(ProduktModel produktModel, int menge, BigDecimal gesamtpreisPosition)
+	public void outWarenkorbInhalt(ProduktModel produktModel, int menge, String einzelpreisFormatiert, String gesamtpreisPositionFormatiert)
 	{
 		this.out.println("<tr>\n<td>");		
 		this.out.println("<a href=\"/SaatgutOnline/Produktinfo?produkt="
@@ -112,13 +109,14 @@ public class WarenkorbView
 		this.out.println("</td>\n<td>");
 		this.out.println(produktModel.getBestellnummer());
 		this.out.println("</td>\n<td>");
-		this.out.println(produktModel.getGewicht());
+		//FIXME getVPE einfügen!
+//		this.out.println(produktModel.get);
 		this.out.println("</td>\n<td>");
-		this.out.println(produktModel.getPreisBrutto());
+		this.out.println(einzelpreisFormatiert);
 		this.out.println("</td>\n<td>");				
 		this.out.println("<input type=\"text\" name=\"menge_" + produktModel.getId() + "\" value=\""+ menge +"\" size=2");
 		this.out.println("</td>\n<td>");
-		this.out.println(gesamtpreisPosition);
+		this.out.println(gesamtpreisPositionFormatiert);
 		this.out.println("</td>\n<td>");
 		this.out.println("<input type=\"checkbox\" name=\"entfernen_"+ produktModel.getId() + "\" value=\"true\">");
 		this.out.println("</td>\n</tr>");		

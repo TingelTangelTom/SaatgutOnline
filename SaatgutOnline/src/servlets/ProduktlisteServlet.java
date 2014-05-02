@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import controller.UrlController;
 import view.ProduktlisteView;
 
 /**
@@ -35,16 +36,21 @@ public class ProduktlisteServlet extends HttpServlet {
 		
 		this.produktliste = new ProduktlisteView(request);
 		//TODO Funktioniert nicht
-		response.setContentType("text/html; charset=UTF-8");
-	    response.setCharacterEncoding("ISO-8859-15");
+		response.setContentType("text/html");
+	    response.setCharacterEncoding("UTF-8");
 	    	    
 		// Kopfbereich (und damit auch Navigationsbereich) einbinden
 		RequestDispatcher rd = getServletContext().getRequestDispatcher("/Kopfbereich");
 		rd.include(request, response);
  		
+		// UrlController
+		UrlController urlController = new UrlController(request);
+		urlController.urlInSessionLegen();
+		
+		
 		PrintWriter out = response.getWriter();
 		
-		response.setContentType("text/html; charset=UTF-8");
+		response.setContentType("text/html");
 	    response.setCharacterEncoding("ISO-8859-15");
 		out.print(this.produktliste.anzeigenProduktliste(request));
 
