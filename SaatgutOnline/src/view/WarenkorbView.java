@@ -41,8 +41,8 @@ public class WarenkorbView
 	}
 
 	public void outWarenkorbAnfang()
-	{					
-		this.out.println("<table>");		
+	{					//TODO remove
+		this.out.println("<table border='1'>");		
 		this.out.println("<tr>\n<td colspan=\"7\">");
 		this.out.println(this.resourceBundle.getString("WARENKORB"));
 		this.out.println("</td>\n</tr>");
@@ -85,10 +85,8 @@ public class WarenkorbView
 		this.out.println("<a href=\""+ this.urlController.urlAusSessionHolen("Produktseite") + "\">\n" + this.resourceBundle.getString("WEITER") + "\n</a>");
 		this.out.println("</td>\n<td colspan=\"2\">");		
 		
-		// FIXME action anpassen und NoOp entfernen!
-		this.out.println("<form action=\"NoOperation\" method=\"GET\">");
-		this.out.println("<input type=\"submit\" name=\"kasse\" value=\"" + this.resourceBundle.getString("KASSE") + " NoOP\">");
-		this.out.println("</form>");
+		// FIXME link anpassen und NoOp entfernen!
+		this.out.println("<a href=\"/SaatgutOnline/NoOperation\">\n" + this.resourceBundle.getString("KASSE") + "\nNoOP</a>");
 		
 		this.out.println("</td>\n</tr>");
 		this.out.println("</table>");
