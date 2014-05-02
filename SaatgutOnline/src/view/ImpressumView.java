@@ -30,5 +30,9 @@ public class ImpressumView {
 				+ "<br><br>Registergericht: " + registergericht + ", " + register_nr 
 				+ "<br>Umsatzsteuer-IdNr.: " + umsatzsteuer_id + "<br>Wirtschafts-IdNr.: " 
 				+ wirtschafts_id + "<br><br>" +  impressum_copyright);
+		out.println("<br><br><a href=\"/SaatgutOnline/IndexPlatzhalter\">&#11013 Zurück</a>");
+		//FIXME : Richtigen Link einsetzen
+		//TODO : Ich hätte den Link gerne in schwarz :)
+		//TODO : Pfeil : Auch &#8678 ausprobieren
 	}
 }
