@@ -3,33 +3,32 @@ package controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.KundeModel;
 import view.RegistrierungVerarbeitungView;
 	
 public class RegistrierungVerarbeitungController {
 	
-	private String nachname;
-	private String vorname;
-	private String strasse;
-	private String hausnummer;
-	private String plz;
-	private String ort;
-	private String email;
-	private String benutzername;
+	KundeModel kunde;
 	private String passwort;
 	private String passwortWiederholung;
 	
 	public RegistrierungVerarbeitungController (HttpServletRequest request, HttpServletResponse response) {
 		
-	this.nachname = request.getParameter("nachname");
-	this.vorname = request.getParameter("vorname");
-	this.strasse = request.getParameter("strasse");
-	this.hausnummer = request.getParameter("hausnummer");
-	this.ort = request.getParameter("ort");
-	this.email = request.getParameter("email");
-	this.benutzername = request.getParameter("benutzername");
-	this.passwort = request.getParameter("passwort");
-	this.passwortWiederholung = request.getParameter("passwortWiederholung");
+		kunde = new KundeModel();
+		
+		this.kunde.setNachname(request.getParameter("nachname"));
+		this.kunde.setVorname(request.getParameter("vorname"));
+		this.kunde.setStrasse(request.getParameter("strasse"));
+		this.kunde.setHausnummer(request.getParameter("hausnummer"));
+		this.kunde.setPostleitzahl(request.getParameter("plz"));
+		this.kunde.setOrt(request.getParameter("ort"));
+		this.kunde.setBenutzername(request.getParameter("benutzername"));
+		this.kunde.setNewsletter(Integer.parseInt(request.getParameter("newsletter")));
+		this.kunde.setNachname(request.getParameter("nachname"));
+		this.kunde.setEmailAdresse(request.getParameter("emailadresse"));
 	
+		this.passwort = request.getParameter("passwort");
+		this.passwortWiederholung = request.getParameter("passwortwiederholung");
 	
 //		RegistrierungVerarbeitungView registrierungView = new RegistrierungView(request, response);
 //		registrierungVerarbeitungView.outResistrierungVerarbeitung(request, response);
