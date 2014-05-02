@@ -12,18 +12,16 @@ import javax.servlet.http.HttpServletResponse;
 import controller.EMailController;
 
 @WebServlet("/KontaktFormular")
-public class KontaktFormular extends HttpServlet {
+public class KontaktFormularVerarbeitungServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public KontaktFormular() {
+	public KontaktFormularVerarbeitungServlet() {
 		super();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		//TODO : Wo muss der Inhalt dieser Datei hin? Contoller? View? KontaktFormularVerarbeitungController? oderso?
-		//TODO : Ist der hier noch nötig? (Für die Ausgabe in der E-Mail???)
 		response.setContentType("text/html");
 		PrintWriter out;
 		try {

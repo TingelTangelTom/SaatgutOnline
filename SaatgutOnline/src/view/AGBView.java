@@ -19,5 +19,8 @@ public class AGBView {
 			return;
 		}
 		out.println(agbText);
+		out.println("<br><br><a href=\"/SaatgutOnline/IndexPlatzhalter\">&#11013 Zurück</a>");
+		//FIXME : Richtigen Link einsetzen
+		//TODO : Ich hätte den Link gerne in schwarz :)
 	}
 }
