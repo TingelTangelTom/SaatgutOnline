@@ -35,7 +35,7 @@ public class UrlController
 	/**
 	 * Legt die aktuelle URL mit allen Parametern unter dem Key <b>'url'</b> in der HttpSession ab
 	 */
-	public void urlProdukteInSessionLegen()
+	public void urlInSessionLegen()
 	{
 		String zwischenzuspeicherndeUrl = this.request.getRequestURL().toString()+"?";
 		
@@ -56,7 +56,15 @@ public class UrlController
 			zwischenzuspeicherndeUrl = zwischenzuspeicherndeUrl.substring(0, zwischenzuspeicherndeUrl.lastIndexOf("&"));
 		}
 				
-		this.session.setAttribute("urlFussbereich", zwischenzuspeicherndeUrl);
+		if(this.request.getServletPath() != "/Warenkorb")
+		{
+			this.session.setAttribute("urlFussbereich", zwischenzuspeicherndeUrl);
+		}
+		else
+		{
+			this.session.setAttribute("urlFussbereich", request.getRequestURL());
+			this.session.setAttribute("urlWarenkorb", zwischenzuspeicherndeUrl);
+		}
 	}
 	
 	
@@ -67,7 +75,7 @@ public class UrlController
 	 * @param Der Bereich, von dem aus zur URL zurückgekehrt werden soll (zB. Fussbereich) als <code>String</code>
 	 * @return Die URL mit allen Parametern als <code>String<code>
 	 */
-	public String urlProdukteAusSessionHolen(String bereich)
+	public String urlAusSessionHolen(String bereich)
 	{
 		return (String) this.session.getAttribute("url"+bereich);		
 	}

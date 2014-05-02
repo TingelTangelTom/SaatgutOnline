@@ -24,7 +24,7 @@ public class WarenkorbController
 		//TODO remove
 		System.out.println("---WarenkorbController---");
 		UrlController urlController = new UrlController(request);
-		urlController.urlProdukteInSessionLegen();
+		urlController.urlInSessionLegen();
 		
 		this.request = request;
 		this.session = request.getSession();
