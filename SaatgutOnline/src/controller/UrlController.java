@@ -29,13 +29,13 @@ public class UrlController
 	public UrlController(HttpServletRequest request)
 	{
 		this.request = request;
-		this.session = request.getSession();
+		this.session = request.getSession();		
 	}
 	
 	/**
 	 * Legt die aktuelle URL mit allen Parametern unter dem Key <b>'url'</b> in der HttpSession ab
 	 */
-	public void zwischenzuspeicherndeUrlInSessionLegen()
+	public void urlProdukteInSessionLegen()
 	{
 		String zwischenzuspeicherndeUrl = this.request.getRequestURL().toString()+"?";
 		
@@ -44,21 +44,31 @@ public class UrlController
 		{
 			String parametername = paramaternamen.nextElement();
 			zwischenzuspeicherndeUrl += parametername + "=" + this.request.getParameter(parametername) + "&";
-			System.out.println("key="+parametername);			
 		}		
-		zwischenzuspeicherndeUrl = zwischenzuspeicherndeUrl.substring(0, zwischenzuspeicherndeUrl.lastIndexOf("&"));
+		
+		
+		if(zwischenzuspeicherndeUrl.lastIndexOf("&") == -1)
+		{
+			zwischenzuspeicherndeUrl = zwischenzuspeicherndeUrl.substring(0, zwischenzuspeicherndeUrl.indexOf("?"));
+		}
+		else
+		{
+			zwischenzuspeicherndeUrl = zwischenzuspeicherndeUrl.substring(0, zwischenzuspeicherndeUrl.lastIndexOf("&"));
+		}
 				
-		this.session.setAttribute("url", zwischenzuspeicherndeUrl);
+		this.session.setAttribute("urlFussbereich", zwischenzuspeicherndeUrl);
 	}
 	
+	
 	/**
-	 * Holt die zwischengespeicherte URL inklusive aller Parameter unter dem Key <b>'url'</b> aus der
+	 * Holt die zwischengespeicherte URL inklusive aller Parameter unter dem Key <b>'url'+bereich</b> aus der
 	 * HttpSession und gibt diese als <code>String<code> zurück
 	 * 
-	 * @return Gibt einen String zurück, der die URL mit allen Parametern enthält
+	 * @param Der Bereich, von dem aus zur URL zurückgekehrt werden soll (zB. Fussbereich) als <code>String</code>
+	 * @return Die URL mit allen Parametern als <code>String<code>
 	 */
-	public String zwischengespeicherteUrlAusSessionHolen()
+	public String urlProdukteAusSessionHolen(String bereich)
 	{
-		return (String) this.session.getAttribute("url");		
+		return (String) this.session.getAttribute("url"+bereich);		
 	}
 }

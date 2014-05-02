@@ -1,6 +1,5 @@
 package controller;
 
-import java.math.BigDecimal;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
@@ -9,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.ProduktModel;
+import view.HtmlAusgabe;
 import view.WarenkorbView;
 
 public class WarenkorbController
@@ -16,17 +16,21 @@ public class WarenkorbController
 	private HttpSession session;	
 	private Hashtable<ProduktModel, Integer> warenkorb;
 	private WarenkorbView warenkorbView;
+	private HttpServletRequest request;
 	
 	// GET-Kostruktor
 	public WarenkorbController(HttpServletRequest request, HttpServletResponse response)
 	{		
 		//TODO remove
 		System.out.println("---WarenkorbController---");
+		UrlController urlController = new UrlController(request);
+		urlController.urlProdukteInSessionLegen();
 		
+		this.request = request;
 		this.session = request.getSession();
 		this.warenkorbView = new WarenkorbView(request, response);
 		this.warenkorbAusSessionHolen();
-		this.warenkorbAktualisieren(request);
+		this.warenkorbAktualisieren();
 		this.warenkorbInSessionLegen();
 		
 		//TODO remove
@@ -36,8 +40,9 @@ public class WarenkorbController
 	
 	public void warenkorbAnzeigen()
 	{
-		double gesamtgewicht = 0;
-		double zwischensumme = 0;		
+		
+		double zwischensumme = 0;
+		HtmlAusgabe htmlAusgabe = new HtmlAusgabe(this.request);
 		
 		this.warenkorbView.outWarenkorbAnfang();
 				
@@ -51,15 +56,12 @@ public class WarenkorbController
 				int menge = this.warenkorb.get(anzuzeigendesProduktModel);
 				
 				double gesamtpreisPosition = menge * anzuzeigendesProduktModel.getPreisBrutto();
+				String einzelpreisFormatiert = htmlAusgabe.outPreisformat(anzuzeigendesProduktModel.getPreisBrutto());
+				String gesamtpreisPositionFormatiert = htmlAusgabe.outPreisformat(gesamtpreisPosition);
 				
-				//kaufmaennisch runden
-				BigDecimal bdGesamtpreisPosition = new BigDecimal(gesamtpreisPosition);		
-				bdGesamtpreisPosition = bdGesamtpreisPosition.setScale(2,BigDecimal.ROUND_HALF_UP);
-				
-				this.warenkorbView.outWarenkorbInhalt(anzuzeigendesProduktModel, menge, bdGesamtpreisPosition);
+				this.warenkorbView.outWarenkorbInhalt(anzuzeigendesProduktModel, menge, einzelpreisFormatiert, gesamtpreisPositionFormatiert);
 			
-				zwischensumme += gesamtpreisPosition;
-				gesamtgewicht += anzuzeigendesProduktModel.getGewicht();
+				zwischensumme += gesamtpreisPosition;				
 			}			
 		}
 		else
@@ -67,14 +69,9 @@ public class WarenkorbController
 			this.warenkorbView.outLeererWarenkorb();
 		}
 		
-		//kaufmaennisch runden
-		BigDecimal bdZwischensumme = new BigDecimal(zwischensumme);
-		BigDecimal bdGesamtgewicht = new BigDecimal(gesamtgewicht);
+		String zwischensummeFormatiert = htmlAusgabe.outPreisformat(zwischensumme);
 		
-		bdZwischensumme = bdZwischensumme.setScale(2,BigDecimal.ROUND_HALF_UP);
-		bdGesamtgewicht = bdGesamtgewicht.setScale(2,BigDecimal.ROUND_HALF_UP);
-		
-		this.warenkorbView.outWarenkorbEnde(bdGesamtgewicht, bdZwischensumme);		
+		this.warenkorbView.outWarenkorbEnde(zwischensummeFormatiert);		
 	}	
 	
 	
@@ -97,14 +94,14 @@ public class WarenkorbController
 	}
 	
 	
-	private void warenkorbAktualisieren(HttpServletRequest request)
+	private void warenkorbAktualisieren()
 	{
 		// Wurde Produkt an WK übergeben?
-		if(request.getParameter("produkt") != null)
+		if(this.request.getParameter("produkt") != null)
 		{
 			// Produkt aus DB holen
-			int id = Integer.parseInt(request.getParameter("produkt"));			
-			ProduktController produktController = new ProduktController(request);
+			int id = Integer.parseInt(this.request.getParameter("produkt"));			
+			ProduktController produktController = new ProduktController(this.request);
 			ProduktModel produktModelAusDatenbank = new ProduktModel();
 			produktModelAusDatenbank = produktController.getProdukt(id);
 			
@@ -122,7 +119,7 @@ public class WarenkorbController
 					{						
 						produktNichtImWarenkorb = false;
 						int mengeImWarenkorb = this.warenkorb.get(produktImWarenkorb);
-						int neuHinzugefuegteMenge = Integer.parseInt(request.getParameter("menge"));
+						int neuHinzugefuegteMenge = Integer.parseInt(this.request.getParameter("menge"));
 						int neueMenge = mengeImWarenkorb + neuHinzugefuegteMenge;
 						this.warenkorb.put(produktImWarenkorb, neueMenge);
 					}					
@@ -130,23 +127,23 @@ public class WarenkorbController
 				
 				if(produktNichtImWarenkorb)
 				{
-					this.warenkorb.put(produktModelAusDatenbank, Integer.parseInt(request.getParameter("menge")));
+					this.warenkorb.put(produktModelAusDatenbank, Integer.parseInt(this.request.getParameter("menge")));
 				}
 				
 			}
 			else
 			{
 				//in WK legen wenn WK leer
-				this.warenkorb.put(produktModelAusDatenbank, Integer.parseInt(request.getParameter("menge")));
+				this.warenkorb.put(produktModelAusDatenbank, Integer.parseInt(this.request.getParameter("menge")));
 			}
 		}
 		else
 		{					
 			// Wurde 'aktualisieren' gewaehlt?
-			if(request.getParameter("aktualisieren") != null)
+			if(this.request.getParameter("aktualisieren") != null)
 			{
 				//TODO remove
-				System.out.println("Warenkorb wird aktualisert...");
+				System.out.println("Warenkorb wird aktualisert...");				
 				
 				ProduktModel produktModelImWarenkorb;
 				Enumeration<ProduktModel> produktModelsImWarenkorb;
@@ -155,11 +152,11 @@ public class WarenkorbController
 				String parameter;
 				
 				// Menge aktualisieren
-				parameters = request.getParameterNames();			
+				parameters = this.request.getParameterNames();			
 				while (parameters.hasMoreElements())
 				{
 					parameter = parameters.nextElement();
-					String value = request.getParameter(parameter);
+					String value = this.request.getParameter(parameter);
 					
 					if(parameter.startsWith("menge"))
 					{							
@@ -186,7 +183,7 @@ public class WarenkorbController
 				}
 				
 				// Bestellpostitionen entfernen
-				parameters = request.getParameterNames();
+				parameters = this.request.getParameterNames();
 				while (parameters.hasMoreElements())
 				{
 					parameter = parameters.nextElement();
@@ -210,7 +207,7 @@ public class WarenkorbController
 			else
 			{			
 				// Wurde 'leeren' gewaehlt?
-				if(request.getParameter("leeren") != null)
+				if(this.request.getParameter("leeren") != null)
 				{
 					//TODO remove
 					System.out.println("Warenkorb wird geleert");
