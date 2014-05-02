@@ -2,12 +2,12 @@ package controller;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
 
 
 
@@ -29,7 +29,6 @@ public class ProduktController {
 	private ProduktModel produktModel;
 	private double steuersatz;
 	private int sprache_id;
-	private String kategorie;
 	
 	public ProduktController(HttpServletRequest request) {
 		super();
@@ -37,7 +36,6 @@ public class ProduktController {
 		HttpSession session = request.getSession();
 		this.produktModel = new ProduktModel();
 		this.sprache_id = (int)session.getAttribute("spracheId");
-		this.kategorie = request.getParameter("kategorie");
 		
 		this.getSortierung(request);
 		
@@ -166,71 +164,62 @@ public class ProduktController {
 	public ArrayList<ProduktModel> getProduktliste(String kategorie_id, HttpServletRequest request) {
 		
 		HttpSession session = ((HttpServletRequest) request).getSession(); 
-		ArrayList<ProduktModel> produkte = new ArrayList<>();
+		ArrayList<Integer> kategorien = new ArrayList<>();
+		int kategoriesuche_eltern_id = 0;
+		String produkt_query;
+	
+		String kategorie_query = "SELECT eltern_id FROM kategorie WHERE kategorie_id = '" + kategorie_id + "'";
 		
-		if(this.kategorie == null) {
-			this.kategorie = "1";
+		try {
+			
+			ResultSet produkt_resultset = DatenbankController.sendeSqlRequest(kategorie_query); 
+
+			while(produkt_resultset.next()){
+				
+				kategoriesuche_eltern_id = produkt_resultset.getInt(1);
+								
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
+		
+		if(kategoriesuche_eltern_id == 0) {
+			produkt_query = "SELECT p.produkt_id "
+					+ "FROM produkt AS p "
+					+ "INNER JOIN produkt_beschreibung AS pb ON p.produkt_id = pb.produkt_id "
+					+ "WHERE pb.sprache_id = '" + this.sprache_id + "' "
+					+ "AND  p.kategorie_id IN (SELECT kategorie_id FROM kategorie WHERE eltern_id = '" + kategorie_id + "' OR (kategorie_id = '" + kategorie_id + "' AND eltern_id = 0)) "
+					+ "ORDER BY " + session.getAttribute("sortierung_sortierspalte") + " " + session.getAttribute("sortierung_reihenfolge") + " "
+					+ "LIMIT " + session.getAttribute("sortierung_limit_von") + "," + session.getAttribute("sortierung_produktanzahl") + "";
+		} else {
+			produkt_query = "SELECT p.produkt_id "
+					+ "FROM produkt AS p "
+					+ "INNER JOIN produkt_beschreibung AS pb ON p.produkt_id = pb.produkt_id "
+					+ "WHERE pb.sprache_id = '" + this.sprache_id + "' "
+					+ "AND  p.kategorie_id = '" + kategorie_id +"'"
+					+ "ORDER BY " + session.getAttribute("sortierung_sortierspalte") + " " + session.getAttribute("sortierung_reihenfolge") + " "
+					+ "LIMIT " + session.getAttribute("sortierung_limit_von") + "," + session.getAttribute("sortierung_produktanzahl") + "";
+		}
+		
+		try {
+			
+			ResultSet produkt_resultset = DatenbankController.sendeSqlRequest(kategorie_query); 
+
+			while(produkt_resultset.next()){
+				
+				kategorien.add(produkt_resultset.getInt(1));
+								
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		 
+		ArrayList<ProduktModel> produkte = new ArrayList<>();
+
 		System.out.println("Sessionwerte Sortierung");
 		System.out.println("Reihenfolge: " + session.getAttribute("sortierung_reihenfolge"));
 		System.out.println("Anzahl: " + session.getAttribute("sortierung_produktanzahl"));
 		System.out.println("Limit: " + session.getAttribute("sortierung_limit_von"));
-
-		String produkt_query = "SELECT p.produkt_id "
-								+ "FROM produkt AS p "
-								+ "INNER JOIN produkt_beschreibung AS pb ON p.produkt_id = pb.produkt_id "
-								+ "WHERE pb.sprache_id = '" + this.sprache_id + "' "
-								+ "AND  p.kategorie_id IN (SELECT kategorie_id FROM kategorie WHERE eltern_id = '" + kategorie_id + "' OR (kategorie_id = '" + kategorie_id + "' AND eltern_id = 0)) "
-								+ "ORDER BY " + session.getAttribute("sortierung_sortierspalte") + " " + session.getAttribute("sortierung_reihenfolge") + " "
-								+ "LIMIT " + session.getAttribute("sortierung_limit_von") + "," + session.getAttribute("sortierung_produktanzahl");
-				/*
-		case report.type
-        when 'P' then amount SELECT kategorie_id FROM kategorie WHERE eltern_id = '" + this.kategorie + "' OR (kategorie_id = '" + this.kategorie + "' AND eltern_id = 0)
-        when 'N' then -amount SELECT kategorie_id FROM kategorie WHERE eltern_id = '" + this.kategorie + "' OR (kategorie_id = '" + this.kategorie + "' AND eltern_id = 0)
-    end as amount
-    
-    
-
-	
-
-SELECT 
-        id
-        , IF(type = 'P', amount, amount * -1) as amount
-FROM    report
-
-
-CASE
-WHEN (SELECT eltern_id FROM produkt WHERE produkt_id=2) > 0 THEN (SELECT kategorie_id FROM kategorie WHERE eltern_id = '" + this.kategorie + "' OR (kategorie_id = '" + this.kategorie + "' AND eltern_id = 0))
-ELSE (SELECT kategorie_id FROM kategorie WHERE kategorie_id = '" + this.kategorie + "')
-END) as myorder
-		
-IF(eltern_id > 0, SELECT kategorie_id FROM kategorie WHERE (eltern_id = '" + this.kategorie + "' OR (kategorie_id = '" + this.kategorie + "' AND eltern_id = 0)), SELECT kategorie_id FROM kategorie WHERE kategorie_id = '" + this.kategorie + "')
-		
-CASE
-    WHEN (SELECT eltern_id FROM kategorie WHERE kategorie_id = '" + kategorie_id + "') = 0 THEN SELECT kategorie_id FROM kategorie WHERE eltern_id = '" + this.kategorie + "' OR (kategorie_id = '" + this.kategorie + "' AND eltern_id = 0)
-    ELSE kategorie_id
-END CASE
-
-
-IF Bedingung THEN Anweisung(en)
-[ELSEIF Bedingung THEN  � Anweisung(en)]
-[ELSE Anweisung(en)]
-END IF
-*/
-
-		
-		if(kategorie_id == null) {
-			kategorie_id = "1";
-		}
-		
-		String produkt_query2 = "SELECT p.produkt_id "
-				+ "FROM produkt AS p "
-				+ "INNER JOIN produkt_beschreibung AS pb ON p.produkt_id = pb.produkt_id "
-				+ "WHERE pb.sprache_id = '" + this.sprache_id + "' "
-				+ "AND  p.kategorie_id IN (SELECT kategorie_id FROM kategorie WHERE eltern_id = '" + kategorie_id + "' OR (kategorie_id = '" + kategorie_id + "' AND eltern_id = 0)) "
-				+ "ORDER BY " + session.getAttribute("sortierung_sortierspalte") + " " + session.getAttribute("sortierung_reihenfolge") + " "
-				+ "LIMIT " + session.getAttribute("sortierung_limit_von") + "," + session.getAttribute("sortierung_produktanzahl") + "";
-
 
 		try {
 			
@@ -247,7 +236,7 @@ END IF
 		
 		return produkte;
 	}
-	
+
 	//TODO Javadoc param bearbeiten
 	/**
 	 * Die Methode <code>getSortierung (HttpServletRequest request)</code> legt fest, 
