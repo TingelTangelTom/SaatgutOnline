@@ -13,7 +13,7 @@ import controller.ProduktController;
 
 public class ProduktlisteView {
 	private ProduktController produktController;
-	private HtmlAusgabe htmlOutput;
+	private HtmlAusgabe htmlAusgabe;
 	private ResourceBundle resourceBundle;
 	private String output;
 	private ArrayList<ProduktModel> produktliste;
@@ -23,7 +23,7 @@ public class ProduktlisteView {
 	public ProduktlisteView(HttpServletRequest request) {
 		
 		this.produktController = new ProduktController(request);
-		this.htmlOutput = new HtmlAusgabe(request);
+		this.htmlAusgabe = new HtmlAusgabe(request);
 		this.produktliste = new ArrayList<>();
 		this.kategorie = request.getParameter("kategorie");
 
@@ -45,33 +45,36 @@ public class ProduktlisteView {
 	public String anzeigenProduktliste(HttpServletRequest request) {	
 		//TODO Internationalisierung einbauen
 
-		
+		if(this.kategorie == null) {
+			this.kategorie = "1";
+		}
 		this.produktliste = this.produktController.getProduktliste(this.kategorie, request);
 		warenkorbmenge = 1;
+		
 		//TODO Comparator einfügen
-		//TODO Kategoriename und Unterkategoriename
 		System.out.println("-----> Kategorie: " + this.kategorie);
-		this.output = "<table class=\"produktinfo\">"
-				+ "<tr><td align=\"left\">" + this.produktController.getKategoriename(this.kategorie) + "Kategoriename</td></tr>"
-				+ "<tr><td align=\"right\">sortieren: Name "
+		this.output = "<table class=\"produktliste\">"
+				+ "<tr><td class=\"produktliste kategoriename\">" + this.htmlAusgabe.outKategoriename(this.kategorie) + "</td>"
+				+ "<td class=\"produktliste sortierung\">sortieren: Name "
 				+ "<a href=\"/SaatgutOnline/Produktliste?kategorie=1&p_anzeige=pn,3,0\"><img src=\"resources/bilder/icons/pfeil_hoch_runter.gif\" width=\"5\" height=\"10\" border=\"0\" alt=\"Sortierung\"></a> | "
 				+ "Preis "
 				+ "<a href=\"/SaatgutOnline/Produktliste?kategorie=1&p_anzeige=pp,3,0\"><img src=\"resources/bilder/icons/pfeil_hoch_runter.gif\" width=\"5\" height=\"10\" border=\"0\" alt=\"Sortierung\"></a>"
 				+ "</td></tr>"
-				+ "<tr><td colspan=\"2\"  style=\"background-image:url(resources/bilder/icons/trennlinie.gif);height: 2px; background-repeat:repeat-x;\">&nbsp;</td></tr><tr><td>";
+				+ "<tr><td colspan=\"2\" style=\"background-image:url(resources/bilder/icons/trennlinie.gif);height: 2px; background-repeat:repeat-x;\">&nbsp;</td></tr>"
+				+ "<tr><td class=\"produktliste listenprodukt\" colspan=\"2\" >";
 		for (int i = 0; i < this.produktliste.size(); i++) {
 			ProduktModel produktModel = this.produktliste.get(i);
 			this.output += "<table class=\"produktliste\">"
 			+ "<tr>"
 			+ "<td class=\"produktliste bild\" rowspan=\"4\"><img src=\"resources/bilder/phoenix_canariensis.jpg\" width=\"100\" height=\"100\" alt=\"Phoenix Canariensis\"></td>"
 	    	+ "<td class=\"produktliste titel\">" + produktModel.getName() + "</td>"
-	    	+ "<td class=\"produktliste preis\">" + this.htmlOutput.outPreisformat(produktModel.getPreisBrutto()) + "</td>"
+	    	+ "<td class=\"produktliste preis\">" + this.htmlAusgabe.outPreisformat(produktModel.getPreisBrutto()) + "</td>"
 	    	+ "</tr>"
 	    	+ "<tr>"
-    		+ "<td class=\"produktliste bestellnummer\">" + this.resourceBundle.getString("BESTELLNUMMER") + " " + produktModel.getBestellnummer() + "</td><td class=\"produktliste preisverordnung\">" + this.htmlOutput.outPreisverordnung(produktModel.getSteuerSatz()) + "</td>"
+    		+ "<td class=\"produktliste bestellnummer\">" + this.resourceBundle.getString("BESTELLNUMMER") + " " + produktModel.getBestellnummer() + "</td><td class=\"produktliste preisverordnung\">" + this.htmlAusgabe.outPreisverordnung(produktModel.getSteuerSatz()) + "</td>"
     		+ "</tr>"
     		+ "<tr>"
-    		+ "<td class=\"produktliste beschreibung\" colspan=\"2\">" + this.htmlOutput.outKurzeProduktbeschreibung(produktModel.getBeschreibung(), 300, produktModel.getId()) + "</td>"
+    		+ "<td class=\"produktliste beschreibung\" colspan=\"2\">" + this.htmlAusgabe.outKurzeProduktbeschreibung(produktModel.getBeschreibung(), 300, produktModel.getId()) + "</td>"
     		+ "</tr>"
     		+ "<tr>"
     		+ "<td><a href=\"/SaatgutOnline/Produktinfo?produkt=" + produktModel.getId() + "\"><b>Details</b></a></td>"
@@ -88,9 +91,9 @@ public class ProduktlisteView {
 			}
 			this.output += "</td></tr>"    		
     		+ "<tr><td colspan=\"3\">&nbsp;</td>"
-    		+ "</tr>"
+    		+ "</tr><tr><td colspan=\"3\" style=\"background-image:url(resources/bilder/icons/trennlinie.gif);height: 1px; background-repeat:repeat-x;\">&nbsp;</td></tr>"
     		+ "</table>"
-			+ "</td></tr><tr><td colspan=\"2\"  style=\"background-image:url(resources/bilder/icons/trennlinie.gif);height: 1px; background-repeat:repeat-x;\">&nbsp;</td></tr><tr><td>";
+			+ "";
 		}
 		this.output += "</td></tr></table>";	
 

@@ -1,6 +1,8 @@
 package view;
 
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.MessageFormat;
 import java.text.NumberFormat;
 import java.util.Currency;
@@ -11,6 +13,8 @@ import java.util.ResourceBundle;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import controller.DatenbankController;
 
 public class HtmlAusgabe extends HttpServlet{
 
@@ -86,6 +90,30 @@ public class HtmlAusgabe extends HttpServlet{
 		String kurzeBeschreibung = beschreibung.substring(0,zeichen);
 		kurzeBeschreibung += "<a href=\"/SaatgutOnline/Produktinfo?produkt=" + id + "\"><b>...(mehr)</b></a>";
 		return kurzeBeschreibung;
-	}	
+	}
+	
+	public String outKategoriename (String kategorie_id) {
+		String kategoriename = null;
+		
+		String query = "SELECT kb.kategorie_beschreibung "
+				+ "FROM kategorie AS k "
+				+ "INNER JOIN kategorie_beschreibung AS kb ON k.kategorie_id = kb.kategorie_id "
+				+ "WHERE kb.sprache_id = '" + session.getAttribute("spracheId") + "' AND kb.kategorie_id = '" + kategorie_id + "'";
+		
+		try {
+			
+			ResultSet resultset = DatenbankController.sendeSqlRequest(query);
+
+			while (resultset.next()){
+				
+				kategoriename = resultset.getString(1);
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return kategoriename;
+	}
 
 }
