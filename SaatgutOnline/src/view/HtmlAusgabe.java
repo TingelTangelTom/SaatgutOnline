@@ -59,10 +59,11 @@ public class HtmlAusgabe extends HttpServlet{
 	
 	/**
 	 * 
-	 * Diese Methode gibt einen rechtskonformen Text als<code>String</code> für die Preisangabe zurück.
-	 * Er setzt sich aus der Angabe der Mehrwertsteuer und einem sichtbaren Link für die Versandkosten zusammen
-	 * @param mwst - Prozentwert der Mehrwertsteuer
-	 * @return <code>String</code>
+	 * Diese Methode gibt einen <b>rechtskonformen Text</b> als <code>String</code> für die Preisangabe zurück.
+	 * Er setzt sich aus der Angabe der Mehrwertsteuer und einem sichtbaren Link für die Versandkosten zusammen.
+	 * @param mwst - <code>double</code>-Parameter des Prozentwert der Mehrwertsteuer als
+	 *  
+	 * @return <code>String</code>, welcher einen rechtskonformen Text inklusive Versandkosten-Link und Mehrwertsteuer enthält
 	 * 
 	 * @see model#HtmlAusgabe
 	 * 
