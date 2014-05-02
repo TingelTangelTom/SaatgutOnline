@@ -82,7 +82,7 @@ public class WarenkorbView
 		this.out.println("</td>\n<td colspan=\"2\">");
 		this.out.println("<a href=\"/SaatgutOnline/Warenkorb?leeren=true\">\n" + this.resourceBundle.getString("WARENKORB_LEEREN") + "\n</a>");		
 		this.out.println("</td>\n<td colspan=\"2\">");
-		this.out.println("<a href=\""+ this.urlController.urlAusSessionHolen("Warenkorb") + "\">\n" + this.resourceBundle.getString("WEITER") + "\n</a>");
+		this.out.println("<a href=\""+ this.urlController.urlAusSessionHolen("Produktseite") + "\">\n" + this.resourceBundle.getString("WEITER") + "\n</a>");
 		this.out.println("</td>\n<td colspan=\"2\">");		
 		
 		// FIXME action anpassen und NoOp entfernen!

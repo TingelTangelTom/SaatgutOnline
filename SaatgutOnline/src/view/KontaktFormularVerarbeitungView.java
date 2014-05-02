@@ -32,13 +32,13 @@ public class KontaktFormularVerarbeitungView {
 		//Ausgabe nach senden
 		out.println("Vielen Dank für ihre Nachricht.");
 		out.println("<a href=\"" + this.urlController.urlAusSessionHolen("Produktseite") +"\">Startseite</a>");
-		out.println("<br><br><a href=\"" + this.urlController.urlAusSessionHolen("Fussbereich") + "\">&#11013 Zurück</a>");
+		out.println("<br><br><a href=\"" + this.urlController.urlAusSessionHolen("LetzteSeite") + "\">&#11013 Zurück</a>");
 	}
 	
 	public void outKontaktVerarbeitungViewUngueltig() {
 		//Ausgabe nach senden
 		out.println("Ihre E-Mail-Adresse ist ungültig.<br>Geben sie eine gültige E-Mail-Adresse ein.");
-		out.println("<br><br><a href=\"" + this.urlController.urlAusSessionHolen("Fussbereich") + "\">&#11013 Zurück</a>"); 
+		out.println("<br><br><a href=\"" + this.urlController.urlAusSessionHolen("LetzteSeite") + "\">&#11013 Zurück</a>"); 
 		
 	}
 	

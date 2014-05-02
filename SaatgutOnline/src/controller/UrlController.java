@@ -56,14 +56,15 @@ public class UrlController
 			zwischenzuspeicherndeUrl = zwischenzuspeicherndeUrl.substring(0, zwischenzuspeicherndeUrl.lastIndexOf("&"));
 		}
 				
-		if(this.request.getServletPath().contains("/Warenkorb"))
+		if(this.request.getServletPath().contains("/Produktliste")
+				|| this.request.getServletPath().contains("/Produktinfo"))
 		{
-			this.session.setAttribute("urlFussbereich", request.getRequestURL().toString());
+			this.session.setAttribute("urlLetzteSeite", zwischenzuspeicherndeUrl);
+			this.session.setAttribute("urlProduktseite", zwischenzuspeicherndeUrl);
 		}
 		else
 		{
-			this.session.setAttribute("urlFussbereich", zwischenzuspeicherndeUrl);
-			this.session.setAttribute("urlWarenkorb", zwischenzuspeicherndeUrl);
+			this.session.setAttribute("urlLetzteSeite", request.getRequestURL().toString());			
 		}
 	}
 	

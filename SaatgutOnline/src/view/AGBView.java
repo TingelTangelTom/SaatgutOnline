@@ -23,7 +23,7 @@ public class AGBView {
 			return;
 		}
 		out.println(agbText);
-		out.println("<br><br><a href=\"" + urlController.urlAusSessionHolen("Fussbereich") + "\">&#11013 Zurück</a>");
+		out.println("<br><br><a href=\"" + urlController.urlAusSessionHolen("LetzteSeite") + "\">&#11013 Zurück</a>");
 		//TODO : Ich hätte den Link gerne in schwarz :)
 	}
 }
