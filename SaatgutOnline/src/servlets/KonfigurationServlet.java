@@ -27,6 +27,7 @@ import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
 import controller.DatenbankController;
+import controller.EMailController;
 
 import java.io.File;
 
@@ -73,7 +74,19 @@ public class KonfigurationServlet extends HttpServlet {
 					DatenbankController.setDbPasswort(element.getElementsByTagName("dbPasswort").item(0).getTextContent());
 				}
 			}
-		
+			
+//			nodeListe = dokument.getElementsByTagName("regeln");
+//			
+//			for (int i=0; i <nodeListe.getLength(); i++) {
+//				Node node = nodeListe.item(i);
+//				
+//				if (node.getNodeType() == Node.ELEMENT_NODE) {
+//					Element element = (Element) node;
+//					
+//					EMailController.setEmailRegel.(element.getElementsByTagName("emailregel").item(0).getTextContent());
+//				}
+//			}
+//		
 		} catch (ParserConfigurationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
