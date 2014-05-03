@@ -16,12 +16,31 @@ import controller.UrlController;
  */
 public class ImpressumView {
 	
+	/**
+	 * Konstruktor für den ImpressumView.
+	 * 
+	 * @param request
+	 * @param response
+	 * @param unternehmen_adresse
+	 * @param unternehmen_telefon
+	 * @param unternehmen_fax
+	 * @param unternehmen_email
+	 * @param unternehmen_geschaeftsfuehrung
+	 * @param registergericht
+	 * @param register_nr
+	 * @param umsatzsteuer_id
+	 * @param wirtschafts_id
+	 * @param impressum_copyright
+	 * 
+	 * @author Anja
+	 */
 	public ImpressumView(HttpServletRequest request, HttpServletResponse response,
 			String unternehmen_adresse, String unternehmen_telefon, 
 			String unternehmen_fax, String unternehmen_email, String unternehmen_geschaeftsfuehrung, 
 			String registergericht, String register_nr, String umsatzsteuer_id, 
 			String wirtschafts_id, String impressum_copyright) {
 		
+		//Für den Zurück-Link
 		UrlController urlController = new UrlController(request);
 
 		// Ausgabe und Formatierung mit Printwriter

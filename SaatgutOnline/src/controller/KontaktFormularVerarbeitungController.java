@@ -14,6 +14,14 @@ import controller.EmailController;
  */
 public class KontaktFormularVerarbeitungController {
 
+	/**
+	 * Konstruktor für den KontaktFormularVerarbeitungController.
+	 * 
+	 * @param request
+	 * @param response
+	 * 
+	 * @author Anja
+	 */
 	public KontaktFormularVerarbeitungController(HttpServletRequest request,
 			HttpServletResponse response) {
 

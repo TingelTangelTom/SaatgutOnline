@@ -9,20 +9,29 @@ import javax.servlet.http.HttpServletResponse;
 import controller.UrlController;
 
 /**
- * Diese Klasse ist für die Ausgabe und Formatierung des Kontaktformulares 
- * nach dem absenden zuständig.
+ * Diese Klasse ist für die Ausgabe und Formatierung des Kontaktformulares nach dem absenden zuständig.
  * 
  * @author Anja
  *
  */
 public class KontaktFormularVerarbeitungView {
 
+  //Für den Zurück-Link
 	UrlController urlController;
 
 	private PrintWriter out;
 
+	/**
+	 * Konstruktor für den KontaktFormularVerarbeitungView.
+	 * 
+	 * @param request
+	 * @param response
+	 * 
+	 * @author Anja
+	 */
 	public KontaktFormularVerarbeitungView(HttpServletRequest request, HttpServletResponse response) {
 
+	  //Für den Zurück-Link
 		this.urlController = new UrlController(request);
 
 		response.setContentType("text/html");
@@ -38,7 +47,7 @@ public class KontaktFormularVerarbeitungView {
 	/**
 	 * Diese Methode ist für das erfolgreiche versenden.
 	 * 
-	 * @author anjad
+	 * @author Anja
 	 */
 	public void outKontaktVerarbeitungView() {
 		// Ausgabe wenn absenden erfolgreich
@@ -52,7 +61,7 @@ public class KontaktFormularVerarbeitungView {
 	/**
 	 * Diese Methode ist für das fehlgeschlagene versenden.
 	 * 
-	 * @author anjad
+	 * @author Anja
 	 */
 	public void outKontaktVerarbeitungViewUngueltig() {
 		// Ausgabe wenn absenden fehlgeschlagen

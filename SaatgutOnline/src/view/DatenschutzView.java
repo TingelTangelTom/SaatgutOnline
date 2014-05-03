@@ -16,9 +16,19 @@ import controller.UrlController;
  */
 public class DatenschutzView {
 
+	/**
+	 * Konstruktor für den DatenschutzView.
+	 * 
+	 * @param request
+	 * @param response
+	 * @param datenschutzText
+	 * 
+	 * @author Anja
+	 */
 	public DatenschutzView(HttpServletRequest request, HttpServletResponse response,
 			String datenschutzText) {
 
+	  //Für den Zurück-Link
 		UrlController urlController = new UrlController(request);
 
 		response.setContentType("text/html");

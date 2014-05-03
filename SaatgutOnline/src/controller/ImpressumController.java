@@ -18,7 +18,7 @@ import view.ImpressumView;
 public class ImpressumController {
 
 	/**
-	 * Variablen zum zwischenspeichern des Datenbankinhaltes.
+	 * Variablen zum zwischenspeichern des Datenbankinhaltes
 	 */
 	private String unternehmen_adresse;
 	private String unternehmen_telefon;
@@ -31,6 +31,16 @@ public class ImpressumController {
 	private String wirtschafts_id;
 	private String impressum_copyright;
 
+	/**
+	 * Konstruktor für den ImpressumController.
+	 * 
+	 * @param request
+	 * @param response
+	 * 
+	 * @throws SQLException
+	 * 
+	 * @author Anja
+	 */
 	public ImpressumController(HttpServletRequest request, HttpServletResponse response) {
 
 		// Datenbankabfrage : Impressum ausgeben

@@ -18,10 +18,20 @@ import view.DatenschutzView;
 public class DatenschutzController {
 	
 	/**
-	 * Variablen zum zwischenspeichern des Datenbankinhaltes.
+	 * Variablen zum zwischenspeichern des Datenbankinhaltes
 	 */
 	private String datenschutzText;
 	
+	/**
+	 * Konstruktor für den DatenschutzController.
+	 * 
+	 * @param request
+	 * @param response
+	 * 
+	 * @throws SQLException
+	 * 
+	 * @author Anja
+	 */
 	public DatenschutzController(HttpServletRequest request, HttpServletResponse response) {
 
 		// Datenbankabfrage : Aktuellsten Datenschutz ausgeben

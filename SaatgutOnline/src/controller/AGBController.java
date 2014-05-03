@@ -22,6 +22,16 @@ public class AGBController {
 	 */
 	private String agbText;
 
+	/**
+	 * Konstruktor für den AGBController.
+	 * 
+	 * @param request
+	 * @param response
+	 * 
+	 * @throws SQLException
+	 * 
+	 * @author Anja
+	 */
 	public AGBController(HttpServletRequest request, HttpServletResponse response) {
 
 		// Datenbankabfrage : Aktuellste AGB ausgeben

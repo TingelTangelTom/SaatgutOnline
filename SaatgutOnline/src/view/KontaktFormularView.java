@@ -19,6 +19,14 @@ public class KontaktFormularView {
 	//Für den Zurück-Link
 	UrlController urlController;
 
+	/**
+	 * Konstruktor für den KontaktFormularView.
+	 * 
+	 * @param request
+	 * @param response
+	 * 
+	 * @author Anja
+	 */
 	public KontaktFormularView(HttpServletRequest request, HttpServletResponse response) {
 
 		response.setContentType("text/html");
@@ -38,7 +46,7 @@ public class KontaktFormularView {
 	 * @param request
 	 * @param response
 	 * 
-	 * @author anjad
+	 * @author Anja
 	 */
 	public void outKontaktFormular(HttpServletRequest request, HttpServletResponse response) {
 

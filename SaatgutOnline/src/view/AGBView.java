@@ -16,8 +16,18 @@ import controller.UrlController;
  */
 public class AGBView {
 
+	/**
+	 * Konstruktor für den AGBView.
+	 * 
+	 * @param request
+	 * @param response
+	 * @param agbText
+	 * 
+	 * @author Anja
+	 */
 	public AGBView(HttpServletRequest request, HttpServletResponse response, String agbText) {
 
+	  //Für den Zurück-Link
 		UrlController urlController = new UrlController(request);
 
 		response.setContentType("text/html");
