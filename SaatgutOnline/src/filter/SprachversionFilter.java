@@ -41,12 +41,25 @@ public class SprachversionFilter implements Filter
 			HttpSession session = ((HttpServletRequest) request).getSession();
 			Locale locale;
 
-			/*
-			 * wenn noch keine Sprache in der Session steht, Browsersprache
-			 * auslesen. Wenn diese NICHT Deutsch ist, default auf english
-			 * setzen.
-			 */
-			if (session.getAttribute("sprache") == null)
+			if (((HttpServletRequest) request).getParameter("sprache") != null)
+			{
+				String sprachwahl = ((HttpServletRequest) request).getParameter("sprache");
+				switch (sprachwahl)
+				{
+				case "de":
+					locale = Locale.GERMAN;
+					break;
+				case "en":
+					locale = Locale.ENGLISH;
+					break;
+				default:
+					locale = Locale.ENGLISH;
+					break;
+				}
+				session.setAttribute("sprache", locale);
+				spracheIdInSessionLegen(session, locale);
+			}
+			else
 			{
 				locale = request.getLocale();
 
@@ -56,36 +69,6 @@ public class SprachversionFilter implements Filter
 				}
 				session.setAttribute("sprache", locale);
 				spracheIdInSessionLegen(session, locale);
-			}
-
-			/*
-			 * falls Sprachwahl erfolgt, entsprechende locale in die Session
-			 * schreiben
-			 */
-			if (request instanceof HttpServletRequest)
-			{
-				if (((HttpServletRequest) request).getParameter("sprache") != null)
-				{
-
-					// TODO remove
-					System.out.println("Sprachauswahl per SprachversionFilter erfolgt.");
-
-					String sprachwahl = ((HttpServletRequest) request).getParameter("sprache");
-					switch (sprachwahl)
-					{
-					case "de":
-						locale = Locale.GERMAN;
-						break;
-					case "en":
-						locale = Locale.ENGLISH;
-						break;
-					default:
-						locale = Locale.ENGLISH;
-						break;
-					}
-					session.setAttribute("sprache", locale);
-					spracheIdInSessionLegen(session, locale);
-				}
 			}
 		}
 
@@ -105,7 +88,6 @@ public class SprachversionFilter implements Filter
 		ResultSet resultSet = DatenbankController.sendeSqlRequest(query);
 		try
 		{
-
 			if (resultSet.next())
 			{
 				session.setAttribute("spracheId", resultSet.getInt("sprache_id"));
