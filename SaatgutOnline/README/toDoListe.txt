@@ -32,6 +32,10 @@ Anja
 - Kontaktformular
 	- FERTIG : E-Mail Ausgabe Formatieren (Tabelle)
 	- FERTIG : E-Mail Validierung
+	- FERTIG : Zurück oder Startseite Links in Impressum, Datenschutz und co.? : Ja, Links aktualisieren
+	- FERTIG : Startseite durch weiter einkaufen ersetzen
+	- FAST FERTIG : Zurück Links in KontaktFormularVerarbeitungView (
+		- verlinkt wieder auf Formular??? "Produktseite" geht auch nicht (404)
 - Fussbereich
 	- FERTIG : Impressum
 	- FERTIG : AGB (Ausgabe könnte noch Formatiert werden (HTML in Datenbank))
@@ -39,15 +43,13 @@ Anja
 	- FERTIG : Copyright
 	- ?? Versandkosten (Versand & Zahlung)
 	- ?? Sitemap
-- FERTIG : Zurück oder Startseite Links in Impressum, Datenschutz und co.? : Ja, Links aktualisieren
-	- FERTIG : Startseite durch weiter einkaufen ersetzen
-- FAST FERTIG : Zurück Links in KontaktFormularVerarbeitungView (
-				- verlinkt wieder auf Formular??? "Produktseite" geht auch nicht (404)
-- Internationalisierung
-- Alle Seitenquelltexte(HTML) mit /n versehen !!
-- Variablen : Müssen noch durchgesehen und aktualisiert werden! (private)
-- In HTML alle ' durch escapte " ersetzen (z.b. bei action)
-
+- FERTIG : Alle Seitenquelltexte(HTML) mit /n versehen !!
+	- (Bis auf den Kram in der DB!)
+- FERTIG : Variablen : Müssen noch durchgesehen und aktualisiert werden! (private)
+- FERTIG : In HTML alle ' durch escapte " ersetzen (z.b. bei action)
+- KRIEG ICH NICH HIN : Internationalisierung
+- Klassen(Objekt)Variablen mit this aufrufen
+- javadoc : FERTIG (mit vorbehalt :D )
 
 
 

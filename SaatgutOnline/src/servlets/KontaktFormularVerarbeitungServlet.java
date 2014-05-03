@@ -27,10 +27,6 @@ public class KontaktFormularVerarbeitungServlet extends HttpServlet {
 		RequestDispatcher rd = getServletContext().getRequestDispatcher("/Kopfbereich");
 		rd.include(request, response);
 
-		// UrlController urlController = new UrlController(request);
-		// urlController.urlInSessionLegen();
-		// FIXME : URLController richtig hier????
-
 		// Inhalte ausgeben (per view!)
 		KontaktFormularVerarbeitungController kontaktFormularVerarbeitungController = new KontaktFormularVerarbeitungController(
 				request, response);
