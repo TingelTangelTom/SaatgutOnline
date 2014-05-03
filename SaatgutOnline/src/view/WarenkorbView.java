@@ -13,13 +13,43 @@ import javax.servlet.http.HttpSession;
 import controller.UrlController;
 import model.ProduktModel;
 
+/**
+ * Die Klasse stellt Html-Ausgabe-Bloecke zur Darstellung des Warenkorbs zur Verfuegung
+ * @author Tom
+ *
+ */
 public class WarenkorbView
 {
+	/**
+	 * Objekt der Klasse <code>PrintWriter</code>
+	 * @see java.io.PrintWriter
+	 */
 	private PrintWriter out;
+	/**
+	 * Objekt der Klasse <code>ResourceBundle</code>
+	 * @see java.util.ResourceBundle
+	 */
 	private ResourceBundle resourceBundle;
+	/**
+	 * Objekt der Klasse <code>HttpSession</code>
+	 * @see HttpSession
+	 */
 	private HttpSession session;
+	/**
+	 * Objekt der Klasse <code>UrlController<code>
+	 * @see controller.UrlController
+	 */
 	private UrlController urlController;
 
+	/**
+	 * Konstruktor der Klasse WarenkorbView
+	 * </br>erzeugt das <code>PrintWriter</code>-Objekt <i>out</i>
+	 * </br>erezugt das <code>PropertyResourceBundle</code>-Objekt <i>resourceBundle</i>
+	 * @param request - der aktuelle <code>HttpServletRequest</code>
+	 * @param response - die aktuelle <code>HttpServletResponse</code>
+	 * @see java.io.PrintWriter
+	 * @see java.util.PropertyResourceBundle
+	 */
 	public WarenkorbView(HttpServletRequest request, HttpServletResponse response)
 	{
 		this.session = request.getSession();
