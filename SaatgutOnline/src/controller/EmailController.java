@@ -13,10 +13,23 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+/**
+ * Diese Klasse verwaltet die E-Mail Funktionalitäten.
+ * 
+ * @author anju
+ *
+ */
 public class EmailController {
 	
+	/**
+	 * RegEx für E-Mail Validierung.
+	 */
 	private static String EmailRegel = "[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*"
 			+ "@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+	
+	/**
+	 * Pattern und Matcher für E-Mail Validierung
+	 */
 	private Pattern pattern;
 	private Matcher matcher;
 	
@@ -28,9 +41,11 @@ public class EmailController {
 	/**
 	 * Diese Methode überprüft E-Mail-Adressen auf ihre Gültigkeit.
 	 * 
-	 * @author anjad
 	 * @param String e-mail
 	 * @return boolean
+	 * 
+	 * @author anjad
+	 * 
 	 */
 	public boolean validiereEmail(String email) {
 		pattern = Pattern.compile(EmailRegel);
@@ -41,11 +56,16 @@ public class EmailController {
 	/**
 	 * Diese Methode versendet E-Mails.
 	 * 
-	 * @author anjad
 	 * @param emailadresseAbsender
 	 * @param betreff
 	 * @param emailadresseEmpfaenger
 	 * @param nachricht
+	 * 
+	 * @throws AdressException
+	 * @throws MessagingException
+	 * 
+	 * @author anjad
+	 * 
 	 */
 	public void sendeEmail(String emailadresseAbsender, String betreff,
 			String emailadresseEmpfaenger, String nachricht) {
@@ -75,7 +95,6 @@ public class EmailController {
 	/**
 	 * Diese Methode versendet E-Mails und formatiert die Ausgabe.
 	 * 
-	 * @author anjad
 	 * @param emailadresseAbsender
 	 * @param betreff
 	 * @param emailadresseEmpfaenger
@@ -83,6 +102,9 @@ public class EmailController {
 	 * @param anrede
 	 * @param vorname
 	 * @param nachname
+	 * 
+	 * @author anjad
+	 * 
 	 */
 	public void sendeEmail(String emailadresseAbsender, String betreff,
 			String emailadresseEmpfaenger, String nachricht, String anrede, String vorname,

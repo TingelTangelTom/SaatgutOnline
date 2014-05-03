@@ -8,8 +8,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import controller.UrlController;
 
+/**
+ * Diese Klasse ist für die Ausgabe und Formatierung des Kontaktformulares zuständig.
+ * 
+ * @author anjad
+ *
+ */
 public class KontaktFormularView {
 
+	//Für den Zurück-Link
 	UrlController urlController;
 
 	public KontaktFormularView(HttpServletRequest request, HttpServletResponse response) {
@@ -25,8 +32,17 @@ public class KontaktFormularView {
 		out.println();
 	}
 
+	/**
+	 * Diese Methode gibt das Kontaktformular aus.
+	 * 
+	 * @param request
+	 * @param response
+	 * 
+	 * @author anjad
+	 */
 	public void outKontaktFormular(HttpServletRequest request, HttpServletResponse response) {
 
+		// Für den Zurück-Link
 		this.urlController = new UrlController(request);
 
 		response.setContentType("text/html");
@@ -58,5 +74,6 @@ public class KontaktFormularView {
 		out.println("<br><br><a href=\"" + this.urlController.urlAusSessionHolen("LetzteSeite")
 				+ "\">&#11013 Zurück</a>");
 	}
+	//TODO: Internationalisierung
 
 }

@@ -9,8 +9,17 @@ import javax.servlet.http.HttpServletResponse;
 
 import view.DatenschutzView;
 
+/**
+ * Diese Klasse liest die aktuellste Datenschutzerklärung aus der Datenbank aus.
+ * 
+ * @author anjad
+ *
+ */
 public class DatenschutzController {
 	
+	/**
+	 * Variablen zum zwischenspeichern des Datenbankinhaltes.
+	 */
 	private String datenschutzText;
 	
 	public DatenschutzController(HttpServletRequest request, HttpServletResponse response) {

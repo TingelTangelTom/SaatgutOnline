@@ -8,6 +8,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import controller.UrlController;
 
+/**
+ * Diese Klasse ist für die Ausgabe der Datenschutzerklärung zuständig.
+ * 
+ * @author anju
+ *
+ */
 public class DatenschutzView {
 
 	public DatenschutzView(HttpServletRequest request, HttpServletResponse response,

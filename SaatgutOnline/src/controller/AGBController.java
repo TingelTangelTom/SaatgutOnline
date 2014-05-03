@@ -9,8 +9,17 @@ import javax.servlet.http.HttpServletResponse;
 
 import view.AGBView;
 
+/**
+ * Diese Klasse liest die aktuellsten AGB aus der Datenbank aus.
+ * 
+ * @author anjad
+ *
+ */
 public class AGBController {
 
+	/**
+	 * Variablen zum zwischenspeichern des Datenbankinhaltes.
+	 */
 	private String agbText;
 
 	public AGBController(HttpServletRequest request, HttpServletResponse response) {

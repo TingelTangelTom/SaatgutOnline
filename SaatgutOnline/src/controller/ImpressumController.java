@@ -1,6 +1,5 @@
 package controller;
 
-import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -8,11 +7,19 @@ import java.sql.Statement;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import view.AGBView;
 import view.ImpressumView;
 
+/**
+ * Diese Klasse liest das Impressum aus der Datenbank aus.
+ * 
+ * @author anjad
+ *
+ */
 public class ImpressumController {
 
+	/**
+	 * Variablen zum zwischenspeichern des Datenbankinhaltes.
+	 */
 	private String unternehmen_adresse;
 	private String unternehmen_telefon;
 	private String unternehmen_fax;
@@ -29,6 +36,7 @@ public class ImpressumController {
 		// Datenbankabfrage : Impressum ausgeben
 		try {
 			String query = "SELECT * FROM impressum";
+			//TODO : query aktualisieren
 
 			Statement statement = DatenbankController.verbindung.createStatement();
 			ResultSet resultset = statement.executeQuery(query);

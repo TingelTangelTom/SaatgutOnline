@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import controller.AGBController;
-import controller.DatenbankController;
 
 /**
  * Servlet implementation class AGB

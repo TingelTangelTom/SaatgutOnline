@@ -8,6 +8,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import controller.UrlController;
 
+/**
+ * Diese Klasse ist für die Ausgabe der AGB zuständig.
+ * 
+ * @author anju
+ *
+ */
 public class AGBView {
 
 	public AGBView(HttpServletRequest request, HttpServletResponse response, String agbText) {

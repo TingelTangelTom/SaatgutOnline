@@ -8,10 +8,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import controller.UrlController;
 
+/**
+ * Diese Klasse ist für die Ausgabe und Formatierung des Impressums zuständig.
+ * 
+ * @author anju
+ *
+ */
 public class ImpressumView {
 	
-
-
 	public ImpressumView(HttpServletRequest request, HttpServletResponse response,
 			String unternehmen_adresse, String unternehmen_telefon, 
 			String unternehmen_fax, String unternehmen_email, String unternehmen_geschaeftsfuehrung, 
