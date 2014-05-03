@@ -15,25 +15,19 @@ public class NavigationsbereichController
 {
 	private NavigationsbereichView navigationsbereichView;
 	private HttpSession session;
-	private HttpServletRequest request;
-	private int hauptKategorieId = 0;	
+	private HttpServletRequest request;		
 	private KategorieModel kategorieModel;	
 	private ArrayList<Integer> geklickteKategorienSession;
-	private Integer geklickteKategorieGet;
 	private int aktuelleKategorieSession;
 	private ArrayList<KategorieModel> kategorienArrayList = new ArrayList<KategorieModel>();
-	private boolean ausGet;
-	
 
-
-	public NavigationsbereichController(HttpServletRequest request, HttpServletResponse response, boolean getMethode)
+	public NavigationsbereichController(HttpServletRequest request, HttpServletResponse response, boolean ausGet)
 	{
-		this.ausGet = getMethode;
 		this.request = request;
 		this.session = request.getSession();
 		this.navigationsbereichView = new NavigationsbereichView(response);
 		this.kategorienArrayList = kategorienAusDB();
-		this.geklickteKategorienOrganisieren();
+		this.geklickteKategorienOrganisieren(ausGet);
 	}
 
 	public void navigationsbereichAnzeigen()
@@ -49,6 +43,8 @@ public class NavigationsbereichController
 	
 	private void kategorienListeAnzeigen()
 	{			
+		int hauptKategorieId = 0;
+		
 		for (int i = 0; i < kategorienArrayList.size(); i++)
 		{			
 			this.kategorieModel = this.kategorienArrayList.get(i);
@@ -65,9 +61,9 @@ public class NavigationsbereichController
 					this.navigationsbereichView.outHauptKategorieAnzeigen(this.kategorieModel);
 				}
 		
-				this.hauptKategorieId = this.kategorieModel.getKategorieId();
+				hauptKategorieId = this.kategorieModel.getKategorieId();
 				
-				if(this.geklickteKategorienSession.contains(this.hauptKategorieId))
+				if(this.geklickteKategorienSession.contains(hauptKategorieId))
 				{
 					for (int j = 0; j < kategorienArrayList.size(); j++)
 					{
@@ -75,7 +71,7 @@ public class NavigationsbereichController
 						
 						if(this.kategorieModel.getElternKategorieId() != 0)
 						{
-							if(this.kategorieModel.getElternKategorieId() == this.hauptKategorieId)
+							if(this.kategorieModel.getElternKategorieId() == hauptKategorieId)
 							{				
 								if(this.aktuelleKategorieSession == this.kategorieModel.getKategorieId())
 								{
@@ -95,22 +91,9 @@ public class NavigationsbereichController
 	
 	
 	@SuppressWarnings("unchecked")
-	private void geklickteKategorienOrganisieren()
-	{		
-		/*UrlController urlController = new UrlController(this.request);
-		String herkunft = urlController.urlAusSessionHolen("LetzteSeite");
-		
-		//TODO remove
-		System.out.println("Herkunft = "+herkunft);
-		
-		boolean nichtInProduktListe = true;
-		
-		if(! herkunft.contains("/Produktliste"))
-		{	
-			nichtInProduktListe = false;
-		}
-		*/
-		
+	private void geklickteKategorienOrganisieren(boolean ausGet)
+	{				
+		Integer geklickteKategorie;
 		
 		if(this.session.getAttribute("geklickteKategorien") != null)
 		{
@@ -131,37 +114,33 @@ public class NavigationsbereichController
 		}
 		
 		
-		//FIXME BUG fixen!&& nichtInProduktListe
-		if(ausGet				
-				
+		//FIXME Aufklapp-BUG
+		if(ausGet							
 				&& (this.request.getParameter("kategorie") != null)				
 				&& (this.request.getParameter("p_anzeige") == null))
 		{			
-			this.geklickteKategorieGet = Integer.parseInt(this.request.getParameter("kategorie"));
-			this.aktuelleKategorieSession = this.geklickteKategorieGet;
+			geklickteKategorie = Integer.parseInt(this.request.getParameter("kategorie"));
+			this.aktuelleKategorieSession = geklickteKategorie;
 			
-			if(this.geklickteKategorienSession.contains(this.geklickteKategorieGet))
+			if(this.geklickteKategorienSession.contains(geklickteKategorie))
 			{
-				this.geklickteKategorienSession.remove(this.geklickteKategorieGet);				
+				this.geklickteKategorienSession.remove(geklickteKategorie);				
 			}
 			else
 			{
-				this.geklickteKategorienSession.add(this.geklickteKategorieGet);
+				this.geklickteKategorienSession.add(geklickteKategorie);
 			}
 			
 			this.session.setAttribute("geklickteKategorien", this.geklickteKategorienSession);			
 			this.session.setAttribute("aktuelleKategorie", this.aktuelleKategorieSession);
 		}
-		//nichtInProduktListe = true;
-		
 	}
 	
 
 	private ArrayList<KategorieModel> kategorienAusDB()
 	{
-		
 			int spracheId = (int) this.session.getAttribute("spracheId");
-			
+						
 			String query = "SELECT k.kategorie_id, k.eltern_id, kb.kategorie_name "
 					+ "FROM kategorie AS k INNER JOIN kategorie_beschreibung AS kb "
 					+ "ON k.kategorie_id = kb.kategorie_id "
@@ -180,7 +159,7 @@ public class NavigationsbereichController
 					this.kategorieModel.setKategorieName(resultSet.getString("kategorie_name"));
 					this.kategorieModel.setElternKategorieId(resultSet.getInt("eltern_id"));
 					
-					kategorienArrayList.add(this.kategorieModel);
+					this.kategorienArrayList.add(this.kategorieModel);
 				}
 			} catch (SQLException e)
 			{
@@ -188,7 +167,6 @@ public class NavigationsbereichController
 				e.printStackTrace();
 			}
 		
-
-		return kategorienArrayList;
+		return this.kategorienArrayList;
 	}
 }
