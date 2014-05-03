@@ -167,7 +167,7 @@ public class ProduktController {
 	 * 
 	 */
 
-	public ArrayList<ProduktModel> getProduktliste(String kategorie_id, HttpServletRequest request) {
+	public ArrayList<ProduktModel> getProduktliste(HttpServletRequest request, String kategorie_id, boolean suche) {
 		
 		HttpSession session = ((HttpServletRequest) request).getSession(); 
 		ArrayList<Integer> kategorien = new ArrayList<>();

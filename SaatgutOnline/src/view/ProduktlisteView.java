@@ -1,18 +1,23 @@
 package view;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import model.ProduktModel;
 import controller.ProduktController;
+import controller.SucheController;
 
 public class ProduktlisteView {
 	private ProduktController produktController;
+	private SucheController sucheController;
 	private HtmlAusgabe htmlAusgabe;
 	private ResourceBundle resourceBundle;
 	private String output;
@@ -23,6 +28,7 @@ public class ProduktlisteView {
 	public ProduktlisteView(HttpServletRequest request) {
 		
 		this.produktController = new ProduktController(request);
+		this.sucheController = new SucheController(request);
 		this.htmlAusgabe = new HtmlAusgabe(request);
 		this.produktliste = new ArrayList<>();
 		this.kategorie = request.getParameter("kategorie");
@@ -43,13 +49,24 @@ public class ProduktlisteView {
 	 */
 	
 	public String anzeigenProduktliste(HttpServletRequest request) {	
+		
+		HttpSession session = ((HttpServletRequest) request).getSession();
+		String suchparameter = request.getParameter("suchbegriff");
+		
+		if(request.getParameter("suchbegriff") != null) {
+			this.sucheController.getProduktliste(request, suchparameter);
+		}
 		//TODO Internationalisierung einbauen
 
 		if(this.kategorie == null) {
 			this.kategorie = "1";
 		}
-		this.produktliste = this.produktController.getProduktliste(this.kategorie, request);
+		this.produktliste = this.produktController.getProduktliste(request, this.kategorie, false);
 		warenkorbmenge = 1;
+		
+		///TODO später entfernen
+		
+	
 		
 		//TODO Comparator einfügen
 		System.out.println("-----> Kategorie: " + this.kategorie);
