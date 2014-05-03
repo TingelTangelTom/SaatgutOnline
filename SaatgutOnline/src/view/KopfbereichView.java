@@ -11,10 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Die Klasse stellt Html-Ausgabe-Bloecke zur Darstellung des Kopfbereichs zur
+ * Die Klasse KopfbereichView stellt Html-Ausgabe-Bloecke zur Darstellung des Kopfbereichs zur
  * Verfuegung
- * 
- * @author Tom
+ * @author Tom Weigelt
  * 
  */
 public class KopfbereichView
@@ -33,7 +32,8 @@ public class KopfbereichView
 	private ResourceBundle resourceBundle;
 
 	/**
-	 * Konstruktor der Klasse KopfbereichView </br>erzeugt das
+	 * Konstruktor der Klasse <code>KopfbereichView</code>
+	 * </br> </br>erzeugt das
 	 * <code>PrintWriter</code>-Objekt <i>out</i> </br>erezugt das
 	 * <code>PropertyResourceBundle</code>-Objekt <i>resourceBundle</i>
 	 * 
@@ -41,11 +41,14 @@ public class KopfbereichView
 	 *            - der aktuelle <code>HttpServletRequest</code>
 	 * @param response
 	 *            - die aktuelle <code>HttpServletResponse</code>
+	 * @see javax.servlet.http.HttpSession
 	 * @see java.io.PrintWriter
 	 * @see java.util.PropertyResourceBundle
 	 */
 	public KopfbereichView(HttpServletRequest request, HttpServletResponse response)
 	{
+		HttpSession session = request.getSession();
+		
 		response.setContentType("text/html");
 		try
 		{
@@ -55,9 +58,7 @@ public class KopfbereichView
 			System.out.println("PrintWriter nicht erstellt!");
 			e.printStackTrace();
 		}
-
-		HttpSession session = request.getSession();
-
+		
 		Locale locale = (Locale) session.getAttribute("sprache");
 		this.resourceBundle = PropertyResourceBundle.getBundle("I18N." + locale.getLanguage() + "."
 				+ getClass().getSimpleName(), locale);

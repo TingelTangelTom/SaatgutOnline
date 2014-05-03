@@ -11,16 +11,68 @@ import javax.servlet.http.HttpSession;
 import model.KategorieModel;
 import view.NavigationsbereichView;
 
+/**
+ * Die Klasse Navigationsbereich stellt Kontrollstrukturen fuer die Darstellung
+ * und Organisation des Navigationsbereichs zur Verfuegung
+ * @author Tom Weigelt
+ *
+ */
 public class NavigationsbereichController
 {
+	/**
+	 * Objekt der Klasse <code>NavigationsbereichView</class>
+	 * @see view.NavigationsbereichView
+	 */
 	private NavigationsbereichView navigationsbereichView;
+	
+	/**
+	 * aktuelle <code>HttpSession</code>
+	 * @see javax.servlet.http.HttpSession
+	 */
 	private HttpSession session;
+	
+	/**
+	 * Objekt der Klasse <code>HttpServletRequest</code>
+	 * @see javax.servlet.http.HttpServletRequest
+	 */
 	private HttpServletRequest request;		
-	private KategorieModel kategorieModel;	
+	
+	/**
+	 * Objekt der Klasse <code>KategorieModel</code>
+	 * @see model.KategorieModel
+	 */
+	private KategorieModel kategorieModel;
+	
+	/**
+	 * Sammlung von Kategorie-Ids der geklickten Kategorien als <code>ArrayList</code> zur Ablage in der <code>HttpSession</code>
+	 */
 	private ArrayList<Integer> geklickteKategorienSession;
+	
+	/**
+	 * aktuell gelickte Kategorie als <code>int</code> zur Ablage in der Session
+	 */
 	private int aktuelleKategorieSession;
+	
+	/**
+	 * Sammlung des Formats <code>ArrayList</code>
+	 * </br>Enthaelt Objekte der Klasse <code>KategorieModel</code>
+	 * @see model.KategorieModel
+	 */
 	private ArrayList<KategorieModel> kategorienArrayList = new ArrayList<KategorieModel>();
 
+	//TODO ausGet checken!
+	/**
+	 * Konstruktor der Klasse <code>NavigationsbereichController</code>
+	 * </br></br>holt die aktuelle <code>HttpSession</code>
+	 * </br>erzeugt ein Objekt der Klasse <code>NavigationsbereichView</code>
+	 * </br>fuellt <code>kategorienArrayList</code> per Methode <code>kategorienAusDB()</code>
+	 * </br>fuehrt Methode <code>geklickteKategorienOrgansisieren()</code> aus
+	 * @param request - der aktuelle <code>HttpServletRequest</code>
+	 * @param response - die aktuelle <code>HttpServletResponse</code>
+	 * @param ausGet - <code>boolean</code>
+	 * @see javax.servlet.http.HttpSession
+	 * @see view.NavigationsbereichView
+	 */
 	public NavigationsbereichController(HttpServletRequest request, HttpServletResponse response, boolean ausGet)
 	{
 		this.request = request;
@@ -30,6 +82,9 @@ public class NavigationsbereichController
 		this.geklickteKategorienOrganisieren(ausGet);
 	}
 
+	/**
+	 * Gibt den Navigationsbereich aus
+	 */
 	public void navigationsbereichAnzeigen()
 	{
 		this.navigationsbereichView.outNavigationsbereichAnfang();
@@ -41,6 +96,9 @@ public class NavigationsbereichController
 		this.navigationsbereichView.outNavigationsbereichEnde();
 	}
 	
+	/**
+	 * 
+	 */
 	private void kategorienListeAnzeigen()
 	{			
 		int hauptKategorieId = 0;
@@ -89,7 +147,10 @@ public class NavigationsbereichController
 		}		
 	}
 	
-	
+	/**
+	 *   
+	 * @param ausGet
+	 */
 	@SuppressWarnings("unchecked")
 	private void geklickteKategorienOrganisieren(boolean ausGet)
 	{				

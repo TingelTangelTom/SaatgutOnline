@@ -11,28 +11,52 @@ import model.ProduktModel;
 import view.HtmlAusgabe;
 import view.WarenkorbView;
 
+/**
+ * Die Klasse <code>WarenkorbController</code> stellt Kontrollstrukturen zur Darstellung
+ * und Organisation des Warenkorbs zur Verfuegung
+ * @author Tom Weigelt
+ *
+ */
 public class WarenkorbController
 {
+	/**
+	 * aktuelle <code>HttpSession</code>
+	 * @see javax.servlet.http.HttpSession
+	 */
 	private HttpSession session;
+	
+	/**
+	 * Eine <code>Hashtable</code> der im Warenkorb abgelegten Produkte vom Datentyp <code>ProduktModel</code> als Schluessel
+	 * und deren Bestellmenge vom Datentyp <code>int</code> als Wert
+	 */
 	private Hashtable<ProduktModel, Integer> warenkorb;
+	
+	/**
+	 * Objekt der Klasse <code>WarenkorbView</code>
+	 * @see view.WarenkorbView
+	 */
+	
 	private WarenkorbView warenkorbView;
+	
+	/**
+	 * Objekt der Klasse <code>HttpServletRequest</code>
+	 * @see javax.servlet.http.HttpServletRequest
+	 */
 	private HttpServletRequest request;
 
-	// GET-Kostruktor
+	/**
+	 * Konstruktor der Klasse <code>WarenkorbController</code>
+	 * @param request - der aktuelle <code>HttpServletRequest</code>
+	 * @param response - die aktuelle <code>HttpServletResponse</code>
+	 */
 	public WarenkorbController(HttpServletRequest request, HttpServletResponse response)
 	{
-		// TODO remove
-		System.out.println("---WarenkorbController---");
-
 		this.request = request;
 		this.session = request.getSession();
 		this.warenkorbView = new WarenkorbView(request, response);
 		this.warenkorbAusSessionHolen();
 		this.warenkorbAktualisieren();
 		this.session.setAttribute("warenkorb", warenkorb);
-
-		// TODO remove
-		System.out.println("-------------------------");
 	}
 
 	public void warenkorbAnzeigen()
@@ -89,23 +113,19 @@ public class WarenkorbController
 
 	private void warenkorbAktualisieren()
 	{
-		// Wurde Produkt an WK übergeben?
 		if (this.request.getParameter("produkt") != null)
 		{
-			// Produkt aus DB holen
 			int id = Integer.parseInt(this.request.getParameter("produkt"));
 			ProduktController produktController = new ProduktController(this.request);
 			ProduktModel produktModelAusDatenbank = new ProduktModel();
 			produktModelAusDatenbank = produktController.getProdukt(id);
 
-			// Liegt Produkt noch nicht im WK?
 			Enumeration<ProduktModel> warenkorbInhalt = this.warenkorb.keys();
 			if (warenkorbInhalt.hasMoreElements())
 			{
 				boolean produktNichtImWarenkorb = true;
 				int hinzugefuegteMenge = Integer.parseInt(this.request.getParameter("menge"));
 
-				// WK-Inhalte mit Produkt vergleichen
 				while (warenkorbInhalt.hasMoreElements())
 				{
 					ProduktModel produktModelImWarenkorb = warenkorbInhalt.nextElement();
@@ -125,24 +145,18 @@ public class WarenkorbController
 
 			} else
 			{
-				// in WK legen wenn WK leer
 				this.warenkorb.put(produktModelAusDatenbank, Integer.parseInt(this.request.getParameter("menge")));
 			}
 		} else
 		{
-			// Wurde 'aktualisieren' gewaehlt?
 			if (this.request.getParameter("aktualisieren") != null)
 			{
-				// TODO remove
-				System.out.println("Warenkorb wird aktualisert...");
-
 				ProduktModel produktModelImWarenkorb;
 				Enumeration<ProduktModel> produktModelsImWarenkorb;
 				Enumeration<String> parameters;
 				String[] splittedParameter;
 				String parameter;
 
-				// Menge aktualisieren
 				parameters = this.request.getParameterNames();
 				while (parameters.hasMoreElements())
 				{
@@ -174,7 +188,6 @@ public class WarenkorbController
 					}
 				}
 
-				// Bestellpostitionen entfernen
 				parameters = this.request.getParameterNames();
 				while (parameters.hasMoreElements())
 				{
@@ -197,12 +210,8 @@ public class WarenkorbController
 				}
 			} else
 			{
-				// Wurde 'leeren' gewaehlt?
 				if (this.request.getParameter("leeren") != null)
 				{
-					// TODO remove
-					System.out.println("Warenkorb wird geleert");
-
 					this.warenkorb.clear();
 				}
 			}

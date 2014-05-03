@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
  * <code>zwischengespeicherteUrlAusSessionHolen()</code>
  * zur Verfügung
  * 
- * @author tomw
+ * @author Tom Weigelt
  *
  */
 public class UrlController

@@ -6,17 +6,41 @@ import javax.servlet.http.HttpSession;
 
 import view.KopfbereichView;
 
+/**
+ * Die Klasse KopfbereichController stellt Kontrollstrukturen fuer die Darstellung des Kopfbereichs zur Verfuegung 
+ * @author Tom Weigelt
+ *
+ */
 public class KopfbereichController
 {
+	/**
+	 * Objekt der Klasse <code>KopfbereichView</code>
+	 * @see view.KopfbereichView
+	 */
 	private KopfbereichView kopfbereichView;
+	/**
+	 * Objekt der Klasse <code>HttpSession</code>
+	 * @see HttpSession
+	 */
 	private HttpSession session;
 		
+	/**
+	 * Konstruktor der Klasse <code>KopfbereichController</code>
+	 * </br></br>holt die aktuelle <code>HttpSession</code>
+	 * </br>erzeugt eine Objekt der Klasse <code>KopfbereichView</code>
+	 * @param request - der aktuelle <code>HttpServletRequest</code>
+	 * @param response - die aktuelle <code>HttpServletResponse</code>
+	 * @see view.KopfbereichView
+	 */
 	public KopfbereichController(HttpServletRequest request, HttpServletResponse response)
 	{	
-		this.kopfbereichView = new KopfbereichView(request, response);
 		this.session = request.getSession();
+		this.kopfbereichView = new KopfbereichView(request, response);		
 	}
 
+	/**
+	 * Gibt den Kopfbereich aus
+	 */
 	public void outKopfbereichAnzeigen()
 	{					
 		this.kopfbereichView.outKopfbereichAnfang();
@@ -56,9 +80,4 @@ public class KopfbereichController
 		
 		this.kopfbereichView.outKopfbereichEnde();	
 	}
-
-
-	
-	
-	
 }

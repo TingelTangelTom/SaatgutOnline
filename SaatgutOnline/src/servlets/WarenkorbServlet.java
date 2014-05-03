@@ -34,19 +34,15 @@ public class WarenkorbServlet extends HttpServlet
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{	
-		// Kopfbereich ausgeben
 		RequestDispatcher rd = getServletContext().getRequestDispatcher("/Kopfbereich");
-		rd.include(request, response);
-	
-		// UrlController
+		rd.include(request, response);	
+		
 		UrlController urlController = new UrlController(request);
 		urlController.urlInSessionLegen();
 		
 		WarenkorbController warenkorbController = new WarenkorbController(request, response);		
 		warenkorbController.warenkorbAnzeigen();
 		
-		
-		// Fussbereich einbinden
 		rd = getServletContext().getRequestDispatcher("/Fussbereich");
 		rd.include(request, response);					
 	}
@@ -60,5 +56,4 @@ public class WarenkorbServlet extends HttpServlet
 	{
 		doGet(request, response);
 	}
-
 }

@@ -34,11 +34,8 @@ public class KopfbereichServlet extends HttpServlet
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		KopfbereichController kopfbereichController = new KopfbereichController(request, response);
-	
 		kopfbereichController.outKopfbereichAnzeigen();
-		
-		
-		// Navigationsbereich einbinden
+
 		RequestDispatcher rd = getServletContext().getRequestDispatcher("/Navigationsbereich");
 		rd.include(request, response);
 	}
@@ -52,5 +49,4 @@ public class KopfbereichServlet extends HttpServlet
 	{
 		doGet(request, response);
 	}
-
 }

@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 import model.KategorieModel;
 
 /**
- * Die Klasse stellt Html-Ausgabe-Bloecke zur Darstellung des Navigationsbereichs zur Verfuegung
- * @author Tom
+ * Die Klasse NavigationsbereichView stellt Html-Ausgabe-Bloecke zur Darstellung des Navigationsbereichs zur Verfuegung
+ * @author Tom Weigelt
  *
  */
 public class NavigationsbereichView
@@ -21,8 +21,8 @@ public class NavigationsbereichView
 	private PrintWriter out;
 	
 	/**
-	 * Konstruktor der Klasse NavigationsbereichView
-	 * </br>erzeugt das <code>PrintWriter</code>-Objekt <i>out</i>
+	 * Konstruktor der Klasse <code>NavigationsbereichView</code>
+	 * </br></br>erzeugt das <code>PrintWriter</code>-Objekt <i>out</i>
 	 * @param response - die aktuelle <code>HttpServletResponse</code>
 	 * @see java.io.PrintWriter
 	 */
