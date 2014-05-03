@@ -25,12 +25,28 @@ public class EmailController {
 
 	}
 	
+	/**
+	 * Diese Methode überprüft E-Mail-Adressen auf ihre Gültigkeit.
+	 * 
+	 * @author anjad
+	 * @param String e-mail die zu überprüfende E-Mail-Adresse
+	 * @return boolean
+	 */
 	public boolean validiereEmail(String email) {
 		pattern = Pattern.compile(EmailRegel);
 		matcher = pattern.matcher(email);
 		return matcher.matches();			
 	}	
 	
+	/**
+	 * Diese Methode versendet E-Mails.
+	 * 
+	 * @author anjad
+	 * @param emailadresseAbsender
+	 * @param betreff
+	 * @param emailadresseEmpfaenger
+	 * @param nachricht
+	 */
 	public void sendeEmail(String emailadresseAbsender, String betreff,
 			String emailadresseEmpfaenger, String nachricht) {
 
@@ -55,6 +71,19 @@ public class EmailController {
 		}
 	}
 
+	
+	/**
+	 * Diese Methode versendet E-Mails und formatiert die Ausgabe.
+	 * 
+	 * @author anjad
+	 * @param emailadresseAbsender
+	 * @param betreff
+	 * @param emailadresseEmpfaenger
+	 * @param nachricht
+	 * @param anrede
+	 * @param vorname
+	 * @param nachname
+	 */
 	public void sendeEmail(String emailadresseAbsender, String betreff,
 			String emailadresseEmpfaenger, String nachricht, String anrede, String vorname,
 			String nachname) {
