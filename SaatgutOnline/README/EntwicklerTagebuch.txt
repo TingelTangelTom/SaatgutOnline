@@ -11,6 +11,15 @@ Bitte offene Fragen hier posten:
 -------
 
 --------------------------------------------------------
+03.Mai, 16:20 (Anja) - Datenbank - Internationalisierung
+--------------------------------------------------------
+@simon: 
+Ich weiß nich so genau wie das mit der internationalisierung in der Datenbank läuft.
+Ich hab mal die drei Tabellen(agb, datenschutz, impressum) so gemacht wie ich denke
+das es sein muss :)
+Beim Rest kannst du mir vielleicht am Mo. helfen?
+
+--------------------------------------------------------
 01.Mai, 13:09 (Christof) - DB-Controller
 --------------------------------------------------------
 
