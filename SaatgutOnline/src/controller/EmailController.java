@@ -29,7 +29,7 @@ public class EmailController {
 	 * Diese Methode überprüft E-Mail-Adressen auf ihre Gültigkeit.
 	 * 
 	 * @author anjad
-	 * @param String e-mail die zu überprüfende E-Mail-Adresse
+	 * @param String e-mail
 	 * @return boolean
 	 */
 	public boolean validiereEmail(String email) {
