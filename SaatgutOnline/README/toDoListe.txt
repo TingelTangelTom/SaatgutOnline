@@ -30,22 +30,22 @@ Simon
 
 Anja
 - Kontaktformular
-	- FERTIG : E-Mail Ausgabe Formatieren (Tabelle) : FERTIG
-	- E-Mail Validierung
+	- FERTIG : E-Mail Ausgabe Formatieren (Tabelle)
+	- FERTIG : E-Mail Validierung
 - Fussbereich
-	- FERTIG : Impressum : FERTIG
-	- FERTIG : AGB : FERTIG (Ausgabe muss noch Formatiert werden (HTML in Datenbank))
-	- Versandkosten (Versand & Zahlung)
-	- FERTIG : Datenschutz : FERTIG
-	- Sitemap
-	- FERTIG : Copyright : FERTIG
-- Zurück oder Startseite Links in Impressum, Datenschutz und co.? : Ja, Links aktualisieren
-  (siehe AGBView)
-- Zurück Links in KontaktFormularVerarbeitungView
-- Wiederrufsbelehrung extra?? : NEIN
+	- FERTIG : Impressum
+	- FERTIG : AGB (Ausgabe könnte noch Formatiert werden (HTML in Datenbank))
+	- FERTIG : Datenschutz
+	- FERTIG : Copyright
+	- ?? Versandkosten (Versand & Zahlung)
+	- ?? Sitemap
+- FERTIG : Zurück oder Startseite Links in Impressum, Datenschutz und co.? : Ja, Links aktualisieren
+	- FERTIG : Startseite durch weiter einkaufen ersetzen
+- FAST FERTIG : Zurück Links in KontaktFormularVerarbeitungView (
+				- verlinkt wieder auf Formular??? "Produktseite" geht auch nicht (404)
 - Internationalisierung
-- Alle Seitenquelltexte mit /n versehen !!
-- Variablen : private??? Müssen noch durchgesehen und aktualisiert werden!
+- Alle Seitenquelltexte(HTML) mit /n versehen !!
+- Variablen : Müssen noch durchgesehen und aktualisiert werden! (private)
 - In HTML alle ' durch escapte " ersetzen (z.b. bei action)
 
 

@@ -6,14 +6,19 @@ import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import controller.UrlController;
+
 public class ImpressumView {
+	
+
 
 	public ImpressumView(HttpServletRequest request, HttpServletResponse response,
 			String unternehmen_adresse, String unternehmen_telefon, 
 			String unternehmen_fax, String unternehmen_email, String unternehmen_geschaeftsfuehrung, 
 			String registergericht, String register_nr, String umsatzsteuer_id, 
 			String wirtschafts_id, String impressum_copyright) {
-			//TODO : E-Mail ändern in samen@saatgutonline.de (In DB)
+		
+		UrlController urlController = new UrlController(request);
 
 		// Ausgabe und Formatierung mit Printwriter
 		response.setContentType("text/html");
@@ -30,9 +35,6 @@ public class ImpressumView {
 				+ "<br><br>Registergericht: " + registergericht + ", " + register_nr 
 				+ "<br>Umsatzsteuer-IdNr.: " + umsatzsteuer_id + "<br>Wirtschafts-IdNr.: " 
 				+ wirtschafts_id + "<br><br>" +  impressum_copyright);
-		out.println("<br><br><a href=\"/SaatgutOnline/IndexPlatzhalter\">&#11013 Zurück</a>");
-		//FIXME : Richtigen Link einsetzen
-		//TODO : Ich hätte den Link gerne in schwarz :)
-		//TODO : Pfeil : Auch &#8678 ausprobieren
+		out.println("<br><br><a href=\"" + urlController.urlAusSessionHolen("LetzteSeite") + "\">&#11013 Zurück</a>");
 	}
 }

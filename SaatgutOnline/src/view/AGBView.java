@@ -9,11 +9,11 @@ import javax.servlet.http.HttpServletResponse;
 import controller.UrlController;
 
 public class AGBView {
-	
+
 	public AGBView(HttpServletRequest request, HttpServletResponse response, String agbText) {
-		
+
 		UrlController urlController = new UrlController(request);
-		
+
 		response.setContentType("text/html");
 		PrintWriter out;
 		try {
@@ -23,7 +23,7 @@ public class AGBView {
 			return;
 		}
 		out.println(agbText);
-		out.println("<br><br><a href=\"" + urlController.urlAusSessionHolen("LetzteSeite") + "\">&#11013 Zurück</a>");
-		//TODO : Ich hätte den Link gerne in schwarz :)
+		out.println("<br><br><a href=\"" + urlController.urlAusSessionHolen("LetzteSeite")
+				+ "\">&#11013 Zurück</a>");
 	}
 }

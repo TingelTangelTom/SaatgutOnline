@@ -52,12 +52,12 @@ public class FussbereichView
 	
 	public void outFussbereichInhalt()
 	{
-		out.println("<footer class=\"fussbereich\"><a href=\"/SaatgutOnline/Impressum\">Impressum</a> | "
-				      + "<a href=\"/SaatgutOnline/AGB\">AGB</a> | "
-				      + "<a href=\"/SaatgutOnline/VersandZahlung\">Versand & Zahlung</a> | "
-				      + "<a href=\"/SaatgutOnline/Datenschutz\">Datenschutz</a> | "
-				      + "<a href=\"/SaatgutOnline/Kontakt\">Kontakt</a> | "
-				      + "<a href=\"/SaatgutOnline/Sitemap\">Sitemap</a> | "
+		out.println("<footer class=\"fussbereich\">\n<a href=\"/SaatgutOnline/Impressum\">Impressum</a> | \n"
+				      + "<a href=\"/SaatgutOnline/AGB\">AGB</a> | \n"
+				      + "<a href=\"/SaatgutOnline/VersandZahlung\">Versand & Zahlung</a> | \n"
+				      + "<a href=\"/SaatgutOnline/Datenschutz\">Datenschutz</a> | \n"
+				      + "<a href=\"/SaatgutOnline/Kontakt\">Kontakt</a> | \n"
+				      + "<a href=\"/SaatgutOnline/Sitemap\">Sitemap</a> | \n"
 				      + "<br>&copy Copyright 2014 by SaatgutOnline GmbH</footer>");
 	}
 }
