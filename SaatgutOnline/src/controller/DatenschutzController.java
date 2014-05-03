@@ -12,7 +12,7 @@ import view.DatenschutzView;
 /**
  * Diese Klasse liest die aktuellste Datenschutzerklärung aus der Datenbank aus.
  * 
- * @author anjad
+ * @author Anja
  *
  */
 public class DatenschutzController {

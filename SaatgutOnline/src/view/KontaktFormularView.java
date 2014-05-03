@@ -11,7 +11,7 @@ import controller.UrlController;
 /**
  * Diese Klasse ist für die Ausgabe und Formatierung des Kontaktformulares zuständig.
  * 
- * @author anjad
+ * @author Anja
  *
  */
 public class KontaktFormularView {

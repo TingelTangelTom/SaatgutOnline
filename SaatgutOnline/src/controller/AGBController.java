@@ -12,7 +12,7 @@ import view.AGBView;
 /**
  * Diese Klasse liest die aktuellsten AGB aus der Datenbank aus.
  * 
- * @author anjad
+ * @author Anja
  *
  */
 public class AGBController {

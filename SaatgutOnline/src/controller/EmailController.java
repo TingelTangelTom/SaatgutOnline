@@ -16,7 +16,7 @@ import javax.mail.internet.MimeMessage;
 /**
  * Diese Klasse verwaltet die E-Mail Funktionalitäten.
  * 
- * @author anju
+ * @author Anja
  *
  */
 public class EmailController {

@@ -12,7 +12,7 @@ import view.ImpressumView;
 /**
  * Diese Klasse liest das Impressum aus der Datenbank aus.
  * 
- * @author anjad
+ * @author Anja
  *
  */
 public class ImpressumController {

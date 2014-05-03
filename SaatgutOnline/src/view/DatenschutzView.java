@@ -11,7 +11,7 @@ import controller.UrlController;
 /**
  * Diese Klasse ist für die Ausgabe der Datenschutzerklärung zuständig.
  * 
- * @author anju
+ * @author Anja
  *
  */
 public class DatenschutzView {

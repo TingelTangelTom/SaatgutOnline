@@ -5,6 +5,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import view.KontaktFormularView;
 
+/**
+ * Diese Klasse ???
+ * 
+ * @author Anja
+ *
+ */
+//TODO : javadoc aktualisieren
 public class KontaktFormularController {
 	
 	public KontaktFormularController(HttpServletRequest request, HttpServletResponse response) {

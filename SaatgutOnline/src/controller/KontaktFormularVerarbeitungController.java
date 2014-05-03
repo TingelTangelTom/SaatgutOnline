@@ -6,6 +6,12 @@ import javax.servlet.http.HttpServletResponse;
 import view.KontaktFormularVerarbeitungView;
 import controller.EmailController;
 
+/**
+ * Diese Klasse liest das Kontaktformular aus und validiert die E-Mail-Adresse. 
+ * 
+ * @author Anja
+ *
+ */
 public class KontaktFormularVerarbeitungController {
 
 	public KontaktFormularVerarbeitungController(HttpServletRequest request,
