@@ -26,8 +26,10 @@ import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
+import controller.ConnectionPoolController;
 import controller.DatenbankController;
 import controller.EmailController;
+import controller.KonfigurationController;
 
 import java.io.File;
 
@@ -37,7 +39,7 @@ public class KonfigurationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	public static final boolean release = false;		// assertions enabled...
        
-    /**
+	/**
      * @see HttpServlet#HttpServlet()
      */
     
@@ -51,51 +53,6 @@ public class KonfigurationServlet extends HttpServlet {
 	public void init(ServletConfig konfiguration) throws ServletException {
 		
 		super.init(konfiguration);
-		
-		File xmlDatei = new File(getServletContext().getRealPath("\\resources\\xml\\Konfiguration.xml"));
-		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-		
-		try {
-			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-			Document dokument = dBuilder.parse(xmlDatei);
-			dokument.getDocumentElement().normalize();	// TODO optional!!!
-	 
-			NodeList nodeListe = dokument.getElementsByTagName("datenbank");
-		
-			for (int i=0; i <nodeListe.getLength(); i++) {
-				Node node = nodeListe.item(i);
-				
-				if (node.getNodeType() == Node.ELEMENT_NODE) {
-					Element element = (Element) node;
-					DatenbankController.setDbHost(element.getElementsByTagName("dbHost").item(0).getTextContent());
-					DatenbankController.setDbPort(element.getElementsByTagName("dbPort").item(0).getTextContent());
-					DatenbankController.setDbName(element.getElementsByTagName("dbName").item(0).getTextContent());
-					DatenbankController.setDbBenutzer(element.getElementsByTagName("dbBenutzer").item(0).getTextContent());
-					DatenbankController.setDbPasswort(element.getElementsByTagName("dbPasswort").item(0).getTextContent());
-				}
-			}
-			
-//			nodeListe = dokument.getElementsByTagName("regeln");
-//			
-//			for (int i=0; i <nodeListe.getLength(); i++) {
-//				Node node = nodeListe.item(i);
-//				
-//				if (node.getNodeType() == Node.ELEMENT_NODE) {
-//					Element element = (Element) node;
-//					
-//					EMailController.setEmailRegel.(element.getElementsByTagName("emailregel").item(0).getTextContent());
-//				}
-//			}
-//		
-		} catch (ParserConfigurationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}catch (SAXException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		KonfigurationController.initialisiereKonfiguration(konfiguration);
 	}
 }

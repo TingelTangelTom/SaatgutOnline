@@ -3,10 +3,15 @@
  */
 package model;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
+import controller.ConnectionPoolController;
 import controller.DatenbankController;
+import controller.KonfigurationController;
 
 /**
  * @author Christof Weigandt
@@ -16,47 +21,43 @@ import controller.DatenbankController;
 public class KundeModel {
 
 	private int id;
-	private String geschlecht;		// TODO anpassen, char oder bool
+	private int geschlecht;		// DB anpassen
 	private String vorname;
 	private String nachname;
 	private String benutzername;
-	private String geburtsdatum;
 	private String firma;
 	private String strasse;
 	private String hausnummer;
 	private String ort;				// TODO DB anpassen
 	private String postleitzahl;	
-	private String bundesland;		// TODO DB anpassen - löschen!
 	private String land;			
 	private String telefon;			
-	private String emailAdresse;	
+	private String emailadresse;	
 	private int newsletter;		// int ggfs. in bool konvertieren
 
-	public KundeModel getKundeAusDatenbank (int id) {
+	public KundeModel ladeKundeAusDatenbank (int id) {
 
 		KundeModel kunde = new KundeModel ();
 		
-		String query = "SELECT * FROM " + DatenbankController.getDbName()
+		String query = "SELECT * FROM " + KonfigurationController.getDbName()
         + ".kunden WHERE kunden_id = " + id;
 		ResultSet result = DatenbankController.sendeSqlRequest(query);
 		
 		try {
 			kunde.id=(result.getInt("kunde_id"));
 		
-		kunde.geschlecht=(result.getString("kunde_geschlecht"));
+		kunde.geschlecht=(result.getInt("kunde_geschlecht"));
 		kunde.vorname=(result.getString("kunde_vorname"));
 		kunde.nachname=(result.getString("kunde_nachname"));
 		kunde.benutzername=(result.getString("kunde_benutername"));
-		kunde.geburtsdatum=(result.getString("kunde_geburtsdatum"));
 		kunde.firma=(result.getString("kunde_firma"));
 		kunde.strasse=(result.getString("kunde_strasse"));
 		kunde.hausnummer=(result.getString("kunde_hausnummer"));
 		kunde.ort=(result.getString("kunde_stadt"));
 		kunde.postleitzahl=(result.getString("kunde_postleitzahl"));
-		kunde.bundesland=(result.getString("kunde_bundesland"));
 		kunde.land=(result.getString("kunde_land"));
 		kunde.telefon=(result.getString("kunde_telefon"));
-		kunde.emailAdresse=(result.getString("kunde_email_adresse"));
+		kunde.emailadresse=(result.getString("kunde_email_adresse"));
 		kunde.newsletter=(result.getInt("kunde_newsletter"));
 		return kunde;
 		
@@ -66,12 +67,68 @@ public class KundeModel {
 			return null;
 		}
 	}
+	public void speichereKundeInDb (KundeModel kunde) {
+		 
+		Connection verbindung = ConnectionPoolController.getInstance().getVerbindungAusPool();
 
+         PreparedStatement prepSql;
+
+         
+         
+         try {
+			prepSql = verbindung.prepareStatement(
+			         "INSERT INTO " + KonfigurationController.getDbName()
+			         + ".kunde ("
+			         + "geschlecht, "
+			         + "vorname, "
+			         + "nachname, "
+			         + "benutzername, "
+			         + "firma, "
+			         + "strasse, "
+			         + "hausnummer, "
+			         + "ort, "
+			         + "postleitzahl, "
+			         + "land, "
+			         + "telefon, "
+			         + "emaildresse, "
+			         + "newsletter, "
+			         + ")"
+			         + " VALUES ("
+			         + "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?"
+			         + ")", Statement.RETURN_GENERATED_KEYS);
+
+         prepSql.setInt(1, getGeschlecht());
+         prepSql.setString(2, getVorname());
+         prepSql.setString(3, getNachname());
+         prepSql.setString(4, getBenutzername());
+         prepSql.setString(5, getFirma());
+         prepSql.setString(6, getStrasse());
+         prepSql.setString(7, getHausnummer());
+         prepSql.setString(8, getOrt());
+         prepSql.setString(9, getPostleitzahl());
+         prepSql.setString(10, getLand());
+         prepSql.setString(11, getTelefon());
+         prepSql.setString(12, getEmailadresse());
+         prepSql.setInt(13, getNewsletter());
+         
+         prepSql.executeUpdate();
+         
+         ResultSet tabellenSchluessel = prepSql.getGeneratedKeys();
+         ConnectionPoolController.getInstance().verschiebeVerbindungInDenPool(verbindung);
+         tabellenSchluessel.next();
+         this.setId(tabellenSchluessel.getInt(1));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+		
+		
 	public int getId() {
 		return id;
 	}
 
-	public String getGeschlecht() {
+	public int getGeschlecht() {
 		return geschlecht;
 	}
 
@@ -85,10 +142,6 @@ public class KundeModel {
 
 	public String getBenutzername() {
 		return benutzername;
-	}
-
-	public String getGeburtsdatum() {
-		return geburtsdatum;
 	}
 
 	public String getFirma() {
@@ -111,9 +164,6 @@ public class KundeModel {
 		return postleitzahl;
 	}
 
-	public String getBundesland() {
-		return bundesland;
-	}
 
 	public String getLand() {
 		return land;
@@ -123,15 +173,20 @@ public class KundeModel {
 		return telefon;
 	}
 
-	public String getEmailAdresse() {
-		return emailAdresse;
+	public String getEmailadresse() {
+		return emailadresse;
 	}
 
 	public int getNewsletter() {
 		return newsletter;
 	}
 
-	public void setGeschlecht(String geschlecht) {
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public void setGeschlecht(int geschlecht) {
 		this.geschlecht = geschlecht;
 	}
 
@@ -145,10 +200,6 @@ public class KundeModel {
 
 	public void setBenutzername(String benutzername) {
 		this.benutzername = benutzername;
-	}
-
-	public void setGeburtsdatum(String geburtsdatum) {
-		this.geburtsdatum = geburtsdatum;
 	}
 
 	public void setFirma(String firma) {
@@ -171,10 +222,6 @@ public class KundeModel {
 		this.postleitzahl = postleitzahl;
 	}
 
-	public void setBundesland(String bundesland) {
-		this.bundesland = bundesland;
-	}
-
 	public void setLand(String land) {
 		this.land = land;
 	}
@@ -183,8 +230,8 @@ public class KundeModel {
 		this.telefon = telefon;
 	}
 
-	public void setEmailAdresse(String emailAdresse) {
-		this.emailAdresse = emailAdresse;
+	public void setEmailadresse(String emailAdresse) {
+		this.emailadresse = emailAdresse;
 	}
 
 	public void setNewsletter(int newsletter) {

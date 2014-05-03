@@ -11,6 +11,21 @@ Bitte offene Fragen hier posten:
 -------
 
 --------------------------------------------------------
+03.Mai, 23:30 (Christof)
+--------------------------------------------------------
+
+Wir haben nun:
+
+EINEN NEUEN DATENBANKCONTROLLER, bitte einbauen!
+
+(kleiner Scherz, an der Schnittstelle ändert sich nichts, aber
+ bitte ggfs. mysql-pass für root@localhost auf 'root' setzen)
+
+- einen eigens programmierten SINGLETON (jawohl Singleton) ConnectionPool
+- einen gescheiten KonfigurationController, der die Konfigdaten statisch
+   zur Verfügung stellt, ohne den lästig zu übergebenden ServletContext
+
+--------------------------------------------------------
 03.Mai, 16:20 (Anja) - Datenbank - Internationalisierung
 --------------------------------------------------------
 @simon: 

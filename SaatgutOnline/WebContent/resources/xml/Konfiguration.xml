@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE datenbank [ 
-<!ELEMENT datenbank (dbHost, dbPort, dbName, dbBenutzer, dbPasswort)> 
+<!ELEMENT datenbank (dbHost, dbPort, dbName, dbBenutzer, dbPasswort, dbMaximalePoolgroesse)> 
   <!ELEMENT dbHost  (#PCDATA)> 
   <!ELEMENT dbPort  (#PCDATA)> 
   <!ELEMENT dbName  (#PCDATA)> 
   <!ELEMENT  dbBenutzer  (#PCDATA)> 
   <!ELEMENT  dbPasswort  (#PCDATA)> 
+  <!ELEMENT  dbMaximalePoolgroesse  (#PCDATA)> 
 ]> 
 
 <datenbank>
@@ -14,4 +15,5 @@
 	<dbName>saatgutonline</dbName>
 	<dbBenutzer>root</dbBenutzer>
 	<dbPasswort>root</dbPasswort>
+	<dbMaximalePoolgroesse>2</dbMaximalePoolgroesse>
 </datenbank>

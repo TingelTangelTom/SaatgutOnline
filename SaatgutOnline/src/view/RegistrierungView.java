@@ -42,6 +42,9 @@ public class RegistrierungView {
 			    
 			    + "<tr><td>Vorname:</td>"
 			    + "<td><input name=\"vorname\" type=\"text\" id=\"vorname\" size=\"35\" maxlength=\"60\"></td></tr>"
+
+			    + "<tr><td>Firma:</td>"
+			    + "<td><input name=\"firma\" type=\"text\" id=\"firma\" size=\"35\" maxlength=\"60\"></td></tr>"
 			    
 				+ "<tr><td>Strasse:</td>"
 			 	+ "<td><input name=\"strasse\" type=\"text\" id=\"strasse\" size=\"35\" maxlength=\"60\"></td>"
@@ -58,6 +61,9 @@ public class RegistrierungView {
 				+ "<tr><td>E-Mail-Adresse:</td>"
 			    + "<td><input name=\"email\" type=\"text\" id=\"email\" size=\"35\" maxlength=\"60\"></td></tr>"
 			    
+				+ "<tr><td>Telefonnummer:</td>"
+				+ "<td><input name=\"telefon\" type=\"text\" id=\"telefon\" size=\"35\" maxlength=\"60\"></td></tr>"
+				
 			  	+ "<tr><td>Ihr gew&uuml;nschter Benutzername:</td>"
 			  	+ "<td><input name=\"benutzername\" type=\"text\" id=\"benutzername\" size=\"35\" maxlength=\"60\"></td></tr>"
   
