@@ -10,6 +10,16 @@ Bitte offene Fragen hier posten:
 //ERLEDIGT! --- Bitte in den Filter noch die sprache_id einbauen
 -------
 --------------------------------------------------------
+04.Mai, 21:05 (Simon)
+--------------------------------------------------------
+
+Alle an die Internationalsierung denken
+
+--> Funktioniert bei mir im Firefox NICHT!!!
+
+Erweiterte Suche klappt
+
+--------------------------------------------------------
 04.Mai, 18:02 (Anja)
 --------------------------------------------------------
 Geht doch nicht, kann nicht auf die Datenbank zugreifen,
