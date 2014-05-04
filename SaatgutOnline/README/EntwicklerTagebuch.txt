@@ -9,6 +9,18 @@ Bitte offene Fragen hier posten:
 
 //ERLEDIGT! --- Bitte in den Filter noch die sprache_id einbauen
 -------
+--------------------------------------------------------
+04.Mai, 17:07 (Anja)
+--------------------------------------------------------
+HM... also läuft zwar alles, aber Eclipse meckert trotzdem, 
+musst du mir morgen nochmal zeigen.
+
+Und wenn jemand noch ein Gantt-Diagramm aus der Prozeßlernen-Woche hat,
+wär das toll, ich hab wohl das falsche gespeichert :(
+Die Doku macht mir eh ein wenig Sorgen :D
+
+So Jungens, einen schönen Sonntag und bis morgen!
+
 
 --------------------------------------------------------
 03.Mai, 23:30 (Christof)
