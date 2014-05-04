@@ -238,7 +238,6 @@ public class KundeModel {
 		return freigeschaltet;
 	}
 
-
 	public void setId(int id) {
 		this.id = id;
 	}

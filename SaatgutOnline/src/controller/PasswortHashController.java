@@ -16,17 +16,16 @@ import java.security.spec.InvalidKeySpecException;
  */
 public class PasswortHashController
 {
-    public static final String PBKDF2_ALGORITHMUS = "PBKDF2MitHmacSHA1";
+    public static final String PBKDF2_ALGORITHMUS = "PBKDF2WithHmacSHA1";
 
     // The following constants may be changed without breaking existing hashes.
-    private static final int SALT_BYTE_GROESSE = 128;
-    private static final int HASH_BYTE_GROESSE = 128;
-    private static final int PBKDF2_ITERATIONEN = 10_000;
+    private static final int SALT_BYTE_GROESSE = 24;
+    private static final int HASH_BYTE_GROESSE = 24;
+    private static final int PBKDF2_ITERATIONEN = 1000;
 
     private static final int ITERATION_INDEX = 0;
     private static final int SALT_INDEX = 1;
     private static final int PBKDF2_INDEX = 2;
-    private PasswortHashModel passwortHash;
     
     /**
      * Liefert einen versalzenen PBKDF2-Hash des Passworts
