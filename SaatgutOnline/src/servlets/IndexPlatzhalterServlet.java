@@ -44,8 +44,6 @@ public class IndexPlatzhalterServlet extends HttpServlet
 		RequestDispatcher rd = getServletContext().getRequestDispatcher("/Kopfbereich");
 		rd.include(request, response);
 				
-		
-		
 		// Inhalte ausgeben (per view!)
 		/*
 		 * Ich habe hier nur den PrintWriter genommen, weil ich nicht extra
