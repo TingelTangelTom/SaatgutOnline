@@ -113,6 +113,9 @@ public class WarenkorbController
 
 	private void warenkorbAktualisieren()
 	{
+		Enumeration<ProduktModel> produktModelsImWarenkorb;
+		ProduktModel produktModelImWarenkorb;
+		
 		if (this.request.getParameter("produkt") != null)
 		{
 			int id = Integer.parseInt(this.request.getParameter("produkt"));
@@ -120,15 +123,15 @@ public class WarenkorbController
 			ProduktModel produktModelAusDatenbank = new ProduktModel();
 			produktModelAusDatenbank = produktController.getProdukt(id);
 
-			Enumeration<ProduktModel> warenkorbInhalt = this.warenkorb.keys();
-			if (warenkorbInhalt.hasMoreElements())
+			produktModelsImWarenkorb = this.warenkorb.keys();
+			if (produktModelsImWarenkorb.hasMoreElements())
 			{
 				boolean produktNichtImWarenkorb = true;
 				int hinzugefuegteMenge = Integer.parseInt(this.request.getParameter("menge"));
 
-				while (warenkorbInhalt.hasMoreElements())
+				while (produktModelsImWarenkorb.hasMoreElements())
 				{
-					ProduktModel produktModelImWarenkorb = warenkorbInhalt.nextElement();
+					produktModelImWarenkorb = produktModelsImWarenkorb.nextElement();
 					if (produktModelAusDatenbank.getId() == produktModelImWarenkorb.getId())
 					{
 						produktNichtImWarenkorb = false;
@@ -150,9 +153,7 @@ public class WarenkorbController
 		} else
 		{
 			if (this.request.getParameter("aktualisieren") != null)
-			{
-				ProduktModel produktModelImWarenkorb;
-				Enumeration<ProduktModel> produktModelsImWarenkorb;
+			{				
 				Enumeration<String> parameters;
 				String[] splittedParameter;
 				String parameter;
@@ -161,7 +162,8 @@ public class WarenkorbController
 				while (parameters.hasMoreElements())
 				{
 					parameter = parameters.nextElement();
-					String value = this.request.getParameter(parameter);
+					
+					
 
 					if (parameter.startsWith("menge"))
 					{
@@ -172,15 +174,26 @@ public class WarenkorbController
 						{
 							produktModelImWarenkorb = produktModelsImWarenkorb.nextElement();
 							if (produktModelImWarenkorb.getId() == Integer.parseInt(splittedParameter[1]))
-							{
-								if(Integer.parseInt(value) >= 0)
+							{		
+								int value = 0;
+								
+								try
 								{
-									if (Integer.parseInt(value) == 0)
+									value = Integer.parseInt(this.request.getParameter(parameter));
+								} catch (NumberFormatException e){
+									value = this.warenkorb.get(produktModelImWarenkorb);
+									System.out.println("Parameter ist kein Integer - "+value+" gesetzt!");
+									System.out.println(e);
+								}
+								
+								if(value >= 0)
+								{
+									if (value == 0)
 									{
 										this.warenkorb.remove(produktModelImWarenkorb);
 									} else
 									{
-										this.warenkorb.put(produktModelImWarenkorb, Integer.parseInt(value));
+										this.warenkorb.put(produktModelImWarenkorb, value);
 									}
 								}
 							}
