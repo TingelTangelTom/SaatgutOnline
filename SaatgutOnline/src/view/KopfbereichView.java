@@ -237,7 +237,7 @@ public class KopfbereichView
 	{
 		this.out.println("<table>");
 		this.out.println("<tr>\n<td>");
-		this.out.println("<form action=\"/SaatgutOnline/SuchergebnisseServlet\" method=\"GET\">");
+		this.out.println("<form action=\"/SaatgutOnline/Suchergebnisse\" method=\"GET\">");
 		this.out.println("<input type=\"text\" name=\"suchbegriff\" size=\"20\">");
 		this.out.println("</td>\n<td>");
 		this.out.println("<input type=\"submit\" name=\"suche\" value=\"" + this.resourceBundle.getString("SUCHEN")
