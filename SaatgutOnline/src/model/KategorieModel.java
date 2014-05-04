@@ -1,7 +1,7 @@
 package model;
 
 /**
- * Die Klasse beinhaltet die Daten einer Kategorie
+ * Die Klasse <code>KategorieModel</code> beinhaltet die Daten einer Kategorie
  * @author Tom
  *
  */

@@ -26,11 +26,10 @@ public class KopfbereichController
 		
 	/**
 	 * Konstruktor der Klasse <code>KopfbereichController</code>
-	 * </br></br>holt die aktuelle <code>HttpSession</code>
-	 * </br>erzeugt eine Objekt der Klasse <code>KopfbereichView</code>
 	 * @param request - der aktuelle <code>HttpServletRequest</code>
 	 * @param response - die aktuelle <code>HttpServletResponse</code>
-	 * @see view.KopfbereichView
+	 * @see javax.servlet.http.HttpServletRequest
+	 * @see javax.servlet.http.HttpServletResponse
 	 */
 	public KopfbereichController(HttpServletRequest request, HttpServletResponse response)
 	{	
@@ -39,7 +38,7 @@ public class KopfbereichController
 	}
 
 	/**
-	 * Gibt den Kopfbereich aus
+	 * Formatiert die Darstellung fuer den Kopfbereich und gibt diese aus
 	 */
 	public void outKopfbereichAnzeigen()
 	{					

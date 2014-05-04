@@ -63,27 +63,23 @@ public class NavigationsbereichController
 	//TODO ausGet checken!
 	/**
 	 * Konstruktor der Klasse <code>NavigationsbereichController</code>
-	 * </br></br>holt die aktuelle <code>HttpSession</code>
-	 * </br>erzeugt ein Objekt der Klasse <code>NavigationsbereichView</code>
-	 * </br>fuellt <code>kategorienArrayList</code> per Methode <code>kategorienAusDB()</code>
-	 * </br>fuehrt Methode <code>geklickteKategorienOrgansisieren()</code> aus
 	 * @param request - der aktuelle <code>HttpServletRequest</code>
 	 * @param response - die aktuelle <code>HttpServletResponse</code>
 	 * @param ausGet - <code>boolean</code>
-	 * @see javax.servlet.http.HttpSession
-	 * @see view.NavigationsbereichView
+	 * @see javax.servlet.http.HttpServletRequest
+	 * @see javax.servlet.http.HttpServletResponse
 	 */
 	public NavigationsbereichController(HttpServletRequest request, HttpServletResponse response, boolean ausGet)
 	{
 		this.request = request;
 		this.session = request.getSession();
 		this.navigationsbereichView = new NavigationsbereichView(response);
-		this.kategorienArrayList = kategorienAusDB();
-		this.geklickteKategorienOrganisieren(ausGet);
+		this.kategorienArrayList = getKategorienAusDB();
+		this.geklickteKategorienAktualisieren(ausGet);
 	}
 
 	/**
-	 * Gibt den Navigationsbereich aus
+	 * Gibt die Darstellung fuer den Navigationsbereich aus
 	 */
 	public void navigationsbereichAnzeigen()
 	{
@@ -97,7 +93,7 @@ public class NavigationsbereichController
 	}
 	
 	/**
-	 * 
+	 * Formatiert die Darstellung fuer die Kategorienliste im Kopfbereich und gibt diese aus
 	 */
 	private void kategorienListeAnzeigen()
 	{			
@@ -148,11 +144,11 @@ public class NavigationsbereichController
 	}
 	
 	/**
-	 *   
-	 * @param ausGet
+	 * Aktualisiert die Sammlung geklickter Kategorien in der <code>HttpSession</code>
+	 * @param ausGet - boolean
 	 */
 	@SuppressWarnings("unchecked")
-	private void geklickteKategorienOrganisieren(boolean ausGet)
+	private void geklickteKategorienAktualisieren(boolean ausGet)
 	{				
 		Integer geklickteKategorie;
 		
@@ -198,7 +194,12 @@ public class NavigationsbereichController
 	}
 	
 
-	private ArrayList<KategorieModel> kategorienAusDB()
+	/**
+	 * Holt die verfuegbaren <code>KategorieModel</code> aus der Datenbank und legt eine Sammlung vom Typ <code>ArrayList</code> an.
+	 * @return ArrayList - beinhaltet alle verfuegbaren <code>KategorieModel</code>
+	 * @see model.KategorieModel
+	 */
+	private ArrayList<KategorieModel> getKategorienAusDB()
 	{
 			int spracheId = (int) this.session.getAttribute("spracheId");
 						

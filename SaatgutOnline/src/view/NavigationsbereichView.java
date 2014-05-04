@@ -22,9 +22,8 @@ public class NavigationsbereichView
 	
 	/**
 	 * Konstruktor der Klasse <code>NavigationsbereichView</code>
-	 * </br></br>erzeugt das <code>PrintWriter</code>-Objekt <i>out</i>
 	 * @param response - die aktuelle <code>HttpServletResponse</code>
-	 * @see java.io.PrintWriter
+	 * @see javax.servlet.http.HttpServletResponse
 	 */
 	public NavigationsbereichView(HttpServletResponse response)
 	{

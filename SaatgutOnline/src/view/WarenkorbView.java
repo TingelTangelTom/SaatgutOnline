@@ -46,16 +46,10 @@ public class WarenkorbView
 
 	/**
 	 * Konstruktor der Klasse <code>WarenkorbView</code>
-	 * </br></br>holt die aktuelle <code>HttpSession</code>
-	 * </br>erzeugt ein Objekt der Klasse <code>UrlController</code>
-	 * </br>erzeugt das <code>PrintWriter</code>-Objekt <i>out</i>
-	 * </br>erezugt das <code>PropertyResourceBundle</code>-Objekt <i>resourceBundle</i>
 	 * @param request - der aktuelle <code>HttpServletRequest</code>
 	 * @param response - die aktuelle <code>HttpServletResponse</code>
-	 * @see javax.servlet.http.HttpSession
-	 * @see controller.UrlController
-	 * @see java.io.PrintWriter
-	 * @see java.util.PropertyResourceBundle
+	 * @see javax.servlet.http.HttpServletRequest
+	 * @see javax.servlet.http.HttpServletResponse
 	 */
 	public WarenkorbView(HttpServletRequest request, HttpServletResponse response)
 	{

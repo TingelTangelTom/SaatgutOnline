@@ -35,7 +35,6 @@ public class WarenkorbController
 	 * Objekt der Klasse <code>WarenkorbView</code>
 	 * @see view.WarenkorbView
 	 */
-	
 	private WarenkorbView warenkorbView;
 	
 	/**
@@ -48,6 +47,8 @@ public class WarenkorbController
 	 * Konstruktor der Klasse <code>WarenkorbController</code>
 	 * @param request - der aktuelle <code>HttpServletRequest</code>
 	 * @param response - die aktuelle <code>HttpServletResponse</code>
+	 * @see javax.servlet.http.HttpServletRequest
+	 * @see javax.servlet.http.HttpServletResponse
 	 */
 	public WarenkorbController(HttpServletRequest request, HttpServletResponse response)
 	{
@@ -59,6 +60,9 @@ public class WarenkorbController
 		this.session.setAttribute("warenkorb", warenkorb);
 	}
 
+	/**
+	 * Formatiert die Darstellung des Warenkorbs und gibt diese aus
+	 */
 	public void warenkorbAnzeigen()
 	{
 		double zwischensumme = 0;
@@ -99,6 +103,10 @@ public class WarenkorbController
 		this.warenkorbView.outWarenkorbEnde(zwischensummeFormatiert);
 	}
 
+	/**
+	 * Liest den Warenkorb aus der <code>HttpSession</code>
+	 * und legt sie in der <code>HashTable</code> <i>warenkorb</i> ab
+	 */
 	@SuppressWarnings("unchecked")
 	private void warenkorbAusSessionHolen()
 	{
@@ -111,6 +119,11 @@ public class WarenkorbController
 		}
 	}
 
+	/**
+	 * Aktualisiert die sich im Warenkorb befindlichen <code>ProduktModel</code> sowie deren Menge
+	 * und legt diese in der <code>HttpSession</code> ab
+	 * @see model.ProduktModel
+	 */
 	private void warenkorbAktualisieren()
 	{
 		Enumeration<ProduktModel> produktModelsImWarenkorb;
@@ -162,8 +175,6 @@ public class WarenkorbController
 				while (parameters.hasMoreElements())
 				{
 					parameter = parameters.nextElement();
-					
-					
 
 					if (parameter.startsWith("menge"))
 					{
@@ -182,7 +193,7 @@ public class WarenkorbController
 									value = Integer.parseInt(this.request.getParameter(parameter));
 								} catch (NumberFormatException e){
 									value = this.warenkorb.get(produktModelImWarenkorb);
-									System.out.println("Parameter ist kein Integer - "+value+" gesetzt!");
+									System.out.println("Parameter ist kein Integer - "+value+" als Menge gesetzt!");
 									System.out.println(e);
 								}
 								
