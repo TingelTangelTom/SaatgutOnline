@@ -36,11 +36,25 @@ public class SprachversionFilter implements Filter
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,
 			ServletException
 	{
+
 		if (request instanceof HttpServletRequest)
 		{
 			HttpSession session = ((HttpServletRequest) request).getSession();
 			Locale locale;
+			 
+			if (session.getAttribute("sprache") == null)
+			{
 
+				locale = request.getLocale();
+
+				if (!locale.equals(Locale.GERMAN))
+				{
+					locale = Locale.ENGLISH;
+				}
+				session.setAttribute("sprache", locale);
+				spracheIdInSessionLegen(session, locale);
+			}
+	
 			if (((HttpServletRequest) request).getParameter("sprache") != null)
 			{
 				String sprachwahl = ((HttpServletRequest) request).getParameter("sprache");
@@ -55,17 +69,6 @@ public class SprachversionFilter implements Filter
 				default:
 					locale = Locale.ENGLISH;
 					break;
-				}
-				session.setAttribute("sprache", locale);
-				spracheIdInSessionLegen(session, locale);
-			}
-			else
-			{
-				locale = request.getLocale();
-
-				if (!locale.equals(Locale.GERMAN))
-				{
-					locale = Locale.ENGLISH;
 				}
 				session.setAttribute("sprache", locale);
 				spracheIdInSessionLegen(session, locale);
