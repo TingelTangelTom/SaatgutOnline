@@ -10,6 +10,13 @@ Bitte offene Fragen hier posten:
 //ERLEDIGT! --- Bitte in den Filter noch die sprache_id einbauen
 -------
 --------------------------------------------------------
+04.Mai, 18:02 (Anja)
+--------------------------------------------------------
+Geht doch nicht, kann nicht auf die Datenbank zugreifen,
+kann aber auch mit der internationalisierung zu tun haben.
+Der query wird wohl nicht mehr stimmen :D
+
+--------------------------------------------------------
 04.Mai, 17:07 (Anja)
 --------------------------------------------------------
 HM... also läuft zwar alles, aber Eclipse meckert trotzdem, 

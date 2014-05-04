@@ -54,7 +54,7 @@ public class FussbereichView
 	{
 		out.println("<footer class=\"fussbereich\">\n<a href=\"/SaatgutOnline/Impressum\">Impressum</a> | \n"
 				      + "<a href=\"/SaatgutOnline/AGB\">AGB</a> | \n"
-				      + "<a href=\"/SaatgutOnline/VersandZahlung\">Versand & Zahlung</a> | \n"
+				      + "<a href=\"/SaatgutOnline/VersandInfo\">Versand & Zahlung</a> | \n"
 				      + "<a href=\"/SaatgutOnline/Datenschutz\">Datenschutz</a> | \n"
 				      + "<a href=\"/SaatgutOnline/Kontakt\">Kontakt</a> | \n"
 				      + "<a href=\"/SaatgutOnline/Sitemap\">Sitemap</a> | \n"
