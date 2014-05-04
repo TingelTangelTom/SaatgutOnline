@@ -29,7 +29,8 @@ public class UrlController
 	public UrlController(HttpServletRequest request)
 	{
 		this.request = request;
-		this.session = request.getSession();		
+		this.session = request.getSession();
+		this.setAktuelleSeite();
 	}
 	
 	/**
@@ -64,8 +65,25 @@ public class UrlController
 		}
 		else
 		{
-			this.session.setAttribute("urlLetzteSeite", request.getRequestURL().toString());			
+			this.session.setAttribute("urlLetzteSeite", this.request.getRequestURL().toString());			
 		}
+	}
+	
+	/**
+	 * Legt die URL der aktuellen Seite in die <code>HttpSession</code>
+	 */
+	public void setAktuelleSeite()
+	{
+		this.session.setAttribute("urlAktuelleSeite", this.request.getRequestURL().toString());
+	}
+	
+	/**
+	 * Holt die URL der zuletzt abgelegten aktuellen Seite aus der <code>HttpSession</code>
+	 * return String - die zuletzt abgelegten aktuelle Seite
+	 */
+	public String getAktuelleSeite()
+	{
+		return (String) this.session.getAttribute("urlAktuelleSeite");		
 	}
 	
 	
