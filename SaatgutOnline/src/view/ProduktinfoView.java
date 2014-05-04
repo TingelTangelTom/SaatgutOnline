@@ -73,7 +73,7 @@ public class ProduktinfoView {
 					+ "<td class=\"produktinfo preis\">" + this.htmlAusgabe.outPreisformat(produktModel.getPreisBrutto()) + "</td>\n"
 					+ "</tr>\n"
 					+ "<tr>\n"
-					+ "<td class=\"produktinfo preisverordnung\">" + this.htmlAusgabe.outPreisverordnung(produktModel.getSteuerSatz()) + "</td>\n"
+					+ "<td class=\"produktinfo preisverordnung\">" + this.htmlAusgabe.outPreisverordnung(this.resourceBundle.getString("VERSANDKOSTEN"), produktModel.getSteuerSatz()) + "</td>\n"
 					+ "</tr>\n"
 					+ "<tr>\n"
 					+ "<td class=\"produktinfo warenkorb\">";

@@ -196,7 +196,7 @@ table.produktinfo {
 
 .produktinfo td.kategoriename {
 vertical-align: baseline;
-  	font-size: 16px;
+  	font-size: 13px;
   	font-weight: bold;
   	color: green;
   	text-align: left;
@@ -300,4 +300,8 @@ vertical-align: baseline;
   	font-weight:normal;
   	text-align: left;
 	width: 50%;
+}
+
+.festeSelectBoxBreite {
+	width: 150px;
 }

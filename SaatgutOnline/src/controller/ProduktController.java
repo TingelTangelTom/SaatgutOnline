@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 
 
+
 import model.ProduktModel;
 
 
@@ -88,6 +89,39 @@ public class ProduktController {
 		getSteuerinformationen(id);
 
 		return this.produktModel;
+	}	
+	
+	public HashMap<Integer, String> getAlleKategorien() {
+		HashMap<Integer, String> kategorien = new HashMap<Integer, String>();
+		Integer kategorie_id;
+		String wert;
+		try {
+			/*
+			String query = "SELECT kategorie_id, kategorie_beschreibung "
+						+ "FROM kategorie_beschreibung "
+						+ "WHERE sprache_id = '" + this.sprache_id + "'";
+			*/
+			String query = "SELECT k.kategorie_id, k.eltern_id, kb.kategorie_name "
+			+ "FROM kategorie AS k "
+			+ "INNER JOIN kategorie_beschreibung AS kb ON k.kategorie_id = kb.kategorie_id "
+			+ "WHERE kb.sprache_id = '" + this.sprache_id + "'";
+			
+			ResultSet resultset = DatenbankController.sendeSqlRequest(query);
+			while(resultset.next()){
+				kategorie_id = resultset.getInt(1);
+				if(resultset.getInt(2) > 0) {
+					wert = "- " + resultset.getString(3);
+				} else {
+					wert = resultset.getString(3);
+				}
+					kategorien.put(kategorie_id, wert);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return kategorien;
 	}
 	
 	/**

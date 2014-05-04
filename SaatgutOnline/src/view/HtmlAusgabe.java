@@ -76,19 +76,19 @@ public class HtmlAusgabe extends HttpServlet{
 	 * @see model#HtmlAusgabe
 	 * 
 	 */
-	public String outPreisverordnung(double mwst) {
+	public String outPreisverordnung(String versandkosten_text, double mwst) {
 		
 		NumberFormat prozentFormat = NumberFormat.getPercentInstance(this.locale);
 		String prozent = prozentFormat.format(mwst / 100);
 		ResourceBundle resourceBundle = PropertyResourceBundle.getBundle("I18N." + this.locale.getLanguage() + ".ProduktinfoView", this.locale); // Pfad muss noch angepasst werden
 		
-		return MessageFormat.format(resourceBundle.getString("PREISTEXT"), prozent) + " <a href=\"/SaatgutOnline/Versandkosten\"><b>" + resourceBundle.getString("VERSANDKOSTEN") + "</b></a>";
+		return MessageFormat.format(resourceBundle.getString("PREISTEXT"), prozent) + " <a href=\"/SaatgutOnline/Versandkosten\"><b>" + versandkosten_text + "</b></a>";
 		
 	}
 	
-	public String outKurzeProduktbeschreibung(String beschreibung, int zeichen, int id) {
+	public String outKurzeProduktbeschreibung(String mehr_anzeigen, String beschreibung, int zeichen, int id) {
 		String kurzeBeschreibung = beschreibung.substring(0,zeichen);
-		kurzeBeschreibung += "<a href=\"/SaatgutOnline/Produktinfo?produkt=" + id + "\"><b>...(mehr)</b></a>";
+		kurzeBeschreibung += "<a href=\"/SaatgutOnline/Produktinfo?produkt=" + id + "\"><b>..." + mehr_anzeigen + "</b></a>";
 		return kurzeBeschreibung;
 	}
 	
