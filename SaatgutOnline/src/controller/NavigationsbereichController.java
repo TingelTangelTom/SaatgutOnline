@@ -150,7 +150,10 @@ public class NavigationsbereichController
 	@SuppressWarnings("unchecked")
 	private void geklickteKategorienAktualisieren(boolean ausGet)
 	{				
-		Integer geklickteKategorie;
+//		UrlController urlController = new UrlController(this.request);
+//		String urlAktuelleSeite = urlController.getAktuelleSeite();
+//		
+		
 		
 		if(this.session.getAttribute("geklickteKategorien") != null)
 		{
@@ -172,11 +175,12 @@ public class NavigationsbereichController
 		
 		
 		//FIXME Aufklapp-BUG
-		if(ausGet							
+		if(		ausGet	
+//				&& (urlAktuelleSeite.contains("/Produkt"))
 				&& (this.request.getParameter("kategorie") != null)				
 				&& (this.request.getParameter("p_anzeige") == null))
 		{			
-			geklickteKategorie = Integer.parseInt(this.request.getParameter("kategorie"));
+			Integer geklickteKategorie = Integer.parseInt(this.request.getParameter("kategorie"));
 			this.aktuelleKategorieSession = geklickteKategorie;
 			
 			if(this.geklickteKategorienSession.contains(geklickteKategorie))
@@ -188,9 +192,19 @@ public class NavigationsbereichController
 				this.geklickteKategorienSession.add(geklickteKategorie);
 			}
 			
-			this.session.setAttribute("geklickteKategorien", this.geklickteKategorienSession);			
+			this.session.setAttribute("geklickteKategorien", this.geklickteKategorienSession);
 			this.session.setAttribute("aktuelleKategorie", this.aktuelleKategorieSession);
 		}
+//		else
+//		{
+//			if((this.request.getParameter("kategorie") != null))
+//			{
+//				this.aktuelleKategorieSession = Integer.parseInt(this.request.getParameter("kategorie"));
+//				this.session.setAttribute("aktuelleKategorie", this.aktuelleKategorieSession);
+//			}			
+//		}
+		
+		
 	}
 	
 

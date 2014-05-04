@@ -30,7 +30,6 @@ public class UrlController
 	{
 		this.request = request;
 		this.session = request.getSession();
-		this.setAktuelleSeite();
 	}
 	
 	/**
