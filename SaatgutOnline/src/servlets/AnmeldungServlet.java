@@ -9,20 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import controller.AnmeldungController;
 import controller.RegistrierungController;
-import controller.RegistrierungVerarbeitungController;
 
 /**
- * Servlet implementation class RegistrierungVerarbeitung
+ * Servlet implementation class AnmeldungServlet
  */
-@WebServlet(name = "RegistrierungVerarbeitungServlet", urlPatterns = { "/RegistrierungVerarbeitung" })
-public class RegistrierungVerarbeitungServlet extends HttpServlet {
+@WebServlet("/Anmeldung")
+public class AnmeldungServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RegistrierungVerarbeitungServlet() {
+    public AnmeldungServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,9 +41,10 @@ public class RegistrierungVerarbeitungServlet extends HttpServlet {
 		RequestDispatcher rd = getServletContext().getRequestDispatcher("/Kopfbereich");
 		rd.include(request, response);
 		
-		RegistrierungVerarbeitungController registrierungVerarbeitungController = new RegistrierungVerarbeitungController(request, response);
+		AnmeldungController anmeldungVerarbeitungController = new AnmeldungController(request, response);
 		
 		rd = getServletContext().getRequestDispatcher("/Fussbereich");
-		rd.include(request, response);			}
+		rd.include(request, response);		
+	}
 
 }

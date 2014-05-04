@@ -22,6 +22,8 @@ public class KonfigurationController {
 	private static String dbName = null;
 	private static String dbBenutzer = null;
 	private static String dbPasswort = null;
+	private static String regelBenutzername = null;
+	private static String regelPasswort = null;
 	
 	public KonfigurationController() {
 	}
@@ -38,27 +40,30 @@ public class KonfigurationController {
 			Document dokument = dBuilder.parse(xmlDatei);
 			dokument.getDocumentElement().normalize();	// TODO optional!!!
 	 
-			NodeList nodeListe = dokument.getElementsByTagName("datenbank");
+			NodeList nodeListe = dokument.getElementsByTagName("konfiguration");
 		
-			for (int i=0; i <nodeListe.getLength(); i++) {
-				Node node = nodeListe.item(i);
-				
-				if (node.getNodeType() == Node.ELEMENT_NODE) {
-					Element element = (Element) node;
-					KonfigurationController.dbHost =
-						element.getElementsByTagName("dbHost").item(0).getTextContent();
-					KonfigurationController.dbPort =
-						element.getElementsByTagName("dbPort").item(0).getTextContent();
-					KonfigurationController.dbName =
-						element.getElementsByTagName("dbName").item(0).getTextContent();
-					KonfigurationController.dbBenutzer =
-						element.getElementsByTagName("dbBenutzer").item(0).getTextContent();
-					KonfigurationController.dbPasswort =
-						element.getElementsByTagName("dbPasswort").item(0).getTextContent();
-					KonfigurationController.dbMaximalePoolgroesse =
-						Integer.parseInt(element.getElementsByTagName("dbMaximalePoolgroesse").item(0).getTextContent());
-				}
+			Node node = nodeListe.item(0);
+			
+			if (node.getNodeType() == Node.ELEMENT_NODE) {
+				Element element = (Element) node;
+				KonfigurationController.dbHost =
+					element.getElementsByTagName("dbHost").item(0).getTextContent();
+				KonfigurationController.dbPort =
+					element.getElementsByTagName("dbPort").item(0).getTextContent();
+				KonfigurationController.dbName =
+					element.getElementsByTagName("dbName").item(0).getTextContent();
+				KonfigurationController.dbBenutzer =
+					element.getElementsByTagName("dbBenutzer").item(0).getTextContent();
+				KonfigurationController.dbPasswort =
+					element.getElementsByTagName("dbPasswort").item(0).getTextContent();
+				KonfigurationController.dbMaximalePoolgroesse =
+					Integer.parseInt(element.getElementsByTagName("dbMaximalePoolgroesse").item(0).getTextContent());
+				KonfigurationController.regelBenutzername  =
+						element.getElementsByTagName("regelBenutzername").item(0).getTextContent();
+				KonfigurationController.regelPasswort =
+						element.getElementsByTagName("regelPasswort").item(0).getTextContent();
 			}
+			
 		} catch (ParserConfigurationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -94,5 +99,11 @@ public class KonfigurationController {
 
 	public static String getDbPasswort() {
 		return dbPasswort;
+	}
+	public static String getRegelBenutzername() {
+		return regelBenutzername;
+	}
+	public static String getRegelPasswort() {
+		return regelPasswort;
 	}
 }

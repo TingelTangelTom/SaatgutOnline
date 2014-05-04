@@ -43,27 +43,28 @@ public class KundeModel {
 		KundeModel kunde = new KundeModel ();
 		
 		String query = "SELECT * FROM " + KonfigurationController.getDbName()
-        + ".kunde WHERE kunden_id = " + id;
+        + ".kunde WHERE kunde_id = " + id;
 		ResultSet result = DatenbankController.sendeSqlRequest(query);
-		
 		try {
-		kunde.id=(result.getInt("kunde_id"));
-		kunde.geschlecht=(result.getInt("kunde_geschlecht"));
-		kunde.vorname=(result.getString("kunde_vorname"));
-		kunde.nachname=(result.getString("kunde_nachname"));
-		kunde.benutzername=(result.getString("kunde_benutername"));
-		kunde.firma=(result.getString("kunde_firma"));
-		kunde.strasse=(result.getString("kunde_strasse"));
-		kunde.hausnummer=(result.getString("kunde_hausnummer"));
-		kunde.ort=(result.getString("kunde_stadt"));
-		kunde.postleitzahl=(result.getString("kunde_postleitzahl"));
-		kunde.land=(result.getString("kunde_land"));
-		kunde.telefon=(result.getString("kunde_telefon"));
-		kunde.emailadresse=(result.getString("kunde_email_adresse"));
-		kunde.bundesland=(result.getString("kunde_bundesland"));
-		kunde.uuid=(result.getString("kunde_uuid"));
-		kunde.newsletter=(result.getInt("kunde_newsletter"));
-		kunde.freigeschaltet=(result.getInt("kunde_freigeschaltet"));
+			while(result.next()) {
+				kunde.id=(result.getInt("kunde_id"));
+				kunde.geschlecht=(result.getInt("kunde_geschlecht"));
+				kunde.vorname=(result.getString("kunde_vorname"));
+				kunde.nachname=(result.getString("kunde_nachname"));
+				kunde.benutzername=(result.getString("kunde_benutzername"));
+				kunde.firma=(result.getString("kunde_firma"));
+				kunde.strasse=(result.getString("kunde_strasse"));
+				kunde.hausnummer=(result.getString("kunde_hausnummer"));
+				kunde.ort=(result.getString("kunde_stadt"));
+				kunde.postleitzahl=(result.getString("kunde_postleitzahl"));
+				kunde.land=(result.getString("kunde_land"));
+				kunde.telefon=(result.getString("kunde_telefon"));
+				kunde.emailadresse=(result.getString("kunde_email_adresse"));
+				kunde.bundesland=(result.getString("kunde_bundesland"));
+				kunde.uuid=(result.getString("kunde_uuid"));
+				kunde.newsletter=(result.getInt("kunde_newsletter"));
+				kunde.freigeschaltet=(result.getInt("kunde_freigeschaltet"));
+			}
 		
 		return kunde;
 		
@@ -73,6 +74,43 @@ public class KundeModel {
 			return null;
 		}
 	}
+	public static KundeModel ladeKundeAusDb (String benutzername) {
+
+		KundeModel kunde = new KundeModel ();
+		
+		String query = "SELECT * FROM " + KonfigurationController.getDbName()
+        + ".kunde WHERE kunde_benutzername ='" + benutzername + "'";
+		System.out.println(query);
+		ResultSet result = DatenbankController.sendeSqlRequest(query);
+		try {
+			while(result.next()) {
+				kunde.id=(result.getInt("kunde_id"));
+				kunde.geschlecht=(result.getInt("kunde_geschlecht"));
+				kunde.vorname=(result.getString("kunde_vorname"));
+				kunde.nachname=(result.getString("kunde_nachname"));
+				kunde.benutzername=(result.getString("kunde_benutzername"));
+				kunde.firma=(result.getString("kunde_firma"));
+				kunde.strasse=(result.getString("kunde_strasse"));
+				kunde.hausnummer=(result.getString("kunde_hausnummer"));
+				kunde.ort=(result.getString("kunde_stadt"));
+				kunde.postleitzahl=(result.getString("kunde_postleitzahl"));
+				kunde.land=(result.getString("kunde_land"));
+				kunde.telefon=(result.getString("kunde_telefon"));
+				kunde.emailadresse=(result.getString("kunde_email_adresse"));
+				kunde.bundesland=(result.getString("kunde_bundesland"));
+				kunde.uuid=(result.getString("kunde_uuid"));
+				kunde.newsletter=(result.getInt("kunde_newsletter"));
+				kunde.freigeschaltet=(result.getInt("kunde_freigeschaltet"));
+			}
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+		return kunde;
+	}
+	
 	public synchronized void speichereKundeInDb () {
 		 
 		Connection verbindung = ConnectionPoolController.getInstance().getVerbindungAusPool();

@@ -77,9 +77,17 @@ public class PasswortHashController
      * @return                  true wenn das Passwort stimmt, sonst false
      */
     public static boolean validierePasswort(String passwort, String korrekterHash)
-        throws NoSuchAlgorithmException, InvalidKeySpecException
     {
-        return validierePasswort(passwort.toCharArray(), korrekterHash);
+        try {
+			return validierePasswort(passwort.toCharArray(), korrekterHash);
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvalidKeySpecException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
     }
 
     /**

@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE datenbank [ 
-<!ELEMENT datenbank (dbHost, dbPort, dbName, dbBenutzer, dbPasswort, dbMaximalePoolgroesse)> 
+<!ELEMENT konfiguration (dbHost, dbPort, dbName, dbBenutzer, dbPasswort,
+ dbMaximalePoolgroesse, regelBenutzername, regelPasswort)> 
   <!ELEMENT dbHost  (#PCDATA)> 
   <!ELEMENT dbPort  (#PCDATA)> 
   <!ELEMENT dbName  (#PCDATA)> 
   <!ELEMENT  dbBenutzer  (#PCDATA)> 
   <!ELEMENT  dbPasswort  (#PCDATA)> 
   <!ELEMENT  dbMaximalePoolgroesse  (#PCDATA)> 
+  <!ELEMENT  regelBenutzername (#PCDATA)> 
+  <!ELEMENT  regelregelPasswort (#PCDATA)> 
 ]> 
 
-<datenbank>
+<konfiguration>
 	<dbHost>localhost</dbHost>
 	<dbPort>3306</dbPort>
 	<dbName>saatgutonline</dbName>
 	<dbBenutzer>root</dbBenutzer>
 	<dbPasswort>root</dbPasswort>
 	<dbMaximalePoolgroesse>2</dbMaximalePoolgroesse>
-</datenbank>
+	<regelBenutzername>[A-Za-z0-9]{3,10}</regelBenutzername>
+	<regelPasswort>[A-Za-z0-9]{3,10}</regelPasswort>
+</konfiguration>

@@ -63,7 +63,7 @@ public class AnmeldungFilter implements Filter {
 
 			// Controller starten und Anmeldedaten uegbergeben
 			AnmeldungController anmeldungController = new AnmeldungController(
-					request, response, context);
+					request, response);
 
 		}
 		

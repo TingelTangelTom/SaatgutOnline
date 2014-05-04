@@ -17,18 +17,18 @@ public class PasswortHashModel {
 	public PasswortHashModel() {
 	}
 	
-	public PasswortHashModel ladePasswortHashAusDb (int kundeId) {
+	public static String ladePasswortHashAusDb (int kundeId) {
 
-		PasswortHashModel passwort = new PasswortHashModel ();
-		
 		String query = "SELECT * FROM " + KonfigurationController.getDbName()
-        + ".passwort WHERE kunden_id = " + kundeId;
+        + ".passwort WHERE kunde_id = " + kundeId;
 		ResultSet result = DatenbankController.sendeSqlRequest(query);
+		String passwortHash = null;
 		
 		try {
-		passwort.passwortHash=(result.getString("passwort_hash"));
-		
-		return passwort;
+			while(result.next()) {
+				passwortHash = (result.getString("passwort_hash"));
+			}
+		return passwortHash;
 		
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
