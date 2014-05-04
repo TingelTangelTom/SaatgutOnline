@@ -69,7 +69,7 @@ public class KonfigurationController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		ConnectionPoolController.getInstance();	// Initialisierung
 	}
 
 	public static int getDbMaximalePoolgroesse() {
