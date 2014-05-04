@@ -53,13 +53,13 @@ public class ProduktlisteView {
 		//TODO Internationalisierung einbauen
 		HttpSession session = ((HttpServletRequest) request).getSession();
 		String suchparameter = request.getParameter("suchbegriff");
+		this.produktController.getSortierung(request);
 		this.output = "";
 		
 		// Standardmenge, die im Textfeld Menge eingetragen wird
 		warenkorbmenge = 1;
 		
 		// Festlegung, ob die Suche gestart werden soll
-		
 		String suchen = "false";
 		
 		if(request.getParameter("suchen") != null) {
@@ -67,7 +67,6 @@ public class ProduktlisteView {
 		}		
 		
 		// Festlegung, ob die erweiterte Suche angezeigt werden soll
-		
 		String erweitertesuche = "false";
 		
 		if(request.getParameter("erweitertesuche") != null) {
@@ -75,7 +74,6 @@ public class ProduktlisteView {
 		}
 
 		// Festlegung, was in der Statusanzeige eingeblendet werden soll
-		
 		String statusanzeige;
 		
 		if(suchen.equals("true")) {
@@ -103,72 +101,71 @@ public class ProduktlisteView {
 		
 		// Ausgabe der Produktliste
 		this.output += "<table class=\"produktliste\">\n"
-						+ "<tr><td colspan=\"2\">";
+					+ "<tr><td colspan=\"2\">";
 				
 		// Erweiterte Suche anzeigen
-				if(erweitertesuche.equals("true")) {
-				this.output += "<form action=\"/SaatgutOnline/Produktliste\" method=\"GET\">\n"
-								+"<table class=\"produktliste\" width=\"100%\" border=\"0\">\n"
-								+"<tr>\n"
-								+"<td colspan\"8\">" + this.resourceBundle.getString("ERWEITERTESUCHE") + "</td>\n"
-								+"</tr>\n"
-					    		+ "<tr>\n<td colspan=\"8\" style=\"background-image:url(resources/bilder/icons/trennlinie.gif);height: 1px; background-repeat:repeat-x;\">&nbsp;</td>\n</tr>\n"
-								+"<tr>\n"
-								+"<td>" + this.resourceBundle.getString("KATEGORIE") + "</td>\n"
-								+"<td><select class=\"festeSelectBoxBreite\" name=\"kategorie\" id=1>\n"
-								+ "<option value=\"0\">Alle Kategorien</option>\n";
-				
-							    for(Integer key : kategorien.keySet()) {
-							    	this.output += "<option value=\"" + key + "\">" + kategorien.get(key) + "</option>\n";
-							    }
+		if(erweitertesuche.equals("true")) {
+		this.output += "<form action=\"/SaatgutOnline/Produktliste\" method=\"GET\">\n"
+					+"<table class=\"produktliste\" width=\"100%\" border=\"0\">\n"
+					+"<tr>\n"
+					+"<td colspan\"8\">" + this.resourceBundle.getString("ERWEITERTESUCHE") + "</td>\n"
+					+"</tr>\n"
+		    		+ "<tr>\n<td colspan=\"8\" style=\"background-image:url(resources/bilder/icons/trennlinie.gif);height: 1px; background-repeat:repeat-x;\">&nbsp;</td>\n</tr>\n"
+					+"<tr>\n"
+					+"<td>" + this.resourceBundle.getString("KATEGORIE") + "</td>\n"
+					+"<td><select class=\"festeSelectBoxBreite\" name=\"kategorie\" id=1>\n"
+					+ "<option value=\"0\">Alle Kategorien</option>\n";
+	
+				    for(Integer key : kategorien.keySet()) {
+				    	this.output += "<option value=\"" + key + "\">" + kategorien.get(key) + "</option>\n";
+				    }
 
-				this.output += "</select></td>\n"
-								+"<td>&nbsp;</td>\n"
-								+"<td>" + this.resourceBundle.getString("BESCHREIBUNG") + "</td>\n"
-								+"<td><input class=\"festeSelectBoxBreite\" type=\"number\" name=\"beschreibung\" id=3></td>\n"
-								+"<td>&nbsp;</td>\n"
-								+"<td>" + this.resourceBundle.getString("PREIS_VON") + "</td>\n"
-								+"<td><input class=\"festeSelectBoxBreite\" type=\"number\" name=\"preis_von\" id=5></td>\n"
-								+"</tr>\n"
-								+"<tr>\n"
-								+"<td>" + this.resourceBundle.getString("NAME") + "</td>\n"
-								+"<td><input class=\"festeSelectBoxBreite\" type=\"text\" name=\"name\" id=2></td>\n"
-								+"<td>&nbsp;</td>\n"
-								+"<td>" + this.resourceBundle.getString("BESTELLNUMMER") + "</td>\n"
-								+"<td><input class=\"festeSelectBoxBreite\" type=\"text\" name=\"artikelnummer\" id=4></td>\n"
-								+"<td>&nbsp;</td>\n"
-								+"<td>" + this.resourceBundle.getString("PREIS_BIS") + "</td>\n"
-								+"<td><input class=\"festeSelectBoxBreite\" type=\"number\" name=\"preis_bis\" id=6>"
-								+ "<input type=\"hidden\" name=\"p_anzeige\" id=\"p_anzeige\" value=\"" + p_anzeige +"\">"
-								+ "<input type=\"hidden\" name=\"erweitertesuche\" id=\"erweitertesuche\" value=\"true\">"
-								+ "<input type=\"hidden\" name=\"suchen\" id=\"suchen\" value=\"true\">"
-								+ "</td>\n"
-								+"</tr>\n"
-								+"<tr>\n"
-								+"<td colspan=\"8\">&nbsp;<input type=\"submit\" name=\"submit\" id=\"submit\" value=\"Senden\"></td>\n"
-								+"</tr>\n"
-								+ "<tr><td>&nbsp;</td></tr>\n"
-					    		+ "<tr>\n<td colspan=\"8\" style=\"background-image:url(resources/bilder/icons/trennlinie.gif);height: 1px; background-repeat:repeat-x;\">&nbsp;</td>\n</tr>\n"
-								+ "<tr><td>&nbsp;</td></tr>\n"
-					    		+"</table>\n"
-								+"</form>\n";
-				}		
-				
-				
-				this.output += "</td></tr>"
-								+ "<tr>\n<td class=\"produktliste kategoriename\">" + statusanzeige + "</td>\n"
-								+ "<td class=\"produktliste sortierung\">";
+		this.output += "</select></td>\n"
+					+"<td>&nbsp;</td>\n"
+					+"<td>" + this.resourceBundle.getString("BESCHREIBUNG") + "</td>\n"
+					+"<td><input class=\"festeSelectBoxBreite\" type=\"number\" name=\"beschreibung\" id=3></td>\n"
+					+"<td>&nbsp;</td>\n"
+					+"<td>" + this.resourceBundle.getString("PREIS_VON") + "</td>\n"
+					+"<td><input class=\"festeSelectBoxBreite\" type=\"number\" name=\"preis_von\" id=5></td>\n"
+					+"</tr>\n"
+					+"<tr>\n"
+					+"<td>" + this.resourceBundle.getString("NAME") + "</td>\n"
+					+"<td><input class=\"festeSelectBoxBreite\" type=\"text\" name=\"name\" id=2></td>\n"
+					+"<td>&nbsp;</td>\n"
+					+"<td>" + this.resourceBundle.getString("BESTELLNUMMER") + "</td>\n"
+					+"<td><input class=\"festeSelectBoxBreite\" type=\"text\" name=\"artikelnummer\" id=4></td>\n"
+					+"<td>&nbsp;</td>\n"
+					+"<td>" + this.resourceBundle.getString("PREIS_BIS") + "</td>\n"
+					+"<td><input class=\"festeSelectBoxBreite\" type=\"number\" name=\"preis_bis\" id=6>"
+					+ "<input type=\"hidden\" name=\"p_anzeige\" id=\"p_anzeige\" value=\"" + p_anzeige +"\">"
+					+ "<input type=\"hidden\" name=\"erweitertesuche\" id=\"erweitertesuche\" value=\"true\">"
+					+ "<input type=\"hidden\" name=\"suchen\" id=\"suchen\" value=\"true\">"
+					+ "</td>\n"
+					+"</tr>\n"
+					+"<tr>\n"
+					+"<td colspan=\"8\">&nbsp;<input type=\"submit\" name=\"submit\" id=\"submit\" value=\"Senden\"></td>\n"
+					+"</tr>\n"
+					+ "<tr><td>&nbsp;</td></tr>\n"
+		    		+ "<tr>\n<td colspan=\"8\" style=\"background-image:url(resources/bilder/icons/trennlinie.gif);height: 1px; background-repeat:repeat-x;\">&nbsp;</td>\n</tr>\n"
+					+ "<tr><td>&nbsp;</td></tr>\n"
+		    		+"</table>\n"
+					+"</form>\n";
+		}		
+						
+		this.output += "</td></tr>"
+					+ "<tr>\n<td class=\"produktliste kategoriename\">" + statusanzeige + "</td>\n"
+					+ "<td class=\"produktliste sortierung\">";
 		
 		if(erweitertesuche.equals("true")) {
-			this.output += "<a href=\"/SaatgutOnline/Produktliste?erweitertesuche=false&suchen=false&kategorie=1&p_anzeige=pn,3,0\">" + this.resourceBundle.getString("ERWEITERTESUCHE_WAHL_AUS") + "</a>  ";
+			this.output += "<a href=\"/SaatgutOnline/Produktliste?erweitertesuche=false&suchen=false\">" + this.resourceBundle.getString("ERWEITERTESUCHE_WAHL_AUS") + "</a>  ";
 		} else {
-			this.output += "<a href=\"/SaatgutOnline/Produktliste?erweitertesuche=true&suchen=false&kategorie=1&p_anzeige=pn,3,0\">" + this.resourceBundle.getString("ERWEITERTESUCHE_WAHL_AN") + "</a>  ";
+			this.output += "<a href=\"/SaatgutOnline/Produktliste?erweitertesuche=true&suchen=false\">" + this.resourceBundle.getString("ERWEITERTESUCHE_WAHL_AN") + "</a>  ";
 		}
 		
 		this.output += "" + this.resourceBundle.getString("SORTIEREN") + ": " + this.resourceBundle.getString("NAME") + " "
-				+ "<a href=\"/SaatgutOnline/Produktliste?kategorie=1&p_anzeige=pn,3,0\"><img src=\"resources/bilder/icons/pfeil_hoch_runter.gif\" width=\"5\" height=\"10\" border=\"0\" alt=\"Sortierung\"></a> | "
+				+ "<a href=\"/SaatgutOnline/Produktliste?sortierung=pn\"><img src=\"resources/bilder/icons/pfeil_hoch_runter.gif\" width=\"5\" height=\"10\" border=\"0\" alt=\"Sortierung\"></a> | "
 				+ " " + this.resourceBundle.getString("PREIS") + " "
-				+ "<a href=\"/SaatgutOnline/Produktliste?kategorie=1&p_anzeige=pp,3,0\"><img src=\"resources/bilder/icons/pfeil_hoch_runter.gif\" width=\"5\" height=\"10\" border=\"0\" alt=\"Sortierung\"></a>"
+				+ "<a href=\"/SaatgutOnline/Produktliste?sortierung=pp\"><img src=\"resources/bilder/icons/pfeil_hoch_runter.gif\" width=\"5\" height=\"10\" border=\"0\" alt=\"Sortierung\"></a>"
 				+ "</td>\n</tr>\n"
 				+ "<tr>\n<td colspan=\"2\" style=\"background-image:url(resources/bilder/icons/trennlinie.gif);height: 2px; background-repeat:repeat-x;\">&nbsp;</td>\n</tr>\n";
 

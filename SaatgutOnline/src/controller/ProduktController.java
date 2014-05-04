@@ -13,6 +13,9 @@ import javax.servlet.http.HttpSession;
 
 
 
+
+
+
 import model.ProduktModel;
 
 
@@ -37,7 +40,6 @@ public class ProduktController {
 		HttpSession session = request.getSession();
 		this.produktModel = new ProduktModel();
 		this.sprache_id = (int)session.getAttribute("spracheId");
-		this.getSortierung(request);
 		
 	}
 
@@ -231,18 +233,20 @@ public class ProduktController {
 					+ "AND  p.kategorie_id IN (SELECT kategorie_id FROM kategorie WHERE eltern_id = '" + kategorie_id + "' OR (kategorie_id = '" + kategorie_id + "' AND eltern_id = 0)) "
 					+ "ORDER BY " + session.getAttribute("sortierung_sortierspalte") + " " + session.getAttribute("sortierung_reihenfolge") + " "
 					+ "LIMIT " + session.getAttribute("sortierung_limit_von") + "," + session.getAttribute("sortierung_produktanzahl") + "";
+					
 		} else {
 			produkt_query = "SELECT p.produkt_id "
 					+ "FROM produkt AS p "
 					+ "INNER JOIN produkt_beschreibung AS pb ON p.produkt_id = pb.produkt_id "
 					+ "WHERE pb.sprache_id = '" + this.sprache_id + "' "
-					+ "AND  p.kategorie_id = '" + kategorie_id +"'"
+					+ "AND  p.kategorie_id = '" + kategorie_id +"' "
 					+ "ORDER BY " + session.getAttribute("sortierung_sortierspalte") + " " + session.getAttribute("sortierung_reihenfolge") + " "
 					+ "LIMIT " + session.getAttribute("sortierung_limit_von") + "," + session.getAttribute("sortierung_produktanzahl") + "";
+
 		}
-		
+		/*
 		try {
-			
+		
 			ResultSet produkt_resultset = DatenbankController.sendeSqlRequest(kategorie_query); 
 
 			while(produkt_resultset.next()){
@@ -252,14 +256,9 @@ public class ProduktController {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		 
+		}*/
+		System.out.println(produkt_query);
 		ArrayList<ProduktModel> produkte = new ArrayList<>();
-
-		System.out.println("Sessionwerte Sortierung");
-		System.out.println("Reihenfolge: " + session.getAttribute("sortierung_reihenfolge"));
-		System.out.println("Anzahl: " + session.getAttribute("sortierung_produktanzahl"));
-		System.out.println("Limit: " + session.getAttribute("sortierung_limit_von"));
 
 		try {
 			
@@ -279,7 +278,7 @@ public class ProduktController {
 
 	//TODO Javadoc param bearbeiten
 	/**
-	 * Die Methode <code>getSortierung (HttpServletRequest request)</code> legt fest, 
+	 * Die Methode <code>getSortierung(HttpServletRequest request)</code> legt fest, 
 	 * wie Produkte in der Produktliste-Anschau angezeigt werden. Festgelegt wird, 
 	 * wieviele Produkte pro Seite angezeigt werden sollen, welche Sortierreihenfolge 
 	 * sie haben (DESC | ASC), ab welchem Produkt die Anzeige stattfinden soll und nach 
@@ -294,34 +293,26 @@ public class ProduktController {
 	 * 
 	 */
 
-	public void getSortierung (HttpServletRequest request) {
+	public void getSortierung(HttpServletRequest request) {
 		HttpSession session = ((HttpServletRequest) request).getSession();
-		String parameter = request.getParameter("p_anzeige");
+		System.out.println("existiert die Session?");
 
-		if(session.getAttribute("sortierung_reihenfolge") == null) {
-			session.setAttribute("sortierung_reihenfolge", "ASC");
-			session.setAttribute("sortierung_produktanzahl", 3);
-			session.setAttribute("sortierung_limit_von", 0);
-			session.setAttribute("sortierung_sortierspalte", "pb.produkt_name");
-      	    session.setAttribute("sortierung_sortierspalte_kuerzel", "pn");
-		} 
-		
-		if(parameter != null) {
-			
-			String[] parameterAufteilung = parameter.split(",");
-
+		if(request.getParameter("sortierung") != null) {
+			System.out.println("----> Sortierung ist ungleich null");
 			//  Wenn sortierung_sortierspalte bereits auf demselben Wert steht, wechselt die Sortierreihenfolge
-			if(parameterAufteilung[0].equals(session.getAttribute("sortierung_sortierspalte_kuerzel"))) {
-				
-				if(session.getAttribute("sortierung_reihenfolge") == "DESC") {
+			if(request.getParameter("sortierung").equals((String)session.getAttribute("sortierung_sortierspalte_kuerzel"))) {
+				System.out.println("gleicher Wert");
+				if(session.getAttribute("sortierung_reihenfolge").equals("DESC")) {
+					System.out.println("reihenfolge war gleich");
 					session.setAttribute("sortierung_reihenfolge", "ASC");
 				} else {
+					System.out.println("reihenfolge war NICHT gleich");		
 					session.setAttribute("sortierung_reihenfolge", "DESC");					
 				}
 				
 			}
 			
-			switch (parameterAufteilung[0]) {
+			switch (request.getParameter("sortierung")) {
 	          case "pn":
 	        	  session.setAttribute("sortierung_sortierspalte", "pb.produkt_name");
 	        	  session.setAttribute("sortierung_sortierspalte_kuerzel", "pn");
@@ -352,18 +343,10 @@ public class ProduktController {
 	        	break;	
 	        }
 			
-			if(parameterAufteilung[1] != session.getAttribute("sortierung_produktanzahl")) {
-				session.setAttribute("sortierung_produktanzahl", parameterAufteilung[1]);
-			}
-			
-			if(parameterAufteilung[2] != session.getAttribute("sortierung_limit_von")) {
-				session.setAttribute("sortierung_limit_von", parameterAufteilung[2]);
-			}
-			
 		}
 
 	}
-	
+	//TODO kommt das da wirklich hin?
 	public static double runden(double wert, int stellen) {
 		double gerundet = Math.round(wert * Math.pow(10d, stellen));
 		return gerundet / Math.pow(10d, stellen);

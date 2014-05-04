@@ -212,6 +212,9 @@ public class SucheController {
 						if(preis_von >= 0 && preis_bis > 0 && preis_von < preis_bis) {
 							produkt_query += "AND p.produkt_preis BETWEEN " + preis_von + " AND " + preis_bis;
 						}
+		produkt_query += "ORDER BY " + session.getAttribute("sortierung_sortierspalte") + " " + session.getAttribute("sortierung_reihenfolge") + " "
+						+ "LIMIT " + session.getAttribute("sortierung_limit_von") + "," + session.getAttribute("sortierung_produktanzahl") + "";
+
 
 		System.out.println(produkt_query);
 

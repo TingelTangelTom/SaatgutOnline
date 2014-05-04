@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import controller.ProduktController;
 import controller.UrlController;
 import view.ProduktlisteView;
 
@@ -27,6 +28,7 @@ public class ProduktlisteServlet extends HttpServlet {
      */
     public ProduktlisteServlet() {
         super();
+        
     }
 
 	/**
@@ -35,6 +37,7 @@ public class ProduktlisteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		this.produktliste = new ProduktlisteView(request);
+		
 		//TODO Funktioniert nicht
 		response.setContentType("text/html");
 	    response.setCharacterEncoding("UTF-8");
