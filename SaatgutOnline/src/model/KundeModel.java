@@ -33,19 +33,21 @@ public class KundeModel {
 	private String land;			
 	private String telefon;			
 	private String emailadresse;	
+	private String bundesland;	
+	private String uuid;	
 	private int newsletter;		// int ggfs. in bool konvertieren
+	private int freigeschaltet;		// int ggfs. in bool konvertieren
 
-	public KundeModel ladeKundeAusDatenbank (int id) {
+	public KundeModel ladeKundeAusDb (int id) {
 
 		KundeModel kunde = new KundeModel ();
 		
 		String query = "SELECT * FROM " + KonfigurationController.getDbName()
-        + ".kunden WHERE kunden_id = " + id;
+        + ".kunde WHERE kunden_id = " + id;
 		ResultSet result = DatenbankController.sendeSqlRequest(query);
 		
 		try {
-			kunde.id=(result.getInt("kunde_id"));
-		
+		kunde.id=(result.getInt("kunde_id"));
 		kunde.geschlecht=(result.getInt("kunde_geschlecht"));
 		kunde.vorname=(result.getString("kunde_vorname"));
 		kunde.nachname=(result.getString("kunde_nachname"));
@@ -58,7 +60,11 @@ public class KundeModel {
 		kunde.land=(result.getString("kunde_land"));
 		kunde.telefon=(result.getString("kunde_telefon"));
 		kunde.emailadresse=(result.getString("kunde_email_adresse"));
+		kunde.bundesland=(result.getString("kunde_bundesland"));
+		kunde.uuid=(result.getString("kunde_uuid"));
 		kunde.newsletter=(result.getInt("kunde_newsletter"));
+		kunde.freigeschaltet=(result.getInt("kunde_freigeschaltet"));
+		
 		return kunde;
 		
 		} catch (SQLException e) {
@@ -67,14 +73,12 @@ public class KundeModel {
 			return null;
 		}
 	}
-	public void speichereKundeInDb (KundeModel kunde) {
+	public synchronized void speichereKundeInDb () {
 		 
 		Connection verbindung = ConnectionPoolController.getInstance().getVerbindungAusPool();
 
          PreparedStatement prepSql;
 
-         
-         
          try {
 			prepSql = verbindung.prepareStatement(
 			         "INSERT INTO " + KonfigurationController.getDbName()
@@ -91,10 +95,13 @@ public class KundeModel {
 			         + "land, "
 			         + "telefon, "
 			         + "emaildresse, "
+			         + "bundesland, "
 			         + "newsletter, "
+			         + "freigeschaltet, "
+			         + "uuid"
 			         + ")"
 			         + " VALUES ("
-			         + "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?"
+			         + "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?"
 			         + ")", Statement.RETURN_GENERATED_KEYS);
 
          prepSql.setInt(1, getGeschlecht());
@@ -109,7 +116,10 @@ public class KundeModel {
          prepSql.setString(10, getLand());
          prepSql.setString(11, getTelefon());
          prepSql.setString(12, getEmailadresse());
-         prepSql.setInt(13, getNewsletter());
+         prepSql.setString(13, getBundesland());
+         prepSql.setInt(14, getNewsletter());
+         prepSql.setInt(15, getFreigeschaltet());
+         prepSql.setString(16, getUuid());
          
          prepSql.executeUpdate();
          
@@ -180,6 +190,15 @@ public class KundeModel {
 	public int getNewsletter() {
 		return newsletter;
 	}
+	public String getBundesland() {
+		return bundesland;
+	}
+	public String getUuid() {
+		return uuid;
+	}
+	public int getFreigeschaltet() {
+		return freigeschaltet;
+	}
 
 
 	public void setId(int id) {
@@ -236,6 +255,15 @@ public class KundeModel {
 
 	public void setNewsletter(int newsletter) {
 		this.newsletter = newsletter;
+	}
+	public void setfreigeschaltet(int freigeschaltet) {
+		this.freigeschaltet = freigeschaltet;
+	}
+	public void setBundesland(String bundesland) {
+		this.bundesland = bundesland;
+	}
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
 	}
 	
 }

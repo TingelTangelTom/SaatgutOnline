@@ -1,40 +1,52 @@
 package controller;
 
 import java.security.SecureRandom;
+
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.SecretKeyFactory;
+
+import model.PasswortHashModel;
+
 import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 
 /*
- * PBKDF2 salted password hashing.
- * Author: havoc AT defuse.ca
  * www: http://crackstation.net/hashing-security.htm
  */
 public class PasswortHashController
 {
-    public static final String PBKDF2_ALGORITHMUS = "PBKDF2WithHmacSHA1";
+    public static final String PBKDF2_ALGORITHMUS = "PBKDF2MitHmacSHA1";
 
     // The following constants may be changed without breaking existing hashes.
-    public static final int SALT_BYTE_GROESSE = 128;
-    public static final int HASH_BYTE_GROESSE = 128;
-    public static final int PBKDF2_ITERATIONEN = 10_000;
+    private static final int SALT_BYTE_GROESSE = 128;
+    private static final int HASH_BYTE_GROESSE = 128;
+    private static final int PBKDF2_ITERATIONEN = 10_000;
 
-    public static final int ITERATION_INDEX = 0;
-    public static final int SALT_INDEX = 1;
-    public static final int PBKDF2_INDEX = 2;
-
+    private static final int ITERATION_INDEX = 0;
+    private static final int SALT_INDEX = 1;
+    private static final int PBKDF2_INDEX = 2;
+    private PasswortHashModel passwortHash;
+    
     /**
      * Liefert einen versalzenen PBKDF2-Hash des Passworts
      *
      * @param   passwort    das zu hashende Passwort
      * @return              versalzener PBKDF2-Hash des Passworts
      */
-    public static String erstelleHash(String passwort)
-        throws NoSuchAlgorithmException, InvalidKeySpecException
+    public static String erstellePasswortHash(String passwort)
     {
-        return erstelleHash(passwort.toCharArray());
+        try {
+			return erstellePasswortHash(passwort.toCharArray());
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		} catch (InvalidKeySpecException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
     }
 
     /**
@@ -43,7 +55,7 @@ public class PasswortHashController
      * @param   passwort     das zu hashende Passwort als char-Array
      * @return               versalzener PBKDF2-Hash des Passworts
      */
-    public static String erstelleHash(char[] passwort)
+    public static String erstellePasswortHash(char[] passwort)
         throws NoSuchAlgorithmException, InvalidKeySpecException
     {
         // Einen zufaelligen Salt generieren
@@ -64,10 +76,10 @@ public class PasswortHashController
      * @param   korrekterHash   Hashwert des richtigen Passworts
      * @return                  true wenn das Passwort stimmt, sonst false
      */
-    public static boolean validatePassword(String passwort, String korrekterHash)
+    public static boolean validierePasswort(String passwort, String korrekterHash)
         throws NoSuchAlgorithmException, InvalidKeySpecException
     {
-        return validatePassword(passwort.toCharArray(), korrekterHash);
+        return validierePasswort(passwort.toCharArray(), korrekterHash);
     }
 
     /**
@@ -77,7 +89,7 @@ public class PasswortHashController
      * @param   correctHash     the hash of the valid password
      * @return                  true if the password is correct, false if not
      */
-    public static boolean validatePassword(char[] password, String correctHash)
+    public static boolean validierePasswort(char[] password, String correctHash)
         throws NoSuchAlgorithmException, InvalidKeySpecException
     {
         // Decode the hash into its parameters
@@ -171,7 +183,7 @@ public class PasswortHashController
         {
             // Print out 10 hashes
             for(int i = 0; i < 10; i++)
-                System.out.println(PasswortHashController.erstelleHash("filly"));
+                System.out.println(PasswortHashController.erstellePasswortHash("filly"));
 
             // Test password validation
             boolean failure = false;
@@ -179,18 +191,18 @@ public class PasswortHashController
             for(int i = 0; i < 100; i++)
             {
                 String password = ""+i;
-                String hash = erstelleHash(password);
-                String secondHash = erstelleHash(password);
+                String hash = erstellePasswortHash(password);
+                String secondHash = erstellePasswortHash(password);
                 if(hash.equals(secondHash)) {
                     System.out.println("FAILURE: TWO HASHES ARE EQUAL!");
                     failure = true;
                 }
                 String wrongPassword = ""+(i+1);
-                if(validatePassword(wrongPassword, hash)) {
+                if(validierePasswort(wrongPassword, hash)) {
                     System.out.println("FAILURE: WRONG PASSWORD ACCEPTED!");
                     failure = true;
                 }
-                if(!validatePassword(password, hash)) {
+                if(!validierePasswort(password, hash)) {
                     System.out.println("FAILURE: GOOD PASSWORD NOT ACCEPTED!");
                     failure = true;
                 }
