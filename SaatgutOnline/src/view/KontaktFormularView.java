@@ -23,7 +23,6 @@ public class KontaktFormularView {
 	//Für den Zurück-Link
 	private UrlController urlController;
 	
-	// private PrintWriter out;
 	private ResourceBundle resourceBundle;
 
 	/**
@@ -104,7 +103,7 @@ public class KontaktFormularView {
 		out.println("<tr><td valign=\"top\">&nbsp;</td><td><div align=\"left\">\n");
 		out.println("<input name=\"submit\" type=\"submit\" id=\"submit\""
 				+ "formmethod=\"POST\" value=\"Senden\"></div></td></tr></table></form>");
-		out.println("<br><br><a href=\"" + this.urlController.urlAusSessionHolen("LetzteSeite")
+		out.println("<br><br><a href=\"" + this.urlController.urlAusSessionHolen("Produktseite")
 				+ "\">&#11013 Zurück</a>");
 	}
 }

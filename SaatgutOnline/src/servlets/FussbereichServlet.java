@@ -34,7 +34,7 @@ public class FussbereichServlet extends HttpServlet
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		// Fussbereichview schliessen
-		FussbereichView fussbereichView = new FussbereichView(response);
+		FussbereichView fussbereichView = new FussbereichView(request, response);
 		
 		// Fussbereich oeffnen
 		fussbereichView.outFussbereichAnfang();
@@ -78,7 +78,7 @@ public class FussbereichServlet extends HttpServlet
 			IOException
 	{	
 		// Fussbereichview schliessen
-		FussbereichView fussbereichView = new FussbereichView(response);
+		FussbereichView fussbereichView = new FussbereichView(request, response);
 		
 		// Fussbereich oeffnen
 		fussbereichView.outFussbereichAnfang();
