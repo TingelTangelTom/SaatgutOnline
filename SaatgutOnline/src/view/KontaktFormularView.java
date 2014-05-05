@@ -2,9 +2,13 @@ package view;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Locale;
+import java.util.PropertyResourceBundle;
+import java.util.ResourceBundle;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import controller.UrlController;
 
@@ -15,9 +19,13 @@ import controller.UrlController;
  *
  */
 public class KontaktFormularView {
+	
+	private UrlController urlController;
+//	private PrintWriter out;
+	private ResourceBundle resourceBundle;
 
 	//Für den Zurück-Link
-	UrlController urlController;
+	//UrlController urlController;
 
 	/**
 	 * Konstruktor für den KontaktFormularView.
@@ -25,19 +33,24 @@ public class KontaktFormularView {
 	 * @param request
 	 * @param response
 	 * 
-	 * @author Anja
 	 */
 	public KontaktFormularView(HttpServletRequest request, HttpServletResponse response) {
 
-		response.setContentType("text/html");
-		PrintWriter out;
-		try {
-			out = response.getWriter();
-		} catch (IOException e) {
-			e.printStackTrace();
-			return;
-		}
-		out.println();
+//		response.setContentType("text/html");
+//		PrintWriter out;
+//		try {
+//			this.out = response.getWriter();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//			return;
+//		}
+//		out.println();
+		
+		HttpSession session = request.getSession();
+		
+		Locale locale = (Locale) session.getAttribute("sprache");
+		this.resourceBundle = PropertyResourceBundle.getBundle("I18N." + locale.getLanguage() + "."
+				+ getClass().getSimpleName(), locale);	
 	}
 
 	/**
@@ -46,7 +59,6 @@ public class KontaktFormularView {
 	 * @param request
 	 * @param response
 	 * 
-	 * @author Anja
 	 */
 	public void outKontaktFormular(HttpServletRequest request, HttpServletResponse response) {
 
@@ -61,26 +73,52 @@ public class KontaktFormularView {
 			e.printStackTrace();
 			return;
 		}
-		out.println("<h1>Kontakt</h1>\n<p><label>SaatgutOnline GmbH<br>\nAm Waldrand 325<br>\n"
-				+ "12325 Palmenhausen<br>\nE-Mail kontakt@saatgutonline.de<br>\nTel 049-098-764512-0<br>\n"
-				+ "Fax 049-098-764512-99 </label></p>\n"
-				+ "<form action=/SaatgutOnline/KontaktFormularVerarbeitung>\n"
-				+ "<table width=\"200\" border=\"0\" cellpadding=\"1\" cellspacing=\"1\">\n"
-				+ "<tr><td>Anrede:</td><td><select name=\"Anrede\" id=\"Anrede\" title=\"Anrede\">\n"
-				+ "<option>Frau</option><option>Herr</option></select></td></tr>\n"
-				+ "<tr><td><label for=\"Vorname\">Vorname:</label></td>\n"
-				+ "<td><input name=\"Vorname\" type=\"text\" id=\"Vorname\" size=\"35\" maxlength=\"60\"></td></tr>\n"
-				+ "<tr><td>Nachname:</td>\n"
-				+ "<td><input name=\"Nachname\" type=\"text\" id=\"Nachname\" size=\"35\" maxlength=\"60\"></td></tr>\n"
-				+ "<tr><td><label for=\"E-Mail\">E-Mail:</label></td>\n"
-				+ "<td><input name=\"E-Mail\" type=\"text\" id=\"E-Mail\" size=\"35\" maxlength=\"60\"></td></tr>\n"
-				+ "<tr><td>Betreff:</td>\n<td><input name=\"Betreff\" type=\"text\" id=\"Betreff\" size=\"35\" maxlength=\"60\"></td></tr>\n"
-				+ "<tr><td valign=\"top\">Nachricht:</td>\n"
-				+ "<td><textarea name=\"Nachricht\" cols=\"30\" rows=\"10\" maxlength=\"900\" id=\"Nachricht\"></textarea></td></tr>\n"
-				+ "<tr><td valign=\"top\">&nbsp;</td><td><div align=\"left\">\n"
-				+ "<input name=\"submit\" type=\"submit\" id=\"submit\" formmethod=\"POST\" value=\"Senden\"></div></td></tr></table></form>");
-		out.println("<br><br><a href=\"" + this.urlController.urlAusSessionHolen("LetzteSeite")
-				+ "\">&#11013 Zurück</a>");
+		out.println("<h1>Kontakt</h1>\n");
+		out.println("<p><label>SaatgutOnline GmbH<br>\n"
+				+ "Am Waldrand 325<br>\n"
+				+ "12325 Palmenhausen<br>\n"
+				+ "E-Mail kontakt@saatgutonline.de<br>\n"
+				+ "Tel 049-098-764512-0<br>\n"
+				+ "Fax 049-098-764512-99 </label></p>\n");
+		out.println("<form action=/SaatgutOnline/KontaktFormularVerarbeitung>\n"
+				+ "<table width=\"374\" border=\"0\" cellpadding=\"1\" cellspacing=\"1\">\n");
+		out.println("<tr><td width=\"108\">");
+		out.println(this.resourceBundle.getString("ANREDE") + " ");
+		out.println("</td><td width=\"259\"><select name=\"Anrede\" id=\"Anrede\" title=\"Anrede\">\n");
+		out.println("<option>");
+		out.println(this.resourceBundle.getString("ANREDEFRAU"));
+		out.println("</option>");
+		out.println("<option>");
+		out.println(this.resourceBundle.getString("ANREDEHERR"));
+		out.println("</option></select></td></tr>\n");
+		out.println("<tr><td><label for=\"Vorname\">");
+		out.println(this.resourceBundle.getString("VORNAME") + " ");
+		out.println("</label></td>\n");
+		out.println("<td><input name=\"Vorname\" type=\"text\" id=\"Vorname\""
+				+ "size=\"35\"maxlength=\"60\"></td></tr>\n");
+		out.println("<tr><td>");
+		out.println(this.resourceBundle.getString("NACHNAME") + " ");
+		out.println("</td>\n");
+		out.println("<td><input name=\"Nachname\" type=\"text\" id=\"Nachname\""
+				+ "size=\"35\" maxlength=\"60\"></td></tr>\n");			
+		out.println("<tr><td><label for=\"E-Mail\">");
+		out.println(this.resourceBundle.getString("EMAIL") + " ");
+		out.println("</label></td>\n");
+		out.println("<td><input name=\"E-Mail\" type=\"text\" id=\"E-Mail\""
+				+ "size=\"35\" maxlength=\"60\"></td></tr>\n");
+		out.println("<tr><td>");
+		out.println(this.resourceBundle.getString("BETREFF") + " ");
+		out.println("</td>\n<td><input name=\"Betreff\" type=\"text\" id=\"Betreff\""
+				+ "size=\"35\" maxlength=\"60\"></td></tr>\n");
+		out.println("<tr><td valign=\"top\">");
+		out.println(this.resourceBundle.getString("NACHRICHT") + " ");
+		out.println("</td>\n");
+		out.println("<td><textarea name=\"Nachricht\" cols=\"30\" rows=\"10\""
+				+ "maxlength=\"900\" id=\"Nachricht\"></textarea></td></tr>\n");
+		out.println("<tr><td valign=\"top\">&nbsp;</td><td><div align=\"left\">\n");
+		out.println("<input name=\"submit\" type=\"submit\" id=\"submit\""
+				+ "formmethod=\"POST\" value=\"Senden\"></div></td></tr></table></form>");
+		out.println("<br><br><a href=\"" + this.urlController.urlAusSessionHolen("LetzteSeite") + "\">&#11013 Zurück</a>");
 	}
 	//TODO: Internationalisierung
 
