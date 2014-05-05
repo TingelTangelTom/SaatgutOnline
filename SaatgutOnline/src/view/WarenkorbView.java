@@ -14,42 +14,29 @@ import controller.UrlController;
 import model.ProduktModel;
 
 /**
- * Die Klasse WarenkorbView stellt Html-Ausgabe-Bloecke zur Darstellung des Warenkorbs zur Verfuegung
+ * <p>Die Klasse <code>WarenkorbView</code> stellt Html-Ausgabe-Bloecke zur Darstellung des Warenkorbs zur Verfuegung.</p>
+ * 
  * @author Tom Weigelt
- *
+ * @version 1.0
+ * @since 1.7.0_51
  */
 public class WarenkorbView
 {
-	/**
-	 * Objekt der Klasse <code>PrintWriter</code>
-	 * @see java.io.PrintWriter
-	 */
 	private PrintWriter out;
-	/**
-	 * Objekt der Klasse <code>ResourceBundle</code>
-	 * @see java.util.ResourceBundle
-	 */
 	private ResourceBundle resourceBundle;
-	/**
-	 * Objekt der Klasse <code>HttpSession</code>
-	 * @see javax.servlet.http.HttpSession
-	 */
-	/**
-	 * 
-	 */
 	private HttpSession session;
-	/**
-	 * Objekt der Klasse <code>UrlController<code>
-	 * @see controller.UrlController
-	 */
 	private UrlController urlController;
 
 	/**
-	 * Konstruktor der Klasse <code>WarenkorbView</code>
+	 * <p>Konstruktor der Klasse <code>WarenkorbView</code>.</p>
+	 * <p>Erzeugt einen <code>PrintWriter</code>.</p>
+	 * <p>Ereugt ein <code>ResourceBundle</code>.</p>
 	 * @param request - der aktuelle <code>HttpServletRequest</code>
 	 * @param response - die aktuelle <code>HttpServletResponse</code>
 	 * @see javax.servlet.http.HttpServletRequest
 	 * @see javax.servlet.http.HttpServletResponse
+	 * @see java.io.PrintWriter
+	 * @see java.util.ResourceBundle
 	 */
 	public WarenkorbView(HttpServletRequest request, HttpServletResponse response)
 	{
@@ -72,7 +59,7 @@ public class WarenkorbView
 	}
 
 	/**
-	 * Stellt die Html-Ausgabe fuer den Anfang des Warenkorbs zur Verfuegung
+	 * <p>Stellt die internationalisierte Html-Ausgabe fuer den Anfang des Warenkorbs zur Verfuegung.</p>
 	 */
 	public void outWarenkorbAnfang()
 	{					
@@ -103,7 +90,7 @@ public class WarenkorbView
 	}
 	
 	/**
-	 * Stellt die Html-Ausgabe fuer eine Position des Warenkorbs zur Verfuegung
+	 * <p>Stellt die Html-Ausgabe fuer eine Position des Warenkorbs zur Verfuegung.</p>
 	 * @param produktModel - Produkt der Position als <code>ProduktModel</code>
 	 * @param menge - Bestellmenge als <code>int</code>
 	 * @param einzelpreisFormatiert - Einzelpreis des Produkts, formatiert auf zwei Stellen nach dem Komma als <code>String</code>
@@ -136,7 +123,7 @@ public class WarenkorbView
 	}
 
 	/**
-	 * Stellt die Html-Ausgabe fuer eine Ausgabezeile des Warenkorbs zur Verfuegung, wenn die Bestellmenge groesser ist, als der Lagerbestand 
+	 * <p>Stellt die internationalisierte Html-Ausgabe fuer eine Ausgabezeile des Warenkorbs zur Verfuegung, wenn die Bestellmenge groesser ist, als der Lagerbestand.</p> 
 	 */
 	public void outMengeNichtImBestand()
 	{		
@@ -146,7 +133,7 @@ public class WarenkorbView
 	}
 	
 	/**
-	 * Stellt die Html-Ausgabe fuer den leeren Warenkorb zur Verfuegung 
+	 * <p>Stellt die internationalisierte Html-Ausgabe fuer den leeren Warenkorb zur Verfuegung.</p> 
 	 */
 	public void outLeererWarenkorb()
 	{
@@ -156,7 +143,7 @@ public class WarenkorbView
 	}	
 
 	/**
-	 * Stellt die Html-Ausgabe fuer das Ende des Warenkorbs zur Verfuegung
+	 * <p>Stellt die internationalisierte Html-Ausgabe fuer das Ende des Warenkorbs zur Verfuegung</p>
 	 * @param zwischensummeFormatiert - die Zwischensumme der Bestellung, , formatiert auf zwei Stellen nach dem Komma als <code>String</code>
 	 */
 	public void outWarenkorbEnde(String zwischensummeFormatiert)
@@ -181,7 +168,4 @@ public class WarenkorbView
 		this.out.println("</td>\n</tr>");
 		this.out.println("</table>");
 	}
-	
-
-
 }
