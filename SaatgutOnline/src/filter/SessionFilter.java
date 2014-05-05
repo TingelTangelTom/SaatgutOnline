@@ -68,6 +68,7 @@ public class SessionFilter implements Filter {
 			    session.setAttribute("angemeldet", false);
 				session.setAttribute("sortierung_reihenfolge", "ASC");
 				session.setAttribute("erweitertesuche", "false");
+				session.setAttribute("suchbegriff", "");
 				session.setAttribute("suchen", "false");
 				session.setAttribute("sortierung_produktanzahl", 7);
 				session.setAttribute("sortierung_limit_von", 0);
