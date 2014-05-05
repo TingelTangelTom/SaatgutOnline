@@ -174,7 +174,7 @@ public class ProduktlisteView {
 			+ "<tr>\n"
 			+ "<td class=\"produktliste bild\" rowspan=\"4\"><img src=\"resources/bilder/phoenix_canariensis.jpg\" width=\"100\" height=\"100\" alt=\"Phoenix Canariensis\"></td>\n"
 	    	+ "<td class=\"produktliste titel\">" + htmlAusgabe.outLinkProduktinfo(produktModel.getName(), produktModel.getId()) + "</td>\n"
-	    	+ "<td class=\"produktliste preis\">" + this.htmlAusgabe.outPreisformat(produktModel.getPreisBrutto()) + "</td>\n"
+	    	+ "<td class=\"produktliste preis\">" + this.htmlAusgabe.outPreisformat(produktModel.getPreisBrutto()) + this.htmlAusgabe.outPreisformatEnglischerZusatz(produktModel.getPreisBrutto()) + "</td>\n"
 	    	+ "</tr>\n"
 	    	+ "<tr>\n"
     		+ "<td class=\"produktliste produktnummer\">" + this.resourceBundle.getString("PRODUKTNUMMER") + " " + produktModel.getProduktnummer() + "</td><td class=\"produktliste preisverordnung\">" + this.htmlAusgabe.outPreisverordnung(this.resourceBundle.getString("VERSANDKOSTEN"), produktModel.getSteuerSatz()) + "</td>\n"

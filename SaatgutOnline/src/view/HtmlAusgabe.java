@@ -54,16 +54,28 @@ public class HtmlAusgabe extends HttpServlet{
 		  }
 */
 	public String outPreisformat(double preis) {
-		
 		NumberFormat waehrungsFormat = NumberFormat.getCurrencyInstance(this.locale);
 		waehrungsFormat.setCurrency(Currency.getInstance("EUR"));
 		
-		
-
-
 		return waehrungsFormat.format(preis);
-
 	}
+	
+	public String outPreisformatEnglischerZusatz(double preis) {
+		
+		
+		String englischerZusatz;
+		if(!this.locale.equals(Locale.GERMAN)) {
+			NumberFormat waehrungsFormat = NumberFormat.getCurrencyInstance(Locale.US);
+			waehrungsFormat.setCurrency(Currency.getInstance("USD"));
+			englischerZusatz = "(" + waehrungsFormat.format(preis * 1.34) + ")";
+		} else {
+			englischerZusatz = "";
+		}
+		
+		return englischerZusatz;
+	}
+	
+	
 	
 	/**
 	 * 
