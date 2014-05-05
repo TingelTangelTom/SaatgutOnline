@@ -49,7 +49,7 @@ Anja
 - FERTIG : In HTML alle ' durch escapte " ersetzen (z.b. bei action)
 - FERTIG : Internationalisierung Bis auf Fussleiste
 	- about | terms | shipping & payment | privacy | contact
-	Fusszeile : Team einfügen :D
+Fusszeile : Team einfügen :D
 - MACH ICH NICHT : Klassen(Objekt)Variablen mit this aufrufen
 - AKTUALISIEREN!!! : javadoc : FERTIG (mit vorbehalt :D )
 - Dokumentation
