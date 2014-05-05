@@ -101,19 +101,19 @@ public class ProduktlisteView {
 		
 		// Ausgabe der Produktliste
 		this.output += "<table class=\"produktliste\">\n"
-					+ "<tr><td colspan=\"2\">";
+					+ "<tr><td class=\"produktliste\" colspan=\"2\">";
 				
 		// Erweiterte Suche anzeigen
 		if(erweitertesuche.equals("true")) {
 		this.output += "<form action=\"/SaatgutOnline/Produktliste\" method=\"GET\">\n"
-					+"<table class=\"produktliste\" width=\"100%\" border=\"0\">\n"
+					+"<table class=\"produktliste\">\n"
 					+"<tr>\n"
-					+"<td colspan\"8\">" + this.resourceBundle.getString("ERWEITERTESUCHE") + "</td>\n"
+					+"<td class=\"produktliste suche\" colspan\"8\">" + this.resourceBundle.getString("ERWEITERTESUCHE") + "</td>\n"
 					+"</tr>\n"
 		    		+ "<tr>\n<td colspan=\"8\" style=\"background-image:url(resources/bilder/icons/trennlinie.gif);height: 1px; background-repeat:repeat-x;\">&nbsp;</td>\n</tr>\n"
 					+"<tr>\n"
-					+"<td>" + this.resourceBundle.getString("KATEGORIE") + "</td>\n"
-					+"<td><select class=\"festeSelectBoxBreite\" name=\"kategorie\" id=1>\n"
+					+"<td class=\"produktliste suchebreite\">" + this.resourceBundle.getString("KATEGORIE") + "</td>\n"
+					+"<td class=\"produktliste suchebreite\"><select class=\"festeSelectBoxBreite\" name=\"kategorie\" id=1>\n"
 					+ "<option value=\"0\">Alle Kategorien</option>\n";
 	
 				    for(Integer key : kategorien.keySet()) {
@@ -121,33 +121,32 @@ public class ProduktlisteView {
 				    }
 
 		this.output += "</select></td>\n"
-					+"<td>&nbsp;</td>\n"
-					+"<td>" + this.resourceBundle.getString("BESCHREIBUNG") + "</td>\n"
-					+"<td><input class=\"festeSelectBoxBreite\" type=\"number\" name=\"beschreibung\" id=3></td>\n"
-					+"<td>&nbsp;</td>\n"
-					+"<td>" + this.resourceBundle.getString("PREIS_VON") + "</td>\n"
-					+"<td><input class=\"festeSelectBoxBreite\" type=\"number\" name=\"preis_von\" id=5></td>\n"
+					+"<td class=\"produktliste sucheleerspalte\">&nbsp;</td>\n"
+					+"<td class=\"produktliste suchebreite\">" + this.resourceBundle.getString("BESCHREIBUNG") + "</td>\n"
+					+"<td class=\"produktliste suchebreite\"><input class=\"festeSelectBoxBreite\" type=\"number\" name=\"beschreibung\" id=3></td>\n"
+					+"<td class=\"produktliste sucheleerspalte\">&nbsp;</td>\n"
+					+"<td class=\"produktliste suchebreite\">" + this.resourceBundle.getString("PREIS_VON") + "</td>\n"
+					+"<td class=\"produktliste suchebreite\"><input class=\"festeSelectBoxBreite\" type=\"number\" name=\"preis_von\" id=5></td>\n"
 					+"</tr>\n"
 					+"<tr>\n"
-					+"<td>" + this.resourceBundle.getString("NAME") + "</td>\n"
-					+"<td><input class=\"festeSelectBoxBreite\" type=\"text\" name=\"name\" id=2></td>\n"
-					+"<td>&nbsp;</td>\n"
-					+"<td>" + this.resourceBundle.getString("BESTELLNUMMER") + "</td>\n"
-					+"<td><input class=\"festeSelectBoxBreite\" type=\"text\" name=\"artikelnummer\" id=4></td>\n"
-					+"<td>&nbsp;</td>\n"
-					+"<td>" + this.resourceBundle.getString("PREIS_BIS") + "</td>\n"
-					+"<td><input class=\"festeSelectBoxBreite\" type=\"number\" name=\"preis_bis\" id=6>"
+					+"<td class=\"produktliste suchebreite\">" + this.resourceBundle.getString("NAME") + "</td>\n"
+					+"<td class=\"produktliste suchebreite\"><input class=\"festeSelectBoxBreite\" type=\"text\" name=\"name\" id=2></td>\n"
+					+"<td class=\"produktliste sucheleerspalte\">&nbsp;</td>\n"
+					+"<td class=\"produktliste suchebreite\">" + this.resourceBundle.getString("PRODUKTNUMMER") + "</td>\n"
+					+"<td class=\"produktliste suchebreite\"><input class=\"festeSelectBoxBreite\" type=\"text\" name=\"produktnummer\" id=4></td>\n"
+					+"<td class=\"produktliste sucheleerspalte\">&nbsp;</td>\n"
+					+"<td class=\"produktliste suchebreite\">" + this.resourceBundle.getString("PREIS_BIS") + "</td>\n"
+					+"<td class=\"produktliste suchebreite\"><input class=\"festeSelectBoxBreite\" type=\"number\" name=\"preis_bis\" id=6>"
 					+ "<input type=\"hidden\" name=\"p_anzeige\" id=\"p_anzeige\" value=\"" + p_anzeige +"\">"
 					+ "<input type=\"hidden\" name=\"erweitertesuche\" id=\"erweitertesuche\" value=\"true\">"
 					+ "<input type=\"hidden\" name=\"suchen\" id=\"suchen\" value=\"true\">"
 					+ "</td>\n"
 					+"</tr>\n"
 					+"<tr>\n"
-					+"<td colspan=\"8\">&nbsp;<input type=\"submit\" name=\"submit\" id=\"submit\" value=\"Senden\"></td>\n"
+					+"<td class=\"produktliste buttons_rechts\" colspan=\"8\">&nbsp;<input type=\"image\" src=\"resources/bilder/icons/suche_button.jpg\" alt=\"Warenkorb\"></td>\n"
 					+"</tr>\n"
 					+ "<tr><td>&nbsp;</td></tr>\n"
 		    		+ "<tr>\n<td colspan=\"8\" style=\"background-image:url(resources/bilder/icons/trennlinie.gif);height: 1px; background-repeat:repeat-x;\">&nbsp;</td>\n</tr>\n"
-					+ "<tr><td>&nbsp;</td></tr>\n"
 		    		+"</table>\n"
 					+"</form>\n";
 		}		
@@ -185,12 +184,12 @@ public class ProduktlisteView {
     		+ "</tr>\n"
     		+ "<tr>\n"
     		+ "<td>" + htmlAusgabe.outLinkProduktinfo(this.resourceBundle.getString("DETAILS"), produktModel.getId()) + "</td>\n"
-    		+ "<td align=\"right\">";
+    		+ "<td class=\"produktliste buttons_rechts\">";
 			if(produktModel.getBestand() == 0) {
 				this.output += this.resourceBundle.getString("NICHTVORRAETIG");
 			} else {
 				this.output += "<form action=\"/SaatgutOnline/Warenkorb\" method=\"POST\">\n"
-    		+ "Menge <input class=\"festeTextBoxBreiteMenge\" type=\"text\" name=\"menge\" value=\"" + warenkorbmenge + "\">\n"
+    		+ "" +this.resourceBundle.getString("MENGE") + " <input class=\"festeTextBoxBreiteMenge\" type=\"text\" name=\"menge\" value=\"" + warenkorbmenge + "\">\n"
 			+ "<input type=\"hidden\" name=\"produkt\" value=\"" + produktModel.getId() + "\">\n"
     		+ "<input type=\"image\" src=\"resources/bilder/icons/warenkorb.gif\" alt=\"Warenkorb\">\n"
     		+ "</form>\n";

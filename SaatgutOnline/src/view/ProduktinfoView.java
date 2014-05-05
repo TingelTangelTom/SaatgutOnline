@@ -50,7 +50,7 @@ public class ProduktinfoView {
 					+ "<td class=\"produktinfo\">" + this.produktModel.getVpe() + "</td>\n"
 					+ "</tr>\n"
 					+ "<tr>\n"
-					+ "<td class=\"produktinfo bestellnummer\">" + this.resourceBundle.getString("BESTELLNUMMER") + " " + produktModel.getBestellnummer() + "</td>\n"
+					+ "<td class=\"produktinfo bestellnummer\">" + this.resourceBundle.getString("PRODUKTNUMMER") + " " + produktModel.getProduktnummer() + "</td>\n"
 					+ "</tr>\n"
 					+ "<tr>\n"
 					+ "<td class=\"produktinfo\">\n"
@@ -81,7 +81,7 @@ public class ProduktinfoView {
 						this.output += this.resourceBundle.getString("NICHTVORRAETIG");
 					} else {
 						this.output += "<form action=\"/SaatgutOnline/Warenkorb\" method=\"POST\">\n"
-		    		+ "<input type=\"hidden\" name=\"menge\" value=\"" + warenkorbmenge + "\">\n"
+		    		+ "" +this.resourceBundle.getString("MENGE") + " <input class=\"festeTextBoxBreiteMenge\" type=\"text\" name=\"menge\" value=\"" + warenkorbmenge + "\">\n"
 					+ "<input type=\"hidden\" name=\"produkt\" value=\"" + produktModel.getId() + "\">\n"
 		    		+ "<input type=\"image\" src=\"resources/bilder/icons/warenkorb.gif\" alt=\"Warenkorb\">\n"
 		    		+ "</form>\n";

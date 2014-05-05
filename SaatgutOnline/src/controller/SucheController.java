@@ -207,7 +207,7 @@ public class SucheController {
 							produkt_query += "AND MATCH (pb.produkt_beschreibung) AGAINST ('" + beschreibung + "') ";
 						}
 						if(!produktnummer.equals("")) {
-							produkt_query += "AND p.produkt_bestellnummer = '" + produktnummer + "' ";
+							produkt_query += "AND p.produkt_produktnummer = '" + produktnummer + "' ";
 						}
 						if(preis_von >= 0 && preis_bis > 0 && preis_von < preis_bis) {
 							produkt_query += "AND p.produkt_preis BETWEEN " + preis_von + " AND " + preis_bis;
