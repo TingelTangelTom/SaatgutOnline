@@ -20,7 +20,6 @@ public class KontaktFormularVerarbeitungController {
 	 * @param request
 	 * @param response
 	 * 
-	 * @author Anja
 	 */
 	public KontaktFormularVerarbeitungController(HttpServletRequest request,
 			HttpServletResponse response) {

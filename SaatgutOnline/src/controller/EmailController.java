@@ -21,21 +21,16 @@ import javax.mail.internet.MimeMessage;
  */
 public class EmailController {
 	
-	/**
-	 * RegEx für E-Mail Validierung
-	 */
+	// RegEx für E-Mail Validierung
 	private static String EmailRegel = "[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*"
 			+ "@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 	
-	/**
-	 * Pattern und Matcher für E-Mail Validierung
-	 */
+
+	// Pattern und Matcher für E-Mail Validierung
 	private Pattern pattern;
 	private Matcher matcher;
 	
-	/**
-	 * Konstruktor für den EmailController.
-	 */
+	// Konstruktor für den EmailController.
 	public EmailController() {
 
 	}
@@ -45,8 +40,6 @@ public class EmailController {
 	 * 
 	 * @param String e-mail
 	 * @return boolean
-	 * 
-	 * @author Anja
 	 * 
 	 */
 	public boolean validiereEmail(String email) {
@@ -65,8 +58,6 @@ public class EmailController {
 	 * 
 	 * @throws AdressException
 	 * @throws MessagingException
-	 * 
-	 * @author Anja
 	 * 
 	 */
 	public void sendeEmail(String emailadresseAbsender, String betreff,
@@ -104,8 +95,6 @@ public class EmailController {
 	 * @param anrede
 	 * @param vorname
 	 * @param nachname
-	 * 
-	 * @author Anja
 	 * 
 	 */
 	public void sendeEmail(String emailadresseAbsender, String betreff,

@@ -6,6 +6,7 @@ import java.sql.Statement;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import view.ImpressumView;
 
@@ -17,9 +18,7 @@ import view.ImpressumView;
  */
 public class ImpressumController {
 
-	/**
-	 * Variablen zum zwischenspeichern des Datenbankinhaltes
-	 */
+	// Variablen zum zwischenspeichern des Datenbankinhaltes
 	private String unternehmen_adresse;
 	private String unternehmen_telefon;
 	private String unternehmen_fax;
@@ -39,15 +38,17 @@ public class ImpressumController {
 	 * 
 	 * @throws SQLException
 	 * 
-	 * @author Anja
 	 */
 	public ImpressumController(HttpServletRequest request, HttpServletResponse response) {
-
+		
+		// Liest die (auf der Shopseite) eingestellte Sprache aus der Session
+		HttpSession session = ((HttpServletRequest) request).getSession();
+		int sprache = (int) session.getAttribute("spracheId");
+		
 		// Datenbankabfrage : Impressum ausgeben
-		try {
-			String query = "SELECT * FROM impressum";
-			//TODO : query aktualisieren
+		String query = "SELECT * FROM impressum WHERE sprache_id=" + sprache;
 
+		try {
 			ResultSet resultSet = DatenbankController.sendeSqlRequest(query);
 			if (resultSet.next()) {
 				unternehmen_adresse = resultSet.getString("unternehmen_adresse");
