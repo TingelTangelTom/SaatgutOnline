@@ -6,18 +6,23 @@ import javax.servlet.http.HttpServletResponse;
 import view.KontaktFormularView;
 
 /**
- * Diese Klasse ruft den KontaktFormularView auf.
+ * <p>Die Klasse <code>KontaktFormularController</code> ruft den KontaktFormularView auf.</p>
  * 
  * @author Anja Dietrich
+ * @version 1.0
+ * @since 1.7.0_51
  * 
  */
 public class KontaktFormularController {
 
 	/**
-	 * Konstruktor für den KontaktFormularController.
+	 * <p>Der Konstruktor der Klasse <code>KontaktFormularController</code> ruft den KontaktFormularView auf.</p>
 	 * 
 	 * @param request
 	 * @param response
+	 * @see javax.servlet.http.HttpServletRequest
+	 * @see javax.servlet.http.HttpServletResponse
+	 * @see view.KontaktFormularView
 	 * 
 	 */
 	public KontaktFormularController(HttpServletRequest request, HttpServletResponse response) {

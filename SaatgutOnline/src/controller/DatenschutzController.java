@@ -10,9 +10,12 @@ import javax.servlet.http.HttpSession;
 import view.DatenschutzView;
 
 /**
- * Diese Klasse liest die aktuellste Datenschutzerklärung aus der Datenbank aus.
+ * <p>Die Klasse <code>DatenschutzController</code> liest die aktuellste Datenschutzerklärung</br> 
+ * aus der Datenbank aus.</p>
  * 
- * @author Anja Dietrich
+ * @author Anja Dietrich 
+ * @version 1.0
+ * @since 1.7.0_51
  * 
  */
 public class DatenschutzController {
@@ -20,12 +23,17 @@ public class DatenschutzController {
 	private String datenschutzText;
 
 	/**
-	 * Konstruktor für den DatenschutzController.
+	 * <p>Konstruktor der Klasse <code>DatenschutzController</code>.</p>
+   * <p>Liest die aktuelle aktuellste Datenschutzerklärung aus der Datenbank</p>
+   * <p>Erzeugt ein neues <code>DatenschutzView</code>Objekt</p>
+   * <p>Sendet die Abfrage an den <code>AGBView</code></p>
 	 * 
 	 * @param request
 	 * @param response
-	 * 
-	 * @throws SQLException
+	 * @throws SQLException 
+	 * @see javax.servlet.http.HttpServletRequest
+	 * @see javax.servlet.http.HttpServletResponse
+	 * @see view.DatenschutzView
 	 * 
 	 */
 	public DatenschutzController(HttpServletRequest request, HttpServletResponse response) {
@@ -34,7 +42,6 @@ public class DatenschutzController {
 		HttpSession session = ((HttpServletRequest) request).getSession();
 		int sprache = (int) session.getAttribute("spracheId");
 
-		// Datenbankabfrage : Aktuellsten Datenschutz ausgeben
 		String query = "SELECT datenschutz_text FROM datenschutz WHERE sprache_id=" + sprache
 				+ " ORDER BY datenschutz_datum_hinzugefuegt DESC LIMIT 1";
 

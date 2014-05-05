@@ -10,9 +10,11 @@ import javax.servlet.http.HttpSession;
 import view.AGBView;
 
 /**
- * Diese Klasse liest die aktuellsten AGB aus der Datenbank aus.
+ * <p>Die Klasse <code>AGBController</code> liest die aktuellsten AGB aus der Datenbank aus.</p>
  * 
  * @author Anja Dietrich
+ * @version 1.0
+ * @since 1.7.0_51
  * 
  */
 public class AGBController {
@@ -20,12 +22,18 @@ public class AGBController {
 	private String agbText;
 
 	/**
-	 * Konstruktor für den AGBController.
+	 * <p>Konstruktor der Klasse <code>AGBController</code>.</p>
+	 * <p>Liest die aktuelle eingestellte Sprache aus der <code>HttpSession</code>,</br>
+	 * und holt die jeweiligen AGB aus der Datenbank.</p>
+	 * <p>Erzeugt ein neues <code>AGBView</code>Objekt</p>
+	 * <p>Sendet die Abfrage an den <code>AGBView</code></p>
 	 * 
 	 * @param request
 	 * @param response
-	 * 
-	 * @throws SQLException
+	 * @throws SQLException 
+	 * @see javax.servlet.http.HttpServletRequest
+	 * @see javax.servlet.http.HttpServletResponse
+	 * @see view.AGBView
 	 * 
 	 */
 	public AGBController(HttpServletRequest request, HttpServletResponse response) {
@@ -34,7 +42,6 @@ public class AGBController {
 		HttpSession session = ((HttpServletRequest) request).getSession();
 		int sprache = (int) session.getAttribute("spracheId");
 
-		// Datenbankabfrage : Aktuellste AGB ausgeben
 		String query = "SELECT agb_text FROM agb WHERE sprache_id=" + sprache
 				+ " ORDER BY agb_datum_hinzugefuegt DESC LIMIT 1";
 
@@ -42,7 +49,6 @@ public class AGBController {
 			ResultSet resultSet = DatenbankController.sendeSqlRequest(query);
 			if (resultSet.next()) {
 				agbText = resultSet.getString(1);
-				System.out.println(agbText);
 				new AGBView(request, response, agbText);
 			}
 		} catch (SQLException e) {

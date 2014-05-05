@@ -15,8 +15,13 @@ import javax.mail.internet.MimeMessage;
 
 /**
  * Diese Klasse verwaltet die E-Mail Funktionalitäten.
+ * <p>Die Klasse <code>EmailController</code> verwaltet die E-Mail Funktionalitäten:</br>
+ * - E-Mail validieren</br>
+ * - E-Mail versenden</p>
  * 
  * @author Anja Dietrich
+ * @version 1.0
+ * @since 1.7.0_51
  * 
  */
 public class EmailController {
@@ -35,7 +40,7 @@ public class EmailController {
 	}
 
 	/**
-	 * Diese Methode überprüft E-Mail-Adressen auf ihre Gültigkeit.
+	 * <p>Diese Methode überprüft E-Mail-Adressen auf ihre Gültigkeit.</p>
 	 * 
 	 * @param String e-mail
 	 * @return boolean
@@ -48,7 +53,7 @@ public class EmailController {
 	}
 
 	/**
-	 * Diese Methode versendet E-Mails.
+	 * <p>Diese Methode versendet E-Mails.</p>
 	 * 
 	 * @param emailadresseAbsender
 	 * @param betreff
@@ -57,6 +62,8 @@ public class EmailController {
 	 * 
 	 * @throws AdressException
 	 * @throws MessagingException
+	 * @see javax.mail.internet.AddressException
+	 * @see javax.mail.MessagingException
 	 * 
 	 */
 	public void sendeEmail(String emailadresseAbsender, String betreff,
@@ -84,7 +91,7 @@ public class EmailController {
 	}
 
 	/**
-	 * Diese Methode versendet E-Mails und formatiert die Ausgabe.
+	 * <p>Diese Methode versendet E-Mails und formatiert die Ausgabe.</p>
 	 * 
 	 * @param emailadresseAbsender
 	 * @param betreff

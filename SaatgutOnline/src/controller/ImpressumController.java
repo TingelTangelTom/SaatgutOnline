@@ -10,14 +10,15 @@ import javax.servlet.http.HttpSession;
 import view.ImpressumView;
 
 /**
- * Diese Klasse liest das Impressum aus der Datenbank aus.
+ * <p>Die Klasse <code>ImpressumController</code> liest das aktuellste Impressum aus der Datenbank aus.</p>
  * 
  * @author Anja Dietrich
+ * @version 1.0
+ * @since 1.7.0_51
  * 
  */
 public class ImpressumController {
 
-	// Variablen zum zwischenspeichern des Datenbankinhaltes
 	private String unternehmen_adresse;
 	private String unternehmen_telefon;
 	private String unternehmen_fax;
@@ -30,21 +31,25 @@ public class ImpressumController {
 	private String impressum_copyright;
 
 	/**
-	 * Konstruktor für den ImpressumController.
+	 * <p>Konstruktor für den ImpressumController.</p>
+	 * <p>Konstruktor der Klasse <code>ImpressumController</code>.</p>
+	 * <p>Liest liest das aktuellste Impressum aus der Datenbank</p>
+	 * <p>Erzeugt ein neues <code>ImpressumView</code>Objekt</p>
+	 * <p>Sendet die Abfrage an den <code>ImpressumView</code></p>
 	 * 
 	 * @param request
 	 * @param response
-	 * 
 	 * @throws SQLException
+	 * @see javax.servlet.http.HttpServletRequest
+	 * @see javax.servlet.http.HttpServletResponse
+	 * @see view.ImpressumView
 	 * 
 	 */
 	public ImpressumController(HttpServletRequest request, HttpServletResponse response) {
 
-		// Liest die (auf der Shopseite) eingestellte Sprache aus der Session
 		HttpSession session = ((HttpServletRequest) request).getSession();
 		int sprache = (int) session.getAttribute("spracheId");
 
-		// Datenbankabfrage : Impressum ausgeben
 		String query = "SELECT * FROM impressum WHERE sprache_id=" + sprache;
 
 		try {
