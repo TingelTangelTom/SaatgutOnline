@@ -13,12 +13,11 @@ import view.WarenkorbView;
 
 /**
  * <p>Die Klasse <code>WarenkorbController</code> stellt Kontrollstrukturen zur
- * Darstellung und Organisation des Warenkorbs zur Verfuegung</p>
+ * Darstellung und Organisation des Warenkorbs zur Verfuegung.</p>
  * 
  * @author Tom Weigelt
  * @version 1.0
  * @since 1.7.0_51
- * 
  */
 public class WarenkorbController
 {
@@ -123,7 +122,7 @@ public class WarenkorbController
 		{
 			int id = Integer.parseInt(this.request.getParameter("produkt"));
 			
-			// die folgenden drei zeilen nutzen Code von Simon Ankele
+			// die drei folgenden Zeilen nutzen Code von Simon Ankele
 			ProduktController produktController = new ProduktController(this.request);
 			ProduktModel produktModelAusDatenbank = new ProduktModel();
 			produktModelAusDatenbank = produktController.getProdukt(id);
@@ -161,21 +160,20 @@ public class WarenkorbController
 			if (this.request.getParameter("aktualisieren") != null)
 			{				
 				/*
-				 * 
-				 * Da pro Aufruf die Menge mehrere Produkte aktualisiert werden koennen,
+				 * Da pro Aufruf die Menge mehrere Produkte aktualisiert werden kann,
 				 * gibt es moeglicherweise mehrere Parameter des Namens "menge". Um die Menge dennoch
 				 * eindeutig einem Produkt zuordenen zu koennen, wird bei der Erzeugung des Parameters (per
 				 * Unterstrich getrennt) die Produkt-ID angehaengt.
 				 * 
 				 * Der Ubergabeparameter "menge" ist wie folgt aufgebaut:
-				 * menge_produktId=neueMenge
+				 * menge_<produktId>=<neueMenge>
 				 * 
 				 * Um nun die Produkt-ID als Wert zu bekommen, mit dem weiter gearbeitet
 				 * werden kann, wird der Parameter am Unterstrich gesplittet und die
-				 * Bestandteile "menge" und 'produktId' im StringArray 'splittedParameter'
+				 * Bestandteile "menge" und <produktId> im StringArray 'splittedParameter'
 				 * abgelegt.
 				 * 
-				 * Die Produkt-ID ist somit als Integer verfuegbar per:
+				 * Die Produkt-ID ist dann als Integer verfuegbar per:
 				 * Integer.parseInt(splittedParameter[1]) 
 				 */
 				Enumeration<String> parameters;
@@ -222,11 +220,19 @@ public class WarenkorbController
 					}
 				}
 
+				
 				parameters = this.request.getParameterNames();
+				
 				while (parameters.hasMoreElements())
 				{
 					parameter = parameters.nextElement();
 
+					/*
+					 * Auch hier wird wieder der Parameter bei der Erzeugung um die Produkt-ID
+					 * erweitert und dann am Unterstrich gesplittet.
+					 * 
+					 * siehe oben
+					 */
 					if (parameter.startsWith("entfernen"))
 					{
 						splittedParameter = parameter.split("[_]");

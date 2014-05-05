@@ -7,13 +7,17 @@ import javax.servlet.http.HttpSession;
 
 
 /**
- * Die Klasse UrlController stellt die Methoden
+ * <p>Die Klasse UrlController stellt die Methoden
  * <code>zwischenzuspeicherndeUrlInSessionLegen()</code> und
  * <code>zwischengespeicherteUrlAusSessionHolen()</code>
- * zur Verfügung
+ * zur Verfügung.</p>
+ * <p>Mittels dieser Methoden ist es moeglich, dynamisch auf die
+ * zuletzt abgespeicherte Seite, oder auch speziell auf die zuletzt abgelegte
+ * Produktseite (<i>Produktliste</i> bzw. <i>Produktinfo</i>) zu verlinken.</p> 
  * 
  * @author Tom Weigelt
- *
+ * @version 1.0
+ * @since 1.7.0_51
  */
 public class UrlController
 {	
@@ -21,10 +25,8 @@ public class UrlController
 	private HttpServletRequest request;
 	
 	/**
-	 * Konstruktor der Klasse <code>UrlController</code>
-	 * 
-	 * @param request - der aktuelle <code>HttpServletRequest</code>
-	 * 
+	 * <p>Konstruktor der Klasse <code>UrlController</code>.</p>
+	 * @param request - der aktuelle <code>HttpServletRequest</code> 
 	 */
 	public UrlController(HttpServletRequest request)
 	{
@@ -33,7 +35,11 @@ public class UrlController
 	}
 	
 	/**
-	 * Legt die aktuelle URL mit allen Parametern unter dem Key <b>'url'</b> in der HttpSession ab
+	 * <p>Legt die zwischenzuspeichernde URL inklusive aller Paramater in der Session ab.</p>
+	 * <p>Es wird automatisch zwischen <b>Produktseite</b> und <b>LetzteSeite</b> unterschieden:
+	 * </br>enthaelt die URL den Teilstring "<b>/Produkt</b>", so wird die URL sowohl unter dem key
+	 * <i>urlProduktseite</i> als auch <i>urlLetzteSeite</i> abgelegt.
+	 * </br>Ist der Teilstring nicht enthalten, wird die URL nur unter <i>urlLetzteSeite</i> abgelegt.</p>
 	 */
 	public void urlInSessionLegen()
 	{
@@ -56,8 +62,7 @@ public class UrlController
 			zwischenzuspeicherndeUrl = zwischenzuspeicherndeUrl.substring(0, zwischenzuspeicherndeUrl.lastIndexOf("&"));
 		}
 				
-		if(this.request.getServletPath().contains("/Produktliste")
-				|| this.request.getServletPath().contains("/Produktinfo"))
+		if(this.request.getServletPath().contains("/Produkt"))				
 		{
 			this.session.setAttribute("urlLetzteSeite", zwischenzuspeicherndeUrl);
 			this.session.setAttribute("urlProduktseite", zwischenzuspeicherndeUrl);
@@ -69,32 +74,13 @@ public class UrlController
 	}
 	
 	/**
-	 * Legt die URL der aktuellen Seite in die <code>HttpSession</code>
-	 */
-	public void setAktuelleSeite()
-	{
-		this.session.setAttribute("urlAktuelleSeite", this.request.getRequestURL().toString());
-	}
-	
-	/**
-	 * Holt die URL der zuletzt abgelegten aktuellen Seite aus der <code>HttpSession</code>
-	 * return String - die zuletzt abgelegten aktuelle Seite
-	 */
-	public String getAktuelleSeite()
-	{
-		return (String) this.session.getAttribute("urlAktuelleSeite");		
-	}
-	
-	
-	/**
-	 * Holt die zwischengespeicherte URL inklusive aller Parameter unter dem Key <b>'url'+bereich</b> aus der
-	 * HttpSession und gibt diese als <code>String<code> zurück
-	 * 
-	 * @param Der Bereich, von dem aus zur URL zurückgekehrt werden soll (zB. Fussbereich) als <code>String</code>
+	 * <p>Holt die zwischengespeicherte URL inklusive aller Parameter unter dem Key <b>'url'+seite</b> aus der
+	 * Session und gibt diese als <code>String<code> zurück.</p> 
+	 * @param seite - Seite, deren URL ausgegeben werden soll (<b>LetzteSeite</b> oder <b>Produktseite</b>) als <code>String</code>
 	 * @return Die URL mit allen Parametern als <code>String<code>
 	 */
-	public String urlAusSessionHolen(String bereich)
+	public String urlAusSessionHolen(String seite)
 	{
-		return (String) this.session.getAttribute("url"+bereich);		
+		return (String) this.session.getAttribute("url"+seite);		
 	}
 }

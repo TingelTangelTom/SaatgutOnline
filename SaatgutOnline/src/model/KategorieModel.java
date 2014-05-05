@@ -1,27 +1,19 @@
 package model;
 
 /**
- * Die Klasse <code>KategorieModel</code> beinhaltet die Daten einer Kategorie
- * @author Tom
- *
+ * <p>Die Klasse <code>KategorieModel</code> beinhaltet die Daten einer Kategorie.</p>
+ * @author Tom Weigelt
+ * @version 1.0
+ * @since 1.7.0_51
  */
 public class KategorieModel
 {
-	/**
-	 * Id der Kategorie als <code>int</code>
-	 */
 	private int kategorieId;
-	/**
-	 * Name der Kategorie als <code>String</code>
-	 */
 	private String kategorieName;
-	/**
-	 * Eltern-Id der Kategorie als <code>int</code>
-	 */
 	private int elternKategorieId;
 	
 	/**
-	 * Stellt die Id der Kategorie zur Verfuegung
+	 * <p>Stellt die Id der Kategorie zur Verfuegung.</p>
 	 * @return Id der Kategorie als <code>int</code> 
 	 */
 	public int getKategorieId()
@@ -30,7 +22,7 @@ public class KategorieModel
 	}
 	
 	/**
-	 * Setzt die Id der Kategorie
+	 * <p>Setzt die Id der Kategorie.</p>
 	 * @param kategorieId - Id der Kategorie als <code>int</code>
 	 */
 	public void setKategorieId(int kategorieId)
@@ -39,7 +31,7 @@ public class KategorieModel
 	}
 	
 	/**
-	 * Stellt den Namen der Kategorie zur Verfuegung
+	 * <p>Stellt den Namen der Kategorie zur Verfuegung.</p>
 	 * @return Name der Kategorie als <code>String</code> 
 	 */
 	public String getKategorieName()
@@ -48,7 +40,7 @@ public class KategorieModel
 	}
 	
 	/**
-	 * Setzt den Namen der Kategorie
+	 * <p>Setzt den Namen der Kategorie.</p>
 	 * @param kategorieName - Name der Kategorie als <code>String</code>
 	 */
 	public void setKategorieName(String kategorieName)
@@ -57,7 +49,7 @@ public class KategorieModel
 	}
 	
 	/**
-	 * Stellt die Eltern-Id der Kategorie zur Verfuegung
+	 * <p>Stellt die Eltern-Id der Kategorie zur Verfuegung.</p>
 	 * @return Eltern-Id der Kategorie als <code>int</code> 
 	 */
 	public int getElternKategorieId()
@@ -66,7 +58,7 @@ public class KategorieModel
 	}
 	
 	/**
-	 * Setzt die Eltern-Id der Kategorie
+	 * <p>Setzt die Eltern-Id der Kategorie.</p>
 	 * @param elternKategorieId - die Eltern-Id der Kategorie als <code>int</code>
 	 */
 	public void setElternKategorieId(int elternKategorieId)

@@ -8,22 +8,21 @@ import javax.servlet.http.HttpServletResponse;
 import model.KategorieModel;
 
 /**
- * Die Klasse NavigationsbereichView stellt Html-Ausgabe-Bloecke zur Darstellung des Navigationsbereichs zur Verfuegung
+ * <p>Die Klasse <code>NavigationsbereichView</code> stellt Html-Ausgabe-Bloecke zur Darstellung des Navigationsbereichs zur Verfuegung.</p>
  * @author Tom Weigelt
- *
+ * @version 1.0
+ * @since 1.7.0_51 
  */
 public class NavigationsbereichView
 {
-	/**
-	 * Objekt der Klasse <code>PrintWriter</code>
-	 * @see java.io.PrintWriter
-	 */
 	private PrintWriter out;
-	
+
 	/**
-	 * Konstruktor der Klasse <code>NavigationsbereichView</code>
+	 * <p>Konstruktor der Klasse <code>NavigationsbereichView</code>.</p>
+	 * <p>Erzeugt einen <code>PrintWriter</code>.</p>
 	 * @param response - die aktuelle <code>HttpServletResponse</code>
 	 * @see javax.servlet.http.HttpServletResponse
+	 * @see java.io.PrintWriter
 	 */
 	public NavigationsbereichView(HttpServletResponse response)
 	{
@@ -39,7 +38,7 @@ public class NavigationsbereichView
 	}
 
 	/**
-	 * Stellt die Html-Ausgabe fuer den Anfang des Navigationsbereiches zur Verfuegung
+	 * <p>Stellt die Html-Ausgabe fuer den Anfang des Navigationsbereiches zur Verfuegung.</p>
 	 */
 	public void outNavigationsbereichAnfang()
 	{
@@ -47,15 +46,15 @@ public class NavigationsbereichView
 	}
 	
 	/**
-	 * Stellt die Html-Ausgabe fuer das Ende des Navigationsbereiches zur Verfuegung
+	 * <p>Stellt die Html-Ausgabe fuer das Ende des Navigationsbereiches zur Verfuegung</p>
 	 */
 	public void outNavigationsbereichEnde()
 	{
 		this.out.println("</td>\n<td class=\"inhalt\">");
 	}
-	
+
 	/**
-	 * Stellt die Html-Ausgabe fuer den Anfang der Kategorienliste im Navigationsbereich zur Verfuegung
+	 * <p>Stellt die Html-Ausgabe fuer den Anfang der Kategorienliste im Navigationsbereich zur Verfuegung.</p>
 	 */
 	public void outKategorienListeAnfang()
 	{
@@ -63,7 +62,7 @@ public class NavigationsbereichView
 	}
 	
 	/**
-	 * Stellt die Html-Ausgabe fuer das Ende der Kategorienliste im Navigationsbereich zur Verfuegung
+	 * <p>Stellt die Html-Ausgabe fuer das Ende der Kategorienliste im Navigationsbereich zur Verfuegung</p>
 	 */
 	public void outKategorienListeEnde()
 	{
@@ -71,7 +70,7 @@ public class NavigationsbereichView
 	}
 	
 	/**
-	 * Stellt die Html-Ausgabe fuer eine Hauptkategorie in der Kategorienliste des Navigationsbereiches zur Verfuegung
+	 * <p>Stellt die Html-Ausgabe fuer eine Hauptkategorie in der Kategorienliste des Navigationsbereiches zur Verfuegung.</p>
 	 * @param kategorieModel - das Objekt der anzuzeigenden Kategorie als <code>KategorieModel</code>
 	 * @see model.KategorieModel
 	 */
@@ -85,31 +84,9 @@ public class NavigationsbereichView
 				+ "\n</a>");
 		this.out.println("</td>\n</tr>");
 	}
-	
-	/**
-	 * Stellt die Html-Ausgabe fuer eine Unterkategorie in der Kategorienliste des Navigationsbereiches zur Verfuegung
-	 * @param kategorieModel - das Objekt der anzuzeigenden Kategorie als <code>KategorieModel</code>
-	 * @see model.KategorieModel
-	 */
-	public void outUnterKategorieAnzeigen(KategorieModel kategorieModel)
-	{			
-		this.out.println("<tr>\n<td>");
 		
-		//TODO remove next line - format properly in CSS!
-		this.out.println("&nbsp;");
-		
-		this.out.println("</td>\n<td>");
-		this.out.println("<a href=\"/SaatgutOnline/Produktliste?kategorie="
-				+ kategorieModel.getKategorieId()				
-				+ "\">\n"
-				+ kategorieModel.getKategorieName()
-				+ "\n</a>");
-		this.out.println("</td>\n</tr>");
-	}
-	
 	/**
-	 * Stellt die Html-Ausgabe fuer die aktuell gewaehlte Hauptkategorie in der Kategorienliste des Navigationsbereiches zur Verfuegung
-	 * </br>Die aktuelle Kategorie kann per CSS gesondert gestyled werden
+	 * <p>Stellt die Html-Ausgabe fuer die aktuell gewaehlte Hauptkategorie in der Kategorienliste des Navigationsbereiches zur Verfuegung.</p>	 
 	 * @param kategorieModel - das Objekt der anzuzeigenden Kategorie als <code>KategorieModel</code>
 	 * @see model.KategorieModel
 	 */
@@ -125,18 +102,32 @@ public class NavigationsbereichView
 	}
 	
 	/**
-	 * Stellt die Html-Ausgabe fuer die aktuell gewaehlte Unterkategorie in der Kategorienliste des Navigationsbereiches zur Verfuegung
-	 * </br>Die aktuelle Kategorie kann per CSS gesondert gestyled werden
+	 * <p>Stellt die Html-Ausgabe fuer eine Unterkategorie in der Kategorienliste des Navigationsbereiches zur Verfuegung.</p>
+	 * @param kategorieModel - das Objekt der anzuzeigenden Kategorie als <code>KategorieModel</code>
+	 * @see model.KategorieModel
+	 */
+	public void outUnterKategorieAnzeigen(KategorieModel kategorieModel)
+	{			
+		this.out.println("<tr>\n<td>");
+		this.out.println("&nbsp;");
+		this.out.println("</td>\n<td>");
+		this.out.println("<a href=\"/SaatgutOnline/Produktliste?kategorie="
+				+ kategorieModel.getKategorieId()				
+				+ "\">\n"
+				+ kategorieModel.getKategorieName()
+				+ "\n</a>");
+		this.out.println("</td>\n</tr>");
+	}
+	
+	/**
+	 * <p>Stellt die Html-Ausgabe fuer die aktuell gewaehlte Unterkategorie in der Kategorienliste des Navigationsbereiches zur Verfuegung.</p>
 	 * @param kategorieModel - das Objekt der anzuzeigenden Kategorie als <code>KategorieModel</code>
 	 * @see model.KategorieModel
 	 */
 	public void outUnterKategorieAktuellAnzeigen(KategorieModel kategorieModel)
 	{			
 		this.out.println("<tr class=\"navigation_aktuell\">\n<td>");
-		
-		//TODO remove next line - format properly in CSS!
-		this.out.println("&nbsp;");
-		
+		this.out.println("&nbsp;");		
 		this.out.println("</td>\n<td>");				
 		this.out.println("<a href=\"/SaatgutOnline/Produktliste?kategorie="
 				+ kategorieModel.getKategorieId()				

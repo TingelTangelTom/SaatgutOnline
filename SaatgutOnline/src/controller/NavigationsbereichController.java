@@ -12,89 +12,63 @@ import model.KategorieModel;
 import view.NavigationsbereichView;
 
 /**
- * Die Klasse Navigationsbereich stellt Kontrollstrukturen fuer die Darstellung
- * und Organisation des Navigationsbereichs zur Verfuegung
+ * <p>Die Klasse <code>NavigationsbereichController</code> stellt Kontrollstrukturen zur
+ * Darstellung und Organisation des Navigationsbereichs zur Verfuegung.</p>
+ * 
  * @author Tom Weigelt
- *
+ * @version 1.0
+ * @since 1.7.0_51
  */
 public class NavigationsbereichController
 {
-	/**
-	 * Objekt der Klasse <code>NavigationsbereichView</class>
-	 * @see view.NavigationsbereichView
-	 */
 	private NavigationsbereichView navigationsbereichView;
-	
-	/**
-	 * aktuelle <code>HttpSession</code>
-	 * @see javax.servlet.http.HttpSession
-	 */
 	private HttpSession session;
-	
-	/**
-	 * Objekt der Klasse <code>HttpServletRequest</code>
-	 * @see javax.servlet.http.HttpServletRequest
-	 */
 	private HttpServletRequest request;		
-	
-	/**
-	 * Objekt der Klasse <code>KategorieModel</code>
-	 * @see model.KategorieModel
-	 */
 	private KategorieModel kategorieModel;
-	
-	/**
-	 * Sammlung von Kategorie-Ids der geklickten Kategorien als <code>ArrayList</code> zur Ablage in der <code>HttpSession</code>
-	 */
 	private ArrayList<Integer> geklickteKategorienSession;
-	
-	/**
-	 * aktuell gelickte Kategorie als <code>int</code> zur Ablage in der Session
-	 */
 	private int aktuelleKategorieSession;
-	
-	/**
-	 * Sammlung des Formats <code>ArrayList</code>
-	 * </br>Enthaelt Objekte der Klasse <code>KategorieModel</code>
-	 * @see model.KategorieModel
-	 */
 	private ArrayList<KategorieModel> kategorienArrayList = new ArrayList<KategorieModel>();
 
-	//TODO ausGet checken!
 	/**
-	 * Konstruktor der Klasse <code>NavigationsbereichController</code>
+	 * <p>Konstruktor der Klasse <code>NavigationsbereichController</code></p>
+	 * <p>Die aufgerufene Methode <code>geklickteKategorienAktualisieren(ausGet)</code> organisiert eine
+	 * <code>ArrayList</code>, in der die IDs der geklickten Kategorien beim ersten Klick
+	 * eingetragen und beim zweiten Klick wieder entfernt werden. Findet sich eine Hauptkategorie
+	 * in dieser Liste, so werden in der Kategorien-Liste auch ihre Unterkategorien angezeigt.
+	 * </br></br>Der <code>boolean</code> <i>ausGet</i> ist <b>true</b>, wenn der <code>NavigationsbereichController</code>
+	 * aus der <code>doGet()</code>-Methode des <code>NavigationsbereichServlet</code> instanziert wird und
+	 * <b>false</b>, wenn er aus der <code>doPost()</code>-Methode instanziert wird.
+	 * </br>Kategorie-IDs werden nur in der Liste eingetragen bzw. entfernt, wenn <code>doGet</code> <b>true</b> ist.</p>
 	 * @param request - der aktuelle <code>HttpServletRequest</code>
 	 * @param response - die aktuelle <code>HttpServletResponse</code>
 	 * @param ausGet - <code>boolean</code>
 	 * @see javax.servlet.http.HttpServletRequest
 	 * @see javax.servlet.http.HttpServletResponse
+	 * @see servlets.NavigationsbereichServlet
 	 */
 	public NavigationsbereichController(HttpServletRequest request, HttpServletResponse response, boolean ausGet)
 	{
 		this.request = request;
 		this.session = request.getSession();
 		this.navigationsbereichView = new NavigationsbereichView(response);
-		this.kategorienArrayList = getKategorienAusDB();
+		this.kategorienArrayList = kategorienAusDbHolen();
 		this.geklickteKategorienAktualisieren(ausGet);
 	}
 
 	/**
-	 * Gibt die Darstellung fuer den Navigationsbereich aus
+	 * <p>Formatiert durch den Aufruf von Methoden der Klasse
+	 * <code>NavigationsbereichView</code> die Darstellung des Navigationsbereichs und gibt diese aus.</p>
+	 * @see view.NavigationsbereichView
 	 */
 	public void navigationsbereichAnzeigen()
 	{
 		this.navigationsbereichView.outNavigationsbereichAnfang();
 		this.navigationsbereichView.outKategorienListeAnfang();
-		
 		this.kategorienListeAnzeigen();
-
 		this.navigationsbereichView.outKategorienListeEnde();
 		this.navigationsbereichView.outNavigationsbereichEnde();
 	}
 	
-	/**
-	 * Formatiert die Darstellung fuer die Kategorienliste im Kopfbereich und gibt diese aus
-	 */
 	private void kategorienListeAnzeigen()
 	{			
 		int hauptKategorieId = 0;
@@ -105,7 +79,6 @@ public class NavigationsbereichController
 			
 			if(this.kategorieModel.getElternKategorieId() == 0)
 			{
-
 				if(this.aktuelleKategorieSession == this.kategorieModel.getKategorieId())
 				{
 					this.navigationsbereichView.outHauptKategorieAktuellAnzeigen(kategorieModel);
@@ -142,19 +115,10 @@ public class NavigationsbereichController
 			}			
 		}		
 	}
-	
-	/**
-	 * Aktualisiert die Sammlung geklickter Kategorien in der <code>HttpSession</code>
-	 * @param ausGet - boolean
-	 */
+
 	@SuppressWarnings("unchecked")
 	private void geklickteKategorienAktualisieren(boolean ausGet)
 	{				
-//		UrlController urlController = new UrlController(this.request);
-//		String urlAktuelleSeite = urlController.getAktuelleSeite();
-//		
-		
-		
 		if(this.session.getAttribute("geklickteKategorien") != null)
 		{
 			this.geklickteKategorienSession = (ArrayList<Integer>) this.session.getAttribute("geklickteKategorien");			
@@ -173,12 +137,13 @@ public class NavigationsbereichController
 			this.aktuelleKategorieSession = 0;			
 		}
 		
+		/*
+		 *  <ausGet> ist 'true', wenn die Instanz dieser Klasse in der doGet()-Methode des zueghoerigen
+		 *  Servlets instanziert wurde, sonst 'false'
+		 */
 		
-		//FIXME Aufklapp-BUG
-		if(		ausGet	
-//				&& (urlAktuelleSeite.contains("/Produkt"))
-				&& (this.request.getParameter("kategorie") != null)				
-				&& (this.request.getParameter("p_anzeige") == null))
+		if(	ausGet	
+			&& (this.request.getParameter("kategorie") != null))
 		{			
 			Integer geklickteKategorie = Integer.parseInt(this.request.getParameter("kategorie"));
 			this.aktuelleKategorieSession = geklickteKategorie;
@@ -195,25 +160,9 @@ public class NavigationsbereichController
 			this.session.setAttribute("geklickteKategorien", this.geklickteKategorienSession);
 			this.session.setAttribute("aktuelleKategorie", this.aktuelleKategorieSession);
 		}
-//		else
-//		{
-//			if((this.request.getParameter("kategorie") != null))
-//			{
-//				this.aktuelleKategorieSession = Integer.parseInt(this.request.getParameter("kategorie"));
-//				this.session.setAttribute("aktuelleKategorie", this.aktuelleKategorieSession);
-//			}			
-//		}
-		
-		
 	}
 	
-
-	/**
-	 * Holt die verfuegbaren <code>KategorieModel</code> aus der Datenbank und legt eine Sammlung vom Typ <code>ArrayList</code> an.
-	 * @return ArrayList - beinhaltet alle verfuegbaren <code>KategorieModel</code>
-	 * @see model.KategorieModel
-	 */
-	private ArrayList<KategorieModel> getKategorienAusDB()
+	private ArrayList<KategorieModel> kategorienAusDbHolen()
 	{
 			int spracheId = (int) this.session.getAttribute("spracheId");
 						
