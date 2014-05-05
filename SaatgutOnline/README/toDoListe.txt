@@ -41,15 +41,20 @@ Anja
 	- FERTIG : AGB (Ausgabe könnte noch Formatiert werden (HTML in Datenbank))
 	- FERTIG : Datenschutz
 	- FERTIG : Copyright
-	- ?? Versandkosten (Versand & Zahlung)
-	- ?? Sitemap
+	- FERTIG : Versandkosten (Versand & Zahlung)
+	- NO : ?? Sitemap
 - FERTIG : Alle Seitenquelltexte(HTML) mit /n versehen !!
 	- (Bis auf den Kram in der DB!)
 - FERTIG : Variablen : Müssen noch durchgesehen und aktualisiert werden! (private)
 - FERTIG : In HTML alle ' durch escapte " ersetzen (z.b. bei action)
-- KRIEG ICH NICH HIN : Internationalisierung
-- Klassen(Objekt)Variablen mit this aufrufen
-- javadoc : FERTIG (mit vorbehalt :D )
+- FERTIG : Internationalisierung Bis auf Fussleiste
+	- about | terms | shipping & payment | privacy | contact
+Fusszeile : Team einfügen :D
+- MACH ICH NICHT : Klassen(Objekt)Variablen mit this aufrufen
+- AKTUALISIEREN!!! : javadoc : FERTIG (mit vorbehalt :D )
+- Dokumentation
+ - Gantt (in Project erst Arbeitszeit eintragen!)
+ - Datenbank (Christof fragen)
 
 
 
