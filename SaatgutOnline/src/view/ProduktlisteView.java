@@ -178,7 +178,7 @@ public class ProduktlisteView {
 	    	+ "<td class=\"produktliste preis\">" + this.htmlAusgabe.outPreisformat(produktModel.getPreisBrutto()) + "</td>\n"
 	    	+ "</tr>\n"
 	    	+ "<tr>\n"
-    		+ "<td class=\"produktliste bestellnummer\">" + this.resourceBundle.getString("BESTELLNUMMER") + " " + produktModel.getBestellnummer() + "</td><td class=\"produktliste preisverordnung\">" + this.htmlAusgabe.outPreisverordnung(this.resourceBundle.getString("VERSANDKOSTEN"), produktModel.getSteuerSatz()) + "</td>\n"
+    		+ "<td class=\"produktliste produktnummer\">" + this.resourceBundle.getString("PRODUKTNUMMER") + " " + produktModel.getProduktnummer() + "</td><td class=\"produktliste preisverordnung\">" + this.htmlAusgabe.outPreisverordnung(this.resourceBundle.getString("VERSANDKOSTEN"), produktModel.getSteuerSatz()) + "</td>\n"
     		+ "</tr>\n"
     		+ "<tr>\n"
     		+ "<td class=\"produktliste beschreibung\" colspan=\"2\">" + this.htmlAusgabe.outKurzeProduktbeschreibung(this.resourceBundle.getString("MEHRANZEIGEN"), produktModel.getBeschreibung(), 300, produktModel.getId()) +  "</td>\n"

@@ -8,7 +8,7 @@ import java.util.HashMap;
 public class ProduktModel {
 	private int id;
 	private int kategorieId;
-	private String bestellnummer;
+	private String produktnummer;
 	private int bestand;
 	private String name;
 	private String beschreibung;
@@ -39,12 +39,12 @@ public class ProduktModel {
 		this.kategorieId = kategorieId;
 	}
 	
-	public String getBestellnummer() {
-		return bestellnummer;
+	public String getProduktnummer() {
+		return produktnummer;
 	}
 	
-	public void setBestellnummer(String bestellnummer) {
-		this.bestellnummer = bestellnummer;
+	public void setProduktnummer(String produktnummer) {
+		this.produktnummer = produktnummer;
 	}
 	
 	public int getBestand() {

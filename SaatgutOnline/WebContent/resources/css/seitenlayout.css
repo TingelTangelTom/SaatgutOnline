@@ -161,7 +161,7 @@ vertical-align: baseline;
 	width: 65%;
 }
 
-.produktliste td.bestellnummer {
+.produktliste td.produktnummer {
 	font-size:10px;
   	font-weight:normal;
   	text-align: left;
@@ -262,7 +262,7 @@ vertical-align: baseline;
 	width: 65%;
 }
 
-.produktinfo td.bestellnummer {
+.produktinfo td.produktnummer {
 	font-size:10px;
   	font-weight:normal;
   	text-align: left;

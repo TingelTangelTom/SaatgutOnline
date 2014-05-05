@@ -173,7 +173,7 @@ public class SucheController {
 		int kategorie = Integer.parseInt(request.getParameter("kategorie"));
 		String name = request.getParameter("name");
 		String beschreibung = request.getParameter("beschreibung");
-		String bestellnummer = request.getParameter("artikelnummer");
+		String produktnummer = request.getParameter("produktnummer");
 		ArrayList<Integer> produkte_ids = new ArrayList<>();
 		int preis_von = 0;
 		int preis_bis = 0;
@@ -206,8 +206,8 @@ public class SucheController {
 						if(!beschreibung.equals("")) {
 							produkt_query += "AND MATCH (pb.produkt_beschreibung) AGAINST ('" + beschreibung + "') ";
 						}
-						if(!bestellnummer.equals("")) {
-							produkt_query += "AND p.produkt_bestellnummer = '" + bestellnummer + "' ";
+						if(!produktnummer.equals("")) {
+							produkt_query += "AND p.produkt_bestellnummer = '" + produktnummer + "' ";
 						}
 						if(preis_von >= 0 && preis_bis > 0 && preis_von < preis_bis) {
 							produkt_query += "AND p.produkt_preis BETWEEN " + preis_von + " AND " + preis_bis;
