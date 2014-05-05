@@ -67,6 +67,9 @@ public class NavigationsbereichView
 		this.out.println("</td>\n<td class=\"inhalt\">");
 	}
 	
+	/**
+	 * <p>Stellt die internationalisierte Html-Ausgabe fuer den Angebote-Link zur Verfuegung</p>
+	 */
 	public void outAngebote()
 	{
 		this.out.println("<table>");
@@ -81,6 +84,9 @@ public class NavigationsbereichView
 		this.out.println("</table>");
 	}
 	
+	/**
+	 * <p>Stellt die internationalisierte Html-Ausgabe fuer den akteull gewaehlten Angebote-Link zur Verfuegung</p>
+	 */
 	public void outAngeboteAktuell()
 	{
 		this.out.println("<table>");
