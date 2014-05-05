@@ -17,6 +17,9 @@ public class ProduktModel {
 	private int angesehen;
 	private double preisNetto;
 	private double preisBrutto;
+	private double preisAngebotNetto;
+	private double preisAngebotBrutto;
+	private Date gueltig_bis;
 	private double vpe;
 	private double steuerSatz;
 	private double steuerBetrag;
@@ -109,6 +112,30 @@ public class ProduktModel {
 	
 	public void setPreisBrutto(double preisBrutto) {
 		this.preisBrutto = preisBrutto;
+	}
+	
+	public double getPreisAngebotNetto() {
+		return preisAngebotNetto;
+	}
+
+	public void setPreisAngebotNetto(double preisAngebotNetto) {
+		this.preisAngebotNetto = preisAngebotNetto;
+	}
+
+	public double getPreisAngebotBrutto() {
+		return preisAngebotBrutto;
+	}
+
+	public void setPreisAngebotBrutto(double preisAngebotBrutto) {
+		this.preisAngebotBrutto = preisAngebotBrutto;
+	}
+
+	public Date getGueltig_bis() {
+		return gueltig_bis;
+	}
+
+	public void setGueltig_bis(Date gueltig_bis) {
+		this.gueltig_bis = gueltig_bis;
 	}
 	
 	public double getVpe() {

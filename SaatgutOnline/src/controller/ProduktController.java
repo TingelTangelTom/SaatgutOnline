@@ -82,6 +82,7 @@ public class ProduktController {
 				this.produktModel.setHinzugefeugt(resultset.getDate(10));
 				this.produktModel.setGeaendert(resultset.getDate(11));
 				this.produktModel.setProduktnummer(resultset.getString(12));
+				
 			}	
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -89,6 +90,7 @@ public class ProduktController {
 		
 		getProduktMerkmale(id);
 		getSteuerinformationen(id);
+		getAngebot(id);
 
 		return this.produktModel;
 	}	
@@ -185,6 +187,31 @@ public class ProduktController {
 		}
 		
 		this.produktModel.setMerkmale(merkmale);
+	}
+	
+	private void getAngebot(int id) {
+		try {
+			String count_query = "SELECT COUNT(a.produkt_id) FROM angebot AS a LEFT JOIN produkt AS p ON p.produkt_id = a.produkt_id WHERE a.produkt_id = '" + id + "' AND a.gueltig_bis > now()";
+			String produkt_query = "SELECT a.angebotspreis, a.gueltig_bis FROM angebot AS a LEFT JOIN produkt AS p ON p.produkt_id = a.produkt_id WHERE a.produkt_id = '" + id + "' AND a.gueltig_bis > now()";
+			
+			ResultSet resultset_count = DatenbankController.sendeSqlRequest(count_query);
+			
+			if (resultset_count!= null) {
+				
+				ResultSet resultset_produkt = DatenbankController.sendeSqlRequest(produkt_query);
+				
+				if(resultset_produkt.next()){
+					this.produktModel.setPreisAngebotNetto(resultset_produkt.getDouble(1));
+					this.produktModel.setGueltig_bis(resultset_produkt.getDate(2));
+				}
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		this.produktModel.setPreisAngebotBrutto(runden(this.produktModel.getPreisAngebotNetto() * this.produktModel.getSteuerSatz() / 100 + this.produktModel.getPreisAngebotNetto(), 2));
+		
 	}
 	
 
@@ -293,14 +320,14 @@ public class ProduktController {
 	 * 
 	 */
 
-	public void getSortierung(HttpServletRequest request) {
+	public void setSortierung(HttpServletRequest request) {
 		HttpSession session = ((HttpServletRequest) request).getSession();
 		System.out.println("existiert die Session?");
 
-		if(request.getParameter("sortierung") != null) {
-			System.out.println("----> Sortierung ist ungleich null");
+		if(request.getParameter("sn") != null) {
+			System.out.println("----> Sortierung ist ungleich null - Request ist " + request.getParameter("sn") + " und Session ist " + (String)session.getAttribute("sortierung_sortierspalte_kuerzel"));
 			//  Wenn sortierung_sortierspalte bereits auf demselben Wert steht, wechselt die Sortierreihenfolge
-			if(request.getParameter("sortierung").equals((String)session.getAttribute("sortierung_sortierspalte_kuerzel"))) {
+			if(request.getParameter("sn").equals((String)session.getAttribute("sortierung_sortierspalte_kuerzel"))) {
 				System.out.println("gleicher Wert");
 				if(session.getAttribute("sortierung_reihenfolge").equals("DESC")) {
 					System.out.println("reihenfolge war gleich");
@@ -310,39 +337,23 @@ public class ProduktController {
 					session.setAttribute("sortierung_reihenfolge", "DESC");					
 				}
 				
+			} else {
+				switch (request.getParameter("sn")) {
+		          case "pn":
+		        	  session.setAttribute("sortierung_sortierspalte", "pb.produkt_name");
+		        	  session.setAttribute("sortierung_sortierspalte_kuerzel", "pn");
+		            break;
+		          case "pp":
+		        	  session.setAttribute("sortierung_sortierspalte", "p.produkt_preis");	
+		        	  session.setAttribute("sortierung_sortierspalte_kuerzel", "pp");
+		            break;
+		          default:
+		        	  session.setAttribute("sortierung_sortierspalte", "pb.produkt_name");
+		        	  session.setAttribute("sortierung_sortierspalte_kuerzel", "pn");
+		        	break;	
+		        }
 			}
-			
-			switch (request.getParameter("sortierung")) {
-	          case "pn":
-	        	  session.setAttribute("sortierung_sortierspalte", "pb.produkt_name");
-	        	  session.setAttribute("sortierung_sortierspalte_kuerzel", "pn");
-	            break;
-	          case "pk":
-	        	  session.setAttribute("sortierung_sortierspalte", "p.kategorie");
-	        	  session.setAttribute("sortierung_sortierspalte_kuerzel", "pk");
-	            break;
-	          case "pb":
-	        	  session.setAttribute("sortierung_sortierspalte", "p.produkt_bestand");
-	        	  session.setAttribute("sortierung_sortierspalte_kuerzel", "pb");
-	            break;
-	          case "pa":
-	        	  session.setAttribute("sortierung_sortierspalte", "p.angesehen");
-	        	  session.setAttribute("sortierung_sortierspalte_kuerzel", "pa");
-	            break;
-	          case "pp":
-	        	  session.setAttribute("sortierung_sortierspalte", "p.produkt_preis");	
-	        	  session.setAttribute("sortierung_sortierspalte_kuerzel", "pp");
-	            break;
-	          case "pd":
-	        	  session.setAttribute("sortierung_sortierspalte", "p.produkt_datum_hinzugefuegt");
-	        	  session.setAttribute("sortierung_sortierspalte_kuerzel", "pd");
-	            break;
-	          default:
-	        	  session.setAttribute("sortierung_sortierspalte", "pb.produkt_name");
-	        	  session.setAttribute("sortierung_sortierspalte_kuerzel", "pn");
-	        	break;	
-	        }
-			
+
 		}
 
 	}

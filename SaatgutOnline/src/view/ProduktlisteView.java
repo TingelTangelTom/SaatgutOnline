@@ -12,6 +12,7 @@ import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import sun.security.util.Length;
 import model.ProduktModel;
 import controller.ProduktController;
 import controller.SucheController;
@@ -25,6 +26,8 @@ public class ProduktlisteView {
 	private ArrayList<ProduktModel> produktliste;
 	private String kategorie;
 	private static int warenkorbmenge;
+	private HttpSession session;
+
 	
 	public ProduktlisteView(HttpServletRequest request) {
 		
@@ -33,27 +36,19 @@ public class ProduktlisteView {
 		this.htmlAusgabe = new HtmlAusgabe(request);
 		this.produktliste = new ArrayList<>();
 		this.kategorie = request.getParameter("kategorie");
-
-		HttpSession session = request.getSession();
+		this.session = request.getSession();
+		
 		Locale locale = (Locale)session.getAttribute("sprache");
 		this.resourceBundle = PropertyResourceBundle.getBundle("I18N." + locale.getLanguage() + "." + getClass().getSimpleName(), locale);
 		
 	}
-	
-	/**
-	 * Diese Methode gibt einen <code>String</code> zurück , welcher den HTML-Code in der <code>ProduktlisteServlet</code> ausgibt.
-	 * 
-	 * @return <code>String</code> - HTML-Code
-	 * 
-	 * @see servlet.ProduktlisteServlet
-	 * 
-	 */
-	
-	public String anzeigenProduktliste(HttpServletRequest request) {	
+
+	public String anzeigenProduktliste(HttpServletRequest request) {
+
 		//TODO Internationalisierung einbauen
 		HttpSession session = ((HttpServletRequest) request).getSession();
 		String suchparameter = request.getParameter("suchbegriff");
-		this.produktController.getSortierung(request);
+		this.produktController.setSortierung(request);
 		this.output = "";
 		
 		// Standardmenge, die im Textfeld Menge eingetragen wird
@@ -64,7 +59,9 @@ public class ProduktlisteView {
 		
 		if(request.getParameter("suchen") != null) {
 			suchen = request.getParameter("suchen");
-		}		
+		}
+		
+		String suchbegriff = request.getParameter("suchen");
 		
 		// Festlegung, ob die erweiterte Suche angezeigt werden soll
 		String erweitertesuche = "false";
@@ -89,15 +86,10 @@ public class ProduktlisteView {
 		
 		}
 		
-		//TODO syso entfernen
-		String p_anzeige = session.getAttribute("sortierung_sortierspalte_kuerzel") + "," + session.getAttribute("sortierung_produktanzahl") + "," + session.getAttribute("sortierung_limit_von");
-		System.out.println("XxXxXXxxX--------------->" + p_anzeige);
+		
 		
 		// Laden der Kategorien für das Select-Feld
 		HashMap<Integer, String> kategorien = new HashMap<Integer, String>(this.produktController.getAlleKategorien());
-		
-		//TODO syso entfernen
-		System.out.println("-----> Kategorie: " + this.kategorie);
 		
 		// Ausgabe der Produktliste
 		this.output += "<table class=\"produktliste\">\n"
@@ -137,7 +129,6 @@ public class ProduktlisteView {
 					+"<td class=\"produktliste sucheleerspalte\">&nbsp;</td>\n"
 					+"<td class=\"produktliste suchebreite\">" + this.resourceBundle.getString("PREIS_BIS") + "</td>\n"
 					+"<td class=\"produktliste suchebreite\"><input class=\"festeSelectBoxBreite\" type=\"number\" name=\"preis_bis\" id=6>"
-					+ "<input type=\"hidden\" name=\"p_anzeige\" id=\"p_anzeige\" value=\"" + p_anzeige +"\">"
 					+ "<input type=\"hidden\" name=\"erweitertesuche\" id=\"erweitertesuche\" value=\"true\">"
 					+ "<input type=\"hidden\" name=\"suchen\" id=\"suchen\" value=\"true\">"
 					+ "</td>\n"
@@ -156,25 +147,44 @@ public class ProduktlisteView {
 					+ "<td class=\"produktliste sortierung\">";
 		
 		if(erweitertesuche.equals("true")) {
-			this.output += "<a href=\"/SaatgutOnline/Produktliste?erweitertesuche=false&suchen=false\">" + this.resourceBundle.getString("ERWEITERTESUCHE_WAHL_AUS") + "</a>  ";
+			if(suchen.equals("true")) {
+				this.output += "<a href=\"/SaatgutOnline/Produktliste?" + this.htmlAusgabe.outParameterLink(request, false, true, suchbegriff) + "\">" + this.resourceBundle.getString("ERWEITERTESUCHE_WAHL_AUS") + "</a>  ";
+			} else {
+				this.output += "<a href=\"/SaatgutOnline/Produktliste?" + this.htmlAusgabe.outParameterLink(request, false, false, suchbegriff) + "\">" + this.resourceBundle.getString("ERWEITERTESUCHE_WAHL_AUS") + "</a>  ";				
+			}
 		} else {
-			this.output += "<a href=\"/SaatgutOnline/Produktliste?erweitertesuche=true&suchen=false\">" + this.resourceBundle.getString("ERWEITERTESUCHE_WAHL_AN") + "</a>  ";
+			if(suchen.equals("true")) {
+				this.output += "<a href=\"/SaatgutOnline/Produktliste?" + this.htmlAusgabe.outParameterLink(request, true, true, suchbegriff) + "\">" + this.resourceBundle.getString("ERWEITERTESUCHE_WAHL_AN") + "</a>  ";
+			} else {
+				this.output += "<a href=\"/SaatgutOnline/Produktliste?" + this.htmlAusgabe.outParameterLink(request, true, false, suchbegriff) + "\">" + this.resourceBundle.getString("ERWEITERTESUCHE_WAHL_AN") + "</a>  ";
+			}	
 		}
 		
 		this.output += "" + this.resourceBundle.getString("SORTIEREN") + ": " + this.resourceBundle.getString("NAME") + " "
-				+ "<a href=\"/SaatgutOnline/Produktliste?sortierung=pn\"><img src=\"resources/bilder/icons/pfeil_hoch_runter.gif\" width=\"5\" height=\"10\" border=\"0\" alt=\"Sortierung\"></a> | "
+				+ "<a href=\"/SaatgutOnline/Produktliste?" + this.htmlAusgabe.outParameterLink(request, "pn") + "\"><img src=\"resources/bilder/icons/pfeil_hoch_runter.gif\" width=\"5\" height=\"10\" border=\"0\" alt=\"Sortierung\"></a> | "
 				+ " " + this.resourceBundle.getString("PREIS") + " "
-				+ "<a href=\"/SaatgutOnline/Produktliste?sortierung=pp\"><img src=\"resources/bilder/icons/pfeil_hoch_runter.gif\" width=\"5\" height=\"10\" border=\"0\" alt=\"Sortierung\"></a>"
+				+ "<a href=\"/SaatgutOnline/Produktliste?" + this.htmlAusgabe.outParameterLink(request, "pp") + "\"><img src=\"resources/bilder/icons/pfeil_hoch_runter.gif\" width=\"5\" height=\"10\" border=\"0\" alt=\"Sortierung\"></a>"
 				+ "</td>\n</tr>\n"
 				+ "<tr>\n<td colspan=\"2\" style=\"background-image:url(resources/bilder/icons/trennlinie.gif);height: 2px; background-repeat:repeat-x;\">&nbsp;</td>\n</tr>\n";
 
 		for (int i = 0; i < this.produktliste.size(); i++) {
 			ProduktModel produktModel = this.produktliste.get(i);
+			String bruttopreis;
+			String angebot = "";
+			if(produktModel.getPreisBrutto() > produktModel.getPreisAngebotBrutto() && produktModel.getPreisAngebotBrutto() > 0) {
+				bruttopreis =  this.htmlAusgabe.outPreisformat(produktModel.getPreisAngebotBrutto()) + " <span style=\"color: red;\"><s>" + this.htmlAusgabe.outPreisformat(produktModel.getPreisBrutto()) + "</s></span>";
+			} else {
+				bruttopreis = this.htmlAusgabe.outPreisformat(produktModel.getPreisBrutto());
+			}
 			this.output += "<tr>\n<td class=\"produktliste listenprodukt\" colspan=\"2\"><table class=\"produktliste\">\n"
 			+ "<tr>\n"
 			+ "<td class=\"produktliste bild\" rowspan=\"4\"><img src=\"resources/bilder/phoenix_canariensis.jpg\" width=\"100\" height=\"100\" alt=\"Phoenix Canariensis\"></td>\n"
-	    	+ "<td class=\"produktliste titel\">" + htmlAusgabe.outLinkProduktinfo(produktModel.getName(), produktModel.getId()) + "</td>\n"
-	    	+ "<td class=\"produktliste preis\">" + this.htmlAusgabe.outPreisformat(produktModel.getPreisBrutto()) + this.htmlAusgabe.outPreisformatEnglischerZusatz(produktModel.getPreisBrutto()) + "</td>\n"
+	    	+ "<td class=\"produktliste titel\">";
+			if(produktModel.getPreisBrutto() > produktModel.getPreisAngebotBrutto() && produktModel.getPreisAngebotBrutto() > 0) {
+				angebot = "<span style=\"color: red;\"> Angebot</span>";
+			}
+			this.output += htmlAusgabe.outLinkProduktinfo(produktModel.getName(), produktModel.getId()) + " " + angebot + "</td>\n"
+	    	+ "<td class=\"produktliste preis\">" + bruttopreis + this.htmlAusgabe.outPreisformatEnglischerZusatz(produktModel.getPreisBrutto()) + "</td>\n"
 	    	+ "</tr>\n"
 	    	+ "<tr>\n"
     		+ "<td class=\"produktliste produktnummer\">" + this.resourceBundle.getString("PRODUKTNUMMER") + " " + produktModel.getProduktnummer() + "</td><td class=\"produktliste preisverordnung\">" + this.htmlAusgabe.outPreisverordnung(this.resourceBundle.getString("VERSANDKOSTEN"), produktModel.getSteuerSatz()) + "</td>\n"

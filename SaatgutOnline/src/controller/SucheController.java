@@ -192,7 +192,7 @@ public class SucheController {
 		String produkt_query;
 		ArrayList<ProduktModel> produkte = new ArrayList<>();
 		
-		produkt_query = "SELECT p.produkt_id "
+		produkt_query = "SELECT DISTINCT p.produkt_id "
 						+ "FROM produkt AS p "
 						+ "INNER JOIN produkt_beschreibung AS pb ON p.produkt_id = pb.produkt_id "
 						+ "INNER JOIN kategorie_beschreibung AS kb ON p.kategorie_id = kb.kategorie_id "
@@ -216,7 +216,7 @@ public class SucheController {
 						+ "LIMIT " + session.getAttribute("sortierung_limit_von") + "," + session.getAttribute("sortierung_produktanzahl") + "";
 
 
-		System.out.println(produkt_query);
+		System.out.println("SUCHE_QUERY ---->" + produkt_query);
 
 		try {
 			
@@ -224,21 +224,21 @@ public class SucheController {
 
 			while(produkt_resultset.next()){
 				
-				produkte_ids.add(produkt_resultset.getInt(1));
-							
+				//produkte_ids.add(produkt_resultset.getInt(1));
+				produkte.add(this.produktController.getProdukt(produkt_resultset.getInt(1)));			
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+		/*
 	    HashSet<Integer> hashSet = new HashSet<Integer>(produkte_ids);
 	    produkte_ids.clear();
 	    produkte_ids.addAll(hashSet);
 		
 		for(Integer id : produkte_ids) {
-			produkte.add(this.produktController.getProdukt(id));
+			
 		}
-		
+		*/
 		
 		//produkte.add(this.produktController.getProdukt(produkt_resultset.getInt(1)));
 	

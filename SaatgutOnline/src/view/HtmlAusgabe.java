@@ -73,9 +73,9 @@ public class HtmlAusgabe extends HttpServlet{
 		}
 		
 		return englischerZusatz;
-	}
+	}	
 	
-	
+
 	
 	/**
 	 * 
@@ -94,7 +94,7 @@ public class HtmlAusgabe extends HttpServlet{
 		String prozent = prozentFormat.format(mwst / 100);
 		ResourceBundle resourceBundle = PropertyResourceBundle.getBundle("I18N." + this.locale.getLanguage() + ".ProduktinfoView", this.locale); // Pfad muss noch angepasst werden
 		
-		return MessageFormat.format(resourceBundle.getString("PREISTEXT"), prozent) + " <a href=\"/SaatgutOnline/Versandkosten\"><b>" + versandkosten_text + "</b></a>";
+		return MessageFormat.format(resourceBundle.getString("PREISTEXT"), prozent) + " <a href=\"/SaatgutOnline/VersandInfo\"><b>" + versandkosten_text + "</b></a>";
 		
 	}
 	
@@ -138,6 +138,29 @@ public class HtmlAusgabe extends HttpServlet{
 	public String outLinkProduktinfo (String linkString, int produkt_id) {
 		
 		return "<a href=\"/SaatgutOnline/Produktinfo?produkt=" + produkt_id + "\">" + linkString + "</a>";
+	}
+	
+	public String outParameterLink(HttpServletRequest request, Boolean erweitertesuche, Boolean suchen, String suchbegriff) {
+
+		if(suchen) {
+			return "kategorie=" + session.getAttribute("aktuelleKategorie") + "&erweitertesuche=" + erweitertesuche + "&suchen=" + suchen + "&suchbegriff=" + suchbegriff + "&as=" + session.getAttribute("sortierung_reihenfolge") + "&sn=" + session.getAttribute("sortierung_sortierspalte_kuerzel") + "&beschreibung=" + request.getParameter("beschreibung") + "&preis_von=" + request.getParameter("preis_von") + "&name=" + request.getParameter("name") + "&produktnummer=" + request.getParameter("produktnummer") + "&preis_bis=" + request.getParameter("preis_bis");
+		} else {
+			return "kategorie=" + session.getAttribute("aktuelleKategorie") + "&erweitertesuche=" + erweitertesuche + "&suchen=" + suchen + "&suchbegriff=" + suchbegriff + "&as=" + session.getAttribute("sortierung_reihenfolge") + "&sn=" + session.getAttribute("sortierung_sortierspalte_kuerzel");			
+		}
+	}	
+	
+	public String outParameterLink(HttpServletRequest request, String sortierspalte) {
+		
+		if(request.getParameter("suchen") != null) {
+			if(request.getParameter("suchen").equalsIgnoreCase("true")) {
+				return "kategorie=" + session.getAttribute("aktuelleKategorie") + "&erweitertesuche=" + request.getParameter("erweitertesuche") + "&suchen=" + request.getParameter("suchen") + "&suchbegriff=&as=" + session.getAttribute("sortierung_reihenfolge") + "&sn=" + sortierspalte + "&beschreibung=" + request.getParameter("beschreibung") + "&preis_von=" + request.getParameter("preis_von") + "&name=" + request.getParameter("name") + "&produktnummer=" + request.getParameter("produktnummer") + "&preis_bis=" + request.getParameter("preis_bis");
+			} else {
+				return "kategorie=" + session.getAttribute("aktuelleKategorie") + "&erweitertesuche=" + session.getAttribute("erweitertesuche") + "&suchen=" + session.getAttribute("suchen") + "&suchbegriff=&as=" + session.getAttribute("sortierung_reihenfolge") + "&sn=" + sortierspalte;
+			}
+		} else {
+			return "kategorie=" + session.getAttribute("aktuelleKategorie") + "&erweitertesuche=" + session.getAttribute("erweitertesuche") + "&suchen=" + session.getAttribute("suchen") + "&suchbegriff=&as=" + session.getAttribute("sortierung_reihenfolge") + "&sn=" + sortierspalte;
+		}
+
 	}
 
 }
