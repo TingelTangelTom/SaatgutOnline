@@ -13,6 +13,9 @@ import controller.ImpressumController;
 
 /**
  * Servlet implementation class ImpressumServlet
+ * <p>Inkludiert Kopfbereich, Inhalt und Fussbereich.</p>
+ * <p>Ruft den <code>ImpressumController</code> auf.</p>
+ * 
  */
 @WebServlet(description = "Impressum", urlPatterns = { "/Impressum" })
 public class ImpressumServlet extends HttpServlet {

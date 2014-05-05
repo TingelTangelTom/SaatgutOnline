@@ -11,6 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import controller.KontaktFormularVerarbeitungController;
 
+/**
+ * Servlet implementation class KontaktFormularVerarbeitungServlet
+ * <p>Inkludiert Kopfbereich, Inhalt und Fussbereich.</p>
+ * <p>Ruft den <code>KontaktformularVerarbeitungController</code> auf.</p>
+ * 
+ */
 @WebServlet("/KontaktFormularVerarbeitung")
 public class KontaktFormularVerarbeitungServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

@@ -14,6 +14,9 @@ import controller.UrlController;
 
 /**
  * Servlet implementation class KontaktFormularServlet
+ * <p>Inkludiert Kopfbereich, Inhalt und Fussbereich.</p>
+ * <p>Ruft den <code>KontaktformularController</code> auf.</p>
+ * 
  */
 @WebServlet(description = "Kontakt Formular", urlPatterns = { "/Kontakt" })
 public class KontaktFormularServlet extends HttpServlet {

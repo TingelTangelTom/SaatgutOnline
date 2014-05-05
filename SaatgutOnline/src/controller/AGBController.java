@@ -22,9 +22,8 @@ public class AGBController {
 	private String agbText;
 
 	/**
-	 * <p>Konstruktor der Klasse <code>AGBController</code>.</p>
-	 * <p>Liest die aktuelle eingestellte Sprache aus der <code>HttpSession</code>,</br>
-	 * und holt die jeweiligen AGB aus der Datenbank.</p>
+	 * <p>Konstruktor der Klasse <code>AGBController</code> liest die aktuell eingestellte Sprache aus der 
+	 * <code>HttpSession</code>,</br> und holt die jeweiligen AGB aus der Datenbank.</p>
 	 * <p>Erzeugt ein neues <code>AGBView</code>Objekt</p>
 	 * <p>Sendet die Abfrage an den <code>AGBView</code></p>
 	 * 

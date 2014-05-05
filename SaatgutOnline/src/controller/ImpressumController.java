@@ -31,10 +31,8 @@ public class ImpressumController {
 	private String impressum_copyright;
 
 	/**
-	 * <p>Konstruktor für den ImpressumController.</p>
-	 * <p>Konstruktor der Klasse <code>ImpressumController</code>.</p>
-	 * <p>Liest liest das aktuellste Impressum aus der Datenbank</p>
-	 * <p>Erzeugt ein neues <code>ImpressumView</code>Objekt</p>
+	 * <p>Der Konstruktor der Klasse <code>ImpressumController</code> liest das aktuellste Impressum
+	 * aus der Datenbank und erzeugt ein neues <code>ImpressumView</code>Objekt</p>
 	 * <p>Sendet die Abfrage an den <code>ImpressumView</code></p>
 	 * 
 	 * @param request
