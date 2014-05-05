@@ -305,3 +305,7 @@ vertical-align: baseline;
 .festeSelectBoxBreite {
 	width: 150px;
 }
+
+.festeTextBoxBreiteMenge {
+	width: 20px;
+}

@@ -190,7 +190,7 @@ public class ProduktlisteView {
 				this.output += this.resourceBundle.getString("NICHTVORRAETIG");
 			} else {
 				this.output += "<form action=\"/SaatgutOnline/Warenkorb\" method=\"POST\">\n"
-    		+ "<input type=\"hidden\" name=\"menge\" value=\"" + warenkorbmenge + "\">\n"
+    		+ "Menge <input class=\"festeTextBoxBreiteMenge\" type=\"text\" name=\"menge\" value=\"" + warenkorbmenge + "\">\n"
 			+ "<input type=\"hidden\" name=\"produkt\" value=\"" + produktModel.getId() + "\">\n"
     		+ "<input type=\"image\" src=\"resources/bilder/icons/warenkorb.gif\" alt=\"Warenkorb\">\n"
     		+ "</form>\n";
