@@ -50,7 +50,7 @@ public class NavigationsbereichController
 	{
 		this.request = request;
 		this.session = request.getSession();
-		this.navigationsbereichView = new NavigationsbereichView(response);
+		this.navigationsbereichView = new NavigationsbereichView(request, response);
 		this.kategorienArrayList = kategorienAusDbHolen();
 		this.geklickteKategorienAktualisieren(ausGet);
 	}
@@ -63,7 +63,15 @@ public class NavigationsbereichController
 	public void navigationsbereichAnzeigen()
 	{
 		this.navigationsbereichView.outNavigationsbereichAnfang();
-		this.navigationsbereichView.outKategorienListeAnfang();
+		if(this.request.getParameter("angebote") != null)
+		{
+			this.navigationsbereichView.outAngeboteAktuell();
+		}
+		else
+		{
+			this.navigationsbereichView.outAngebote();
+		}		
+		this.navigationsbereichView.outKategorienListeAnfang();		
 		this.kategorienListeAnzeigen();
 		this.navigationsbereichView.outKategorienListeEnde();
 		this.navigationsbereichView.outNavigationsbereichEnde();
@@ -79,7 +87,8 @@ public class NavigationsbereichController
 			
 			if(this.kategorieModel.getElternKategorieId() == 0)
 			{
-				if(this.aktuelleKategorieSession == this.kategorieModel.getKategorieId())
+				if(	(this.request.getParameter("angebote") == null)
+					&& this.aktuelleKategorieSession == this.kategorieModel.getKategorieId())
 				{
 					this.navigationsbereichView.outHauptKategorieAktuellAnzeigen(kategorieModel);
 				}

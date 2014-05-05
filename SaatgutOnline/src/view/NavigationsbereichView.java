@@ -2,8 +2,13 @@ package view;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Locale;
+import java.util.PropertyResourceBundle;
+import java.util.ResourceBundle;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.KategorieModel;
 
@@ -15,17 +20,22 @@ import model.KategorieModel;
  */
 public class NavigationsbereichView
 {
-	private PrintWriter out;
+	private PrintWriter out;	
+	private ResourceBundle resourceBundle;
 
 	/**
 	 * <p>Konstruktor der Klasse <code>NavigationsbereichView</code>.</p>
 	 * <p>Erzeugt einen <code>PrintWriter</code>.</p>
 	 * @param response - die aktuelle <code>HttpServletResponse</code>
+	 * @param request - der aktuelle <code>HttpServletRequest</code>
+	 * @see javax.servlet.http.HttpServletRequest
 	 * @see javax.servlet.http.HttpServletResponse
 	 * @see java.io.PrintWriter
 	 */
-	public NavigationsbereichView(HttpServletResponse response)
-	{
+	public NavigationsbereichView(HttpServletRequest request, HttpServletResponse response)
+	{	
+		HttpSession session = request.getSession();
+		
 		response.setContentType("text/html");
 		try
 		{
@@ -35,6 +45,10 @@ public class NavigationsbereichView
 			System.out.println("PrintWriter nicht erstellt!");
 			e.printStackTrace();
 		}		
+		
+		Locale locale = (Locale) session.getAttribute("sprache");
+		this.resourceBundle = PropertyResourceBundle.getBundle("I18N." + locale.getLanguage() + "."
+				+ getClass().getSimpleName(), locale);
 	}
 
 	/**
@@ -52,7 +66,35 @@ public class NavigationsbereichView
 	{
 		this.out.println("</td>\n<td class=\"inhalt\">");
 	}
-
+	
+	public void outAngebote()
+	{
+		this.out.println("<table>");
+		this.out.println("<tr rowspan=\"2\">\n<td>");
+		this.out.println("&nbsp;");
+		this.out.println("</td>\n</tr>");
+		this.out.println("<tr>\n<td>");
+		this.out.println("<a href=\"/SaatgutOnline/Produktliste?angebote=true\">"+ this.resourceBundle.getString("ANGEBOTE")+"</a>");
+		this.out.println("</td>\n</tr>\n<tr rowspan=\"2\">\n<td>");
+		this.out.println("&nbsp;");
+		this.out.println("</td>\n</tr>");
+		this.out.println("</table>");
+	}
+	
+	public void outAngeboteAktuell()
+	{
+		this.out.println("<table>");
+		this.out.println("<tr rowspan=\"2\">\n<td>");
+		this.out.println("&nbsp;");
+		this.out.println("</td>\n</tr>");
+		this.out.println("<tr class=\"navigation_aktuell\">\n<td>");
+		this.out.println("<a href=\"/SaatgutOnline/Produktliste?angebote=true\">"+ this.resourceBundle.getString("ANGEBOTE")+"</a>");
+		this.out.println("</td>\n</tr>\n<tr rowspan=\"2\">\n<td>");
+		this.out.println("&nbsp;");
+		this.out.println("</td>\n</tr>");
+		this.out.println("</table>");
+	}
+	
 	/**
 	 * <p>Stellt die Html-Ausgabe fuer den Anfang der Kategorienliste im Navigationsbereich zur Verfuegung.</p>
 	 */
