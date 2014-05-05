@@ -69,6 +69,7 @@ public class SessionFilter implements Filter {
 			    // neue Sesison, daher den Standard "nicht angemeldet" zuweisen
 			    session.setAttribute( "angemeldet", false);
 				session.setAttribute("sortierung_reihenfolge", "ASC");
+				session.setAttribute("erweitertesuche", "false");
 				session.setAttribute("sortierung_produktanzahl", 7);
 				session.setAttribute("sortierung_limit_von", 0);
 				session.setAttribute("sortierung_sortierspalte", "pb.produkt_name");
