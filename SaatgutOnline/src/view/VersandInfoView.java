@@ -9,20 +9,24 @@ import javax.servlet.http.HttpServletResponse;
 import controller.UrlController;
 
 /**
- * Diese Klasse ist für die Ausgabe der Versand & Zahlungs Informationen
- * zuständig.
+ * <p>Die Klasse <code>VersandInfoView</code> ist für die Ausgabe der Versand & Zahlungs Informationen
+ * zuständig.</p>
  * 
  * @author Anja Dietrich
+ * @version 1.0
+ * @since 1.7.0_51
  * 
  */
 public class VersandInfoView {
 
 	/**
-	 * Konstruktor für den VersandInfoView.
+	 * <p>Konstruktor der Klasse<code>VersandInfoView</code>.</p>
 	 * 
 	 * @param request
 	 * @param response
 	 * @param agbText
+	 * @see javax.servlet.http.HttpServletRequest
+	 * @see javax.servlet.http.HttpServletResponse
 	 * 
 	 */
 	public VersandInfoView(HttpServletRequest request, HttpServletResponse response,

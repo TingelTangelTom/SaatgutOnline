@@ -13,6 +13,9 @@ import controller.VersandInfoController;
 
 /**
  * Servlet implementation class VersandInfoServlet
+ * <p>Inkludiert Kopfbereich, Inhalt und Fussbereich.</p>
+ * <p>Ruft den <code>VersandInfoController</code> auf.</p>
+ * 
  */
 @WebServlet(description = "Versand & Zahlung", urlPatterns = { "/VersandInfo" })
 public class VersandInfoServlet extends HttpServlet {

@@ -9,9 +9,12 @@ import javax.servlet.http.HttpServletResponse;
 import controller.UrlController;
 
 /**
- * Diese Klasse ist für die Ausgabe und Formatierung des Kontaktformulares nach dem absenden zuständig.
+ * <p>Die Klasse <code>KontaktFormularVerarbeitungView</code> ist für die Ausgabe und Formatierung</br>
+ * des Kontaktformulares nach dem absenden zuständig.</p>
  * 
  * @author Anja Dietrich
+ * @version 1.0
+ * @since 1.7.0_51
  * 
  */
 public class KontaktFormularVerarbeitungView {
@@ -22,10 +25,14 @@ public class KontaktFormularVerarbeitungView {
 	private PrintWriter out;
 
 	/**
-	 * Konstruktor für den KontaktFormularVerarbeitungView.
+	 * <p>Konstruktor der Klasse<code>KontaktFormularVerarbeitungView</code>.</p>
 	 * 
 	 * @param request
 	 * @param response
+	 * @see javax.servlet.http.HttpServletRequest
+	 * @see javax.servlet.http.HttpServletResponse
+	 * @see controller.UrlController
+	 * @see java.io.PrintWriter
 	 * 
 	 */
 	public KontaktFormularVerarbeitungView(HttpServletRequest request, HttpServletResponse response) {
@@ -44,7 +51,8 @@ public class KontaktFormularVerarbeitungView {
 	}
 
 	/**
-	 * Diese Methode ist für das erfolgreiche versenden.
+	 * <p>Die Methode <code>outKontaktVerarbeitungView</code> erzeugt die Ausgabe, wenn die E-Mail Validierung</br>
+	 * erfolgreich war.</p>
 	 * 
 	 */
 	public void outKontaktVerarbeitungView() {
@@ -57,7 +65,8 @@ public class KontaktFormularVerarbeitungView {
 	}
 
 	/**
-	 * Diese Methode ist für das fehlgeschlagene versenden.
+	 * <p>Die Methode <code>outKontaktVerarbeitungView</code> erzeugt die Ausgabe, wenn die E-Mail Validierung</br>
+	 * fehlgeschlagen ist.</p>
 	 * 
 	 */
 	public void outKontaktVerarbeitungViewUngueltig() {

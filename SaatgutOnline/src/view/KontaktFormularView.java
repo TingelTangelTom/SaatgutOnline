@@ -13,9 +13,12 @@ import javax.servlet.http.HttpSession;
 import controller.UrlController;
 
 /**
- * Diese Klasse ist für die Ausgabe und Formatierung des Kontaktformulares zuständig.
+ * <p>Die Klasse <code>KontaktFormularView</code> ist für die Ausgabe und Formatierung</br>#
+ * des Kontaktformulars zuständig.
  * 
  * @author Anja Dietrich
+ * @version 1.0
+ * @since 1.7.0_51
  * 
  */
 public class KontaktFormularView {
@@ -26,10 +29,15 @@ public class KontaktFormularView {
 	private ResourceBundle resourceBundle;
 
 	/**
-	 * Konstruktor für den KontaktFormularView.
+	 * <p>Konstruktor der Klasse<code>KontaktFormularView</code>.</p>
+	 * <p>Liest die aktuelle eingestellte Sprache aus der <code>HttpSession</code>,</br>
+	 * und gibt die entsprechenden properties aus.</p>
 	 * 
 	 * @param request
 	 * @param response
+	 * @see javax.servlet.http.HttpServletRequest
+	 * @see javax.servlet.http.HttpServletResponse
+	 * @see javax.servlet.http.HttpSession
 	 * 
 	 */
 	public KontaktFormularView(HttpServletRequest request, HttpServletResponse response) {
@@ -42,10 +50,14 @@ public class KontaktFormularView {
 	}
 
 	/**
-	 * Diese Methode gibt das Kontaktformular aus.
+	 * <p>Die Methode <code>outKontaktFormular</code> gibt das Kontaktformular aus.</p>
 	 * 
 	 * @param request
 	 * @param response
+	 * @see javax.servlet.http.HttpServletRequest
+	 * @see javax.servlet.http.HttpServletResponse
+	 * @see controller.UrlController
+	 * @see java.io.PrintWriter
 	 * 
 	 */
 	public void outKontaktFormular(HttpServletRequest request, HttpServletResponse response) {

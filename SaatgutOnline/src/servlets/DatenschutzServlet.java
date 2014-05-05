@@ -13,6 +13,9 @@ import controller.DatenschutzController;
 
 /**
  * Servlet implementation class DatenschutzServlet
+ * <p>Inkludiert Kopfbereich, Inhalt und Fussbereich.</p>
+ * <p>Ruft den <code>DatenschutzController</code> auf.</p>
+ * 
  */
 @WebServlet(description = "Datenschutzerklärung", urlPatterns = { "/Datenschutz" })
 public class DatenschutzServlet extends HttpServlet {

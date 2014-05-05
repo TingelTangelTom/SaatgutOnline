@@ -9,15 +9,17 @@ import javax.servlet.http.HttpServletResponse;
 import controller.UrlController;
 
 /**
- * Diese Klasse ist für die Ausgabe und Formatierung des Impressums zuständig.
+ * <p>Die Klasse <code>ImpressumView</code> ist für die Ausgabe und Formatierung des Impressums zuständig.</p>
  * 
  * @author Anja Dietrich
+ * @version 1.0
+ * @since 1.7.0_51
  * 
  */
 public class ImpressumView {
 
 	/**
-	 * Konstruktor für den ImpressumView.
+	 * <p>Konstruktor der Klasse<code>ImpressumView</code>.</p>
 	 * 
 	 * @param request
 	 * @param response
@@ -31,6 +33,10 @@ public class ImpressumView {
 	 * @param umsatzsteuer_id
 	 * @param wirtschafts_id
 	 * @param impressum_copyright
+	 * @see javax.servlet.http.HttpServletRequest
+	 * @see javax.servlet.http.HttpServletResponse
+	 * @see controller.UrlController
+	 * @see java.io.PrintWriter
 	 * 
 	 */
 	public ImpressumView(HttpServletRequest request, HttpServletResponse response,
@@ -41,7 +47,6 @@ public class ImpressumView {
 		// Für den Zurück-Link
 		UrlController urlController = new UrlController(request);
 
-		// Ausgabe und Formatierung mit Printwriter
 		response.setContentType("text/html");
 		PrintWriter out;
 		try {

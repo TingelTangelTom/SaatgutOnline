@@ -23,9 +23,8 @@ public class DatenschutzController {
 	private String datenschutzText;
 
 	/**
-	 * <p>Konstruktor der Klasse <code>DatenschutzController</code>.</p>
-   * <p>Liest die aktuelle aktuellste Datenschutzerklärung aus der Datenbank</p>
-   * <p>Erzeugt ein neues <code>DatenschutzView</code>Objekt</p>
+	 * <p>Konstruktor der Klasse <code>DatenschutzController</code> liest die aktuellste Datenschutzerklärung aus der Datenbank
+   * und erzeugt ein neues <code>DatenschutzView</code>Objekt</p>
    * <p>Sendet die Abfrage an den <code>AGBView</code></p>
 	 * 
 	 * @param request
