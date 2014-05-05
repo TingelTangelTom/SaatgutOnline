@@ -19,7 +19,6 @@ public class KontaktFormularController {
 	 * @param request
 	 * @param response
 	 * 
-	 * @author Anja
 	 */
 	public KontaktFormularController(HttpServletRequest request, HttpServletResponse response) {
 		

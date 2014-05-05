@@ -6,6 +6,7 @@ import java.sql.Statement;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import view.AGBView;
 
@@ -17,9 +18,6 @@ import view.AGBView;
  */
 public class AGBController {
 
-	/**
-	 * Variablen zum zwischenspeichern des Datenbankinhaltes.
-	 */
 	private String agbText;
 
 	/**
@@ -30,14 +28,17 @@ public class AGBController {
 	 * 
 	 * @throws SQLException
 	 * 
-	 * @author Anja
 	 */
 	public AGBController(HttpServletRequest request, HttpServletResponse response) {
-
+		
+		//Liest die (auf der Shopseite) eingestellte Sprache aus der Session
+		HttpSession session = ((HttpServletRequest) request).getSession();
+		int sprache = (int)session.getAttribute("spracheId");
+		
 		// Datenbankabfrage : Aktuellste AGB ausgeben
+		String query = "SELECT agb_text FROM agb WHERE sprache_id=" + sprache + " ORDER BY agb_datum_hinzugefuegt DESC LIMIT 1";
+		
 		try {
-			String query = "SELECT agb_txt FROM agb ORDER BY agb_datum_hinzugefuegt DESC LIMIT 1";
-
 			ResultSet resultSet = DatenbankController.sendeSqlRequest(query);
 			if (resultSet.next()) {
 				agbText = resultSet.getString(1);
