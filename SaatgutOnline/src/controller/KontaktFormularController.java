@@ -8,11 +8,11 @@ import view.KontaktFormularView;
 /**
  * Diese Klasse ruft den KontaktFormularView auf.
  * 
- * @author Anja
- *
+ * @author Anja Dietrich
+ * 
  */
 public class KontaktFormularController {
-	
+
 	/**
 	 * Konstruktor für den KontaktFormularController.
 	 * 
@@ -21,10 +21,8 @@ public class KontaktFormularController {
 	 * 
 	 */
 	public KontaktFormularController(HttpServletRequest request, HttpServletResponse response) {
-		
+
 		KontaktFormularView kontaktFormularView = new KontaktFormularView(request, response);
 		kontaktFormularView.outKontaktFormular(request, response);
-		
 	}
-
 }

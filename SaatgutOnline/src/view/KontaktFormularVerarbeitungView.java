@@ -11,12 +11,12 @@ import controller.UrlController;
 /**
  * Diese Klasse ist für die Ausgabe und Formatierung des Kontaktformulares nach dem absenden zuständig.
  * 
- * @author Anja
- *
+ * @author Anja Dietrich
+ * 
  */
 public class KontaktFormularVerarbeitungView {
 
-  //Für den Zurück-Link
+	// Für den Zurück-Link
 	UrlController urlController;
 
 	private PrintWriter out;
@@ -27,11 +27,10 @@ public class KontaktFormularVerarbeitungView {
 	 * @param request
 	 * @param response
 	 * 
-	 * @author Anja
 	 */
 	public KontaktFormularVerarbeitungView(HttpServletRequest request, HttpServletResponse response) {
 
-	  //Für den Zurück-Link
+		// Für den Zurück-Link
 		this.urlController = new UrlController(request);
 
 		response.setContentType("text/html");
@@ -47,7 +46,6 @@ public class KontaktFormularVerarbeitungView {
 	/**
 	 * Diese Methode ist für das erfolgreiche versenden.
 	 * 
-	 * @author Anja
 	 */
 	public void outKontaktVerarbeitungView() {
 		// Ausgabe wenn absenden erfolgreich
@@ -61,7 +59,6 @@ public class KontaktFormularVerarbeitungView {
 	/**
 	 * Diese Methode ist für das fehlgeschlagene versenden.
 	 * 
-	 * @author Anja
 	 */
 	public void outKontaktVerarbeitungViewUngueltig() {
 		// Ausgabe wenn absenden fehlgeschlagen
@@ -69,5 +66,4 @@ public class KontaktFormularVerarbeitungView {
 		out.println("<br><br><a href=\"" + this.urlController.urlAusSessionHolen("LetzteSeite")
 				+ "\">&#11013 Zurück</a>");
 	}
-
 }

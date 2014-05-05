@@ -2,7 +2,6 @@ package controller;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,8 +12,8 @@ import view.VersandInfoView;
 /**
  * Diese Klasse liest die aktuellsten Versand- und Zahlungsbedingungen aus der Datenbank aus.
  * 
- * @author Anja
- *
+ * @author Anja Dietrich
+ * 
  */
 public class VersandInfoController {
 
@@ -30,13 +29,14 @@ public class VersandInfoController {
 	 * 
 	 */
 	public VersandInfoController(HttpServletRequest request, HttpServletResponse response) {
-		
-		//Liest die (auf der Shopseite) eingestellte Sprache aus der Session
+
+		// Liest die (auf der Shopseite) eingestellte Sprache aus der Session
 		HttpSession session = ((HttpServletRequest) request).getSession();
-		int sprache = (int)session.getAttribute("spracheId");
-	
+		int sprache = (int) session.getAttribute("spracheId");
+
 		// Datenbankabfrage : Aktuellste AGB ausgeben
-		String query = "SELECT versand_info_text FROM versand_info WHERE sprache_id=" + sprache + " ORDER BY versand_info_datum_hinzugefuegt DESC LIMIT 1";
+		String query = "SELECT versand_info_text FROM versand_info WHERE sprache_id=" + sprache
+				+ " ORDER BY versand_info_datum_hinzugefuegt DESC LIMIT 1";
 
 		try {
 			ResultSet resultSet = DatenbankController.sendeSqlRequest(query);
@@ -49,5 +49,4 @@ public class VersandInfoController {
 			e.printStackTrace();
 		}
 	}
-
 }

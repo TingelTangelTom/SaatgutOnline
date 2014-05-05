@@ -7,10 +7,10 @@ import view.KontaktFormularVerarbeitungView;
 import controller.EmailController;
 
 /**
- * Diese Klasse liest das Kontaktformular aus und validiert die E-Mail-Adresse. 
+ * Diese Klasse liest das Kontaktformular aus und validiert die E-Mail-Adresse.
  * 
- * @author Anja
- *
+ * @author Anja Dietrich
+ * 
  */
 public class KontaktFormularVerarbeitungController {
 
@@ -38,7 +38,5 @@ public class KontaktFormularVerarbeitungController {
 		} else {
 			kontaktFormularVerarbeitungView.outKontaktVerarbeitungViewUngueltig();
 		}
-
 	}
-
 }

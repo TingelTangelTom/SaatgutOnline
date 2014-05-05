@@ -15,17 +15,15 @@ import controller.UrlController;
 /**
  * Diese Klasse ist für die Ausgabe und Formatierung des Kontaktformulares zuständig.
  * 
- * @author Anja
- *
+ * @author Anja Dietrich
+ * 
  */
 public class KontaktFormularView {
-	
-	private UrlController urlController;
-//	private PrintWriter out;
-	private ResourceBundle resourceBundle;
 
 	//Für den Zurück-Link
-	//UrlController urlController;
+	private UrlController urlController;
+	
+	private ResourceBundle resourceBundle;
 
 	/**
 	 * Konstruktor für den KontaktFormularView.
@@ -36,21 +34,11 @@ public class KontaktFormularView {
 	 */
 	public KontaktFormularView(HttpServletRequest request, HttpServletResponse response) {
 
-//		response.setContentType("text/html");
-//		PrintWriter out;
-//		try {
-//			this.out = response.getWriter();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//			return;
-//		}
-//		out.println();
-		
+		// Internationalisierung
 		HttpSession session = request.getSession();
-		
 		Locale locale = (Locale) session.getAttribute("sprache");
 		this.resourceBundle = PropertyResourceBundle.getBundle("I18N." + locale.getLanguage() + "."
-				+ getClass().getSimpleName(), locale);	
+				+ getClass().getSimpleName(), locale);
 	}
 
 	/**
@@ -74,12 +62,9 @@ public class KontaktFormularView {
 			return;
 		}
 		out.println("<h1>Kontakt</h1>\n");
-		out.println("<p><label>SaatgutOnline GmbH<br>\n"
-				+ "Am Waldrand 325<br>\n"
-				+ "12325 Palmenhausen<br>\n"
-				+ "E-Mail kontakt@saatgutonline.de<br>\n"
-				+ "Tel 049-098-764512-0<br>\n"
-				+ "Fax 049-098-764512-99 </label></p>\n");
+		out.println("<p><label>SaatgutOnline GmbH<br>\n" + "Am Waldrand 325<br>\n"
+				+ "12325 Palmenhausen<br>\n" + "E-Mail kontakt@saatgutonline.de<br>\n"
+				+ "Tel 049-098-764512-0<br>\n" + "Fax 049-098-764512-99 </label></p>\n");
 		out.println("<form action=/SaatgutOnline/KontaktFormularVerarbeitung>\n"
 				+ "<table width=\"374\" border=\"0\" cellpadding=\"1\" cellspacing=\"1\">\n");
 		out.println("<tr><td width=\"108\">");
@@ -100,7 +85,7 @@ public class KontaktFormularView {
 		out.println(this.resourceBundle.getString("NACHNAME") + " ");
 		out.println("</td>\n");
 		out.println("<td><input name=\"Nachname\" type=\"text\" id=\"Nachname\""
-				+ "size=\"35\" maxlength=\"60\"></td></tr>\n");			
+				+ "size=\"35\" maxlength=\"60\"></td></tr>\n");
 		out.println("<tr><td><label for=\"E-Mail\">");
 		out.println(this.resourceBundle.getString("EMAIL") + " ");
 		out.println("</label></td>\n");
@@ -118,8 +103,7 @@ public class KontaktFormularView {
 		out.println("<tr><td valign=\"top\">&nbsp;</td><td><div align=\"left\">\n");
 		out.println("<input name=\"submit\" type=\"submit\" id=\"submit\""
 				+ "formmethod=\"POST\" value=\"Senden\"></div></td></tr></table></form>");
-		out.println("<br><br><a href=\"" + this.urlController.urlAusSessionHolen("LetzteSeite") + "\">&#11013 Zurück</a>");
+		out.println("<br><br><a href=\"" + this.urlController.urlAusSessionHolen("Produktseite")
+				+ "\">&#11013 Zurück</a>");
 	}
-	//TODO: Internationalisierung
-
 }

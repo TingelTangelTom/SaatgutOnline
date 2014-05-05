@@ -2,7 +2,6 @@ package controller;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,8 +12,8 @@ import view.ImpressumView;
 /**
  * Diese Klasse liest das Impressum aus der Datenbank aus.
  * 
- * @author Anja
- *
+ * @author Anja Dietrich
+ * 
  */
 public class ImpressumController {
 
@@ -40,11 +39,11 @@ public class ImpressumController {
 	 * 
 	 */
 	public ImpressumController(HttpServletRequest request, HttpServletResponse response) {
-		
+
 		// Liest die (auf der Shopseite) eingestellte Sprache aus der Session
 		HttpSession session = ((HttpServletRequest) request).getSession();
 		int sprache = (int) session.getAttribute("spracheId");
-		
+
 		// Datenbankabfrage : Impressum ausgeben
 		String query = "SELECT * FROM impressum WHERE sprache_id=" + sprache;
 

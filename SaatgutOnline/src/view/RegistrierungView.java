@@ -27,7 +27,7 @@ public class RegistrierungView {
 	
 	public RegistrierungView (HttpServletRequest request, HttpServletResponse response) {
 		
-HttpSession session = request.getSession();
+		HttpSession session = request.getSession();
 		
 		response.setContentType("text/html");
 		try
@@ -57,8 +57,9 @@ HttpSession session = request.getSession();
 			    + "<form action=/SaatgutOnline/RegistrierungVerarbeitung method=\"POST\">"
 			    + "<table width=\"200\" border=\"0\" cellpadding=\"1\" cellspacing=\"1\">"
 			  
-			    + "<tr><td>Anrede:</td><td><select name=\"" + this.resourceBundle.getString("ANREDE") + "\" id=\"Anrede\" title=\"Anrede\">\n"
-				+ "<option>" + this.resourceBundle.getString("FRAU") + "</option><option>" + this.resourceBundle.getString("HERR") + "</option></select></td></tr>\n"
+			    + "<tr><td><label for =\"Anrede\">" + this.resourceBundle.getString("ANREDE") + "</label></td>"
+	    		+ "<td><select name=\"Anrede\" id=\"Anrede\" title=\"Anrede\">\n"
+				+ "<option value=\"0\">" + this.resourceBundle.getString("FRAU") + "</option><option value=\"1\">" + this.resourceBundle.getString("HERR") + "</option></select></td></tr>\n"
 			    
 			    + "<tr><td><label for=\"Vorname\">" + this.resourceBundle.getString("VORNAME") + "</label></td>\n"
 				+ "<td><input name=\"Vorname\" type=\"text\" id=\"Vorname\" size=\"35\" maxlength=\"60\"></td></tr>\n"
@@ -71,22 +72,21 @@ HttpSession session = request.getSession();
 
  				+ "<tr><td><label for=\"Strasse\">" + this.resourceBundle.getString("STRASSE") + "</label></td>\n"
  				+ "<td><input name=\"Strasse\" type=\"text\" id=\"Strasse\" size=\"35\" maxlength=\"60\"></td></tr>\n"
-
 			    
  				+ "<tr><td><label for=\"Hausnummer\">" + this.resourceBundle.getString("HAUSNUMMER") + "</label></td>\n"
  				+ "<td><input name=\"Hausnummer\" type=\"text\" id=\"Hausnummer\" size=\"35\" maxlength=\"60\"></td></tr>\n"
  				
- 				+ "<tr><td><label for=\"plz\">" + this.resourceBundle.getString("PLZ") + "</label></td>\n"
- 				+ "<td><input name=\"plz\" type=\"text\" id=\"plz\" size=\"35\" maxlength=\"60\"></td></tr>\n"
+ 				+ "<tr><td><label for=\"Plz\">" + this.resourceBundle.getString("PLZ") + "</label></td>\n"
+ 				+ "<td><input name=\"Plz\" type=\"text\" id=\"Plz\" size=\"35\" maxlength=\"60\"></td></tr>\n"
  				
  				+ "<tr><td><label for=\"Ort\">" + this.resourceBundle.getString("ORT") + "</label></td>\n"
  				+ "<td><input name=\"Ort\" type=\"text\" id=\"Ort\" size=\"35\" maxlength=\"60\"></td></tr>\n"
 
- 				+ "<tr><td><label for=\"E-Mail-Adresse\">" + this.resourceBundle.getString("EMAILADRESSE") + "</label></td>\n"
- 				+ "<td><input name=\"E-Mail-Adresse\" type=\"text\" id=\"E-Mail-Adresse\" size=\"35\" maxlength=\"60\"></td></tr>\n"
+ 				+ "<tr><td><label for=\"Emailadresse\">" + this.resourceBundle.getString("EMAILADRESSE") + "</label></td>\n"
+ 				+ "<td><input name=\"Emailadresse\" type=\"text\" id=\"Emailadresse\" size=\"35\" maxlength=\"60\"></td></tr>\n"
  				
- 				+ "<tr><td><label for=\"Telefonnummer\">" + this.resourceBundle.getString("TELEFONNUMMER") + "</label></td>\n"
- 				+ "<td><input name=\"Telefonnummer\" type=\"text\" id=\"Telefonnummer\" size=\"35\" maxlength=\"60\"></td></tr>\n"
+ 				+ "<tr><td><label for=\"Telefon\">" + this.resourceBundle.getString("TELEFONNUMMER") + "</label></td>\n"
+ 				+ "<td><input name=\"Telefon\" type=\"text\" id=\"Telefon\" size=\"35\" maxlength=\"60\"></td></tr>\n"
  				
  				+ "<tr><td><label for=\"Benutzername\">" + this.resourceBundle.getString("BENUTZERNAME") + "</label></td>\n"
  				+ "<td><input name=\"Benutzername\" type=\"text\" id=\"Benutzername\" size=\"35\" maxlength=\"60\"></td></tr>\n"
