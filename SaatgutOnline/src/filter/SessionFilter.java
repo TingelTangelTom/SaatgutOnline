@@ -16,7 +16,6 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
 
 /**
  * Servlet Filter implementation class SessionVerwaltung
@@ -47,7 +46,6 @@ public class SessionFilter implements Filter {
 		// den ankommenden ServletRequest in einen HttpServletRequest casten,
 		// damit die Session-Funktionen zur Verfuegung stehen
 		
-		
 		// Alternative Methode
 		
 //		HttpSession session = request.getSession();
@@ -67,9 +65,10 @@ public class SessionFilter implements Filter {
 				session = ((HttpServletRequest) request).getSession();
 			    
 			    // neue Sesison, daher den Standard "nicht angemeldet" zuweisen
-			    session.setAttribute( "angemeldet", false);
+			    session.setAttribute("angemeldet", false);
 				session.setAttribute("sortierung_reihenfolge", "ASC");
 				session.setAttribute("erweitertesuche", "false");
+				session.setAttribute("suchen", "false");
 				session.setAttribute("sortierung_produktanzahl", 7);
 				session.setAttribute("sortierung_limit_von", 0);
 				session.setAttribute("sortierung_sortierspalte", "pb.produkt_name");
