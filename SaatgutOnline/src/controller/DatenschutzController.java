@@ -2,7 +2,6 @@ package controller;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,14 +12,11 @@ import view.DatenschutzView;
 /**
  * Diese Klasse liest die aktuellste Datenschutzerklärung aus der Datenbank aus.
  * 
- * @author Anja
+ * @author Anja Dietrich
  * 
  */
 public class DatenschutzController {
 
-	/**
-	 * Variablen zum zwischenspeichern des Datenbankinhaltes
-	 */
 	private String datenschutzText;
 
 	/**

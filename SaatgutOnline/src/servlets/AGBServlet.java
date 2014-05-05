@@ -52,5 +52,4 @@ public class AGBServlet extends HttpServlet {
 			throws ServletException, IOException {
 		doGet(request, response);
 	}
-
 }

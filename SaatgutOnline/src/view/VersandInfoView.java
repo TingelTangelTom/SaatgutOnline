@@ -9,13 +9,14 @@ import javax.servlet.http.HttpServletResponse;
 import controller.UrlController;
 
 /**
- * Diese Klasse ist für die Ausgabe der Versand & Zahlungs Informationen zuständig.
+ * Diese Klasse ist für die Ausgabe der Versand & Zahlungs Informationen
+ * zuständig.
  * 
- * @author Anja
- *
+ * @author Anja Dietrich
+ * 
  */
 public class VersandInfoView {
-	
+
 	/**
 	 * Konstruktor für den VersandInfoView.
 	 * 
@@ -23,11 +24,11 @@ public class VersandInfoView {
 	 * @param response
 	 * @param agbText
 	 * 
-	 * @author Anja
 	 */
-	public VersandInfoView(HttpServletRequest request, HttpServletResponse response, String versandInfoText) {
+	public VersandInfoView(HttpServletRequest request, HttpServletResponse response,
+			String versandInfoText) {
 
-	  //Für den Zurück-Link
+		// Für den Zurück-Link
 		UrlController urlController = new UrlController(request);
 
 		response.setContentType("text/html");
@@ -42,5 +43,4 @@ public class VersandInfoView {
 		out.println("<br><br><a href=\"" + urlController.urlAusSessionHolen("LetzteSeite")
 				+ "\">&#11013 Zurück</a>");
 	}
-
 }

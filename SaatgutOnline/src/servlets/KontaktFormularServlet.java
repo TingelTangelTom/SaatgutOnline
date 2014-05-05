@@ -18,29 +18,31 @@ import controller.UrlController;
 @WebServlet(description = "Kontakt Formular", urlPatterns = { "/Kontakt" })
 public class KontaktFormularServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public KontaktFormularServlet() {
-        super();
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public KontaktFormularServlet() {
+		super();
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
 		// Kopfbereich (und damit auch Navigationsbereich) einbinden
 		RequestDispatcher rd = getServletContext().getRequestDispatcher("/Kopfbereich");
 		rd.include(request, response);
 
-		
 		UrlController urlController = new UrlController(request);
 		urlController.urlInSessionLegen();
-		
+
 		// Inhalte ausgeben (per view!)
-		KontaktFormularController kontaktFormularController = new KontaktFormularController(request, response);
+		KontaktFormularController kontaktFormularController = new KontaktFormularController(request,
+				response);
 
 		// Fussbereich einbinden
 		rd = getServletContext().getRequestDispatcher("/Fussbereich");
@@ -48,9 +50,11 @@ public class KontaktFormularServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(request, response);
 	}
 }

@@ -11,8 +11,8 @@ import controller.UrlController;
 /**
  * Diese Klasse ist für die Ausgabe der Datenschutzerklärung zuständig.
  * 
- * @author Anja
- *
+ * @author Anja Dietrich
+ * 
  */
 public class DatenschutzView {
 
@@ -23,12 +23,11 @@ public class DatenschutzView {
 	 * @param response
 	 * @param datenschutzText
 	 * 
-	 * @author Anja
 	 */
 	public DatenschutzView(HttpServletRequest request, HttpServletResponse response,
 			String datenschutzText) {
 
-	  //Für den Zurück-Link
+		// Für den Zurück-Link
 		UrlController urlController = new UrlController(request);
 
 		response.setContentType("text/html");
@@ -42,6 +41,5 @@ public class DatenschutzView {
 		out.println(datenschutzText);
 		out.println("<br><br><a href=\"" + urlController.urlAusSessionHolen("LetzteSeite")
 				+ "\">&#11013 Zurück</a>");
-
 	}
 }

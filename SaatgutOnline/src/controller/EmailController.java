@@ -16,25 +16,24 @@ import javax.mail.internet.MimeMessage;
 /**
  * Diese Klasse verwaltet die E-Mail Funktionalitäten.
  * 
- * @author Anja
- *
+ * @author Anja Dietrich
+ * 
  */
 public class EmailController {
-	
+
 	// RegEx für E-Mail Validierung
 	private static String EmailRegel = "[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*"
 			+ "@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-	
 
 	// Pattern und Matcher für E-Mail Validierung
 	private Pattern pattern;
 	private Matcher matcher;
-	
+
 	// Konstruktor für den EmailController.
 	public EmailController() {
 
 	}
-	
+
 	/**
 	 * Diese Methode überprüft E-Mail-Adressen auf ihre Gültigkeit.
 	 * 
@@ -45,9 +44,9 @@ public class EmailController {
 	public boolean validiereEmail(String email) {
 		pattern = Pattern.compile(EmailRegel);
 		matcher = pattern.matcher(email);
-		return matcher.matches();			
-	}	
-	
+		return matcher.matches();
+	}
+
 	/**
 	 * Diese Methode versendet E-Mails.
 	 * 
@@ -84,7 +83,6 @@ public class EmailController {
 		}
 	}
 
-	
 	/**
 	 * Diese Methode versendet E-Mails und formatiert die Ausgabe.
 	 * 
@@ -108,5 +106,4 @@ public class EmailController {
 
 		sendeEmail(emailadresseAbsender, betreff, emailadresseEmpfaenger, nachricht);
 	}
-	
 }
