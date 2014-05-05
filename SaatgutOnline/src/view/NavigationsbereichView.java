@@ -59,7 +59,7 @@ public class NavigationsbereichView
 	 */
 	public void outKategorienListeAnfang()
 	{
-		this.out.println("<table border = '1'>");
+		this.out.println("<table>");
 	}
 	
 	/**

@@ -73,7 +73,7 @@ public class KopfbereichView
 		this.out.println("<!doctype html>\n" + "<html>\n<head>\n" + "<meta charset=\"ISO-8859-15\">\n"
 				+ "<link type=\"text/css\" href=\"resources/css/seitenlayout.css\" rel=\"stylesheet\" />\n"
 				+ "<title></title>\n" + "</head>\n<body>");
-		this.out.println("<table class=\"kopfbereich\" border = '1'>");
+		this.out.println("<table class=\"kopfbereich\">");
 		this.out.println("<tr>\n<td colspan=\"2\">");
 	}
 
@@ -91,7 +91,7 @@ public class KopfbereichView
 	 */
 	public void outInhaltsRahmenAnfang()
 	{
-		this.out.println("<table border = '1'>");
+		this.out.println("<table>");
 		this.out.println("<tr>\n<td>");
 	}
 
@@ -121,7 +121,7 @@ public class KopfbereichView
 	public void outLoginBereich()
 	{
 		this.out.println("<form action=\"\" method=\"POST\">");
-		this.out.println("<table border = '1'>");
+		this.out.println("<table>");
 		this.out.println("<tr>\n<td>");
 		this.out.println(this.resourceBundle.getString("BENUTZERNAME"));
 		this.out.println("</td>\n<td colspan=\"2\">");
@@ -153,7 +153,7 @@ public class KopfbereichView
 	 */
 	public void outLogoutBereich()
 	{
-		this.out.println("<table border = '1'>");
+		this.out.println("<table>");
 		this.out.println("<tr>\n<td>");
 		this.out.println(this.resourceBundle.getString("ANGEMELDET_ALS"));
 		this.out.println("</td>\n</tr>\n<tr>\n<td>");
@@ -170,7 +170,7 @@ public class KopfbereichView
 	 */
 	public void outLogo()
 	{
-		this.out.println("<table border = '1'>");
+		this.out.println("<table>");
 		this.out.println("<tr>\n<td>");
 		this.out.println("<img src=\"resources/bilder/logo.png\" alt=\"Logo\">");
 		this.out.println("</td>\n</tr>");
@@ -183,7 +183,7 @@ public class KopfbereichView
 	 */
 	public void outSchriftzug()
 	{
-		this.out.println("<table border = '1'>");
+		this.out.println("<table>");
 		this.out.println("<tr>\n<td>");
 		this.out.println("Saatgut");
 		this.out.println("</td>\n</tr>\n<tr>\n<td>");
@@ -198,7 +198,7 @@ public class KopfbereichView
 	 */
 	public void outSprachwahl()
 	{
-		this.out.println("<table border = '1'>");
+		this.out.println("<table>");
 		this.out.println("<tr>\n<td>");
 		this.out.println("<form action=\"\" method=\"POST\">");
 		this.out.println("<input type=\"image\" src=\"resources/bilder/flags_iso/24/de.png\" alt=\"de\">");
@@ -219,7 +219,7 @@ public class KopfbereichView
 	 */
 	public void outWarenkorbLink()
 	{
-		this.out.println("<table border = '1'>");
+		this.out.println("<table>");
 		this.out.println("<tr>\n<td>");
 		this.out.println("<a href=\"/SaatgutOnline/Warenkorb\">\n" + this.resourceBundle.getString("ZUM_WARENKORB")
 				+ "\n</a>");
@@ -233,7 +233,7 @@ public class KopfbereichView
 	 */
 	public void outSuchfeld()
 	{
-		this.out.println("<table border = '1'>");
+		this.out.println("<table>");
 		this.out.println("<tr>\n<td>");
 		this.out.println("<form action=\"/SaatgutOnline/Suchergebnisse\" method=\"GET\">");
 		this.out.println("<input type=\"text\" name=\"suchbegriff\" size=\"20\">");

@@ -140,7 +140,7 @@ public class WarenkorbView
 	 */
 	public void outMengeNichtImBestand()
 	{		
-		this.out.println("<tr>\n<td colspan=\"8\">\n</td>\n</tr>\n<tr>\n<td colspan=\"7\">");
+		this.out.println("<tr rowspan=\"2\">\n<td colspan=\"8\">\n</td>\n</tr>\n<tr>\n<td colspan=\"7\">");
 		this.out.println(this.resourceBundle.getString("MENGE_NICHT_IM_BESTAND"));
 		this.out.println("</td>\n</tr>");		
 	}
