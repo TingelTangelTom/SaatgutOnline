@@ -48,19 +48,18 @@ public class ImpressumController {
 			String query = "SELECT * FROM impressum";
 			//TODO : query aktualisieren
 
-			Statement statement = DatenbankController.verbindung.createStatement();
-			ResultSet resultset = statement.executeQuery(query);
-			if (resultset.next()) {
-				unternehmen_adresse = resultset.getString("unternehmen_adresse");
-				unternehmen_telefon = resultset.getString("unternehmen_telefon");
-				unternehmen_fax = resultset.getString("unternehmen_fax");
-				unternehmen_email = resultset.getString("unternehmen_email");
-				unternehmen_geschaeftsfuehrung = resultset.getString("unternehmen_geschaeftsfuehrung");
-				registergericht = resultset.getString("registergericht");
-				register_nr = resultset.getString("register_nr");
-				umsatzsteuer_id = resultset.getString("umsatzsteuer_id");
-				wirtschafts_id = resultset.getString("wirtschafts_id");
-				impressum_copyright = resultset.getString("impressum_copyright");
+			ResultSet resultSet = DatenbankController.sendeSqlRequest(query);
+			if (resultSet.next()) {
+				unternehmen_adresse = resultSet.getString("unternehmen_adresse");
+				unternehmen_telefon = resultSet.getString("unternehmen_telefon");
+				unternehmen_fax = resultSet.getString("unternehmen_fax");
+				unternehmen_email = resultSet.getString("unternehmen_email");
+				unternehmen_geschaeftsfuehrung = resultSet.getString("unternehmen_geschaeftsfuehrung");
+				registergericht = resultSet.getString("registergericht");
+				register_nr = resultSet.getString("register_nr");
+				umsatzsteuer_id = resultSet.getString("umsatzsteuer_id");
+				wirtschafts_id = resultSet.getString("wirtschafts_id");
+				impressum_copyright = resultSet.getString("impressum_copyright");
 
 				new ImpressumView(request, response, unternehmen_adresse, unternehmen_telefon,
 						unternehmen_fax, unternehmen_email, unternehmen_geschaeftsfuehrung, registergericht,

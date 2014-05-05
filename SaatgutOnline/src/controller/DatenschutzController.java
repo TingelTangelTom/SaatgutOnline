@@ -36,13 +36,12 @@ public class DatenschutzController {
 
 		// Datenbankabfrage : Aktuellsten Datenschutz ausgeben
 		try {
-			String query = "SELECT datenschutz_txt FROM datenschutz ORDER BY datenschutz_datum_hinzugefuegt DESC LIMIT 1";
-			//  
+			String query = "SELECT datenschutz_txt FROM datenschutz "
+					+ "ORDER BY datenschutz_datum_hinzugefuegt DESC LIMIT 1";
 
-			Statement statement = DatenbankController.verbindung.createStatement();
-			ResultSet resultset = statement.executeQuery(query);
-			if (resultset.next()) {
-				datenschutzText = resultset.getString(1);
+			ResultSet resultSet = DatenbankController.sendeSqlRequest(query);
+			if (resultSet.next()) {
+				datenschutzText = resultSet.getString(1);
 				 System.out.println(datenschutzText);
 				 new DatenschutzView(request, response, datenschutzText);
 			}

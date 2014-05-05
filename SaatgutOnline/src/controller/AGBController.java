@@ -38,10 +38,9 @@ public class AGBController {
 		try {
 			String query = "SELECT agb_txt FROM agb ORDER BY agb_datum_hinzugefuegt DESC LIMIT 1";
 
-			Statement statement = DatenbankController.verbindung.createStatement();
-			ResultSet resultset = statement.executeQuery(query);
-			if (resultset.next()) {
-				agbText = resultset.getString(1);
+			ResultSet resultSet = DatenbankController.sendeSqlRequest(query);
+			if (resultSet.next()) {
+				agbText = resultSet.getString(1);
 				 System.out.println(agbText);
 				 new AGBView(request, response, agbText);
 			}
