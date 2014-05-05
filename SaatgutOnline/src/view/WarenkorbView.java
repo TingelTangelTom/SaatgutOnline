@@ -84,7 +84,7 @@ public class WarenkorbView
 		this.out.println("<tr>\n<td>");
 		this.out.println(this.resourceBundle.getString("NAME"));
 		this.out.println("</td>\n<td>");
-		this.out.println(this.resourceBundle.getString("BESTELLNUMMER"));
+		this.out.println(this.resourceBundle.getString("PRODUKTNUMMER"));
 		this.out.println("</td>\n<td>");
 		this.out.println(this.resourceBundle.getString("VERPACKUNGSEINHEIT"));
 		this.out.println("</td>\n<td>");
@@ -119,7 +119,7 @@ public class WarenkorbView
 				+ produktModel.getName()
 				+ "\n</a>");
 		this.out.println("</td>\n<td>");
-		this.out.println(produktModel.getBestellnummer());
+		this.out.println(produktModel.getProduktnummer());
 		this.out.println("</td>\n<td>");
 		this.out.println(produktModel.getVpe());
 		this.out.println("</td>\n<td>");
