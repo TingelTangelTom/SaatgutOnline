@@ -30,6 +30,12 @@ public class KopfbereichView
 	 * @see java.util.ResourceBundle
 	 */
 	private ResourceBundle resourceBundle;
+	
+	/**
+	 * Objekt der Klasse <code>HttpSession</code>
+	 * @see HttpSession
+	 */
+	private HttpSession session;
 
 	/**
 	 * Konstruktor der Klasse <code>KopfbereichView</code>
@@ -42,7 +48,7 @@ public class KopfbereichView
 	 */
 	public KopfbereichView(HttpServletRequest request, HttpServletResponse response)
 	{
-		HttpSession session = request.getSession();
+		this.session = request.getSession();
 		
 		response.setContentType("text/html");
 		try
@@ -151,12 +157,9 @@ public class KopfbereichView
 		this.out.println("<tr>\n<td>");
 		this.out.println(this.resourceBundle.getString("ANGEMELDET_ALS"));
 		this.out.println("</td>\n</tr>\n<tr>\n<td>");
-		// FIXME benutzername einsetzen!
-		this.out.println(this.resourceBundle.getString("BENUTZERNAME"));
+		this.out.println(this.session.getAttribute("benutzername"));		
 		this.out.println("</td>\n</tr>\n<tr><td>\n</tr><tr>\n<td>");
-		// FIXME Link anpassen und NoOp entfernen!
-		this.out.println("<a href=\"/SaatgutOnline/NoOperation\">\n" + this.resourceBundle.getString("ABMELDEN")
-				+ "\n</a>");
+		this.out.println("<a href=\"/SaatgutOnline/Abmeldung\">\n" + this.resourceBundle.getString("ABMELDEN")+"\n</a>");
 		this.out.println("</td>\n</tr>");
 		this.out.println("</table>");
 	}
