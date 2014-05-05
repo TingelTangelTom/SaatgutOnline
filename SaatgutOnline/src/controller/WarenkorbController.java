@@ -12,41 +12,39 @@ import view.HtmlAusgabe;
 import view.WarenkorbView;
 
 /**
- * Die Klasse <code>WarenkorbController</code> stellt Kontrollstrukturen zur Darstellung
- * und Organisation des Warenkorbs zur Verfuegung
+ * <p>Die Klasse <code>WarenkorbController</code> stellt Kontrollstrukturen zur
+ * Darstellung und Organisation des Warenkorbs zur Verfuegung</p>
+ * 
  * @author Tom Weigelt
- *
+ * @version 1.0
+ * @since 1.7.0_51
+ * 
  */
 public class WarenkorbController
 {
-	/**
-	 * aktuelle <code>HttpSession</code>
-	 * @see javax.servlet.http.HttpSession
-	 */
 	private HttpSession session;
-	
-	/**
-	 * Eine <code>Hashtable</code> der im Warenkorb abgelegten Produkte vom Datentyp <code>ProduktModel</code> als Schluessel
-	 * und deren Bestellmenge vom Datentyp <code>int</code> als Wert
-	 */
 	private Hashtable<ProduktModel, Integer> warenkorb;
-	
-	/**
-	 * Objekt der Klasse <code>WarenkorbView</code>
-	 * @see view.WarenkorbView
-	 */
 	private WarenkorbView warenkorbView;
-	
-	/**
-	 * Objekt der Klasse <code>HttpServletRequest</code>
-	 * @see javax.servlet.http.HttpServletRequest
-	 */
 	private HttpServletRequest request;
 
 	/**
-	 * Konstruktor der Klasse <code>WarenkorbController</code>
+	 * <p>
+	 * Konstruktor der Klasse <code>WarenkorbController</code>.
+	 * </p>
+	 * <p>Ruft die Methode <code>warenkorbAusSessionHolen()</code> auf.
+	 * </br>Die Methode holt einen bestehenden Warenkorb aus der <code>HttpSession</code>
+	 * und legt ihn in der Variable <i>warenkorb</i> ab. Falls kein Warenkorb in der Session
+	 * liegt, wird er erzeugt.</p>
+	 * <p>Ruft die Methode <code>warenkorbAktualiseren()</code> auf.
+	 * </br>Die Methode stellt die Funktionalitaet fuer den Warenkorb zur Verfuegung:
+	 * </br>- Produkt hinzufuegen
+	 * </br>- Produkt entfernen
+	 * </br>- Menge aendern</p>
+	 * <p>Der aktuelle Warenkorb wird in die Session geschrieben.
+	 * </p>
 	 * @param request - der aktuelle <code>HttpServletRequest</code>
 	 * @param response - die aktuelle <code>HttpServletResponse</code>
+	 * @see javax.servlet.http.HttpSession
 	 * @see javax.servlet.http.HttpServletRequest
 	 * @see javax.servlet.http.HttpServletResponse
 	 */
@@ -61,7 +59,9 @@ public class WarenkorbController
 	}
 
 	/**
-	 * Formatiert die Darstellung des Warenkorbs und gibt diese aus
+	 * <p>Formatiert durch den situationsbedingten Aufruf von Methoden der Klasse
+	 * <code>WarenkorbView</code> die Darstellung des Warenkorbs und gibt diese aus.</p>
+	 * @see view.WarenkorbView
 	 */
 	public void warenkorbAnzeigen()
 	{
@@ -77,24 +77,23 @@ public class WarenkorbController
 			{
 				ProduktModel anzuzeigendesProduktModel = produkte.nextElement();
 				int menge = this.warenkorb.get(anzuzeigendesProduktModel);
-				
-				if(menge > anzuzeigendesProduktModel.getBestand())
+
+				if (menge > anzuzeigendesProduktModel.getBestand())
 				{
 					menge = anzuzeigendesProduktModel.getBestand();
 					this.warenkorb.put(anzuzeigendesProduktModel, menge);
 					this.warenkorbView.outMengeNichtImBestand();
-					
 				}
-				
+
 				double gesamtpreisPosition = menge * anzuzeigendesProduktModel.getPreisBrutto();
 				String einzelpreisFormatiert = htmlAusgabe.outPreisformat(anzuzeigendesProduktModel.getPreisBrutto());
 				String gesamtpreisPositionFormatiert = htmlAusgabe.outPreisformat(gesamtpreisPosition);
-				this.warenkorbView.outWarenkorbInhalt(anzuzeigendesProduktModel, menge, einzelpreisFormatiert,
-						gesamtpreisPositionFormatiert);
+				this.warenkorbView.outWarenkorbInhalt(anzuzeigendesProduktModel, menge, einzelpreisFormatiert, gesamtpreisPositionFormatiert);
 
 				zwischensumme += gesamtpreisPosition;
 			}
-		} else
+		}
+		else
 		{
 			this.warenkorbView.outLeererWarenkorb();
 		}
@@ -103,10 +102,6 @@ public class WarenkorbController
 		this.warenkorbView.outWarenkorbEnde(zwischensummeFormatiert);
 	}
 
-	/**
-	 * Liest den Warenkorb aus der <code>HttpSession</code>
-	 * und legt sie in der <code>HashTable</code> <i>warenkorb</i> ab
-	 */
 	@SuppressWarnings("unchecked")
 	private void warenkorbAusSessionHolen()
 	{
@@ -119,19 +114,16 @@ public class WarenkorbController
 		}
 	}
 
-	/**
-	 * Aktualisiert die sich im Warenkorb befindlichen <code>ProduktModel</code> sowie deren Menge
-	 * und legt diese in der <code>HttpSession</code> ab
-	 * @see model.ProduktModel
-	 */
 	private void warenkorbAktualisieren()
 	{
 		Enumeration<ProduktModel> produktModelsImWarenkorb;
 		ProduktModel produktModelImWarenkorb;
-		
+
 		if (this.request.getParameter("produkt") != null)
 		{
 			int id = Integer.parseInt(this.request.getParameter("produkt"));
+			
+			// die folgenden drei zeilen nutzen Code von Simon Ankele
 			ProduktController produktController = new ProduktController(this.request);
 			ProduktModel produktModelAusDatenbank = new ProduktModel();
 			produktModelAusDatenbank = produktController.getProdukt(id);
@@ -148,7 +140,7 @@ public class WarenkorbController
 					if (produktModelAusDatenbank.getId() == produktModelImWarenkorb.getId())
 					{
 						produktNichtImWarenkorb = false;
-						int mengeImWarenkorb = this.warenkorb.get(produktModelImWarenkorb);						
+						int mengeImWarenkorb = this.warenkorb.get(produktModelImWarenkorb);
 						int neueMenge = mengeImWarenkorb + hinzugefuegteMenge;
 						this.warenkorb.put(produktModelImWarenkorb, neueMenge);
 					}
@@ -163,10 +155,29 @@ public class WarenkorbController
 			{
 				this.warenkorb.put(produktModelAusDatenbank, Integer.parseInt(this.request.getParameter("menge")));
 			}
-		} else
+		}
+		else
 		{
 			if (this.request.getParameter("aktualisieren") != null)
 			{				
+				/*
+				 * 
+				 * Da pro Aufruf die Menge mehrere Produkte aktualisiert werden koennen,
+				 * gibt es moeglicherweise mehrere Parameter des Namens "menge". Um die Menge dennoch
+				 * eindeutig einem Produkt zuordenen zu koennen, wird bei der Erzeugung des Parameters (per
+				 * Unterstrich getrennt) die Produkt-ID angehaengt.
+				 * 
+				 * Der Ubergabeparameter "menge" ist wie folgt aufgebaut:
+				 * menge_produktId=neueMenge
+				 * 
+				 * Um nun die Produkt-ID als Wert zu bekommen, mit dem weiter gearbeitet
+				 * werden kann, wird der Parameter am Unterstrich gesplittet und die
+				 * Bestandteile "menge" und 'produktId' im StringArray 'splittedParameter'
+				 * abgelegt.
+				 * 
+				 * Die Produkt-ID ist somit als Integer verfuegbar per:
+				 * Integer.parseInt(splittedParameter[1]) 
+				 */
 				Enumeration<String> parameters;
 				String[] splittedParameter;
 				String parameter;
@@ -185,19 +196,18 @@ public class WarenkorbController
 						{
 							produktModelImWarenkorb = produktModelsImWarenkorb.nextElement();
 							if (produktModelImWarenkorb.getId() == Integer.parseInt(splittedParameter[1]))
-							{		
+							{
 								int value = 0;
-								
+
 								try
 								{
 									value = Integer.parseInt(this.request.getParameter(parameter));
-								} catch (NumberFormatException e){
-									value = this.warenkorb.get(produktModelImWarenkorb);
-									System.out.println("Parameter ist kein Integer - "+value+" als Menge gesetzt!");
-									System.out.println(e);
+								} catch (NumberFormatException e)
+								{
+									value = this.warenkorb.get(produktModelImWarenkorb);									
 								}
-								
-								if(value >= 0)
+
+								if (value >= 0)
 								{
 									if (value == 0)
 									{
