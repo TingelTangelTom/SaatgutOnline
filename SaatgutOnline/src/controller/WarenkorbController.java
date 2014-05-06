@@ -122,7 +122,7 @@ public class WarenkorbController
 		{
 			int id = Integer.parseInt(this.request.getParameter("produkt"));
 			
-			// die drei folgenden Zeilen nutzen Code von Simon Ankele
+			// die drei nachfolgenden Zeilen nutzen Code von Simon Ankele
 			ProduktController produktController = new ProduktController(this.request);
 			ProduktModel produktModelAusDatenbank = new ProduktModel();
 			produktModelAusDatenbank = produktController.getProdukt(id);

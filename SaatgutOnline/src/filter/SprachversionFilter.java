@@ -88,7 +88,10 @@ public class SprachversionFilter implements Filter
 	private void spracheIdInSessionLegen(HttpSession session, Locale locale)
 	{
 		String query = "SELECT sprache_id FROM sprache WHERE name = \"" + locale.getLanguage() + "\"";
+		
+		// Die nachfolgende Zeile nutzt Code von Christof Weigand
 		ResultSet resultSet = DatenbankController.sendeSqlRequest(query);
+		
 		try
 		{
 			if (resultSet.next())
@@ -97,7 +100,7 @@ public class SprachversionFilter implements Filter
 			}
 		} catch (SQLException e)
 		{
-			System.out.println("DB-Fehler: Resultset Scprachfilter");
+			// remove?
 			e.printStackTrace();
 		}
 	}

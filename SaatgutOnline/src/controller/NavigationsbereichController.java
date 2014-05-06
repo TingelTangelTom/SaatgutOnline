@@ -148,7 +148,7 @@ public class NavigationsbereichController
 		
 		/*
 		 *  <ausGet> ist 'true', wenn die Instanz dieser Klasse in der doGet()-Methode des zueghoerigen
-		 *  Servlets instanziert wurde, sonst 'false'
+		 *  Servlets instanziert wurde, sonst 'false'.
 		 */
 		
 		if(	ausGet	
@@ -182,6 +182,7 @@ public class NavigationsbereichController
 					+ "WHERE sprache_id = '" + spracheId + "' "
 					+ "ORDER BY k.sortier_reihenfolge";
 			
+			// Die nachfolgende Zeile nutzt Code von Christof Weigand
 			ResultSet resultSet = DatenbankController.sendeSqlRequest(query);
 			
 			try
@@ -198,7 +199,7 @@ public class NavigationsbereichController
 				}
 			} catch (SQLException e)
 			{
-				System.out.println("DB-Fehler: ResultSet NavigationsbereichController");
+				// remove?
 				e.printStackTrace();
 			}
 		
