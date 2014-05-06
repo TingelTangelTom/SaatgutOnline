@@ -1,5 +1,15 @@
 package view;
-
+/**
+ * <p>Die Klasse <code>AnmeldungFehlerView</code>
+ * erzeugt einen <code>PrintWriter</code> und gibt
+ * gemaess mittels resourcebundle uebergebener Spracheinstellungen
+ * den passenden internationalisierten Text aus.
+ * </p>
+ * @author Christof Weigandt
+ * @version 1.0
+ * @since 1.7.0_51
+ * @see AnmeldungFehlerView
+ */
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Locale;
@@ -12,17 +22,7 @@ import javax.servlet.http.HttpSession;
 
 public class AnmeldungFehlerView {
 
-	/**
-	 * Objekt der Klasse <code>PrintWriter</code>
-	 * 
-	 * @see java.io.PrintWriter
-	 */
 	private PrintWriter out;
-	/**
-	 * Objekt der Klasse <code>ResourceBundle</code>
-	 * 
-	 * @see java.util.ResourceBundle
-	 */
 	private ResourceBundle resourceBundle;
 	
 	
@@ -36,7 +36,6 @@ public class AnmeldungFehlerView {
 			this.out = response.getWriter();
 		} catch (IOException e)
 		{
-			System.out.println("PrintWriter nicht erstellt!");
 			e.printStackTrace();
 		}
 		
@@ -44,7 +43,9 @@ public class AnmeldungFehlerView {
 		this.resourceBundle = PropertyResourceBundle.getBundle("I18N." + locale.getLanguage() + "."
 				+ getClass().getSimpleName(), locale);
 	}
-	
+	/**
+	 * Neues Formular zur erneuten Anmeldung ausgeben
+	 */
 	public void outAnmeldungFehler(HttpServletRequest request, HttpServletResponse response) {
 		response.setContentType("text/html");
 		try {
@@ -70,11 +71,8 @@ public class AnmeldungFehlerView {
 		this.out.println("<input type=\"submit\" name=\"anmelden\" value=\""
 				+ this.resourceBundle.getString("ANMELDEN") + "\">");
 		this.out.println("</td>\n</tr>\n<tr>\n<td>\n</td>\n<td colspan=\"2\">");
-		// FIXME mit Mailfunktion verbinden!
 		this.out.println("<a href=\"/SaatgutOnline/NoOperation\">\n"
 				+ this.resourceBundle.getString("PASSWORT_VERGESSEN") + "\n</a>");
-		// TODO remove
-		this.out.println(" (noOp)");
 		this.out.println("</td>\n</tr>\n<tr>\n<td>\n</td>\n<td colspan=\"2\">");
 		this.out.println("<a href=\"/SaatgutOnline/Registrierung\">\n" + this.resourceBundle.getString("REGISTRIEREN")
 				+ "\n</a>");
