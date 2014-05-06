@@ -54,9 +54,8 @@ public class KopfbereichView {
 		} catch (IOException e) {
 		}
 
-		Locale locale = (Locale) session.getAttribute("sprache");
-		
-		// die nachfolgende Zeile enthaelt Code von Simon Ankele
+		// die zwei nachfolgenden Zeilen enthalten Code von Simon Ankele
+		Locale locale = (Locale) session.getAttribute("sprache");		
 		this.resourceBundle = PropertyResourceBundle.getBundle("I18N." + locale.getLanguage() + "."
 				+ getClass().getSimpleName(), locale);
 	}

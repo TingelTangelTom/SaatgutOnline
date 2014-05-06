@@ -51,9 +51,8 @@ public class NavigationsbereichView {
 		} catch (IOException e) {
 		}
 
+		// die zwei nachfolgenden Zeilen enthalten Code von Simon Ankele
 		Locale locale = (Locale) session.getAttribute("sprache");
-		
-		// die nachfolgende Zeile enthaelt Code von Simon Ankele
 		this.resourceBundle = PropertyResourceBundle.getBundle("I18N." + locale.getLanguage() + "."
 				+ getClass().getSimpleName(), locale);
 	}
