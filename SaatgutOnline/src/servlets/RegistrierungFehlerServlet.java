@@ -12,7 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 import controller.RegistrierungFehlerController;
 
 /**
- * Servlet implementation class RegistrierungFehlerServlet
+ * <p>Die Klasse <code>RegistrierungFehlerServlet</code>
+ * nimmt den request entgegen und erzeugt einen <code>RegistrierungFehlerController</code>.
+ * </p>
+ * @author Christof Weigandt
+ * @version 1.0
+ * @since 1.7.0_51
+ * @see RegistrierungFehlerController
  */
 @WebServlet("/RegistrierungFehler")
 public class RegistrierungFehlerServlet extends HttpServlet {

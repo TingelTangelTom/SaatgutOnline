@@ -13,7 +13,13 @@ import controller.AnmeldungFehlerController;
 import controller.RegistrierungFehlerController;
 
 /**
- * Servlet implementation class AnmeldungFehlerServlet
+ * <p>Die Klasse <code>AnmeldungFehlerServlet</code>
+ * nimmt den request entgegen und erzeugt einen <code>AnmeldungFehlerController</code>.
+ * </p>
+ * @author Christof Weigandt
+ * @version 1.0
+ * @since 1.7.0_51
+ * @see anmeldungFehlerController
  */
 @WebServlet("/AnmeldungFehler")
 public class AnmeldungFehlerServlet extends HttpServlet {
@@ -24,7 +30,6 @@ public class AnmeldungFehlerServlet extends HttpServlet {
      */
     public AnmeldungFehlerServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -39,12 +44,10 @@ public class AnmeldungFehlerServlet extends HttpServlet {
 		rd = getServletContext().getRequestDispatcher("/Fussbereich");
 		rd.include(request, response);			
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 	}
 
 }

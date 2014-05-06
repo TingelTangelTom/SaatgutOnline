@@ -37,17 +37,15 @@ public class NavigationsbereichController {
 	 * </p>
 	 * <p>
 	 * Die aufgerufene Methode
-	 * <code>geklickteKategorienAktualisieren(ausGet)</code> organisiert eine
-	 * <code>ArrayList</code>, in der die IDs der geklickten Kategorien beim
-	 * ersten Klick eingetragen und beim zweiten Klick wieder entfernt werden.
+	 * <code>geklickteKategorienAktualisieren()</code> organisiert eine in der
+	 * Session abgelegte<code>ArrayList</code>, in der die IDs der geklickten Kategorien
+	 * beim ersten Klick eingetragen und beim zweiten darauf Klick wieder entfernt werden.
 	 * Findet sich eine Hauptkategorie in dieser Liste, so werden in der
-	 * Kategorien-Liste auch ihre Unterkategorien angezeigt. </br></br>Der
-	 * <code>boolean</code> <i>ausGet</i> ist <b>true</b>, wenn der
-	 * <code>NavigationsbereichController</code> aus der <code>doGet()</code>
-	 * -Methode des <code>NavigationsbereichServlet</code> instanziert wird und
-	 * <b>false</b>, wenn er aus der <code>doPost()</code>-Methode instanziert
-	 * wird. </br>Kategorie-IDs werden nur in der Liste eingetragen bzw.
-	 * entfernt, wenn <code>doGet</code> <b>true</b> ist.
+	 * Kategorien-Liste auch ihre Unterkategorien angezeigt.
+	 * </br></br>Desweiteren wird  der <code>int</code> <i>aktuelleKategorie</i> in der
+	 * Session aktualisiert - und zwar immer mit der ID der zuletzt geklickten
+	 * Kategorie. Die Kategorie, deren ID diesem Wert gleicht, wird farblich
+	 * hervorgehoben dargestellt.
 	 * </p>
 	 * 
 	 * @param request
@@ -60,12 +58,12 @@ public class NavigationsbereichController {
 	 * @see javax.servlet.http.HttpServletResponse
 	 * @see servlets.NavigationsbereichServlet
 	 */
-	public NavigationsbereichController(HttpServletRequest request, HttpServletResponse response, boolean ausGet) {
+	public NavigationsbereichController(HttpServletRequest request, HttpServletResponse response) {
 		this.request = request;
 		this.session = request.getSession();
 		this.navigationsbereichView = new NavigationsbereichView(request, response);
 		this.kategorienArrayList = kategorienAusDbHolen();
-		this.geklickteKategorienAktualisieren(ausGet);
+		this.geklickteKategorienAktualisieren();
 	}
 
 	/**
@@ -79,7 +77,8 @@ public class NavigationsbereichController {
 	 */
 	public void navigationsbereichAnzeigen() {
 		this.navigationsbereichView.outNavigationsbereichAnfang();
-		if (this.request.getParameter("angebote") != null) {
+
+		if((int)this.session.getAttribute("aktuelleKategorie") == 0) {			
 			this.navigationsbereichView.outAngeboteAktuell();
 		} else {
 			this.navigationsbereichView.outAngebote();
@@ -97,8 +96,10 @@ public class NavigationsbereichController {
 			this.kategorieModel = this.kategorienArrayList.get(i);
 
 			if (this.kategorieModel.getElternKategorieId() == 0) {
-				if ((this.request.getParameter("angebote") == null)
-						&& this.aktuelleKategorieSession == this.kategorieModel.getKategorieId()) {
+				if (	((this.request.getParameter("angebote") != null)
+						&& (this.request.getParameter("angebote").contains("false"))						
+						|| (this.request.getParameter("angebote") == null))
+						&& (this.aktuelleKategorieSession == this.kategorieModel.getKategorieId())) {
 					this.navigationsbereichView.outHauptKategorieAktuellAnzeigen(kategorieModel);
 				} else {
 					this.navigationsbereichView.outHauptKategorieAnzeigen(this.kategorieModel);
@@ -112,7 +113,11 @@ public class NavigationsbereichController {
 
 						if (this.kategorieModel.getElternKategorieId() != 0) {
 							if (this.kategorieModel.getElternKategorieId() == hauptKategorieId) {
-								if (this.aktuelleKategorieSession == this.kategorieModel.getKategorieId()) {
+								if (	((this.request.getParameter("angebote") != null)
+										&& (this.request.getParameter("angebote").contains("false"))						
+										|| (this.request.getParameter("angebote") == null))
+										&& (this.aktuelleKategorieSession == this.kategorieModel.getKategorieId())) 
+								{
 									this.navigationsbereichView.outUnterKategorieAktuellAnzeigen(kategorieModel);
 								} else {
 									this.navigationsbereichView.outUnterKategorieAnzeigen(this.kategorieModel);
@@ -126,40 +131,39 @@ public class NavigationsbereichController {
 	}
 
 	@SuppressWarnings("unchecked")
-	private void geklickteKategorienAktualisieren(boolean ausGet) {
+	private void geklickteKategorienAktualisieren() {
 		if (this.session.getAttribute("geklickteKategorien") != null) {
-			this.geklickteKategorienSession = (ArrayList<Integer>) this.session
-					.getAttribute("geklickteKategorien");
+			this.geklickteKategorienSession = (ArrayList<Integer>) this.session.getAttribute("geklickteKategorien");
 		} else {
 			this.geklickteKategorienSession = new ArrayList<Integer>();
 		}
 
 		if (this.session.getAttribute("aktuelleKategorie") != null) {
-			this.aktuelleKategorieSession = (int) this.session.getAttribute("aktuelleKategorie");
+			this.aktuelleKategorieSession = (Integer) this.session.getAttribute("aktuelleKategorie");
 		} else {
 			this.aktuelleKategorieSession = 0;
 		}
+		
+		if((this.request.getParameter("angebote") != null) && this.request.getParameter("angebote").contains("true")){
+			this.aktuelleKategorieSession = 0;
+		}
 
-		/*
-		 * <ausGet> ist 'true', wenn die Instanz dieser Klasse in der
-		 * doGet()-Methode des zueghoerigen Servlets instanziert wurde, sonst
-		 * 'false'.
-		 */
-
-		if (ausGet && (this.request.getParameter("kategorie") != null)
+		if (	(this.request.getParameter("kategorie") != null)
 				&& (this.request.getParameter("erweitertesuche") == null)) {
 			Integer geklickteKategorie = Integer.parseInt(this.request.getParameter("kategorie"));
-			this.aktuelleKategorieSession = geklickteKategorie;
 
-			if (this.geklickteKategorienSession.contains(geklickteKategorie)) {
-				this.geklickteKategorienSession.remove(geklickteKategorie);
-			} else {
-				this.geklickteKategorienSession.add(geklickteKategorie);
+			if ((this.geklickteKategorienSession.contains(geklickteKategorie)) && (this.aktuelleKategorieSession == geklickteKategorie)) {
+				this.geklickteKategorienSession.remove(this.geklickteKategorienSession.indexOf(geklickteKategorie));				
+			}	else {			
+				if (! this.geklickteKategorienSession.contains(geklickteKategorie)) {
+					this.geklickteKategorienSession.add(geklickteKategorie);				
+				}
 			}
-
-			this.session.setAttribute("geklickteKategorien", this.geklickteKategorienSession);
-			this.session.setAttribute("aktuelleKategorie", this.aktuelleKategorieSession);
+			this.aktuelleKategorieSession = geklickteKategorie;
 		}
+		
+		this.session.setAttribute("geklickteKategorien", this.geklickteKategorienSession);
+		this.session.setAttribute("aktuelleKategorie", this.aktuelleKategorieSession);
 	}
 
 	private ArrayList<KategorieModel> kategorienAusDbHolen() {

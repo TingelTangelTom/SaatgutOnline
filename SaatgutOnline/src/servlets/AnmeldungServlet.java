@@ -11,9 +11,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import controller.AnmeldungController;
 import controller.RegistrierungController;
-
 /**
- * Servlet implementation class AnmeldungServlet
+ * <p>Die Klasse <code>AnmeldungServlet</code>
+ * nimmt den request entgegen und erzeugt einen <code>anmeldungVerarbeitungController</code>.
+ * </p>
+ * @author Christof Weigandt
+ * @version 1.0
+ * @since 1.7.0_51
+ * @see anmeldungVerarbeitungController
  */
 @WebServlet("/Anmeldung")
 public class AnmeldungServlet extends HttpServlet {
