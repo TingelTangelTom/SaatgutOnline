@@ -8,31 +8,55 @@ import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-
-
-
-
-
-
-
-
+import view.WarenkorbView;
 import model.ProduktModel;
 
-
 /**
- * 
- * Der ProduktController liefert Rückgabewerte für <code>ProduktlisteView</code>
- * und <code>ProduktinfoView</code>. Ausserdem stellt er Methoden zur Verfügung, 
- * welche für das Bearbeiten der Rückgabewerte benötigt werden.
+ * <p>Die Klasse <code>ProduktController</code> liefert Rückgabewerte für die 
+ * Darstellung und Organisation der Produktliste und der Einzelansicht von Produkten Verfuegung.</p>
  * 
  * @author Simon Ankele
- *
+ * @version 1.0
+ * @since 1.7.0_51
+ * 
  */
+
 public class ProduktController {
 	
 	private ProduktModel produktModel;
 	private double steuersatz;
 	private int sprache_id;
+	
+	/**
+	 * <p>Konstruktor der Klasse <code>ProduktController</code></p>
+	 * <p>Ruft die Methode <code>warenkorbAusSessionHolen()</code> auf.
+	 * </br>Die Methode holt einen bestehenden Warenkorb aus der <code>HttpSession</code>
+	 * und legt ihn in der Variable <i>warenkorb</i> ab. Falls kein Warenkorb in der Session
+	 * liegt, wird er erzeugt.</p>
+	 * <p>Ruft die Methode <code>warenkorbAktualiseren()</code> auf.
+	 * </br>Die Methode stellt die Funktionalitaet fuer den Warenkorb zur Verfuegung:
+	 * </br>- Produkt hinzufuegen
+	 * </br>- Produkt entfernen
+	 * </br>- Menge aendern</p>
+	 * <p>Der aktuelle Warenkorb wird in die Session geschrieben.
+	 * </p>
+	 * @param request - der aktuelle <code>HttpServletRequest</code>
+	 * @param response - die aktuelle <code>HttpServletResponse</code>
+	 * @see javax.servlet.http.HttpSession
+	 * @see javax.servlet.http.HttpServletRequest
+	 * @see javax.servlet.http.HttpServletResponse
+	 */
+	
+	/**
+	 * 
+	 * <p>Konstruktor der Klasse <code>ProduktController</code></p>
+	 * <p>Der Konstruktor erstellt ein <code>ProduktModel</code>-Objekt und speichert 
+	 * das Session-Attribut <i>spracheId</i> in der Klassenvariablen <i>sprache_id</i>
+	 * 
+	 * @param request - der aktuelle <code>HttpServletRequest</code>
+	 * @see javax.servlet.http.HttpServletRequest
+	 * 
+	 */
 	
 	public ProduktController(HttpServletRequest request) {
 		super();
@@ -40,7 +64,6 @@ public class ProduktController {
 		HttpSession session = request.getSession();
 		this.produktModel = new ProduktModel();
 		this.sprache_id = (int)session.getAttribute("spracheId");
-		
 	}
 
 	/**
