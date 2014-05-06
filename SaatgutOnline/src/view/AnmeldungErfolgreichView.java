@@ -1,4 +1,14 @@
 package view;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Locale;
+import java.util.PropertyResourceBundle;
+import java.util.ResourceBundle;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 /**
  * <p>Die Klasse <code>AnmeldungErfolgreichView</code>
  * erzeugt einen <code>PrintWriter</code> und gibt
@@ -10,16 +20,6 @@ package view;
  * @since 1.7.0_51
  * @see AnmeldungFehlerView
  */
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Locale;
-import java.util.PropertyResourceBundle;
-import java.util.ResourceBundle;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 public class AnmeldungErfolgreichView {
 	private PrintWriter out;
 	private ResourceBundle resourceBundle;

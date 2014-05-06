@@ -9,35 +9,49 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import view.RegistrierungFehlerView;
 import controller.ConnectionPoolController;
 import controller.DatenbankController;
 import controller.KonfigurationController;
-
 /**
+ * <p>Die Klasse <code>KundeModel</code>
+ * repraesentiert die abstrahierten, relevanten
+ * und modellierten Daten eines Kunden des Onlineshops.
+ * <code>validiereKundendaten(request)</code>.
+ * Je nach Ergebnis der Auswertung wird auf entsprechende 
+ * Seiten weitergeleitet.
+ * </p>
  * @author Christof Weigandt
- *
- */
-
+ * @version 1.0
+ * @since 1.7.0_51
+ * @see DatenbankController
+ * @see ConnectionPoolController
+ */	
 public class KundeModel {
 
 	private int id;
-	private int geschlecht;		// DB anpassen
-	private String vorname;
+	private int geschlecht;	
 	private String nachname;
+	private String vorname;
 	private String benutzername;
 	private String firma;
 	private String strasse;
 	private String hausnummer;
-	private String ort;				// TODO DB anpassen
+	private String ort;			
 	private String postleitzahl;	
 	private String land;			
 	private String telefon;			
 	private String emailadresse;	
 	private String bundesland;	
 	private String uuid;	
-	private int newsletter;		// int ggfs. in bool konvertieren
-	private int freigeschaltet;		// int ggfs. in bool konvertieren
+	private int newsletter;		
+	private int freigeschaltet;
 
+	/**
+	 * Holt einen Kundendatensatz nach Kunden-ID aus der Datenbank
+	 * @param id
+	 * @return
+	 */
 	public KundeModel ladeKundeAusDb (int id) {
 
 		KundeModel kunde = new KundeModel ();
@@ -69,18 +83,21 @@ public class KundeModel {
 		return kunde;
 		
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 			return null;
 		}
 	}
-	public static KundeModel ladeKundeAusDb (String benutzername) {
+	
+	/**
+	 *  Holt einen Kundendatensatz nach Benutzernamen aus der Datenbank
+	 * @param benutzername
+	 * @return
+	 */
+	public synchronized static KundeModel ladeKundeAusDb (String benutzername) {
 
 		KundeModel kunde = new KundeModel ();
 		
 		String query = "SELECT * FROM " + KonfigurationController.getDbName()
         + ".kunde WHERE kunde_benutzername ='" + benutzername + "'";
-		System.out.println(query);
 		ResultSet result = DatenbankController.sendeSqlRequest(query);
 		try {
 			while(result.next()) {
@@ -104,13 +121,21 @@ public class KundeModel {
 			}
 		
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 			return null;
 		}
 		return kunde;
 	}
 	
+	/**
+	 *  Speichert einen Kundendatensatz in die Datenbank.
+	 *  Prepared Statements werden verwendet, um die Gefahr von SQL-Injections
+	 *  zu verringern. Nach dem speichern wird dem aktuellen Kunden-Objekt
+	 *  die von der Datenbank vergebene Kunden-ID uebergeben.
+	 *  Fuer den Verbindungsaufbau wird die Klasse ConnectionPoolController verwendet.
+	 * @return void
+	 * @see ConnectionPoolController
+	 * @see KonfigurationController
+	 */
 	public synchronized void speichereKundeInDb () {
 		 
 		Connection verbindung = ConnectionPoolController.getInstance().getVerbindungAusPool();
@@ -166,11 +191,8 @@ public class KundeModel {
          tabellenSchluessel.next();
          this.setId(tabellenSchluessel.getInt(1));
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 	}
-		
 		
 	public int getId() {
 		return id;
@@ -302,5 +324,4 @@ public class KundeModel {
 	public void setUuid(String uuid) {
 		this.uuid = uuid;
 	}
-	
 }

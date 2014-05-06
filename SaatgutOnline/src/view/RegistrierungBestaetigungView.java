@@ -9,23 +9,23 @@ import java.util.ResourceBundle;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
+/**
+ * <p>Die Klasse <code>RegistrierungBestaetigungView</code>
+ * erzeugt einen <code>PrintWriter</code> und gibt
+ * gemaess mittels resourcebundle uebergebener Spracheinstellungen
+ * ein passendes internationalisiertes
+ * Registrierungsformular aus.
+ * </p>
+ * @author Christof Weigandt
+ * @version 1.0
+ * @since 1.7.0_51
+ */
 public class RegistrierungBestaetigungView {
-	/**
-	 * Objekt der Klasse <code>PrintWriter</code>
-	 * 
-	 * @see java.io.PrintWriter
-	 */
 	private PrintWriter out;
-	/**
-	 * Objekt der Klasse <code>ResourceBundle</code>
-	 * 
-	 * @see java.util.ResourceBundle
-	 */
 	private ResourceBundle resourceBundle;
 
 	/**
-	 * Konstruktor der Klasse <code>KopfbereichView</code>
+	 * Konstruktor der Klasse <code>RegistrierungBestaetigungView</code>
 	 * @param request
 	 *            - der aktuelle <code>HttpServletRequest</code>
 	 * @param response
@@ -53,7 +53,7 @@ public class RegistrierungBestaetigungView {
 	}
 
 	/**
-	 * Stellt die Html-Ausgabe fuer den Anfang des Kopfbereiches zur Verfuegung
+	 * Stellt die internationalisierte Html-Ausgabe zur Verfuegung
 	 */
 	public void outRegistrierungBestaetigungView() {
 		this.out.println("<h1>" + (this.resourceBundle.getString("UEBERSCHRIFT")) + "</h1>");

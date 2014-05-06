@@ -11,25 +11,27 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import controller.RegistrierungVerarbeitungController;
-
+/**
+ * <p>Die Klasse <code>RegistrierungFehlerView</code>
+ * erzeugt einen <code>PrintWriter</code> und gibt
+ * gemaess mittels resourcebundle uebergebener Spracheinstellungen
+ * HTML-Code aus.
+ * </p>
+ * @author Christof Weigandt
+ * @version 1.0
+ * @since 1.7.0_51
+ */
 public class RegistrierungFehlerView {
-
-	/**
-	 * Objekt der Klasse <code>PrintWriter</code>
-	 * 
-	 * @see java.io.PrintWriter
-	 */
 	private PrintWriter out;
-	/**
-	 * Objekt der Klasse <code>ResourceBundle</code>
-	 * 
-	 * @see java.util.ResourceBundle
-	 */
 	private ResourceBundle resourceBundle;
 	private HttpSession session;
 	private RegistrierungVerarbeitungController registrierungVerarbeitungController;
 	
-	
+	/**
+	 * Konstruktor des Views.
+	 * @param request
+	 * @param response
+	 */
 	public RegistrierungFehlerView (HttpServletRequest request, HttpServletResponse response) {
 		
 		this.session = request.getSession();
@@ -41,7 +43,6 @@ public class RegistrierungFehlerView {
 			this.out = response.getWriter();
 		} catch (IOException e)
 		{
-			System.out.println("PrintWriter nicht erstellt!");
 			e.printStackTrace();
 		}
 		
@@ -49,14 +50,21 @@ public class RegistrierungFehlerView {
 		this.resourceBundle = PropertyResourceBundle.getBundle("I18N." + locale.getLanguage() + "."
 				+ getClass().getSimpleName(), locale);
 	}
-	
+	/**
+	 * Internationalisierte Ausgabemethode.
+	 * Zuvor falsch oder nicht regelgemaess ausgefuellte 
+	 * Formularfelder werden hervorgehoben und alle Formularfelder
+	 * mit Ausnahme der Passwortfelder werden mit den zuvor eingegebenen
+	 * Werten belegt.
+	 * @param request
+	 * @param response
+	 */
 	public void outRegistrierungFehler(HttpServletRequest request, HttpServletResponse response) {
 		response.setContentType("text/html");
 		PrintWriter out;
 		try {
 			out = response.getWriter();
 		} catch (IOException e) {
-			e.printStackTrace();
 			return;
 		}
 		this.out.println("<h1>" + this.resourceBundle.getString("UEBERSCHRIFT") + "</h1>"

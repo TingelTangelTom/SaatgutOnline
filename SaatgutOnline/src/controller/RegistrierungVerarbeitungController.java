@@ -11,12 +11,14 @@ import javax.servlet.http.HttpSession;
 import model.KundeModel;
 import model.PasswortHashModel;
 import view.RegistrierungFehlerView;
-import view.RegistrierungVerarbeitungView;
 	
 /**
  * <p>Die Klasse <code>RegistrierungVerarbeitungController</code>
- * erzeugt einen <code>RegistrierungBestaetigungView</code> und ruft
- * die passende Ausgabemethode derselben auf.
+ * verarbeitet die Daten aus dem Registrierungsformular
+ * <code>RegistrierungView</code> mit der Methode
+ * <code>validiereKundendaten(request)</code>.
+ * Je nach Ergebnis der Auswertung wird auf entsprechende 
+ * Seiten weitergeleitet.
  * </p>
  * @author Christof Weigandt
  * @version 1.0
@@ -48,6 +50,25 @@ public class RegistrierungVerarbeitungController {
 	 */
 	private HttpSession session;
 	
+	/**
+	 * <p>Konstruktor der Klasse<code>RegistrierungVerarbeitungController</code>.
+	 * Mit <code>validiereKundendaten(request)</code> werden die Formulareingaben
+	 * ueberprueft.
+	 * Die Pruefung prueft auf nicht null (Pflichtfelder) und weiter auf
+	 * anderer Eigenschaften, je nach Formularfeld. 
+	 * <code>RegistrierungView</code> mit der Methode
+	 * <code>validiereKundendaten(request)</code>.
+	 * Bei bestandener Pruefung wird ein Kundenobjekt in die Datenbank 
+	 * gespeichert, ein Hash aus dem Passwort erstellt und dieses 
+	 * ebenfalls in die Datenbank gespeichert.
+	 * Weiters wird eine uuid erzeugt und per Email eine Registrierungsaufforderung an
+	 * die E-Mail-Adresse des Kunden gesendet.
+	 * </p>
+	 * @author Christof Weigandt
+	 * @version 1.0
+	 * @since 1.7.0_51
+	 * @see RegistrierungFehlerView
+	 */	
 	public RegistrierungVerarbeitungController (HttpServletRequest request, HttpServletResponse response) {
 		
 		kunde = new KundeModel();
@@ -90,7 +111,7 @@ public class RegistrierungVerarbeitungController {
 				if ((Integer.parseInt(request.getParameter("Anrede")) == 0 ||
 				(Integer.parseInt(request.getParameter("Anrede")) == 1))) {
 					this.geschlechtGeprueft = true;
-					System.out.println("geschlecht ok"); }
+				}
 			} catch(NumberFormatException e) {
 		    }
 		}
@@ -99,14 +120,12 @@ public class RegistrierungVerarbeitungController {
 			if (request.getParameter("Vorname").length() > 2) {
 				this.vornameGeprueft = true;
 			} 
-			else { System.out.println("FEHLER bei Vorname"); }
 		}
 		if (request.getParameter("Nachname") != null) {
 			this.kunde.setNachname(request.getParameter("Nachname"));
 			if (request.getParameter("Nachname").length() > 1) {
 				this.nachnameGeprueft = true;
 			}
-			else { System.out.println("FEHLER bei Nachname"); }
 		}
 		if (request.getParameter("Strasse") != null) {
 			this.kunde.setStrasse(request.getParameter("Strasse"));
@@ -125,14 +144,12 @@ public class RegistrierungVerarbeitungController {
 			if (request.getParameter("Plz").length() > 4 && request.getParameter("Plz").length() < 8 ){
 				this.postleitzahlGeprueft = true;
 			}
-			else { System.out.println("FEHLER bei Plz"); }
 		}
 		if (request.getParameter("Ort") != null) {
 			this.kunde.setOrt(request.getParameter("Ort"));
 			if (request.getParameter("Ort").length() > 2 && request.getParameter("Ort").length() < 30 ){
 				this.ortGeprueft = true;
 			}
-			else { System.out.println("FEHLER bei Ort"); }
 		}
 		if (request.getParameter("Benutzername") != null) {
 			String regelBenutzername = KonfigurationController.getRegelBenutzername();
@@ -140,45 +157,37 @@ public class RegistrierungVerarbeitungController {
 			if (Pattern.matches(regelBenutzername, request.getParameter("Benutzername"))) {
 				this.benutzernameGeprueft = true;
 			}
-			else { System.out.println("FEHLER bei Benutzername"); }
 		}
 		if (request.getParameter("Firma") != null) {
 			this.kunde.setFirma(request.getParameter("Firma"));
 			if (request.getParameter("Firma").length() > 2 && request.getParameter("Firma").length() < 40 ){
 				this.firmaGeprueft = true;
 			}
-			else { System.out.println("FEHLER bei Firma"); }
 		}
 		if (request.getParameter("Emailadresse") != null) {
 			this.kunde.setEmailadresse(request.getParameter("Emailadresse"));
 			if (request.getParameter("Emailadresse").length() > 4 && request.getParameter("Emailadresse").length() < 70 ){
 				this.emailadresseGeprueft = true;
 			}
-			else { System.out.println("FEHLER bei Emailadresse"); }
 		}
 		if (request.getParameter("Telefon") != null) {
 			this.kunde.setTelefon(request.getParameter("Telefon"));
 			if (request.getParameter("Telefon").length() > 4 && request.getParameter("Telefon").length() < 30 ){
 				this.telefonGeprueft = true;
 			}
-			else { System.out.println("FEHLER bei Telefon"); }
 		}
 		if (request.getParameter("Passwort") != null) {
 			this.passwort = request.getParameter("Passwort");
 			String regelPasswort = KonfigurationController.getRegelPasswort();
 			if (Pattern.matches(regelPasswort, request.getParameter("Passwort"))) {
 				this.passwortGeprueft = true;
-				System.out.println("Passwort ist ok!");
 			} else {
-				System.out.println("pass ned ok");
 			}
 		}
 		if (request.getParameter("PasswortWiederholung") != null && request.getParameter("Passwort") != null) {
 			if (request.getParameter("PasswortWiederholung").equals(request.getParameter("Passwort"))) {
 				this.passwortWiederholungGeprueft = true;
-				System.out.println("Passwoerter stimmen ueberein!");
 			} else {
-				System.out.println("Passwoerter stimmen nicht ueberein!");
 			}
 		}
 		
