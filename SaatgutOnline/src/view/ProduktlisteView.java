@@ -94,9 +94,7 @@ public class ProduktlisteView {
 			this.produktliste = this.produktController.getProduktliste(request, this.kategorie, false);
 			statusanzeige = this.htmlAusgabe.outKategoriename(this.kategorie);
 		}
-		
-		
-		
+
 		// Laden der Kategorien für das Select-Feld
 		HashMap<Integer, String> kategorien = new HashMap<Integer, String>(this.produktController.getAlleKategorien());
 		

@@ -280,29 +280,30 @@ public class ProduktController {
 		
 		
 		System.out.println("+++Anfang Angebot+++");
-		if(request.getParameter("angebote") != null) {
-			System.out.println("angebot ungleich null");
-			if(request.getParameter("angebote").equals("true")) {
-				System.out.println("angebot ungleich null");
-				if(kategoriesuche_eltern_id == 0) {
-					produkt_query = "SELECT produkt_id FROM angebot WHERE gueltig_bis > now()";
-				} else {
-					if(kategoriesuche_eltern_id == 0) {
-						produkt_query = "SELECT p.produkt_id "
-								+ "FROM produkt AS p "
-								+ "INNER JOIN produkt_beschreibung AS pb ON p.produkt_id = pb.produkt_id "
-								+ "WHERE pb.sprache_id = '" + this.sprache_id + "' "
-								+ "AND  p.kategorie_id IN (SELECT kategorie_id FROM kategorie WHERE eltern_id = '" + kategorie_id + "' OR (kategorie_id = '" + kategorie_id + "' AND eltern_id = 0)) "
-								+ "ORDER BY " + session.getAttribute("sortierung_sortierspalte") + " " + session.getAttribute("sortierung_reihenfolge");
-					} else {
-						produkt_query = "SELECT p.produkt_id "
-								+ "FROM produkt AS p "
-								+ "INNER JOIN produkt_beschreibung AS pb ON p.produkt_id = pb.produkt_id "
-								+ "WHERE pb.sprache_id = '" + this.sprache_id + "' "
-								+ "AND  p.kategorie_id = '" + kategorie_id +"' "
-								+ "ORDER BY " + session.getAttribute("sortierung_sortierspalte") + " " + session.getAttribute("sortierung_reihenfolge");
-					}
-				}
+		if(request.getParameter("angebote") != null && request.getParameter("angebote").equals("true")) {
+				System.out.println("angebote werden gesucht");
+				produkt_query = "SELECT produkt_id FROM angebot WHERE gueltig_bis > now()";
+			
+		} else {
+			System.out.println("Er geht ins else");
+			if(kategoriesuche_eltern_id == 0) {
+				System.out.println("Er ist im alle kategorien");
+
+				produkt_query = "SELECT p.produkt_id "
+						+ "FROM produkt AS p "
+						+ "INNER JOIN produkt_beschreibung AS pb ON p.produkt_id = pb.produkt_id "
+						+ "WHERE pb.sprache_id = '" + this.sprache_id + "' "
+						+ "AND  p.kategorie_id IN (SELECT kategorie_id FROM kategorie WHERE eltern_id = '" + kategorie_id + "' OR (kategorie_id = '" + kategorie_id + "' AND eltern_id = 0)) "
+						+ "ORDER BY " + session.getAttribute("sortierung_sortierspalte") + " " + session.getAttribute("sortierung_reihenfolge");
+			} else {
+				System.out.println("Er ist in bestimmtere kategorie");
+
+				produkt_query = "SELECT p.produkt_id "
+						+ "FROM produkt AS p "
+						+ "INNER JOIN produkt_beschreibung AS pb ON p.produkt_id = pb.produkt_id "
+						+ "WHERE pb.sprache_id = '" + this.sprache_id + "' "
+						+ "AND  p.kategorie_id = '" + kategorie_id +"' "
+						+ "ORDER BY " + session.getAttribute("sortierung_sortierspalte") + " " + session.getAttribute("sortierung_reihenfolge");
 			}
 		}
 
