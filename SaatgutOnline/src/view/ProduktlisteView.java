@@ -12,7 +12,8 @@ import controller.ProduktController;
 import controller.SucheController;
 
 /**
- * <p>Die Klasse <code>ProduktlisteView</code> ist für die Zusammenstellung des <i>HTML</i>-Codes zuständig.
+ * <p>Die Klasse <code>ProduktlisteView</code> ist für die Zusammenstellung 
+ * des <i>HTML</i>-Codes für die Listenansicht der Produkte zust&auml;ndig.</p>
  * 
  * @author Simon Ankele
  * @version 1.0
@@ -35,7 +36,7 @@ public class ProduktlisteView {
 	 * 
 	 * <p>Konstruktor der Klasse <code>ProduktlisteView</code></p>
 	 * <p>Der Konstruktor erstellt die Objekte <code>ProduktController</code>, <code>SucheController</code>, 
-	 * <code>HtmlAusgabe</code>, <code>ArrayList</code> und übergibt den Klassenvariablen <i>kategorie</i> 
+	 * <code>HtmlAusgabe</code>, <code>ArrayList</code> und &uuml;bergibt den Klassenvariablen <i>kategorie</i> 
 	 * und <i>session</i> die benötigten Werte. Desweiteren werden in <i>this.resourceBundle</i> die benötigten 
 	 * Texte der aktuellen Sprache abgelegt.</p>
 	 * 
@@ -58,13 +59,13 @@ public class ProduktlisteView {
 	}
 
 	/**
-	 * <p>Die Methode <code>anzeigenProduktliste</code> liefert den <i>HTML</i>-Code für die Anzeige 
-	 * der Produktliste. Sie lässt Daten im <code>ProduktController</code>, <code>SucheController</code> 
+	 * <p>Die Methode <code>anzeigenProduktliste</code> liefert den <i>HTML</i>-Code f&uuml;r die Anzeige 
+	 * der Produktliste. Sie l&auml;sst Daten im <code>ProduktController</code>, <code>SucheController</code> 
 	 * und in der <code>HtmlAusgabe</code> bearbeiten und erstellen, um den <i>HTML</i>-Code richtig 
 	 * darstellen zu können.
 	 *
 	 * @param request - der aktuelle <code>HttpServletRequest</code>
-	 * @return <i>String</i> des <i>HTML</i>-Codes für die Produktliste
+	 * @return <i>String</i> des <i>HTML</i>-Codes f&uuml;r die Produktliste
 	 * @see controller#ProduktController
 	 * @see controller#SucheController
 	 * @see view#HtmlAusgabe
@@ -74,7 +75,7 @@ public class ProduktlisteView {
 
 		@SuppressWarnings("unused")
 		HttpSession session = ((HttpServletRequest) request).getSession();
-		String suchparameter = request.getParameter("suchbegriff");
+
 		this.produktController.setSortierung(request);
 		this.output = "";
 		
@@ -105,11 +106,9 @@ public class ProduktlisteView {
 		String statusanzeige;
 		
 		if(suchen.equals("true")) {
-			System.out.println("Produkte aus der Suche");
-			this.produktliste = this.sucheController.getProduktliste(request, suchparameter);
+			this.produktliste = this.sucheController.getProduktliste(request);
 			statusanzeige = this.produktliste.size() + " gefundene Produkte";
 		} else if (angebote.equals("true")) {
-			System.out.println("Angebote wurden aufgerufen");
 			this.produktliste = this.produktController.getProduktliste(request, this.kategorie);
 			statusanzeige = resourceBundle.getString("ANGEBOT");
 		} else {

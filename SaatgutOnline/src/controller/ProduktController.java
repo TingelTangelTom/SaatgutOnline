@@ -105,7 +105,7 @@ public class ProduktController {
 	 * @param request - der aktuelle <code>HttpServletRequest</code>
 	 * @param kategorie_id - die Kategorie-ID der aktuellen Kategorie          
 	 * @return <code>ArrayList&lt;ProduktModel&gt;</code> - liefert eine <code>ArrayList&lt;ProduktModel&gt;</code> zur&uuml;ck
-	 * 
+	 * @see model#ProduktModel
 	 */
 
 	public ArrayList<ProduktModel> getProduktliste(HttpServletRequest request, String kategorie_id) {
@@ -176,7 +176,7 @@ public class ProduktController {
 
 	/**
 	 * <p>Die Methode <code>getAlleKategorien</code> erstellt eine <i>HashMap&lt;Integer,String&gt;</i> mit allen Kategorien aus der Datenbank.</p>
-	 * <p>Der <i>Integer</i>-Wert der <i>HashMap</i> wird mit der jeweiligen Kategorie-ID und der <i>String</i>-Wert mit dem Kategorienamen gefüllt.</p>
+	 * <p>Der <i>Integer</i>-Wert der <i>HashMap</i> wird mit der jeweiligen Kategorie-ID und der <i>String</i>-Wert mit dem Kategorienamen gef&uuml;llt.</p>
 	 *        
 	 * @return <i>HashMap&lt;Integer,String&gt;</i> - liefert eine <i>HashMap&lt;Integer,String&gt;</i> mit alle Kategorien zur&uuml;ck
 	 * 
@@ -314,18 +314,13 @@ public class ProduktController {
 
 	public void setSortierung(HttpServletRequest request) {
 		HttpSession session = ((HttpServletRequest) request).getSession();
-		System.out.println("existiert die Session?");
 
 		if(request.getParameter("sn") != null) {
-			System.out.println("----> Sortierung ist ungleich null - Request ist " + request.getParameter("sn") + " und Session ist " + (String)session.getAttribute("sortierung_sortierspalte_kuerzel"));
 			//  Wenn sortierung_sortierspalte bereits auf demselben Wert steht, wechselt die Sortierreihenfolge
 			if(request.getParameter("sn").equals((String)session.getAttribute("sortierung_sortierspalte_kuerzel"))) {
-				System.out.println("gleicher Wert");
 				if(session.getAttribute("sortierung_reihenfolge").equals("DESC")) {
-					System.out.println("reihenfolge war gleich");
 					session.setAttribute("sortierung_reihenfolge", "ASC");
 				} else {
-					System.out.println("reihenfolge war NICHT gleich");		
 					session.setAttribute("sortierung_reihenfolge", "DESC");					
 				}
 				

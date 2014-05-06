@@ -4,13 +4,20 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
-
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpServletRequest;
-
 import controller.ProduktController;
 import model.ProduktModel;
 
+/**
+ * <p>Die Klasse <code>ProduktinfoView</code> ist für die Zusammenstellung des 
+ * <i>HTML</i>-Codes für die Einzelansicht des Produkts zust&auml;ndig.</p>
+ * 
+ * @author Simon Ankele
+ * @version 1.0
+ * @since 1.7.0_51
+ * 
+ */
 public class ProduktinfoView {
 	private ProduktController produktController;
 	private ResourceBundle resourceBundle;
@@ -19,6 +26,18 @@ public class ProduktinfoView {
 	private String output;
 	private HashMap<String, String> merkmale;
 	private static int warenkorbmenge;
+	
+	/**
+	 * 
+	 * <p>Konstruktor der Klasse <code>ProduktinfoView</code></p>
+	 * <p>Der Konstruktor erstellt die Objekte <code>ProduktController</code>, <code>ProduktModel</code> und  
+	 * <code>HtmlAusgabe</code> und &uuml;bergibt den Klassenvariablen <i>kategorie</i> 
+	 * und <i>session</i> die benötigten Werte. Desweiteren werden in <i>this.resourceBundle</i> die benötigten 
+	 * Texte der aktuellen Sprache abgelegt.</p>
+	 * 
+	 * @param request - der aktuelle <code>HttpServletRequest</code>
+	 * @see javax.servlet.http.HttpServletRequest
+	 */
 	
 	public ProduktinfoView(HttpServletRequest request) {
 		
@@ -31,7 +50,18 @@ public class ProduktinfoView {
 		this.resourceBundle = PropertyResourceBundle.getBundle("I18N." + locale.getLanguage() + "." + getClass().getSimpleName(), locale);
 	}
 
-	//texte.getString("WILLKOMMEN");
+	/**
+	 * <p>Die Methode <code>anzeigenProduktinfo</code> liefert den <i>HTML</i>-Code f&uuml;r die Anzeige 
+	 * der Einzelansicht eines Produkts. Sie l&auml;sst Daten im <code>ProduktController</code> und in der 
+	 * <code>HtmlAusgabe</code> bearbeiten und erstellen, um den <i>HTML</i>-Code richtig 
+	 * darstellen zu können.</p>
+	 * 
+	 * @param id - Produkt-ID des anzuzeigenden Produkts
+	 * @return <i>String</i> des <i>HTML</i>-Codes f&uuml;r die Produktliste
+	 * @see controller#ProduktController
+	 * @see view#HtmlAusgabe
+	 */
+	
 	public String anzeigenProduktinfo(int id) {	
 		this.produktModel = this.produktController.getProdukt(id);
 		this.merkmale = this.produktModel.getMerkmale();
@@ -41,7 +71,6 @@ public class ProduktinfoView {
 					+ "<tr>\n"
 					+ "<td class=\"produktinfo bild\"><img src=\"resources/bilder/palme.jpg\" alt=\"Phoenix Canariensis\"></td>\n"
 					+ "<td>\n"
-					
 					+ "<table class=\"produktinfo mittlerespalte\">\n"
 					+ "<tr>\n"
 					+ "<td class=\"produktinfo titel\">" + this.htmlAusgabe.outLinkProduktinfo(produktModel.getName(), produktModel.getId()) + "</td>\n"
@@ -55,9 +84,11 @@ public class ProduktinfoView {
 					+ "<tr>\n"
 					+ "<td class=\"produktinfo\">\n"
 					+ "<table class=\"produktmerkmale\">\n";
+		
 					for(String name : merkmale.keySet()) {
 						output += "<tr><td class=\"produktmerkmale name\">" + name + "</td><td class=\"produktmerkmale wert\">" + merkmale.get(name) +"</td></tr>"; // Eigenschaft 1
 					}
+					
 		this.output	+= "</td>\n"
 					+ "</table>\n"
 					+ "</tr>\n"
@@ -77,6 +108,7 @@ public class ProduktinfoView {
 					+ "</tr>\n"
 					+ "<tr>\n"
 					+ "<td class=\"produktinfo warenkorb\">";
+		
 					if(produktModel.getBestand() == 0) {
 						this.output += this.resourceBundle.getString("NICHTVORRAETIG");
 					} else {
@@ -86,6 +118,7 @@ public class ProduktinfoView {
 		    		+ "<input type=\"image\" src=\"resources/bilder/icons/warenkorb.gif\" alt=\"Warenkorb\">\n"
 		    		+ "</form>\n";
 					}
+					
 		this.output	+= "</td>\n"
 					+ "</tr>\n"
 					+ "<tr>\n"
@@ -102,26 +135,7 @@ public class ProduktinfoView {
 					+ "<td class=\"produktinfo\" colspan=\"3\">zusätzliche Informationen</td>\n"
 					+ "</tr>\n"
 					+ "</table>\n";
-		/*
-		this.output += "<table class=\"produktinfo\">"
-				+ "<tr><td rowspan=\"3\">Cell 1</td><td>" + this.produktModel.getName() + "</td></tr>" // Titel
-				+ "<tr><td>" + this.produktModel.getName() + "</td></tr>" // Titel
-				+ "<tr><td><table class=\"produktinfo\">";
-				for(String name : merkmale.keySet()) {
-					output += "<tr><td>" + name + "</td><td>" + merkmale.get(name) +"</td></tr>"; // Eigenschaft 1
-				}
-		this.output += "</table></td></tr>"		
-				+ "<tr><td colspan=\"2\">" + htmlAusgabe.outPreisformat(this.produktModel.getPreisBrutto()) + " " + htmlAusgabe.outPreisverordnung(this.produktModel.getSteuerSatz()) + "</td></tr>" // Titel
-				+ "<tr><td colspan=\"2\">" + this.produktModel.getBeschreibung() + "</td></tr>" // Produktbeschreibung
-				+ "<tr><td colspan=\"2\">Warenkorb</td></tr>" // Button Warenkorb
-				+ "<tr><td colspan=\"2\">" // Button Warenkorb"
-				+ "<form action=\"/SaatgutOnline/Warenkorb\" method=\"POST\">"
-				+ "<input type=\"hidden\" name=\"menge\" value=\"" + warenkorbmenge + "\">"
-				+ "<input type=\"hidden\" name=\"produkt\" value=\"" + this.produktModel.getId() + "\">"
-				+ "<input type=\"image\" name=\"absenden\" value=\"senden\">absenden</form>"
-				+ "</td></tr></table>";	
-System.out.println("Warenkorbmenge: " +warenkorbmenge);
-*/
+
 		return this.output;
 	}
 

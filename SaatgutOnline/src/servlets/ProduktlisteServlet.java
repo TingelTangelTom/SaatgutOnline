@@ -2,22 +2,25 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Enumeration;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import controller.ProduktController;
 import controller.UrlController;
 import view.ProduktlisteView;
 
 /**
- * Servlet implementation class ProduktlisteServlet
+ * <p>Das Servlet <code>ProduktlisteServlet</code> ist für die Zusammenstellung des 
+ * Frameworks zust&uuml;ndig.</p>
+ * 
+ * @author Simon Ankele
+ * @version 1.0
+ * @since 1.7.0_51
+ * 
  */
+
 @WebServlet("/Produktliste")
 public class ProduktlisteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -38,37 +41,25 @@ public class ProduktlisteServlet extends HttpServlet {
 		
 		this.produktliste = new ProduktlisteView(request);
 		
-		//TODO Funktioniert nicht
 		response.setContentType("text/html");
-	    response.setCharacterEncoding("UTF-8");
+	    response.setCharacterEncoding("ISO-8859-15");
 	    	    
-		// Kopfbereich (und damit auch Navigationsbereich) einbinden
 		RequestDispatcher rd = getServletContext().getRequestDispatcher("/Kopfbereich");
 		rd.include(request, response);
  		
-		// UrlController
+		/*
+		 * Die nächsten beiden Quellcode-Zeilen stammen von Tom Weigelt
+		 */
 		UrlController urlController = new UrlController(request);
 		urlController.urlInSessionLegen();
 		
-		
 		PrintWriter out = response.getWriter();
-		
-		response.setContentType("text/html");
-	    response.setCharacterEncoding("ISO-8859-15");
 		out.print(this.produktliste.anzeigenProduktliste(request));
 
-		// Fussbereich einbinden
+
 		rd = getServletContext().getRequestDispatcher("/Fussbereich");
 		rd.include(request, response);
 		
-		Enumeration<String> paramaters = request.getParameterNames();
-		while (paramaters.hasMoreElements())
-		{
-			String name = paramaters.nextElement();
-			String value = request.getParameter(name);
-			System.out.println(name + " = " + value);			
-		}
-	
 	}
 
 	/**
