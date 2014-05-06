@@ -1,7 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-import java.util.Enumeration;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,31 +34,6 @@ public class FussbereichServlet extends HttpServlet
 	{
 		FussbereichController fussbereichController = new FussbereichController(request, response);
 		fussbereichController.outFussbereichAnzeigen();
-		
-		
-		// DEBUG-Ausgabe für request-Parameter (GET)
-		//TODO remove
-		{
-		System.out.println("\n----(GET) request-Parameter----");		
-		Enumeration<String> parameters = request.getParameterNames();
-		while (parameters.hasMoreElements())
-		{
-			String name = parameters.nextElement();
-			String value = request.getParameter(name);
-			System.out.println(name + " = " + value);			
-		}		
-		System.out.println("----------------------------------");
-		}	
-		System.out.println("\n---Session-Inhalte---");
-		Enumeration<String> sessionParamaters = request.getSession().getAttributeNames();
-		while (sessionParamaters.hasMoreElements())
-		{
-			String name = sessionParamaters.nextElement();
-			System.out.println(name + " = " + request.getSession().getAttribute(name));			
-		}
-		System.out.println("---------------------");
-		
-		
 	}
 
 	/**
@@ -69,33 +43,6 @@ public class FussbereichServlet extends HttpServlet
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
 			IOException
 	{	
-		FussbereichController fussbereichController = new FussbereichController(request, response);
-		fussbereichController.outFussbereichAnzeigen();
-		
-		
-		
-		// DEBUG-Ausgabe für request-Parameter (POST)
-		//TODO remove
-		{
-		System.out.println("\n---(POST)  request-Parameter---");		
-		Enumeration<String> paramaters = request.getParameterNames();
-		while (paramaters.hasMoreElements())
-		{
-			String name = paramaters.nextElement();
-			String value = request.getParameter(name);
-			System.out.println(name + " = " + value);			
-		}		
-		System.out.println("----------------------------------");
-		}		
-		System.out.println("\n---Session-Inhalte---");
-		Enumeration<String> sessionParamaters = request.getSession().getAttributeNames();
-		while (sessionParamaters.hasMoreElements())
-		{
-			String name = sessionParamaters.nextElement();
-			System.out.println(name + " = " + request.getSession().getAttribute(name));			
-		}
-		System.out.println("---------------------");
-	
-		
+		doGet(request, response);		
 	}
 }
