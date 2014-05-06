@@ -10,7 +10,7 @@
   <!ELEMENT  dbMaximalePoolgroesse  (#PCDATA)> 
   <!ELEMENT  regelBenutzername (#PCDATA)> 
   <!ELEMENT  regelregelPasswort (#PCDATA)> 
-]> 
+]>
 
 <konfiguration>
 	<dbHost>localhost</dbHost>

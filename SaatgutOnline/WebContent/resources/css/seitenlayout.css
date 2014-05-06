@@ -13,108 +13,198 @@ body {
 table {
 	vertical-align: top;
 	border-collapse: separate;
-    border-spacing: 0px;
-    border-padding: 0px;
-    border: none;
+	border-spacing: 0px;
+	border-padding: 0px;
+	border: none;
 }
 
+a:link {
+	text-decoration: none;
+	font-weight: bold;
+	color: #BEBEBE;
+}
 
-a:link { text-decoration:none; font-weight:bold; color:#BEBEBE; }
-a:visited { text-decoration:none; font-weight:bold; color:#BEBEBE; }
-a:hover { text-decoration:none; font-weight:bold; color:#BEBEBE; }
-a:active { text-decoration:none; font-weight:bold; color:#BEBEBE; }
-a:focus { text-decoration:none; font-weight:bold; color:#BEBEBE; }
+a:visited {
+	text-decoration: none;
+	font-weight: bold;
+	color: #BEBEBE;
+}
 
+a:hover {
+	text-decoration: none;
+	font-weight: bold;
+	color: #BEBEBE;
+}
 
-.fussbereich a:link { text-decoration:none; font-weight:bold; color:#000000; }
-.fussbereich a:visited { text-decoration:none; font-weight:bold; color:#000000; }
-.fussbereich a:hover { text-decoration:none; font-weight:bold; color:#000000; }
-.fussbereich a:active { text-decoration:none; font-weight:bold; color:#000000; }
-.fussbereich a:focus { text-decoration:none; font-weight:bold; color:#000000; }
+a:active {
+	text-decoration: none;
+	font-weight: bold;
+	color: #BEBEBE;
+}
 
+a:focus {
+	text-decoration: none;
+	font-weight: bold;
+	color: #BEBEBE;
+}
 
+.fussbereich a:link {
+	text-decoration: none;
+	font-weight: bold;
+	color: #000000;
+}
+
+.fussbereich a:visited {
+	text-decoration: none;
+	font-weight: bold;
+	color: #000000;
+}
+
+.fussbereich a:hover {
+	text-decoration: none;
+	font-weight: bold;
+	color: #000000;
+}
+
+.fussbereich a:active {
+	text-decoration: none;
+	font-weight: bold;
+	color: #000000;
+}
+
+.fussbereich a:focus {
+	text-decoration: none;
+	font-weight: bold;
+	color: #000000;
+}
 
 .kopfbereich {
-  	font-family: Verdana, Arial;
-  	font-size:11px;
+	font-family: Verdana, Arial;
+	font-size: 11px;
 	color: #000000;
 	width: 100%;
-	height:100px;
+	height: 100px;
 	background: GREY;
 }
 
 .navigation {
-  	font-family: Verdana, Arial;
-  	font-size:11px;
-  	color: #000000;
-  	width: 200px;
-	height:100px;
+	font-family: Verdana, Arial;
+	font-size: 11px;
+	color: #000000;
+	width: 200px;
+	height: 100px;
 	vertical-align: top;
 	background: GREY;
 }
 
-.navigation_aktuell a:link { text-decoration:none; font-weight:bold; color:WHITE; }
-.navigation_aktuell a:visited { text-decoration:none; font-weight:bold; color:WHITE; }
-.navigation_aktuell a:hover { text-decoration:none; font-weight:bold; color:WHITE; }
-.navigation_aktuell a:active { text-decoration:none; font-weight:bold; color:WHITE; }
-.navigation_aktuell a:focus { text-decoration:none; font-weight:bold; color:WHITE; }
+.navigation_aktuell a:link {
+	text-decoration: none;
+	font-weight: bold;
+	color: WHITE;
+}
+
+.navigation_aktuell a:visited {
+	text-decoration: none;
+	font-weight: bold;
+	color: WHITE;
+}
+
+.navigation_aktuell a:hover {
+	text-decoration: none;
+	font-weight: bold;
+	color: WHITE;
+}
+
+.navigation_aktuell a:active {
+	text-decoration: none;
+	font-weight: bold;
+	color: WHITE;
+}
+
+.navigation_aktuell a:focus {
+	text-decoration: none;
+	font-weight: bold;
+	color: WHITE;
+}
 
 .inhalt {
 	font-family: Verdana, Arial;
-  	font-size:11px;
-  	color: #000000;
-  	width: 770px;
-	height:500px;
-  	vertical-align: top;
+	font-size: 11px;
+	color: #000000;
+	width: 770px;
+	height: 500px;
+	vertical-align: top;
 	background: WHITE;
 	padding: 10px 0px 10px 10px;
 }
 
 .fussbereich {
-  	font-family: Verdana, Arial;
-  	font-size:11px;
+	font-family: Verdana, Arial;
+	font-size: 11px;
 	color: #000000;
 	width: 100%;
-	height:30px;
+	height: 30px;
 	background: GREY;
 	text-align: center;
 }
 
 .produktinfo td {
 	vertical-align: top;
-
 }
 
-table.produktliste a:link {color: green; background: white; text-decoration:none;}
-table.produktliste a:visited {color: green; background: white; text-decoration: none;}
-table.produktliste a:hover {color: green; background: white; text-decoration:none;}
-table.produktliste a:active {color: green; background: white; text-decoration: none;}
-table.produktliste a:focus {color: green; background: white; text-decoration:none;}
+table.produktliste a:link {
+	color: green;
+	background: white;
+	text-decoration: none;
+}
+
+table.produktliste a:visited {
+	color: green;
+	background: white;
+	text-decoration: none;
+}
+
+table.produktliste a:hover {
+	color: green;
+	background: white;
+	text-decoration: none;
+}
+
+table.produktliste a:active {
+	color: green;
+	background: white;
+	text-decoration: none;
+}
+
+table.produktliste a:focus {
+	color: green;
+	background: white;
+	text-decoration: none;
+}
 
 table.produktliste {
 	font-family: Verdana, Arial, Helvetica, sans-serif;
-  	color: #000000;
-  	width: 100%;
-  	vertical-align: top;
+	color: #000000;
+	width: 100%;
+	vertical-align: top;
 	background: WHITE;
-    border-spacing: 0px;
-    border-padding: 0px;
+	border-spacing: 0px;
+	border-padding: 0px;
 	border: 0px solid #000000;
 }
 
 .produktliste td {
 	vertical-align: top;
-
 }
 
 .produktliste td.suchebreite {
 	vertical-align: top;
-	with: 121px; 
+	with: 121px;
 }
 
 .produktliste td.sucheleerspalte {
 	vertical-align: top;
-	with: 10px; 
+	with: 10px;
 }
 
 .produktliste td.buttons_rechts {
@@ -123,55 +213,50 @@ table.produktliste {
 }
 
 .produktliste td.kategoriename {
-vertical-align: baseline;
-  	font-size: 14px;
-  	font-weight: bold;
-  	color: green;
-  	text-align: left;
-  	height: 25px;
+	vertical-align: baseline;
+	font-size: 14px;
+	font-weight: bold;
+	color: green;
+	text-align: left;
+	height: 25px;
 }
 
 .produktliste td.suche {
-vertical-align: baseline;
-  	font-size: 14px;
-  	font-weight: bold;
-  	color: green;
-  	text-align: left;
-  	width: 100%;
-  	height: 25px;
+	vertical-align: baseline;
+	font-size: 14px;
+	font-weight: bold;
+	color: green;
+	text-align: left;
+	width: 100%;
+	height: 25px;
 }
 
 .produktliste td.sortierung {
-vertical-align: baseline;
-  	font-size: 10px;
-  	font-weight: normal;
-  	color: black;
-  	text-align: right;
-  	height: 25px;
+	vertical-align: baseline;
+	font-size: 10px;
+	font-weight: normal;
+	color: black;
+	text-align: right;
+	height: 25px;
 }
 
 .produktliste td.preis {
 	width: 100%;
-	
-  	font-size:13px;
-  	font-weight:bold;
-  	color: green;
-  	text-align: right;
-  	height: 35%;
+	font-size: 13px;
+	font-weight: bold;
+	color: green;
+	text-align: right;
+	height: 35%;
 }
 
 .produktliste td.listenprodukt {
 	vertical-align: top;
 }
 
-
-
 .produktliste td.preisverordnung {
-
 	font-size: 9px;
-  	font-weight: normal;
-  	text-align: right;
-  	
+	font-weight: normal;
+	text-align: right;
 	width: 35%;
 }
 
@@ -180,99 +265,118 @@ vertical-align: baseline;
 }
 
 .produktliste td.titel {
-
-	
 	font-size: 13px;
-  	font-weight: bold;
-  	text-align: left;
-  	color: green;
-
+	font-weight: bold;
+	text-align: left;
+	color: green;
 	width: 65%;
 }
 
 .produktliste td.produktnummer {
-	font-size:10px;
-  	font-weight:normal;
-  	text-align: left;
-
+	font-size: 10px;
+	font-weight: normal;
+	text-align: left;
 	width: 65%;
 }
 
 .produktliste td.beschreibung {
-	font-size:11px;
-  	font-weight:normal;
-  	text-align: justify;
+	font-size: 11px;
+	font-weight: normal;
+	text-align: justify;
 	width: 100%;
 }
 
-table.produktinfo a:link {color: green; background: white; text-decoration:none;}
-table.produktinfo a:visited {color: green; background: white; text-decoration: none;}
-table.produktinfo a:hover {color: green; background: white; text-decoration:none;}
-table.produktinfo a:active {color: green; background: white; text-decoration: none;}
-table.produktinfo a:focus {color: green; background: white; text-decoration:none;}
+table.produktinfo a:link {
+	color: green;
+	background: white;
+	text-decoration: none;
+}
+
+table.produktinfo a:visited {
+	color: green;
+	background: white;
+	text-decoration: none;
+}
+
+table.produktinfo a:hover {
+	color: green;
+	background: white;
+	text-decoration: none;
+}
+
+table.produktinfo a:active {
+	color: green;
+	background: white;
+	text-decoration: none;
+}
+
+table.produktinfo a:focus {
+	color: green;
+	background: white;
+	text-decoration: none;
+}
 
 table.produktinfo {
 	font-family: Verdana, Arial, Helvetica, sans-serif;
-  	color: #000000;
-  	width: 100%;
-	height:100%;
-  	vertical-align: top;
+	color: #000000;
+	width: 100%;
+	height: 100%;
+	vertical-align: top;
 	background: WHITE;
-    border-spacing: 0px;
-    border-padding: 0px;
+	border-spacing: 0px;
+	border-padding: 0px;
 	border: 0px solid #000000;
 }
 
 .produktinfo td.kategoriename {
-vertical-align: baseline;
-  	font-size: 13px;
-  	font-weight: bold;
-  	color: green;
-  	text-align: left;
-  	height: 25px;
+	vertical-align: baseline;
+	font-size: 13px;
+	font-weight: bold;
+	color: green;
+	text-align: left;
+	height: 25px;
 }
 
 .produktinfo td.sortierung {
-vertical-align: baseline;
-  	font-size: 10px;
-  	font-weight: normal;
-  	color: black;
-  	text-align: right;
-  	height: 25px;
+	vertical-align: baseline;
+	font-size: 10px;
+	font-weight: normal;
+	color: black;
+	text-align: right;
+	height: 25px;
 }
 
 .produktinfo td.preis {
 	width: 100%;
-  	font-size:18px;
-  	font-weight:bold;
-  	color: green;
-  	text-align: right;
-  	height: 35%;
+	font-size: 18px;
+	font-weight: bold;
+	color: green;
+	text-align: right;
+	height: 35%;
 }
 
 .produktinfo td.mittlerespalte {
 	width: 60%;
 	vertical-align: top;
 }
+
 .produktinfo td.rechtespalte {
 	width: 40%;
 	vertical-align: top;
-	  	height: 35%;
+	height: 35%;
 }
 
 .produktinfo td.preisverordnung {
-
 	font-size: 9px;
-  	font-weight: normal;
-  	text-align: right;
+	font-weight: normal;
+	text-align: right;
 	vertical-align: top;
 }
 
 .produktinfo td.warenkorb {
-
 	font-size: 9px;
-  	font-weight: normal;
-  	text-align: right;
+	font-weight: normal;
+	text-align: right;
 	vertical-align: top;
 }
 
@@ -281,53 +385,47 @@ vertical-align: baseline;
 }
 
 .produktinfo td.titel {
-
-	
 	font-size: 13px;
-  	font-weight: bold;
-  	text-align: left;
-  	color: green;
-
+	font-weight: bold;
+	text-align: left;
+	color: green;
 	width: 65%;
 }
 
 .produktinfo td.produktnummer {
-	font-size:10px;
-  	font-weight:normal;
-  	text-align: left;
-
+	font-size: 10px;
+	font-weight: normal;
+	text-align: left;
 	width: 65%;
 }
 
 .produktinfo td.beschreibung {
-	font-size:11px;
-  	font-weight:normal;
-  	text-align: justify;
-
+	font-size: 11px;
+	font-weight: normal;
+	text-align: justify;
 	width: 100%;
 }
 
 .produktmerkmale {
 	width: 100%;
-  	font-size:18px;
-  	font-weight:bold;
-  	color: green;
-  	text-align: right;
+	font-size: 18px;
+	font-weight: bold;
+	color: green;
+	text-align: right;
 	vertical-align: top;
 }
 
 .produktmerkmale td.name {
-	font-size:11px;
-  	font-weight: bold;
-  	text-align: left;
-
+	font-size: 11px;
+	font-weight: bold;
+	text-align: left;
 	width: 50%;
 }
 
 .produktmerkmale td.wert {
-	font-size:11px;
-  	font-weight:normal;
-  	text-align: left;
+	font-size: 11px;
+	font-weight: normal;
+	text-align: left;
 	width: 50%;
 }
 
