@@ -152,7 +152,8 @@ public class NavigationsbereichController
 		 */
 		
 		if(	ausGet	
-			&& (this.request.getParameter("kategorie") != null))
+			&& (this.request.getParameter("kategorie") != null)
+			&& (this.request.getParameter("erweitertesuche") == null))
 		{			
 			Integer geklickteKategorie = Integer.parseInt(this.request.getParameter("kategorie"));
 			this.aktuelleKategorieSession = geklickteKategorie;
