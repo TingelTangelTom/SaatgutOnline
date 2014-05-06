@@ -77,7 +77,7 @@ public class NavigationsbereichView
 		this.out.println("&nbsp;");
 		this.out.println("</td>\n</tr>");
 		this.out.println("<tr>\n<td>");
-		this.out.println("<a href=\"/SaatgutOnline/Produktliste?angebote=true&erweitertesuche=false&suchen=false&suchbegriff=&as=DESC&sn=pn\">"+ this.resourceBundle.getString("ANGEBOTE")+"</a>");
+		this.out.println("<a href=\"/SaatgutOnline/Produktliste?angebote=true&kategorie=0&erweitertesuche=false&suchen=false&suchbegriff=&as=DESC&sn=pn\">"+ this.resourceBundle.getString("ANGEBOTE")+"</a>");
 		this.out.println("</td>\n</tr>\n<tr rowspan=\"2\">\n<td>");
 		this.out.println("&nbsp;");
 		this.out.println("</td>\n</tr>");
@@ -94,7 +94,7 @@ public class NavigationsbereichView
 		this.out.println("&nbsp;");
 		this.out.println("</td>\n</tr>");
 		this.out.println("<tr class=\"navigation_aktuell\">\n<td>");
-		this.out.println("<a href=\"/SaatgutOnline/Produktliste?angebote=true&erweitertesuche=false&suchen=false&suchbegriff=&as=DESC&sn=pn\">"+ this.resourceBundle.getString("ANGEBOTE")+"</a>");
+		this.out.println("<a href=\"/SaatgutOnline/Produktliste?angebote=true&kategorie=0&erweitertesuche=false&suchen=false&suchbegriff=&as=DESC&sn=pn\">"+ this.resourceBundle.getString("ANGEBOTE")+"</a>");
 		this.out.println("</td>\n</tr>\n<tr rowspan=\"2\">\n<td>");
 		this.out.println("&nbsp;");
 		this.out.println("</td>\n</tr>");
