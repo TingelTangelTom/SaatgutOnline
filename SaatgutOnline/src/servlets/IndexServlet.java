@@ -17,7 +17,7 @@ import controller.UrlController;
 /**
  * Servlet implementation class IndexPlatzhalter
  */
-@WebServlet("/IndexServlet")
+@WebServlet("/Index")
 public class IndexServlet extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
@@ -38,31 +38,8 @@ public class IndexServlet extends HttpServlet
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		
-
-		/*
-		 * DIES IST NUR EIN PLATZHALTER UND SIMULIERT DIE SPAETERE INDEX-DATEI!
-		 * 
-		 * Jedes Servlet fuer den Hauptbereich MUSS Kopfbereich & Fussbereich einbinden!! 
-		 */
-		// Kopfbereich (und damit auch Navigationsbereich) einbinden
-		RequestDispatcher rd = getServletContext().getRequestDispatcher("/Kopfbereich");
-		rd.include(request, response);
-		
-
-		// Inhalte ausgeben (per view!)
-		/*
-		 * Ich habe hier nur den PrintWriter genommen, weil ich nicht extra
-		 * einen Controller und einen View bauen wollte...
-		 * Normal so, wie auch z.B. in Kopf oder Navi!
-		 */
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-		out.print("Angebote");
-		
-		// Fussbereich einbinden
-		rd = getServletContext().getRequestDispatcher("/Fussbereich");
-		rd.include(request, response);		
+		RequestDispatcher rd = getServletContext().getRequestDispatcher("/Produktliste?angebote=true&kategorie=0&erweitertesuche=false&suchen=false&suchbegriff=&as=DESC&sn=pn");
+		rd.forward(request, response);
 	}
 
 	/**
