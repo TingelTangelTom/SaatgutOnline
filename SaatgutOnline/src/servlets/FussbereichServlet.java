@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import view.FussbereichView;
+import controller.FussbereichController;
 
 /**
  * Servlet implementation class FussbereichController
@@ -33,17 +33,9 @@ public class FussbereichServlet extends HttpServlet
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		// Fussbereichview schliessen
-		FussbereichView fussbereichView = new FussbereichView(request, response);
+		FussbereichController fussbereichController = new FussbereichController(request, response);
+		fussbereichController.outFussbereichAnzeigen();
 		
-		// Fussbereich oeffnen
-		fussbereichView.outFussbereichAnfang();
-		
-		// Inhalte des Fussbereiches ausgeben
-		fussbereichView.outFussbereichInhalt();
-		
-		// Fussbereich schliessen
-		fussbereichView.outFussbereichEnde();
 		
 		// DEBUG-Ausgabe für request-Parameter (GET)
 		//TODO remove
@@ -77,17 +69,8 @@ public class FussbereichServlet extends HttpServlet
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
 			IOException
 	{	
-		// Fussbereichview schliessen
-		FussbereichView fussbereichView = new FussbereichView(request, response);
-		
-		// Fussbereich oeffnen
-		fussbereichView.outFussbereichAnfang();
-		
-		// Inhalte des Fussbereiches ausgeben
-		fussbereichView.outFussbereichInhalt();
-		
-		// Fussbereich schliessen
-		fussbereichView.outFussbereichEnde();
+		FussbereichController fussbereichController = new FussbereichController(request, response);
+		fussbereichController.outFussbereichAnzeigen();
 		
 		
 		
