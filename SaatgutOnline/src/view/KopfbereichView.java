@@ -69,7 +69,7 @@ public class KopfbereichView
 	 */
 	public void outKopfbereichEnde()
 	{
-		this.out.println("</td>\n</tr>"); // schliesst Kopfbereich
+		this.out.println("</td>\n</tr>");
 	}
 
 	/**
@@ -140,14 +140,7 @@ public class KopfbereichView
 		this.out.println("</td>\n<td>");
 		this.out.println("<input type=\"password\" name=\"passwort\" size=\"15\">");
 		this.out.println("</td>\n<td>");
-		this.out.println("<input type=\"submit\" name=\"anmelden\" value=\""
-				+ this.resourceBundle.getString("ANMELDEN") + "\">");
-		this.out.println("</td>\n</tr>\n<tr>\n<td>\n</td>\n<td colspan=\"2\">");
-		// FIXME mit Mailfunktion verbinden!
-		this.out.println("<a href=\"/SaatgutOnline/NoOperation\">\n"
-				+ this.resourceBundle.getString("PASSWORT_VERGESSEN") + "\n</a>");
-		// TODO remove
-		this.out.println(" (noOp)");
+		this.out.println("<input type=\"submit\" name=\"anmelden\" value=\"" + this.resourceBundle.getString("ANMELDEN") + "\">");
 		this.out.println("</td>\n</tr>\n<tr>\n<td>\n</td>\n<td colspan=\"2\">");
 		this.out.println("<a href=\"/SaatgutOnline/Registrierung\">\n" + this.resourceBundle.getString("REGISTRIEREN")
 				+ "\n</a>");
