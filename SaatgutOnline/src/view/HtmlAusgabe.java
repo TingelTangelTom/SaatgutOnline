@@ -141,24 +141,36 @@ public class HtmlAusgabe extends HttpServlet{
 	}
 	
 	public String outParameterLink(HttpServletRequest request, Boolean erweitertesuche, Boolean suchen, String suchbegriff) {
-
+		
+		String angebote = "false";
+		
+		if(request.getParameter("angebote") != null) {
+			angebote = request.getParameter("angebote");
+		}
+		
 		if(suchen) {
-			return "kategorie=" + session.getAttribute("aktuelleKategorie") + "&erweitertesuche=" + erweitertesuche + "&suchen=" + suchen + "&suchbegriff=" + suchbegriff + "&as=" + session.getAttribute("sortierung_reihenfolge") + "&sn=" + session.getAttribute("sortierung_sortierspalte_kuerzel") + "&beschreibung=" + request.getParameter("beschreibung") + "&preis_von=" + request.getParameter("preis_von") + "&name=" + request.getParameter("name") + "&produktnummer=" + request.getParameter("produktnummer") + "&preis_bis=" + request.getParameter("preis_bis");
+			return "angebote=" + angebote + "&kategorie=" + session.getAttribute("aktuelleKategorie") + "&erweitertesuche=" + erweitertesuche + "&suchen=" + suchen + "&suchbegriff=" + suchbegriff + "&as=" + session.getAttribute("sortierung_reihenfolge") + "&sn=" + session.getAttribute("sortierung_sortierspalte_kuerzel") + "&beschreibung=" + request.getParameter("beschreibung") + "&preis_von=" + request.getParameter("preis_von") + "&name=" + request.getParameter("name") + "&produktnummer=" + request.getParameter("produktnummer") + "&preis_bis=" + request.getParameter("preis_bis");
 		} else {
-			return "kategorie=" + session.getAttribute("aktuelleKategorie") + "&erweitertesuche=" + erweitertesuche + "&suchen=" + suchen + "&suchbegriff=" + suchbegriff + "&as=" + session.getAttribute("sortierung_reihenfolge") + "&sn=" + session.getAttribute("sortierung_sortierspalte_kuerzel");			
+			return "angebote=" + angebote + "&kategorie=" + session.getAttribute("aktuelleKategorie") + "&erweitertesuche=" + erweitertesuche + "&suchen=" + suchen + "&suchbegriff=" + suchbegriff + "&as=" + session.getAttribute("sortierung_reihenfolge") + "&sn=" + session.getAttribute("sortierung_sortierspalte_kuerzel");			
 		}
 	}	
 	
 	public String outParameterLink(HttpServletRequest request, String sortierspalte) {
 		
+		String angebote = "false";
+		
+		if(request.getParameter("angebote") != null) {
+			angebote = request.getParameter("angebote");
+		}
+		
 		if(request.getParameter("suchen") != null) {
 			if(request.getParameter("suchen").equalsIgnoreCase("true")) {
-				return "kategorie=" + session.getAttribute("aktuelleKategorie") + "&erweitertesuche=" + request.getParameter("erweitertesuche") + "&suchen=" + request.getParameter("suchen") + "&suchbegriff=&as=" + session.getAttribute("sortierung_reihenfolge") + "&sn=" + sortierspalte + "&beschreibung=" + request.getParameter("beschreibung") + "&preis_von=" + request.getParameter("preis_von") + "&name=" + request.getParameter("name") + "&produktnummer=" + request.getParameter("produktnummer") + "&preis_bis=" + request.getParameter("preis_bis");
+				return "angebote=" + angebote + "&kategorie=" + session.getAttribute("aktuelleKategorie") + "&erweitertesuche=" + request.getParameter("erweitertesuche") + "&suchen=" + request.getParameter("suchen") + "&suchbegriff=&as=" + session.getAttribute("sortierung_reihenfolge") + "&sn=" + sortierspalte + "&beschreibung=" + request.getParameter("beschreibung") + "&preis_von=" + request.getParameter("preis_von") + "&name=" + request.getParameter("name") + "&produktnummer=" + request.getParameter("produktnummer") + "&preis_bis=" + request.getParameter("preis_bis");
 			} else {
-				return "kategorie=" + session.getAttribute("aktuelleKategorie") + "&erweitertesuche=" + session.getAttribute("erweitertesuche") + "&suchen=" + session.getAttribute("suchen") + "&suchbegriff=&as=" + session.getAttribute("sortierung_reihenfolge") + "&sn=" + sortierspalte;
+				return "angebote=" + angebote + "&kategorie=" + session.getAttribute("aktuelleKategorie") + "&erweitertesuche=" + session.getAttribute("erweitertesuche") + "&suchen=" + session.getAttribute("suchen") + "&suchbegriff=&as=" + session.getAttribute("sortierung_reihenfolge") + "&sn=" + sortierspalte;
 			}
 		} else {
-			return "kategorie=" + session.getAttribute("aktuelleKategorie") + "&erweitertesuche=" + session.getAttribute("erweitertesuche") + "&suchen=" + session.getAttribute("suchen") + "&suchbegriff=&as=" + session.getAttribute("sortierung_reihenfolge") + "&sn=" + sortierspalte;
+			return "angebote=" + angebote + "&kategorie=" + session.getAttribute("aktuelleKategorie") + "&erweitertesuche=" + session.getAttribute("erweitertesuche") + "&suchen=" + session.getAttribute("suchen") + "&suchbegriff=&as=" + session.getAttribute("sortierung_reihenfolge") + "&sn=" + sortierspalte;
 		}
 
 	}

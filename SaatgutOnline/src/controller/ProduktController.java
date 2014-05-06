@@ -235,7 +235,7 @@ public class ProduktController {
 		HttpSession session = ((HttpServletRequest) request).getSession(); 
 		ArrayList<Integer> kategorien = new ArrayList<>();
 		int kategoriesuche_eltern_id = 0;
-		String produkt_query;
+		String produkt_query = "";
 	
 		String kategorie_query = "SELECT eltern_id FROM kategorie WHERE kategorie_id = '" + kategorie_id + "'";
 		
@@ -251,26 +251,61 @@ public class ProduktController {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		if(kategoriesuche_eltern_id == 0) {
-			produkt_query = "SELECT p.produkt_id "
-					+ "FROM produkt AS p "
-					+ "INNER JOIN produkt_beschreibung AS pb ON p.produkt_id = pb.produkt_id "
-					+ "WHERE pb.sprache_id = '" + this.sprache_id + "' "
-					+ "AND  p.kategorie_id IN (SELECT kategorie_id FROM kategorie WHERE eltern_id = '" + kategorie_id + "' OR (kategorie_id = '" + kategorie_id + "' AND eltern_id = 0)) "
-					+ "ORDER BY " + session.getAttribute("sortierung_sortierspalte") + " " + session.getAttribute("sortierung_reihenfolge") + " "
-					+ "LIMIT " + session.getAttribute("sortierung_limit_von") + "," + session.getAttribute("sortierung_produktanzahl") + "";
-					
-		} else {
-			produkt_query = "SELECT p.produkt_id "
-					+ "FROM produkt AS p "
-					+ "INNER JOIN produkt_beschreibung AS pb ON p.produkt_id = pb.produkt_id "
-					+ "WHERE pb.sprache_id = '" + this.sprache_id + "' "
-					+ "AND  p.kategorie_id = '" + kategorie_id +"' "
-					+ "ORDER BY " + session.getAttribute("sortierung_sortierspalte") + " " + session.getAttribute("sortierung_reihenfolge") + " "
-					+ "LIMIT " + session.getAttribute("sortierung_limit_von") + "," + session.getAttribute("sortierung_produktanzahl") + "";
+		/*
+		 
+		  			String count_query = "SELECT COUNT(a.produkt_id) FROM angebot AS a LEFT JOIN produkt AS p ON p.produkt_id = a.produkt_id WHERE a.produkt_id = '" + id + "' AND a.gueltig_bis > now()";
+			String produkt_query = "SELECT a.angebotspreis, a.gueltig_bis FROM angebot AS a LEFT JOIN produkt AS p ON p.produkt_id = a.produkt_id WHERE a.produkt_id = '" + id + "' AND a.gueltig_bis > now()";
+			
+			ResultSet resultset_count = DatenbankController.sendeSqlRequest(count_query);
+			
+			if (resultset_count!= null) {
+				
+				ResultSet resultset_produkt = DatenbankController.sendeSqlRequest(produkt_query);
+				
+				if(resultset_produkt.next()){
+					this.produktModel.setPreisAngebotNetto(resultset_produkt.getDouble(1));
+					this.produktModel.setGueltig_bis(resultset_produkt.getDate(2));
+				}
+			}
 
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
+
+		  */
+
+		
+		
+		
+		
+		
+		System.out.println("+++Anfang Angebot+++");
+		if(request.getParameter("angebote") != null) {
+			System.out.println("angebot ungleich null");
+			if(request.getParameter("angebote").equals("true")) {
+				System.out.println("angebot ungleich null");
+				if(kategoriesuche_eltern_id == 0) {
+					produkt_query = "SELECT produkt_id FROM angebot WHERE gueltig_bis > now()";
+				} else {
+					if(kategoriesuche_eltern_id == 0) {
+						produkt_query = "SELECT p.produkt_id "
+								+ "FROM produkt AS p "
+								+ "INNER JOIN produkt_beschreibung AS pb ON p.produkt_id = pb.produkt_id "
+								+ "WHERE pb.sprache_id = '" + this.sprache_id + "' "
+								+ "AND  p.kategorie_id IN (SELECT kategorie_id FROM kategorie WHERE eltern_id = '" + kategorie_id + "' OR (kategorie_id = '" + kategorie_id + "' AND eltern_id = 0)) "
+								+ "ORDER BY " + session.getAttribute("sortierung_sortierspalte") + " " + session.getAttribute("sortierung_reihenfolge");
+					} else {
+						produkt_query = "SELECT p.produkt_id "
+								+ "FROM produkt AS p "
+								+ "INNER JOIN produkt_beschreibung AS pb ON p.produkt_id = pb.produkt_id "
+								+ "WHERE pb.sprache_id = '" + this.sprache_id + "' "
+								+ "AND  p.kategorie_id = '" + kategorie_id +"' "
+								+ "ORDER BY " + session.getAttribute("sortierung_sortierspalte") + " " + session.getAttribute("sortierung_reihenfolge");
+					}
+				}
+			}
+		}
+
 		/*
 		try {
 		
