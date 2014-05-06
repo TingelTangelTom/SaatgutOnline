@@ -14,15 +14,13 @@ import controller.NavigationsbereichController;
  * Servlet implementation class NavigationsbereichController
  */
 @WebServlet("/Navigationsbereich")
-public class NavigationsbereichServlet extends HttpServlet
-{
+public class NavigationsbereichServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public NavigationsbereichServlet()
-	{
+	public NavigationsbereichServlet() {
 		super();
 	}
 
@@ -30,10 +28,11 @@ public class NavigationsbereichServlet extends HttpServlet
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-	{
-		NavigationsbereichController navigationsbereichController = new NavigationsbereichController(request, response, true);		
-		navigationsbereichController.navigationsbereichAnzeigen();		
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException,
+			IOException {
+		NavigationsbereichController navigationsbereichController = new NavigationsbereichController(request,
+				response, true);
+		navigationsbereichController.navigationsbereichAnzeigen();
 	}
 
 	/**
@@ -41,10 +40,10 @@ public class NavigationsbereichServlet extends HttpServlet
 	 *      response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
-			IOException
-	{			
-		NavigationsbereichController navigationsbereichController = new NavigationsbereichController(request, response, false);		
-		navigationsbereichController.navigationsbereichAnzeigen();			
+			IOException {
+		NavigationsbereichController navigationsbereichController = new NavigationsbereichController(request,
+				response, false);
+		navigationsbereichController.navigationsbereichAnzeigen();
 	}
 
 }

@@ -11,98 +11,117 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * <p>Die Klasse <code>KopfbereichView</code> stellt Html-Ausgabe-Bloecke zur Darstellung des Kopfbereichs zur Verfuegung.</p>
+ * <p>
+ * Die Klasse <code>KopfbereichView</code> stellt Html-Ausgabe-Bloecke zur
+ * Darstellung des Kopfbereichs zur Verfuegung.
+ * </p>
+ * 
  * @author Tom Weigelt
  * @version 1.0
  * @since 1.7.0_51
  */
-public class KopfbereichView
-{
+public class KopfbereichView {
 	private PrintWriter out;
 	private ResourceBundle resourceBundle;
 	private HttpSession session;
 
 	/**
-	 * <p>Konstruktor der Klasse <code>KopfbereichView</code>.</p>
-	 * <p>Erzeugt einen <code>PrintWriter</code>.</p>
-	 * <p>Ereugt ein <code>ResourceBundle</code>.</p>
-	 * @param request - der aktuelle <code>HttpServletRequest</code>
-	 * @param response - die aktuelle <code>HttpServletResponse</code>
+	 * <p>
+	 * Konstruktor der Klasse <code>KopfbereichView</code>.
+	 * </p>
+	 * <p>
+	 * Erzeugt einen <code>PrintWriter</code>.
+	 * </p>
+	 * <p>
+	 * Ereugt ein <code>ResourceBundle</code>.
+	 * </p>
+	 * 
+	 * @param request
+	 *            - der aktuelle <code>HttpServletRequest</code>
+	 * @param response
+	 *            - die aktuelle <code>HttpServletResponse</code>
 	 * @see javax.servlet.http.HttpServletRequest
 	 * @see javax.servlet.http.HttpServletResponse
 	 * @see java.io.PrintWriter
 	 * @see java.util.ResourceBundle
 	 */
-	public KopfbereichView(HttpServletRequest request, HttpServletResponse response)
-	{
+	public KopfbereichView(HttpServletRequest request, HttpServletResponse response) {
 		this.session = request.getSession();
-		
+
 		response.setContentType("text/html");
-		try
-		{
+		try {
 			this.out = response.getWriter();
-		} catch (IOException e)
-		{
-			System.out.println("PrintWriter nicht erstellt!");
-			e.printStackTrace();
+		} catch (IOException e) {
 		}
-		
+
 		Locale locale = (Locale) session.getAttribute("sprache");
+		
+		// die nachfolgende Zeilen enthaelt Code von Simon Ankele
 		this.resourceBundle = PropertyResourceBundle.getBundle("I18N." + locale.getLanguage() + "."
 				+ getClass().getSimpleName(), locale);
 	}
 
 	/**
-	 * <p>Stellt die Html-Ausgabe fuer den Anfang des Kopfbereiches zur Verfuegung.</p>
+	 * <p>
+	 * Stellt die Html-Ausgabe fuer den Anfang des Kopfbereiches zur Verfuegung.
+	 * </p>
 	 */
-	public void outKopfbereichAnfang()
-	{
+	public void outKopfbereichAnfang() {
 		this.out.println("<!doctype html>\n" + "<html>\n<head>\n" + "<meta charset=\"ISO-8859-15\">\n"
 				+ "<link type=\"text/css\" href=\"resources/css/seitenlayout.css\" rel=\"stylesheet\" />\n"
 				+ "<title></title>\n" + "</head>\n<body>");
 		this.out.println("<table class=\"kopfbereich\">");
 		this.out.println("<tr>\n<td colspan=\"2\">");
 	}
-	
+
 	/**
-	 * <p>Stellt die Html-Ausgabe fuer das Ende des Kopfbereiches zur Verfuegung.</p>
+	 * <p>
+	 * Stellt die Html-Ausgabe fuer das Ende des Kopfbereiches zur Verfuegung.
+	 * </p>
 	 */
-	public void outKopfbereichEnde()
-	{
+	public void outKopfbereichEnde() {
 		this.out.println("</td>\n</tr>");
 	}
 
 	/**
-	 * <p>Stellt die Html-Ausgabe fuer den Anfang des Inhaltsrahmens des Kopfbereiches zur Verfuegung.</p>
+	 * <p>
+	 * Stellt die Html-Ausgabe fuer den Anfang des Inhaltsrahmens des
+	 * Kopfbereiches zur Verfuegung.
+	 * </p>
 	 */
-	public void outInhaltsRahmenAnfang()
-	{
+	public void outInhaltsRahmenAnfang() {
 		this.out.println("<table>");
 		this.out.println("<tr>\n<td>");
 	}
 
 	/**
-	 * <p>Stellt die Html-Ausgabe fuer eine neue Spalte im Inhaltsrahmen des Kopfbereiches zur Verfuegung.</p>
+	 * <p>
+	 * Stellt die Html-Ausgabe fuer eine neue Spalte im Inhaltsrahmen des
+	 * Kopfbereiches zur Verfuegung.
+	 * </p>
 	 */
-	public void outInhaltsRahmenNeueSpalte()
-	{
+	public void outInhaltsRahmenNeueSpalte() {
 		this.out.println("</td>\n<td>");
 	}
 
 	/**
-	 * <p>Stellt die Html-Ausgabe fuer das Ende des Inhaltsrahmens des Kopfbereiches zur Verfuegung.</p>
+	 * <p>
+	 * Stellt die Html-Ausgabe fuer das Ende des Inhaltsrahmens des
+	 * Kopfbereiches zur Verfuegung.
+	 * </p>
 	 */
-	public void outInhaltsRahmenEnde()
-	{
+	public void outInhaltsRahmenEnde() {
 		this.out.println("</td>\n</tr>");
 		this.out.println("</table>");
 	}
 
 	/**
-	 * <p>Stellt die Html-Ausgabe fuer das Firmen-Logo im Inhaltsrahmen des Kopfbereiches zur Verfuegung.</p>
+	 * <p>
+	 * Stellt die Html-Ausgabe fuer das Firmen-Logo im Inhaltsrahmen des
+	 * Kopfbereiches zur Verfuegung.
+	 * </p>
 	 */
-	public void outLogo()
-	{
+	public void outLogo() {
 		this.out.println("<table>");
 		this.out.println("<tr>\n<td>");
 		this.out.println("<img src=\"resources/bilder/logo.png\" alt=\"Logo\">");
@@ -111,10 +130,12 @@ public class KopfbereichView
 	}
 
 	/**
-	 * <p>Stellt die Html-Ausgabe fuer den Firmen-Schriftzug im Inhaltsrahmen des Kopfbereiches zur Verfuegung.</p>
+	 * <p>
+	 * Stellt die Html-Ausgabe fuer den Firmen-Schriftzug im Inhaltsrahmen des
+	 * Kopfbereiches zur Verfuegung.
+	 * </p>
 	 */
-	public void outSchriftzug()
-	{
+	public void outSchriftzug() {
 		this.out.println("<table>");
 		this.out.println("<tr>\n<td>");
 		this.out.println("Saatgut");
@@ -123,12 +144,14 @@ public class KopfbereichView
 		this.out.println("</td>\n</tr>");
 		this.out.println("</table>");
 	}
-	
+
 	/**
-	 * <p>Stellt die internationalisierte Html-Ausgabe fuer den Login-Bereich im Inhaltsrahmen des Kopfbereiches zur Verfuegung.</p>
+	 * <p>
+	 * Stellt die internationalisierte Html-Ausgabe fuer den Login-Bereich im
+	 * Inhaltsrahmen des Kopfbereiches zur Verfuegung.
+	 * </p>
 	 */
-	public void outLoginBereich()
-	{
+	public void outLoginBereich() {
 		this.out.println("<form action=\"\" method=\"POST\">");
 		this.out.println("<table>");
 		this.out.println("<tr>\n<td>");
@@ -140,65 +163,77 @@ public class KopfbereichView
 		this.out.println("</td>\n<td>");
 		this.out.println("<input type=\"password\" name=\"passwort\" size=\"15\">");
 		this.out.println("</td>\n<td>");
-		this.out.println("<input type=\"submit\" name=\"anmelden\" value=\"" + this.resourceBundle.getString("ANMELDEN") + "\">");
+		this.out.println("<input type=\"submit\" name=\"anmelden\" value=\""
+				+ this.resourceBundle.getString("ANMELDEN") + "\">");
 		this.out.println("</td>\n</tr>\n<tr>\n<td>\n</td>\n<td colspan=\"2\">");
-		this.out.println("<a href=\"/SaatgutOnline/Registrierung\">\n" + this.resourceBundle.getString("REGISTRIEREN")
-				+ "\n</a>");
+		this.out.println("<a href=\"/SaatgutOnline/Registrierung\">\n"
+				+ this.resourceBundle.getString("REGISTRIEREN") + "\n</a>");
 		this.out.println("</td>\n</tr>");
 		this.out.println("</table>");
 		this.out.println("</form>");
 	}
 
 	/**
-	 * <p>Stellt die internationalisierte Html-Ausgabe fuer den Logout-Bereich im Inhaltsrahmen des Kopfbereiches zur Verfuegung.</p>
+	 * <p>
+	 * Stellt die internationalisierte Html-Ausgabe fuer den Logout-Bereich im
+	 * Inhaltsrahmen des Kopfbereiches zur Verfuegung.
+	 * </p>
 	 */
-	public void outLogoutBereich()
-	{
+	public void outLogoutBereich() {
 		this.out.println("<table>");
 		this.out.println("<tr>\n<td>");
 		this.out.println(this.resourceBundle.getString("ANGEMELDET_ALS"));
 		this.out.println("</td>\n</tr>\n<tr>\n<td>");
-		this.out.println(this.session.getAttribute("benutzername"));		
+		this.out.println(this.session.getAttribute("benutzername"));
 		this.out.println("</td>\n</tr>\n<tr>\n<td>");
-		this.out.println("<a href=\"/SaatgutOnline/Abmeldung\">\n" + this.resourceBundle.getString("ABMELDEN")+"\n</a>");
+		this.out.println("<a href=\"/SaatgutOnline/Abmeldung\">\n" + this.resourceBundle.getString("ABMELDEN")
+				+ "\n</a>");
 		this.out.println("</td>\n</tr>");
 		this.out.println("</table>");
 	}
 
 	/**
-	 * <p>Stellt die internationalisierte Html-Ausgabe fuer den Link zum Warenkorb im Inhaltsrahmen des Kopfbereiches zur Verfuegung.</p>
+	 * <p>
+	 * Stellt die internationalisierte Html-Ausgabe fuer den Link zum Warenkorb
+	 * im Inhaltsrahmen des Kopfbereiches zur Verfuegung.
+	 * </p>
 	 */
-	public void outWarenkorbLink()
-	{
+	public void outWarenkorbLink() {
 		this.out.println("<table>");
 		this.out.println("<tr>\n<td>");
-		this.out.println("<a href=\"/SaatgutOnline/Warenkorb\">\n" + this.resourceBundle.getString("ZUM_WARENKORB") + "\n</a>");
+		this.out.println("<a href=\"/SaatgutOnline/Warenkorb\">\n"
+				+ this.resourceBundle.getString("ZUM_WARENKORB") + "\n</a>");
 		this.out.println("</td>\n</tr>");
 		this.out.println("</table>");
 	}
 
 	/**
-	 * <p>Stellt die internationalisierte Html-Ausgabe fuer den Suchfeld-Bereich im Inhaltsrahmen des Kopfbereiches zur Verfuegung.</p>
+	 * <p>
+	 * Stellt die internationalisierte Html-Ausgabe fuer den Suchfeld-Bereich im
+	 * Inhaltsrahmen des Kopfbereiches zur Verfuegung.
+	 * </p>
 	 */
-	public void outSuchfeld()
-	{
+	public void outSuchfeld() {
 		this.out.println("<table>");
 		this.out.println("<tr>\n<td>");
 		this.out.println("<form action=\"/SaatgutOnline/Produktliste\" method=\"GET\">");
 		this.out.println("<input type=\"hidden\" name=\"erweitertesuche\" value=\"false\">");
 		this.out.println("<input type=\"text\" name=\"suchbegriff\" size=\"20\">");
 		this.out.println("</td>\n<td>");
-		this.out.println("<input type=\"submit\" name=\"suche\" value=\"" + this.resourceBundle.getString("SUCHEN") + "\">");
+		this.out.println("<input type=\"submit\" name=\"suche\" value=\""
+				+ this.resourceBundle.getString("SUCHEN") + "\">");
 		this.out.println("</form>");
 		this.out.println("</td>\n</tr>");
 		this.out.println("</table>");
 	}
 
 	/**
-	 * <p>Stellt die Html-Ausgabe fuer den Sprachwahl-Bereich im Inhaltsrahmen des Kopfbereiches zur Verfuegung.</p>
+	 * <p>
+	 * Stellt die Html-Ausgabe fuer den Sprachwahl-Bereich im Inhaltsrahmen des
+	 * Kopfbereiches zur Verfuegung.
+	 * </p>
 	 */
-	public void outSprachwahl()
-	{
+	public void outSprachwahl() {
 		this.out.println("<table>");
 		this.out.println("<tr>\n<td>");
 		this.out.println("<form action=\"\" method=\"POST\">");

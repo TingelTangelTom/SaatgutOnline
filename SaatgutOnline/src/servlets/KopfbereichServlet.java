@@ -1,4 +1,4 @@
- package servlets;
+package servlets;
 
 import java.io.IOException;
 
@@ -15,15 +15,13 @@ import controller.KopfbereichController;
  * Servlet implementation class KopfbereichController
  */
 @WebServlet("/Kopfbereich")
-public class KopfbereichServlet extends HttpServlet
-{
+public class KopfbereichServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public KopfbereichServlet()
-	{
+	public KopfbereichServlet() {
 		super();
 	}
 
@@ -31,8 +29,8 @@ public class KopfbereichServlet extends HttpServlet
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-	{
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException,
+			IOException {
 		KopfbereichController kopfbereichController = new KopfbereichController(request, response);
 		kopfbereichController.outKopfbereichAnzeigen();
 
@@ -45,8 +43,7 @@ public class KopfbereichServlet extends HttpServlet
 	 *      response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
-			IOException
-	{
+			IOException {
 		doGet(request, response);
 	}
 }
