@@ -89,5 +89,4 @@ public class SprachversionFilter implements Filter {
 		} catch (SQLException e) {
 		}
 	}
-
 }
