@@ -1,4 +1,14 @@
 package controller;
+/**
+ * <p>Die Klasse <code>PasswortController</code>
+ * stellt eine Schnittstelle von und zu der
+ * Datenbank bereit.
+ * </p>
+ * @author Christof Weigandt
+ * @version 1.0
+ * @since 1.7.0_51
+ * @see https://crackstation.net/hashing-security.htm
+ */
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,7 +16,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class PasswortController {
-	
+	/**
+     * Laedt ein zu einer Kunden-ID passendes
+     * Passwort-Hash aus der Datenbank
+     *
+     * @param   int kundeId
+     * @return  String
+     */
 	public static String ladePasswortHashAusDb (int kundeId) {
 
 		String query = "SELECT * FROM " + KonfigurationController.getDbName()
@@ -21,11 +37,17 @@ public class PasswortController {
 		return passwortHash;
 		
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
 		}
 	}
+	/**
+     * Speichert einen Passwort-Hash samt Kunden-ID 
+     * in die Datenbank
+     *
+     * @param   int kundeId
+     * @param   String passwortHash
+     */
 	public static synchronized void speicherePasswortHashInDb (String passwortHash, int kundeId) {
 		 
 		Connection verbindung = ConnectionPoolController.getInstance().getVerbindungAusPool();
@@ -44,7 +66,6 @@ public class PasswortController {
          
          ConnectionPoolController.getInstance().verschiebeVerbindungInDenPool(verbindung);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

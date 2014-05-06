@@ -11,9 +11,16 @@ import javax.servlet.http.HttpServletResponse;
 
 import controller.AbmeldungController;
 import controller.RegistrierungBestaetigungController;
+import controller.RegistrierungErfolgreichController;
 
 /**
- * Servlet implementation class RegistrierungBestaetigungServlet
+ * <p>Die Klasse <code>RegistrierungBestaetigung</code>
+ * nimmt den request entgegen und erzeugt einen <code>RegistrierungBestaetigungController</code>.
+ * </p>
+ * @author Christof Weigandt
+ * @version 1.0
+ * @since 1.7.0_51
+ * @see RegistrierungBestaetigungController
  */
 @WebServlet("/RegistrierungBestaetigung")
 public class RegistrierungBestaetigungServlet extends HttpServlet {

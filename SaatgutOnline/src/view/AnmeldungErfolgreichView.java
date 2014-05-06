@@ -1,5 +1,15 @@
 package view;
-
+/**
+ * <p>Die Klasse <code>AnmeldungErfolgreichView</code>
+ * erzeugt einen <code>PrintWriter</code> und gibt
+ * gemaess mittels resourcebundle uebergebener Spracheinstellungen
+ * den passenden internationalisierten Text aus.
+ * </p>
+ * @author Christof Weigandt
+ * @version 1.0
+ * @since 1.7.0_51
+ * @see AnmeldungFehlerView
+ */
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Locale;
@@ -11,17 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class AnmeldungErfolgreichView {
-	/**
-	 * Objekt der Klasse <code>PrintWriter</code>
-	 * 
-	 * @see java.io.PrintWriter
-	 */
 	private PrintWriter out;
-	/**
-	 * Objekt der Klasse <code>ResourceBundle</code>
-	 * 
-	 * @see java.util.ResourceBundle
-	 */
 	private ResourceBundle resourceBundle;
 
 	/**
@@ -36,24 +36,21 @@ public class AnmeldungErfolgreichView {
 	public AnmeldungErfolgreichView(HttpServletRequest request, HttpServletResponse response)
 	{
 		HttpSession session = request.getSession();
-		
 		response.setContentType("text/html");
 		try
 		{
 			this.out = response.getWriter();
 		} catch (IOException e)
 		{
-			System.out.println("PrintWriter nicht erstellt!");
 			e.printStackTrace();
 		}
-		
 		Locale locale = (Locale) session.getAttribute("sprache");
 		this.resourceBundle = PropertyResourceBundle.getBundle("I18N." + locale.getLanguage() + "."
 				+ getClass().getSimpleName(), locale);
 	}
 
 	/**
-	 * Stellt die Html-Ausgabe fuer den Anfang des Kopfbereiches zur Verfuegung
+	 * Gibt Text aus
 	 */
 	public void outAnmeldungErfolgreichView() {
 		this.out.println("<h1>" + (this.resourceBundle.getString("UEBERSCHRIFT")) + "</h1>");

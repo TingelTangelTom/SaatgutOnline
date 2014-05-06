@@ -13,8 +13,15 @@ import controller.AnmeldungErfolgreichController;
 import controller.RegistrierungController;
 
 /**
- * Servlet implementation class AnmeldungErfolgreichServlet
+ * <p>Die Klasse <code>AnmeldungErfolgreichServlet</code>
+ * nimmt den request entgegen und erzeugt einen  <code>AnmeldungErfolgreichController</code>.
+ * </p>
+ * @author Christof Weigandt
+ * @version 1.0
+ * @since 1.7.0_51
+ * @see AnmeldungErfolgreichController
  */
+
 @WebServlet("/AnmeldungErfolgreich")
 public class AnmeldungErfolgreichServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -24,7 +31,6 @@ public class AnmeldungErfolgreichServlet extends HttpServlet {
      */
     public AnmeldungErfolgreichServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -33,9 +39,7 @@ public class AnmeldungErfolgreichServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher rd = getServletContext().getRequestDispatcher("/Kopfbereich");
 		rd.include(request, response);
-		
 		AnmeldungErfolgreichController anmeldungErfolgreichController = new AnmeldungErfolgreichController(request, response);
-		
 		rd = getServletContext().getRequestDispatcher("/Fussbereich");
 		rd.include(request, response);		
 	}
@@ -44,7 +48,6 @@ public class AnmeldungErfolgreichServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 	}
 
 }

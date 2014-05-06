@@ -13,7 +13,13 @@ import controller.RegistrierungController;
 import controller.RegistrierungErfolgreichController;
 
 /**
- * Servlet implementation class RegistrierungErfolgreichServlet
+ * <p>Die Klasse <code>RegistrierungErfolgreichServlet</code>
+ * nimmt den request entgegen und erzeugt einen <code>RegistrierungErfolgreichController</code>.
+ * </p>
+ * @author Christof Weigandt
+ * @version 1.0
+ * @since 1.7.0_51
+ * @see RegistrierungErfolgreichController
  */
 @WebServlet("/RegistrierungErfolgreich")
 public class RegistrierungErfolgreichServlet extends HttpServlet {
@@ -45,5 +51,4 @@ public class RegistrierungErfolgreichServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	}
-
 }

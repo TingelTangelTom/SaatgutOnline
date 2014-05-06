@@ -15,7 +15,13 @@ import javax.xml.ws.Response;
 import controller.AnmeldungController;
 
 /**
- * Servlet Filter implementation class AnmeldungFilter
+ * <p>Die Klasse <code>AnmeldungFilter</code> pruef bei jedem Seitenaufruf,
+ * ob Anmeldedaten im request als Parameter uebergeben wurden und leitet
+ * diese gegebenenfalls an den AnmeldungController weiter.</p>
+ * 
+ * @author Christof Weigandt
+ * @version 1.0
+ * @since 1.7.0_51
  */
 @WebFilter(description = "Anmeldedaten verarbeiten", urlPatterns = { "/*" })
 public class AnmeldungFilter implements Filter {
@@ -57,20 +63,11 @@ public class AnmeldungFilter implements Filter {
 		// Wurden Formulardaten uebertragen?
 		if(request.getParameter("anmelden") != null)
 		{
-			System.out.println("LOGIN erfolgt!");
-			System.out.println("Benutzername: " + request.getParameter("benutzername"));
-			System.out.println("Passwort: " + request.getParameter("passwort"));
-
-			// Controller starten und Anmeldedaten uegbergeben
+			// Controller starten und Anmeldedaten im request uegbergeben
 			AnmeldungController anmeldungController = new AnmeldungController(
 					request, response);
-
 		}
-		
-		// pass the request along the filter chain
 		chain.doFilter(request, response);
 	}
-
-
 
 }
