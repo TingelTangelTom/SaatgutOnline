@@ -33,8 +33,6 @@ public class IndexPlatzhalterServlet extends HttpServlet
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		
-		
 		/*
 		 * DIES IST NUR EIN PLATZHALTER UND SIMULIERT DIE SPAETERE INDEX-DATEI!
 		 * 
@@ -53,8 +51,6 @@ public class IndexPlatzhalterServlet extends HttpServlet
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		out.println("Hauptseite");
-		
-		
 		
 		// Fussbereich einbinden
 		rd = getServletContext().getRequestDispatcher("/Fussbereich");

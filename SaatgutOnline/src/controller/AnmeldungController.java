@@ -86,7 +86,7 @@ public class AnmeldungController {
 		if (this.kunde.getBenutzername() == null) {
 			return 0; }
 
-		String passwortHash = PasswortHashModel.ladePasswortHashAusDb(this.kunde.getId());
+		String passwortHash = PasswortController.ladePasswortHashAusDb(this.kunde.getId());
 		if (!(PasswortHashController.validierePasswort(this.passwort, passwortHash))) {		// TODO umbenennen validiere...
 			return 0; }
 		if(this.kunde.getFreigeschaltet() != 1) {

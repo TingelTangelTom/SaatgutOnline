@@ -16,7 +16,7 @@ public class RegistrierungVerarbeitungController {
 	
 	private KundeModel kunde;
 	private String passwort;
-	private PasswortHashModel passwortHash;
+//	private PasswortHashModel passwortHash;
 	
 	private boolean geschlechtGeprueft;		// DB anpassen
 	private boolean vornameGeprueft;
@@ -27,11 +27,11 @@ public class RegistrierungVerarbeitungController {
 	private boolean hausnummerGeprueft;
 	private boolean ortGeprueft;				// TODO DB anpassen
 	private boolean postleitzahlGeprueft;	
-	private boolean landGeprueft;			
+//	private boolean landGeprueft;			
 	private boolean telefonGeprueft;			
 	private boolean emailadresseGeprueft;	
-	private boolean bundeslandGeprueft;	
-	private boolean newsletterGeprueft;		// int ggfs. in bool konvertieren
+//	private boolean bundeslandGeprueft;	
+//	private boolean newsletterGeprueft;		// int ggfs. in bool konvertieren
 	private boolean passwortGeprueft;
 	private boolean passwortWiederholungGeprueft;
 	
@@ -45,6 +45,10 @@ public class RegistrierungVerarbeitungController {
 		
 		kunde = new KundeModel();
 		this.session = request.getSession();
+		
+		this.passwort = "hallo";
+		System.out.println("this.passwort ist: " + this.passwort);
+		System.out.println(PasswortHashController.erstellePasswortHash(this.passwort));
 		
 		// TODO Validierung
 		
@@ -72,13 +76,13 @@ public class RegistrierungVerarbeitungController {
 		if (validiereKundendaten(request)) {
 			generiereUuid();
 			kunde.speichereKundeInDb();
-			this.passwortHash.setPasswortHash(
-					PasswortHashController.erstellePasswortHash(this.passwort));
-			this.passwortHash.speicherePasswortHashInDb();
+			System.out.println("this.passwort ist: " + this.passwort);
+			System.out.println(PasswortHashController.erstellePasswortHash(this.passwort));
+			PasswortController.speicherePasswortHashInDb(PasswortHashController.erstellePasswortHash(this.passwort), this.kunde.getId());
 			sendeRegistrierungsEmail();
 			
 			try {
-				response.sendRedirect("/RegistrierungErfolgreich");
+				response.sendRedirect("RegistrierungErfolgreich");
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -106,44 +110,51 @@ public class RegistrierungVerarbeitungController {
 			System.out.println("kunde geschlecht ist jetzt: " + this.kunde.getGeschlecht());
 			try {
 				if ((Integer.parseInt(request.getParameter("Anrede")) == 0 ||
-				(Integer.parseInt(request.getParameter("Anrede")) == 1))) 
-				this.geschlechtGeprueft = true;
+				(Integer.parseInt(request.getParameter("Anrede")) == 1))) {
+					this.geschlechtGeprueft = true;
+					System.out.println("geschlecht ok"); }
 			} catch(NumberFormatException e) {
-		    }		
+		    }
 		}
 		if (request.getParameter("Vorname") != null) {
 			this.kunde.setVorname(request.getParameter("Vorname"));
 			if (request.getParameter("Vorname").length() > 2) {
 				this.vornameGeprueft = true;
-			}
+			} 
+			else { System.out.println("FEHLER bei Vorname"); }
 		}
 		if (request.getParameter("Nachname") != null) {
 			this.kunde.setNachname(request.getParameter("Nachname"));
 			if (request.getParameter("Nachname").length() > 1) {
 				this.nachnameGeprueft = true;
 			}
+			else { System.out.println("FEHLER bei Nachname"); }
 		}
 		if (request.getParameter("Strasse") != null) {
 			this.kunde.setStrasse(request.getParameter("Strasse"));
 			if (request.getParameter("Strasse").length() > 2) {
 				this.strasseGeprueft = true;
 			}
+			else { System.out.println("FEHLER bei Strasse"); }
 		}
 		if (request.getParameter("Hausnummer") != null) {
 			this.kunde.setHausnummer(request.getParameter("Hausnummer"));
 			this.hausnummerGeprueft = true;
 		}
+		else { System.out.println("FEHLER bei Hausnummer"); }
 		if (request.getParameter("Plz") != null) {
 			this.kunde.setPostleitzahl(request.getParameter("Plz"));
 			if (request.getParameter("Plz").length() > 4 && request.getParameter("Plz").length() < 8 ){
 				this.postleitzahlGeprueft = true;
 			}
+			else { System.out.println("FEHLER bei Plz"); }
 		}
 		if (request.getParameter("Ort") != null) {
 			this.kunde.setOrt(request.getParameter("Ort"));
 			if (request.getParameter("Ort").length() > 2 && request.getParameter("Ort").length() < 30 ){
 				this.ortGeprueft = true;
 			}
+			else { System.out.println("FEHLER bei Ort"); }
 		}
 		if (request.getParameter("Benutzername") != null) {
 			String regelBenutzername = KonfigurationController.getRegelBenutzername();
@@ -151,46 +162,69 @@ public class RegistrierungVerarbeitungController {
 			if (Pattern.matches(regelBenutzername, request.getParameter("Benutzername"))) {
 				this.benutzernameGeprueft = true;
 			}
+			else { System.out.println("FEHLER bei Benutzername"); }
 		}
 		if (request.getParameter("Firma") != null) {
 			this.kunde.setFirma(request.getParameter("Firma"));
 			if (request.getParameter("Firma").length() > 2 && request.getParameter("Firma").length() < 40 ){
 				this.firmaGeprueft = true;
 			}
+			else { System.out.println("FEHLER bei Firma"); }
 		}
 		if (request.getParameter("Emailadresse") != null) {
 			this.kunde.setEmailadresse(request.getParameter("Emailadresse"));
 			if (request.getParameter("Emailadresse").length() > 4 && request.getParameter("Emailadresse").length() < 70 ){
 				this.emailadresseGeprueft = true;
 			}
+			else { System.out.println("FEHLER bei Emailadresse"); }
 		}
 		if (request.getParameter("Telefon") != null) {
 			this.kunde.setTelefon(request.getParameter("Telefon"));
 			if (request.getParameter("Telefon").length() > 4 && request.getParameter("Telefon").length() < 30 ){
 				this.telefonGeprueft = true;
 			}
+			else { System.out.println("FEHLER bei Telefon"); }
 		}
-		if (request.getParameter("Newsletter") != null) {
-			try {
-				this.kunde.setNewsletter(Integer.parseInt(request.getParameter("Newsletter")));
-				if ((Integer.parseInt(request.getParameter("Newsletter")) == 0 ||
-				(Integer.parseInt(request.getParameter("Newsletter")) == 1))) 
-				this.newsletterGeprueft = true;
-			} catch(NumberFormatException e) {
-		    }		
-		}
+//		if (request.getParameter("Newsletter") != null) {
+//			try {
+//				this.kunde.setNewsletter(Integer.parseInt(request.getParameter("Newsletter")));
+//				if ((Integer.parseInt(request.getParameter("Newsletter")) == 0 ||
+//				(Integer.parseInt(request.getParameter("Newsletter")) == 1))) 
+//				this.newsletterGeprueft = true;
+//			} catch(NumberFormatException e) {
+//		    }		
+//		}
 		if (request.getParameter("Passwort") != null) {
 			this.passwort = request.getParameter("Passwort");
 			String regelPasswort = KonfigurationController.getRegelPasswort();
 			if (Pattern.matches(regelPasswort, request.getParameter("Passwort"))) {
 				this.passwortGeprueft = true;
+				System.out.println("Passwort ist ok!");
+			} else {
+				System.out.println("pass ned ok");
 			}
 		}
-		if (request.getParameter("Passwortwiederholung") != null && request.getParameter("Passwort") != null) {
-			if (request.getParameter("Passwortwiederholung").equals(request.getParameter("Passwort"))) {
+		if (request.getParameter("PasswortWiederholung") != null && request.getParameter("Passwort") != null) {
+			if (request.getParameter("PasswortWiederholung").equals(request.getParameter("Passwort"))) {
 				this.passwortWiederholungGeprueft = true;
+				System.out.println("Passwoerter stimmen ueberein!");
+			} else {
+				System.out.println("Passwoerter stimmen nicht ueberein!");
 			}
 		}
+		
+		System.out.println(geschlechtGeprueft);
+		System.out.println(vornameGeprueft);
+		System.out.println(nachnameGeprueft);
+		System.out.println(benutzernameGeprueft);
+		System.out.println(firmaGeprueft);
+		System.out.println(strasseGeprueft);
+		System.out.println(hausnummerGeprueft);
+		System.out.println(ortGeprueft);
+		System.out.println(postleitzahlGeprueft);
+		System.out.println(geschlechtGeprueft);
+		System.out.println(geschlechtGeprueft);
+		
 		if (geschlechtGeprueft
 				&& vornameGeprueft
 				&& nachnameGeprueft
@@ -200,17 +234,20 @@ public class RegistrierungVerarbeitungController {
 				&& hausnummerGeprueft
 				&& ortGeprueft
 				&& postleitzahlGeprueft
-				&& landGeprueft
+//				&& landGeprueft
 				&& telefonGeprueft
 				&& emailadresseGeprueft
-				&& bundeslandGeprueft
-				&& newsletterGeprueft
+//				&& bundeslandGeprueft
+//				&& newsletterGeprueft
 				&& passwortGeprueft
 				&& passwortWiederholungGeprueft) {
-			return true; } else {
-				return false;
-			}
+			System.out.println("Alle Eingaben korrekt");	// TODO entfernen
+			return true;
+		} else {
+			System.out.println("Nicht alle Eingaben korrekt");
+			return false;
 		}
+	}
 		
 	private void generiereUuid() {
 		this.kunde.setUuid(UUID.randomUUID().toString());		
@@ -277,9 +314,9 @@ public class RegistrierungVerarbeitungController {
 		return postleitzahlGeprueft;
 	}
 
-	public boolean isLandGeprueft() {
-		return landGeprueft;
-	}
+//	public boolean isLandGeprueft() {
+//		return landGeprueft;
+//	}
 
 	public boolean isTelefonGeprueft() {
 		return telefonGeprueft;
@@ -289,13 +326,13 @@ public class RegistrierungVerarbeitungController {
 		return emailadresseGeprueft;
 	}
 
-	public boolean isBundeslandGeprueft() {
-		return bundeslandGeprueft;
-	}
+//	public boolean isBundeslandGeprueft() {
+//		return bundeslandGeprueft;
+//	}
 
-	public boolean isNewsletterGeprueft() {
-		return newsletterGeprueft;
-	}
+//	public boolean isNewsletterGeprueft() {
+//		return newsletterGeprueft;
+//	}
 
 	public boolean isPasswortGeprueft() {
 		return passwortGeprueft;

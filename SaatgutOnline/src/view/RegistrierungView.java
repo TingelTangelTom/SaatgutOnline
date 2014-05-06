@@ -92,10 +92,10 @@ public class RegistrierungView {
  				+ "<td><input name=\"Benutzername\" type=\"text\" id=\"Benutzername\" size=\"35\" maxlength=\"60\"></td></tr>\n"
  				
  				+ "<tr><td><label for=\"Passwort\">" + this.resourceBundle.getString("PASSWORT") + "</label></td>\n"
- 				+ "<td><input name=\"Passwort\" type=\"text\" id=\"Passwort\" size=\"35\" maxlength=\"60\"></td></tr>\n"
+ 				+ "<td><input type=\"password\" name=\"Passwort\" type=\"text\" id=\"Passwort\" size=\"35\" maxlength=\"60\"></td></tr>\n"
  				
  				+ "<tr><td><label for=\"PasswortWiederholung<\">" + this.resourceBundle.getString("PASSWORTWIEDERHOLUNG") + "</label></td>\n"
- 				+ "<td><input name=\"PasswortWiederholung\" type=\"text\" id=\"PasswortWiederholung\" size=\"35\" maxlength=\"60\"></td></tr>\n"
+ 				+ "<td><input type=\"password\"  name=\"PasswortWiederholung\" type=\"text\" id=\"PasswortWiederholung\" size=\"35\" maxlength=\"60\"></td></tr>\n"
  				
 			    + "<tr><td valign=\"top\">&nbsp;</td><td><div align=\"left\">"
 			    + "<input name=\"submit\" type=\"submit\" id=\"submit\" value=\"" + this.resourceBundle.getString("SENDEN") + "\"></div></td></tr></table></form>");

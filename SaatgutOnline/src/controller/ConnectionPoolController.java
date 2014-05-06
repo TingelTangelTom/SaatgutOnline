@@ -16,7 +16,6 @@ public class ConnectionPoolController {
 	private Vector<Connection> connectionPool = new Vector<Connection>();
 	
 	private ConnectionPoolController() {
-		System.out.println("Konstuktor ConnectionPoolController aufgerufen.");
 		ladeKonfiguration();
 		initialisiereConnectionPool();
 	}
@@ -80,7 +79,6 @@ public class ConnectionPoolController {
 	        return null;
 	    }
 	}
-	
 	
     public synchronized Connection getVerbindungAusPool()
     {

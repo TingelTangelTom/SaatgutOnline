@@ -42,13 +42,9 @@ public class RegistrierungBestaetigungController {
 			String query = "SELECT * FROM " + KonfigurationController.getDbName()
 			        + ".kunde WHERE kunde_uuid ='" + this.uuid + "'";
 			ResultSet result = DatenbankController.sendeSqlRequest(query);
-			try {
 				while(result.next()) {
 					count++;
 				}
-			} catch {
-				(Exception e)
-			}
 			if (count == 1) {
 				this.registrierungBestaetigungView.outRegistrierungBestaetigungView();
 			} else {
