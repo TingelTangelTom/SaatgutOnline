@@ -1,6 +1,7 @@
 package controller;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -8,11 +9,22 @@ import javax.servlet.http.HttpSession;
 
 import view.AnmeldungErfolgreichView;
 import view.RegistrierungBestaetigungView;
+import view.RegistrierungFehlerView;
 
+
+// asdöflkjasdfkljasödlfkj
+/**
+ * <p>Die Klasse <code>RegistrierungBestaetigungController</code>
+ * erzeugt einen <code>RegistrierungBestaetigungView</code> und ruft
+ * die passende Ausgabemethode derselben auf.
+ * </p>
+ * @author Christof Weigandt
+ * @version 1.0
+ * @since 1.7.0_51
+ * @see RegistrierungFehlerView
+ */	
 public class RegistrierungBestaetigungController {
-	
 	private String uuid = null;
-	
 	/**
 	 * Objekt der Klasse <code>KopfbereichView</code>
 	 * @see view.KopfbereichView
@@ -42,13 +54,17 @@ public class RegistrierungBestaetigungController {
 			String query = "SELECT * FROM " + KonfigurationController.getDbName()
 			        + ".kunde WHERE kunde_uuid ='" + this.uuid + "'";
 			ResultSet result = DatenbankController.sendeSqlRequest(query);
-				while(result.next()) {
-					count++;
+				try {
+					while(result.next()) {
+						count++;
+					}
+				} catch (SQLException e) {
 				}
 			if (count == 1) {
 				this.registrierungBestaetigungView.outRegistrierungBestaetigungView();
 			} else {
-				this.registrierungBestaetigungView.outRegistrierungBestaetigungFehler();
+//				this.registrierungBestaetigungView.outRegistrierungBestaetigungFehler();
 			}
+		}
 	}
 }

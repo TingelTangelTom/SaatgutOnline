@@ -1,5 +1,23 @@
 package controller;
-
+/**
+ * <p>Die Singleton-Klasse <code>ConnectionPoolController</code>
+ * erzeugt einen Pool von SQL-Verbindungen, die ueber die Methode
+ * <code>getVerbindungAusPool</code> abgerufen werden koennen.
+ * Mit der Methode <code>verschiebeVerbindungInDenPool</code> koennen 
+ * Verbindungen zurueck in den Pool gelegt werden und stehen
+ * wieder zur Verfuegung.
+ * Die Anzahl an Verbindungen werden ueber den
+ * <code>KonfigurationController</code> <code>dbMaximalePoolgroesse</code>
+ * ausgelesen und ist variabel.
+ * Die Klasse sollte moeglichst frueh in den Startprozess des Servers
+ * eingebunden werden, damit der Pool bei aufruf zur Verfügung steht und
+ * nicht erst aufgebaut werden muss.
+ * </p>
+ * @author Christof Weigandt
+ * @version 1.0
+ * @since 1.7.0_51
+ * @see KonfigurationController
+ */
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -27,7 +45,6 @@ public class ConnectionPoolController {
 		this.dbName = KonfigurationController.getDbName();
 		this.dbPasswort = KonfigurationController.getDbPasswort();
 		this.dbPort = KonfigurationController.getDbPort();		
-		
 	}
 
 	private static class ConnectionPoolControllerHolder { 
@@ -42,12 +59,12 @@ public class ConnectionPoolController {
     {
 		while(!pruefeObConnectionPoolVoll())
         {
-            // Connection Pool ist nicht voll. Weitere Verbindungen hinzufügen, bis der Pool voll ist
+            // Connection Pool ist nicht voll. Weitere Verbindungen hinzufuegen, bis der Pool voll ist
             connectionPool.addElement(this.sqlVerbindungAufbauen());
         }
     }
 
-	private synchronized boolean pruefeObConnectionPoolVoll()
+	private boolean pruefeObConnectionPoolVoll()
 	{
 		// Poolgroesse pruefen
 		if(this.connectionPool.size() < dbMaximalePoolgroesse)
@@ -57,6 +74,11 @@ public class ConnectionPoolController {
 		return true;
 	}
 	
+	/**
+	 * Neue SQL-Verbindung erstellen
+	 * @return Connection
+	 */
+	
 	public Connection sqlVerbindungAufbauen () {
 		try {
 			// ggfs. Datenbanktreiber laden
@@ -65,22 +87,23 @@ public class ConnectionPoolController {
 			Connection verbindung = DriverManager.getConnection("jdbc:mysql://" + this.dbHost + ":"
 		           + this.dbPort + "/" + this.dbName + "?" + "user=" + this.dbBenutzer + "&"
 		           + "password=" + this.dbPasswort);
-//		    System.out.println("Verbindung zur Datenbank wurde hergestellt.");
-		    return verbindung;
+			return verbindung;
 		} catch(SQLException e) { 
-			System.out.println("Verbindung zur Datenbank konnte nicht hergestellt werden.");
 	    	System.out.println(e.getMessage());
 	    	System.out.println(e.getSQLState());
 	    	System.out.println(e.getErrorCode());
 	    	return null;
 	    } catch(Exception e) {  
-	    	System.out.println("Verbindung zur Datenbank konnte nicht hergestellt werden.");
 	        System.out.println(e.getClass().toString() +" / "+ e.getMessage());
 	        return null;
 	    }
 	}
 	
-    public synchronized Connection getVerbindungAusPool()
+	/**
+	 * SQL-Verbindung aus dem Pool entnehmen
+	 * @return Connection
+	 */
+	public Connection getVerbindungAusPool()
     {
         Connection verbindung = null;
 
@@ -90,20 +113,19 @@ public class ConnectionPoolController {
             verbindung = (Connection) connectionPool.firstElement();
             this.connectionPool.removeElementAt(0);
         }
-        // Verbindung aushändigen
+        // Verbindung aushaendigen
         return verbindung;
-        
-        // TODO else: sinnvolle exception werfen!
     }
-
-    public synchronized void verschiebeVerbindungInDenPool(Connection verbindung)
+	/**
+	 * SQL-Verbindung in den Pool zurueckgeben
+	 * @param Connection
+	 */
+    public void verschiebeVerbindungInDenPool(Connection verbindung)
     {
         // Vom Client zurück in den Pool
         this.connectionPool.addElement(verbindung);
     }
-	
 	public String getDbName() {
 		return this.dbName;
 	}
-	
 }

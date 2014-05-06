@@ -1,5 +1,14 @@
 package controller;
-
+/**
+ * <p>Die Klasse <code>AbmeldungController</code>
+ * meldet den Kunden vom System ab und erzeugt als Ausgabe einen passenden
+ * <code>AbmeldungView</code></p>
+ * 
+ * @author Christof Weigandt
+ * @version 1.0
+ * @since 1.7.0_51
+ * @see view.AbmeldungView
+ */
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,19 +19,12 @@ import view.AbmeldungView;
 import view.KopfbereichView;
 
 public class AbmeldungController {
-	/**
-	 * Objekt der Klasse <code>KopfbereichView</code>
-	 * @see view.KopfbereichView
-	 */
 	private AbmeldungView abmeldungView;
-	/**
-	 * Objekt der Klasse <code>HttpSession</code>
-	 * @see HttpSession
-	 */
 	private HttpSession session;
 		
 	/**
-	 * Konstruktor der Klasse <code>KopfbereichController</code>
+	 * Konstruktor der Klasse <code>AbmeldungController</code>
+	 * Session-Attribut "angemeldet" wird auf false gesetzt
 	 * @param request - der aktuelle <code>HttpServletRequest</code>
 	 * @param response - die aktuelle <code>HttpServletResponse</code>
 	 * @see javax.servlet.http.HttpServletRequest
@@ -44,8 +46,4 @@ public class AbmeldungController {
 			}
 		}
 	}
-
-	/**
-	 * Formatiert die Darstellung fuer den Kopfbereich und gibt diese aus
-	 */
 }

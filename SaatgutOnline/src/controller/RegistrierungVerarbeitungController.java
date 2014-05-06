@@ -10,28 +10,35 @@ import javax.servlet.http.HttpSession;
 
 import model.KundeModel;
 import model.PasswortHashModel;
+import view.RegistrierungFehlerView;
 import view.RegistrierungVerarbeitungView;
 	
+/**
+ * <p>Die Klasse <code>RegistrierungVerarbeitungController</code>
+ * erzeugt einen <code>RegistrierungBestaetigungView</code> und ruft
+ * die passende Ausgabemethode derselben auf.
+ * </p>
+ * @author Christof Weigandt
+ * @version 1.0
+ * @since 1.7.0_51
+ * @see RegistrierungFehlerView
+ */	
 public class RegistrierungVerarbeitungController {
 	
 	private KundeModel kunde;
 	private String passwort;
-//	private PasswortHashModel passwortHash;
 	
-	private boolean geschlechtGeprueft;		// DB anpassen
+	private boolean geschlechtGeprueft;		
 	private boolean vornameGeprueft;
 	private boolean nachnameGeprueft;
 	private boolean benutzernameGeprueft;
 	private boolean firmaGeprueft;
 	private boolean strasseGeprueft;
 	private boolean hausnummerGeprueft;
-	private boolean ortGeprueft;				// TODO DB anpassen
+	private boolean ortGeprueft;				
 	private boolean postleitzahlGeprueft;	
-//	private boolean landGeprueft;			
 	private boolean telefonGeprueft;			
 	private boolean emailadresseGeprueft;	
-//	private boolean bundeslandGeprueft;	
-//	private boolean newsletterGeprueft;		// int ggfs. in bool konvertieren
 	private boolean passwortGeprueft;
 	private boolean passwortWiederholungGeprueft;
 	
@@ -50,29 +57,6 @@ public class RegistrierungVerarbeitungController {
 		System.out.println("this.passwort ist: " + this.passwort);
 		System.out.println(PasswortHashController.erstellePasswortHash(this.passwort));
 		
-		// TODO Validierung
-		
-		// Daten aus Formular einlesen
-//		System.out.println("geschlecht: " + request.getParameter("geschlecht"));
-//		System.out.println("nachname: " + request.getParameter("nachname"));
-//		System.out.println("Vorname: " + request.getParameter("Vorname"));
-//		
-//		this.kunde.setGeschlecht(Integer.parseInt(request.getParameter("geschlecht")));	// muss validiert sein
-//		this.kunde.setVorname(request.getParameter("vorname"));
-//		this.kunde.setNachname(request.getParameter("nachname"));
-//		this.kunde.setStrasse(request.getParameter("strasse"));
-//		this.kunde.setHausnummer(request.getParameter("hausnummer"));
-//		this.kunde.setPostleitzahl(request.getParameter("plz"));
-//		this.kunde.setOrt(request.getParameter("ort"));
-//		this.kunde.setBenutzername(request.getParameter("benutzername"));
-//		this.kunde.setNewsletter(Integer.parseInt(request.getParameter("newsletter")));		// muss validiert sein
-//		this.kunde.setFirma(request.getParameter("firma"));
-//		this.kunde.setEmailadresse(request.getParameter("emailadresse"));
-//		this.kunde.setTelefon(request.getParameter("telefon"));
-//		this.kunde.setNewsletter(Integer.parseInt(request.getParameter("newsletter")));				// muss validiert sein		
-//		
-//		this.passwort = request.getParameter("passwort");
-		
 		if (validiereKundendaten(request)) {
 			generiereUuid();
 			kunde.speichereKundeInDb();
@@ -84,23 +68,17 @@ public class RegistrierungVerarbeitungController {
 			try {
 				response.sendRedirect("RegistrierungErfolgreich");
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		} else {
 			try {
-				// hier ein forward mit request einbauen
-				// Fehlerhafte Daten als Objekt in session speichern
+				// Fehlerhaft ausgefuellte Formularfelder als Objekt in session speichern
 				this.session.setAttribute("RegistrierungVerarbeitungController", this);
-				response.sendRedirect("RegistrierungFehler");	// POST-Daten mitgeben!!!
+				response.sendRedirect("RegistrierungFehler");
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-	
-//		RegistrierungVerarbeitungView registrierungView = new RegistrierungView(request, response);
-//		registrierungVerarbeitungView.outResistrierungVerarbeitung(request, response);
 	}
 
 	private boolean validiereKundendaten(HttpServletRequest request) {
@@ -185,15 +163,6 @@ public class RegistrierungVerarbeitungController {
 			}
 			else { System.out.println("FEHLER bei Telefon"); }
 		}
-//		if (request.getParameter("Newsletter") != null) {
-//			try {
-//				this.kunde.setNewsletter(Integer.parseInt(request.getParameter("Newsletter")));
-//				if ((Integer.parseInt(request.getParameter("Newsletter")) == 0 ||
-//				(Integer.parseInt(request.getParameter("Newsletter")) == 1))) 
-//				this.newsletterGeprueft = true;
-//			} catch(NumberFormatException e) {
-//		    }		
-//		}
 		if (request.getParameter("Passwort") != null) {
 			this.passwort = request.getParameter("Passwort");
 			String regelPasswort = KonfigurationController.getRegelPasswort();
@@ -234,17 +203,12 @@ public class RegistrierungVerarbeitungController {
 				&& hausnummerGeprueft
 				&& ortGeprueft
 				&& postleitzahlGeprueft
-//				&& landGeprueft
 				&& telefonGeprueft
 				&& emailadresseGeprueft
-//				&& bundeslandGeprueft
-//				&& newsletterGeprueft
 				&& passwortGeprueft
 				&& passwortWiederholungGeprueft) {
-			System.out.println("Alle Eingaben korrekt");	// TODO entfernen
 			return true;
 		} else {
-			System.out.println("Nicht alle Eingaben korrekt");
 			return false;
 		}
 	}
@@ -263,7 +227,7 @@ public class RegistrierungVerarbeitungController {
 				+ "uuid=" + this.kunde.getUuid() + "\">Registrierung abschliessen</a>";	
 				
 		emailController.sendeEmail("kontakt@saatgutonline.de", "Ihre Registrierung",
-				emailadresseEmpfaenger, registrierungsnachricht);		
+				emailadresseEmpfaenger, registrierungsnachricht);	
 	}
 
 	public KundeModel getKunde() {
@@ -272,10 +236,6 @@ public class RegistrierungVerarbeitungController {
 
 	public String getPasswort() {
 		return passwort;
-	}
-
-	public PasswortHashModel getPasswortHash() {
-		return passwortHash;
 	}
 
 	public boolean isGeschlechtGeprueft() {
@@ -314,10 +274,6 @@ public class RegistrierungVerarbeitungController {
 		return postleitzahlGeprueft;
 	}
 
-//	public boolean isLandGeprueft() {
-//		return landGeprueft;
-//	}
-
 	public boolean isTelefonGeprueft() {
 		return telefonGeprueft;
 	}
@@ -325,14 +281,6 @@ public class RegistrierungVerarbeitungController {
 	public boolean isEmailadresseGeprueft() {
 		return emailadresseGeprueft;
 	}
-
-//	public boolean isBundeslandGeprueft() {
-//		return bundeslandGeprueft;
-//	}
-
-//	public boolean isNewsletterGeprueft() {
-//		return newsletterGeprueft;
-//	}
 
 	public boolean isPasswortGeprueft() {
 		return passwortGeprueft;
