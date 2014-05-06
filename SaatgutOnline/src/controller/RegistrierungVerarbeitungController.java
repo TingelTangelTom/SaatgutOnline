@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.KundeModel;
-import model.PasswortHashModel;
 import view.RegistrierungFehlerView;
 	
 /**

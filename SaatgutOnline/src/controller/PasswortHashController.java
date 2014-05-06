@@ -1,20 +1,5 @@
 package controller;
-/**
- * <p>Die Klasse <code>PasswortHashController</code>
- * kann sichere Hashes von Passwoertern erstellen
- * und Passwoerter und dazugehoerige Hashes vergleichen.
- * Als Algorithmus kommt 
- * PBKDF_2 (Password-Based Key Derivation Function 2) 
- * in Verbindung mit der SecretKeyFactory Klasse zum
- * Einsatz. Die Anzahl an Iterationen sowie die 
- * verwendete Schluessel sowie Salt-Laenge kann
- * intern eingestellt werden.
- * </p>
- * @author Christof Weigandt
- * @version 1.0
- * @since 1.7.0_51
- * @see https://crackstation.net/hashing-security.htm
- */
+
 import java.security.SecureRandom;
 
 import javax.crypto.spec.PBEKeySpec;
@@ -25,7 +10,22 @@ import model.PasswortHashModel;
 import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
-
+/**
+ * <p>Die Klasse <code>PasswortHashController</code>
+ * kann sichere Hashes von Passwoertern erstellen
+ * und Passwoerter und dazugehoerige Hashes vergleichen.
+ * Als Algorithmus
+ * PBKDF_2 (Password-Based Key Derivation Function 2) 
+ * kommt in Verbindung mit der SecretKeyFactory Klasse zum
+ * Einsatz. Die Anzahl an Iterationen sowie die 
+ * verwendete Schluessel- sowie Salt-Laenge kann
+ * intern eingestellt werden.
+ * </p>
+ * @author Christof Weigandt
+ * @version 1.0
+ * @since 1.7.0_51
+ * @see https://crackstation.net/hashing-security.htm
+ */
 public class PasswortHashController
 {
     public static final String PBKDF2_ALGORITHMUS = "PBKDF2WithHmacSHA1";
