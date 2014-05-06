@@ -2,20 +2,23 @@ package view;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
-import sun.security.util.Length;
 import model.ProduktModel;
 import controller.ProduktController;
 import controller.SucheController;
+
+/**
+ * <p>Die Klasse <code>ProduktlisteView</code> ist für die Zusammenstellung des <i>HTML</i>-Codes zuständig.
+ * 
+ * @author Simon Ankele
+ * @version 1.0
+ * @since 1.7.0_51
+ * 
+ */
 
 public class ProduktlisteView {
 	private ProduktController produktController;
@@ -28,6 +31,17 @@ public class ProduktlisteView {
 	private static int warenkorbmenge;
 	private HttpSession session;
 
+	/**
+	 * 
+	 * <p>Konstruktor der Klasse <code>ProduktlisteView</code></p>
+	 * <p>Der Konstruktor erstellt die Objekte <code>ProduktController</code>, <code>SucheController</code>, 
+	 * <code>HtmlAusgabe</code>, <code>ArrayList</code> und übergibt den Klassenvariablen <i>kategorie</i> 
+	 * und <i>session</i> die benötigten Werte. Desweiteren werden in <i>this.resourceBundle</i> die benötigten 
+	 * Texte der aktuellen Sprache abgelegt.</p>
+	 * 
+	 * @param request - der aktuelle <code>HttpServletRequest</code>
+	 * @see javax.servlet.http.HttpServletRequest
+	 */
 	
 	public ProduktlisteView(HttpServletRequest request) {
 		
@@ -43,9 +57,22 @@ public class ProduktlisteView {
 		
 	}
 
+	/**
+	 * <p>Die Methode <code>anzeigenProduktliste</code> liefert den <i>HTML</i>-Code für die Anzeige 
+	 * der Produktliste. Sie lässt Daten im <code>ProduktController</code>, <code>SucheController</code> 
+	 * und in der <code>HtmlAusgabe</code> bearbeiten und erstellen, um den <i>HTML</i>-Code richtig 
+	 * darstellen zu können.
+	 *
+	 * @param request - der aktuelle <code>HttpServletRequest</code>
+	 * @return <i>String</i> des <i>HTML</i>-Codes für die Produktliste
+	 * @see controller#ProduktController
+	 * @see controller#SucheController
+	 * @see view#HtmlAusgabe
+	 */
+	
 	public String anzeigenProduktliste(HttpServletRequest request) {
 
-		//TODO Internationalisierung einbauen
+		@SuppressWarnings("unused")
 		HttpSession session = ((HttpServletRequest) request).getSession();
 		String suchparameter = request.getParameter("suchbegriff");
 		this.produktController.setSortierung(request);
@@ -54,7 +81,6 @@ public class ProduktlisteView {
 		// Standardmenge, die im Textfeld Menge eingetragen wird
 		warenkorbmenge = 1;
 		
-		// Festlegung, ob die Suche gestart werden soll
 		String suchen = "false";
 		
 		if(request.getParameter("suchen") != null) {
@@ -62,7 +88,6 @@ public class ProduktlisteView {
 		}
 		
 		String suchbegriff = request.getParameter("suchen");		
-		
 		String angebote = "false";
 		
 		if(request.getParameter("angebote") != null) {
@@ -85,13 +110,13 @@ public class ProduktlisteView {
 			statusanzeige = this.produktliste.size() + " gefundene Produkte";
 		} else if (angebote.equals("true")) {
 			System.out.println("Angebote wurden aufgerufen");
-			this.produktliste = this.produktController.getProduktliste(request, this.kategorie, false);
+			this.produktliste = this.produktController.getProduktliste(request, this.kategorie);
 			statusanzeige = resourceBundle.getString("ANGEBOT");
 		} else {
 			if(this.kategorie == null) {
 				this.kategorie = "1";
 			}
-			this.produktliste = this.produktController.getProduktliste(request, this.kategorie, false);
+			this.produktliste = this.produktController.getProduktliste(request, this.kategorie);
 			statusanzeige = this.htmlAusgabe.outKategoriename(this.kategorie);
 		}
 
