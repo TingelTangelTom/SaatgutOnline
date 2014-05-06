@@ -127,7 +127,7 @@ public class HtmlAusgabe extends HttpServlet{
 		
 		return kategoriename;
 	}
-	
+
 	
 	/**
 	 * 

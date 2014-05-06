@@ -61,7 +61,13 @@ public class ProduktlisteView {
 			suchen = request.getParameter("suchen");
 		}
 		
-		String suchbegriff = request.getParameter("suchen");
+		String suchbegriff = request.getParameter("suchen");		
+		
+		String angebote = "false";
+		
+		if(request.getParameter("angebote") != null) {
+			angebote = request.getParameter("angebote");
+		}	
 		
 		// Festlegung, ob die erweiterte Suche angezeigt werden soll
 		String erweitertesuche = "false";
@@ -74,16 +80,19 @@ public class ProduktlisteView {
 		String statusanzeige;
 		
 		if(suchen.equals("true")) {
+			System.out.println("Produkte aus der Suche");
 			this.produktliste = this.sucheController.getProduktliste(request, suchparameter);
 			statusanzeige = this.produktliste.size() + " gefundene Produkte";
+		} else if (angebote.equals("true")) {
+			System.out.println("Angebote wurden aufgerufen");
+			this.produktliste = this.produktController.getProduktliste(request, this.kategorie, false);
+			statusanzeige = resourceBundle.getString("ANGEBOT");
 		} else {
 			if(this.kategorie == null) {
 				this.kategorie = "1";
 			}
-			
 			this.produktliste = this.produktController.getProduktliste(request, this.kategorie, false);
 			statusanzeige = this.htmlAusgabe.outKategoriename(this.kategorie);
-		
 		}
 		
 		
