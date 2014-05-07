@@ -263,7 +263,6 @@ public class ProduktlisteView
 					+ "</td>\n"
 					+ "<td class=\"produktliste preis\">"
 					+ bruttopreis
-					+ this.htmlAusgabe.outPreisformatEnglischerZusatz(produktModel.getPreisBrutto())
 					+ "</td>\n"
 					+ "</tr>\n"
 					+ "<tr>\n"
