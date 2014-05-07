@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import controller.AGBController;
 
 /**
- * Servlet implementation class AGB
  * <p>Inkludiert Kopfbereich, Inhalt und Fussbereich.</p>
  * <p>Ruft den <code>AGBController</code> auf.</p>
  */

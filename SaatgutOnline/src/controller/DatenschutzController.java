@@ -10,7 +10,7 @@ import javax.servlet.http.HttpSession;
 import view.DatenschutzView;
 
 /**
- * <p>Die Klasse <code>DatenschutzController</code> liest die aktuellste Datenschutzerklärung</br> 
+ * <p>Die Klasse <code>DatenschutzController</code> liest die aktuellste Datenschutzerklaerung</br> 
  * aus der Datenbank aus.</p>
  * 
  * @author Anja Dietrich 
@@ -23,7 +23,7 @@ public class DatenschutzController {
 	private String datenschutzText;
 
 	/**
-	 * <p>Konstruktor der Klasse <code>DatenschutzController</code> liest die aktuellste Datenschutzerklärung aus der Datenbank
+	 * <p>Konstruktor der Klasse <code>DatenschutzController</code> liest die aktuellste Datenschutzerklaerung aus der Datenbank
    * und erzeugt ein neues <code>DatenschutzView</code>Objekt</p>
    * <p>Sendet die Abfrage an den <code>AGBView</code></p>
 	 * 
