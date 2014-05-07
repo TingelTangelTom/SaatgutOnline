@@ -37,7 +37,7 @@ public class KontaktFormularVerarbeitungServlet extends HttpServlet
 		RequestDispatcher rd = getServletContext().getRequestDispatcher("/Kopfbereich");
 		rd.include(request, response);
 		// Inhalte ausgeben (per view!)
-		KontaktFormularVerarbeitungController kontaktFormularVerarbeitungController = new KontaktFormularVerarbeitungController(
+		new KontaktFormularVerarbeitungController(
 				request, response);
 		// Fussbereich einbinden
 		rd = getServletContext().getRequestDispatcher("/Fussbereich");

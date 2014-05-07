@@ -42,7 +42,7 @@ public class DatenschutzServlet extends HttpServlet
 		RequestDispatcher rd = getServletContext().getRequestDispatcher("/Kopfbereich");
 		rd.include(request, response);
 		// Inhalte ausgeben (per view!)
-		DatenschutzController datenschutzController = new DatenschutzController(request, response);
+		new DatenschutzController(request, response);
 		// Fussbereich einbinden
 		rd = getServletContext().getRequestDispatcher("/Fussbereich");
 		rd.include(request, response);

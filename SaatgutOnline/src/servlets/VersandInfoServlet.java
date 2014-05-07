@@ -42,7 +42,7 @@ public class VersandInfoServlet extends HttpServlet
 		RequestDispatcher rd = getServletContext().getRequestDispatcher("/Kopfbereich");
 		rd.include(request, response);
 		// Inhalte ausgeben (per view!)
-		VersandInfoController versandInfoController = new VersandInfoController(request, response);
+		new VersandInfoController(request, response);
 		// Fussbereich einbinden
 		rd = getServletContext().getRequestDispatcher("/Fussbereich");
 		rd.include(request, response);

@@ -42,7 +42,7 @@ public class ImpressumServlet extends HttpServlet
 		RequestDispatcher rd = getServletContext().getRequestDispatcher("/Kopfbereich");
 		rd.include(request, response);
 		// Inhalte ausgeben (per view!)
-		ImpressumController impressumController = new ImpressumController(request, response);
+		new ImpressumController(request, response);
 		// Fussbereich einbinden
 		rd = getServletContext().getRequestDispatcher("/Fussbereich");
 		rd.include(request, response);

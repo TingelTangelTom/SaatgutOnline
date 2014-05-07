@@ -45,7 +45,7 @@ public class KontaktFormularServlet extends HttpServlet
 		UrlController urlController = new UrlController(request);
 		urlController.urlInSessionLegen();
 		// Inhalte ausgeben (per view!)
-		KontaktFormularController kontaktFormularController = new KontaktFormularController(request, response);
+		new KontaktFormularController(request, response);
 		// Fussbereich einbinden
 		rd = getServletContext().getRequestDispatcher("/Fussbereich");
 		rd.include(request, response);

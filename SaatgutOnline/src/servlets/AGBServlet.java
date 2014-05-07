@@ -42,7 +42,7 @@ public class AGBServlet extends HttpServlet
 		RequestDispatcher rd = getServletContext().getRequestDispatcher("/Kopfbereich");
 		rd.include(request, response);
 		// Inhalte ausgeben (per view!)
-		AGBController agbController = new AGBController(request, response);
+		new AGBController(request, response);
 		// Fussbereich einbinden
 		rd = getServletContext().getRequestDispatcher("/Fussbereich");
 		rd.include(request, response);
