@@ -23,6 +23,7 @@ import model.KategorieModel;
  * @since 1.7.0_51
  */
 public class NavigationsbereichView {
+	
 	private PrintWriter out;
 	private ResourceBundle resourceBundle;
 
@@ -50,13 +51,12 @@ public class NavigationsbereichView {
 			this.out = response.getWriter();
 		} catch (IOException e) {
 		}
-
 		// die zwei nachfolgenden Zeilen enthalten Code von Simon Ankele
 		Locale locale = (Locale) session.getAttribute("sprache");
-		this.resourceBundle = PropertyResourceBundle.getBundle("I18N." + locale.getLanguage() + "."
-				+ getClass().getSimpleName(), locale);
+		this.resourceBundle = PropertyResourceBundle.getBundle("I18N." + locale.getLanguage() + "."	+ getClass().getSimpleName(), locale);
 	}
 
+	
 	/**
 	 * <p>
 	 * Stellt die Html-Ausgabe fuer den Anfang des Navigationsbereiches zur
@@ -67,6 +67,7 @@ public class NavigationsbereichView {
 		this.out.println("<tr>\n<td class=\"navigation\">");
 	}
 
+	
 	/**
 	 * <p>
 	 * Stellt die Html-Ausgabe fuer das Ende des Navigationsbereiches zur
@@ -77,6 +78,7 @@ public class NavigationsbereichView {
 		this.out.println("</td>\n<td class=\"inhalt\">");
 	}
 
+	
 	/**
 	 * <p>
 	 * Stellt die internationalisierte Html-Ausgabe fuer den Angebote-Link zur
@@ -89,14 +91,14 @@ public class NavigationsbereichView {
 		this.out.println("&nbsp;");
 		this.out.println("</td>\n</tr>");
 		this.out.println("<tr>\n<td>");
-		this.out.println("<a href=\"/SaatgutOnline/Produktliste?angebote=true&kategorie=0&erweitertesuche=false&suchen=false&suchbegriff=&as=DESC&sn=pn\">"
-				+ this.resourceBundle.getString("ANGEBOTE") + "</a>");
+		this.out.println("<a href=\"/SaatgutOnline/Produktliste?angebote=true&kategorie=0&erweitertesuche=false&suchen=false&suchbegriff=&as=DESC&sn=pn\">"	+ this.resourceBundle.getString("ANGEBOTE") + "</a>");
 		this.out.println("</td>\n</tr>\n<tr rowspan=\"2\">\n<td>");
 		this.out.println("&nbsp;");
 		this.out.println("</td>\n</tr>");
 		this.out.println("</table>");
 	}
 
+	
 	/**
 	 * <p>
 	 * Stellt die internationalisierte Html-Ausgabe fuer den akteull gewaehlten
@@ -109,14 +111,14 @@ public class NavigationsbereichView {
 		this.out.println("&nbsp;");
 		this.out.println("</td>\n</tr>");
 		this.out.println("<tr class=\"navigation_aktuell\">\n<td>");
-		this.out.println("<a href=\"/SaatgutOnline/Produktliste?angebote=true&kategorie=0&erweitertesuche=false&suchen=false&suchbegriff=&as=DESC&sn=pn\">"
-				+ this.resourceBundle.getString("ANGEBOTE") + "</a>");
+		this.out.println("<a href=\"/SaatgutOnline/Produktliste?angebote=true&kategorie=0&erweitertesuche=false&suchen=false&suchbegriff=&as=DESC&sn=pn\">" + this.resourceBundle.getString("ANGEBOTE") + "</a>");
 		this.out.println("</td>\n</tr>\n<tr rowspan=\"2\">\n<td>");
 		this.out.println("&nbsp;");
 		this.out.println("</td>\n</tr>");
 		this.out.println("</table>");
 	}
 
+	
 	/**
 	 * <p>
 	 * Stellt die Html-Ausgabe fuer den Anfang der Kategorienliste im
@@ -127,6 +129,7 @@ public class NavigationsbereichView {
 		this.out.println("<table>");
 	}
 
+	
 	/**
 	 * <p>
 	 * Stellt die Html-Ausgabe fuer das Ende der Kategorienliste im
@@ -137,79 +140,71 @@ public class NavigationsbereichView {
 		this.out.println("</table>");
 	}
 
+	
 	/**
 	 * <p>
 	 * Stellt die Html-Ausgabe fuer eine Hauptkategorie in der Kategorienliste
 	 * des Navigationsbereiches zur Verfuegung.
 	 * </p>
 	 * 
-	 * @param kategorieModel
-	 *            - das Objekt der anzuzeigenden Kategorie als
-	 *            <code>KategorieModel</code>
+	 * @param kategorieModel - das Objekt der anzuzeigenden Kategorie als <code>KategorieModel</code>
 	 * @see model.KategorieModel
 	 */
 	public void outHauptKategorieAnzeigen(KategorieModel kategorieModel) {
 		this.out.println("<tr>\n<td colspan=\"2\">");
-		this.out.println("<a href=\"/SaatgutOnline/Produktliste?kategorie=" + kategorieModel.getKategorieId()
-				+ "\">\n" + kategorieModel.getKategorieName() + "\n</a>");
+		this.out.println("<a href=\"/SaatgutOnline/Produktliste?kategorie=" + kategorieModel.getKategorieId() + "\">\n" + kategorieModel.getKategorieName() + "\n</a>");
 		this.out.println("</td>\n</tr>");
 	}
 
+	
 	/**
 	 * <p>
 	 * Stellt die Html-Ausgabe fuer die aktuell gewaehlte Hauptkategorie in der
 	 * Kategorienliste des Navigationsbereiches zur Verfuegung.
 	 * </p>
 	 * 
-	 * @param kategorieModel
-	 *            - das Objekt der anzuzeigenden Kategorie als
-	 *            <code>KategorieModel</code>
+	 * @param kategorieModel - das Objekt der anzuzeigenden Kategorie als <code>KategorieModel</code>
 	 * @see model.KategorieModel
 	 */
 	public void outHauptKategorieAktuellAnzeigen(KategorieModel kategorieModel) {
 		this.out.println("<tr class=\"navigation_aktuell\">\n<td colspan=\"2\">");
-		this.out.println("<a href=\"/SaatgutOnline/Produktliste?kategorie=" + kategorieModel.getKategorieId()
-				+ "\">\n" + kategorieModel.getKategorieName() + "\n</a>");
+		this.out.println("<a href=\"/SaatgutOnline/Produktliste?kategorie=" + kategorieModel.getKategorieId() + "\">\n" + kategorieModel.getKategorieName() + "\n</a>");
 		this.out.println("</td>\n</tr>");
 	}
 
+	
 	/**
 	 * <p>
 	 * Stellt die Html-Ausgabe fuer eine Unterkategorie in der Kategorienliste
 	 * des Navigationsbereiches zur Verfuegung.
 	 * </p>
 	 * 
-	 * @param kategorieModel
-	 *            - das Objekt der anzuzeigenden Kategorie als
-	 *            <code>KategorieModel</code>
+	 * @param kategorieModel - das Objekt der anzuzeigenden Kategorie als <code>KategorieModel</code>
 	 * @see model.KategorieModel
 	 */
 	public void outUnterKategorieAnzeigen(KategorieModel kategorieModel) {
 		this.out.println("<tr>\n<td>");
 		this.out.println("&nbsp;");
 		this.out.println("</td>\n<td>");
-		this.out.println("<a href=\"/SaatgutOnline/Produktliste?kategorie=" + kategorieModel.getKategorieId()
-				+ "\">\n" + kategorieModel.getKategorieName() + "\n</a>");
+		this.out.println("<a href=\"/SaatgutOnline/Produktliste?kategorie=" + kategorieModel.getKategorieId() + "\">\n" + kategorieModel.getKategorieName() + "\n</a>");
 		this.out.println("</td>\n</tr>");
 	}
 
+	
 	/**
 	 * <p>
 	 * Stellt die Html-Ausgabe fuer die aktuell gewaehlte Unterkategorie in der
 	 * Kategorienliste des Navigationsbereiches zur Verfuegung.
 	 * </p>
 	 * 
-	 * @param kategorieModel
-	 *            - das Objekt der anzuzeigenden Kategorie als
-	 *            <code>KategorieModel</code>
+	 * @param kategorieModel - das Objekt der anzuzeigenden Kategorie als <code>KategorieModel</code>
 	 * @see model.KategorieModel
 	 */
 	public void outUnterKategorieAktuellAnzeigen(KategorieModel kategorieModel) {
 		this.out.println("<tr class=\"navigation_aktuell\">\n<td>");
 		this.out.println("&nbsp;");
 		this.out.println("</td>\n<td>");
-		this.out.println("<a href=\"/SaatgutOnline/Produktliste?kategorie=" + kategorieModel.getKategorieId()
-				+ "\">\n" + kategorieModel.getKategorieName() + "\n</a>");
+		this.out.println("<a href=\"/SaatgutOnline/Produktliste?kategorie=" + kategorieModel.getKategorieId() + "\">\n" + kategorieModel.getKategorieName() + "\n</a>");
 		this.out.println("</td>\n</tr>");
 	}
 }

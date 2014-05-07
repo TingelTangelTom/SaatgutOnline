@@ -10,10 +10,12 @@ package model;
  * @since 1.7.0_51
  */
 public class KategorieModel {
+	
 	private int kategorieId;
 	private String kategorieName;
 	private int elternKategorieId;
 
+	
 	/**
 	 * <p>
 	 * Stellt die Id der Kategorie zur Verfuegung.
@@ -25,6 +27,7 @@ public class KategorieModel {
 		return kategorieId;
 	}
 
+	
 	/**
 	 * <p>
 	 * Setzt die Id der Kategorie.
@@ -37,6 +40,7 @@ public class KategorieModel {
 		this.kategorieId = kategorieId;
 	}
 
+	
 	/**
 	 * <p>
 	 * Stellt den Namen der Kategorie zur Verfuegung.
@@ -48,6 +52,7 @@ public class KategorieModel {
 		return kategorieName;
 	}
 
+	
 	/**
 	 * <p>
 	 * Setzt den Namen der Kategorie.
@@ -60,6 +65,7 @@ public class KategorieModel {
 		this.kategorieName = kategorieName;
 	}
 
+	
 	/**
 	 * <p>
 	 * Stellt die Eltern-Id der Kategorie zur Verfuegung.
@@ -71,6 +77,7 @@ public class KategorieModel {
 		return elternKategorieId;
 	}
 
+	
 	/**
 	 * <p>
 	 * Setzt die Eltern-Id der Kategorie.

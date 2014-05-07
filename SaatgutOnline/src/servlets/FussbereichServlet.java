@@ -14,10 +14,11 @@ import controller.FussbereichController;
  * Servlet implementation class FussbereichController
  */
 @WebServlet("/Fussbereich")
-public class FussbereichServlet extends HttpServlet
-{
+public class FussbereichServlet extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
 
+	
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -26,6 +27,7 @@ public class FussbereichServlet extends HttpServlet
 		super();
 	}
 
+	
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -36,6 +38,7 @@ public class FussbereichServlet extends HttpServlet
 		fussbereichController.outFussbereichAnzeigen();
 	}
 
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)

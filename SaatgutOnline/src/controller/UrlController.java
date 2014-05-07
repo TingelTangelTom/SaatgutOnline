@@ -22,22 +22,24 @@ import javax.servlet.http.HttpSession;
  * @since 1.7.0_51
  */
 public class UrlController {
+	
 	private HttpSession session;
 	private HttpServletRequest request;
 
+	
 	/**
 	 * <p>
 	 * Konstruktor der Klasse <code>UrlController</code>.
 	 * </p>
 	 * 
-	 * @param request
-	 *            - der aktuelle <code>HttpServletRequest</code>
+	 * @param request - der aktuelle <code>HttpServletRequest</code>
 	 */
 	public UrlController(HttpServletRequest request) {
 		this.request = request;
 		this.session = request.getSession();
 	}
 
+	
 	/**
 	 * <p>
 	 * Legt die zwischenzuspeichernde URL inklusive aller Paramater in der
@@ -53,13 +55,11 @@ public class UrlController {
 	 */
 	public void urlInSessionLegen() {
 		String zwischenzuspeicherndeUrl = this.request.getRequestURL().toString() + "?";
-
 		Enumeration<String> paramaternamen = this.request.getParameterNames();
 		while (paramaternamen.hasMoreElements()) {
 			String parametername = paramaternamen.nextElement();
 			zwischenzuspeicherndeUrl += parametername + "=" + this.request.getParameter(parametername) + "&";
 		}
-
 		if (zwischenzuspeicherndeUrl.lastIndexOf("&") == -1) {
 			zwischenzuspeicherndeUrl = zwischenzuspeicherndeUrl
 					.substring(0, zwischenzuspeicherndeUrl.indexOf("?"));
@@ -67,7 +67,6 @@ public class UrlController {
 			zwischenzuspeicherndeUrl = zwischenzuspeicherndeUrl.substring(0,
 					zwischenzuspeicherndeUrl.lastIndexOf("&"));
 		}
-
 		if (this.request.getServletPath().contains("/Produkt")) {
 			this.session.setAttribute("urlLetzteSeite", zwischenzuspeicherndeUrl);
 			this.session.setAttribute("urlProduktseite", zwischenzuspeicherndeUrl);
@@ -76,6 +75,7 @@ public class UrlController {
 		}
 	}
 
+	
 	/**
 	 * <p>
 	 * Holt die zwischengespeicherte URL inklusive aller Parameter unter dem Key
@@ -83,9 +83,7 @@ public class UrlController {
 	 * <code>String<code> zurück.
 	 * </p>
 	 * 
-	 * @param seite
-	 *            - Seite, deren URL ausgegeben werden soll (<b>LetzteSeite</b>
-	 *            oder <b>Produktseite</b>) als <code>String</code>
+	 * @param seite - Seite, deren URL ausgegeben werden soll (<b>LetzteSeite</b> oder <b>Produktseite</b>) als <code>String</code>
 	 * @return Die URL mit allen Parametern als <code>String<code>
 	 */
 	public String urlAusSessionHolen(String seite) {

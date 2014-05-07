@@ -24,11 +24,13 @@ import model.ProduktModel;
  * @since 1.7.0_51
  */
 public class WarenkorbView {
+	
 	private PrintWriter out;
 	private ResourceBundle resourceBundle;
 	private HttpSession session;
 	private UrlController urlController;
 
+	
 	/**
 	 * <p>
 	 * Konstruktor der Klasse <code>WarenkorbView</code>.
@@ -40,10 +42,8 @@ public class WarenkorbView {
 	 * Ereugt ein <code>ResourceBundle</code>.
 	 * </p>
 	 * 
-	 * @param request
-	 *            - der aktuelle <code>HttpServletRequest</code>
-	 * @param response
-	 *            - die aktuelle <code>HttpServletResponse</code>
+	 * @param request - der aktuelle <code>HttpServletRequest</code>
+	 * @param response - die aktuelle <code>HttpServletResponse</code>
 	 * @see javax.servlet.http.HttpServletRequest
 	 * @see javax.servlet.http.HttpServletResponse
 	 * @see java.io.PrintWriter
@@ -52,19 +52,17 @@ public class WarenkorbView {
 	public WarenkorbView(HttpServletRequest request, HttpServletResponse response) {
 		this.session = request.getSession();
 		this.urlController = new UrlController(request);
-
 		response.setContentType("text/html");
 		try {
 			this.out = response.getWriter();
 		} catch (IOException e) {
 		}
-
 		// die zwei nachfolgenden Zeilen enthalten Code von Simon Ankele
 		Locale locale = (Locale) session.getAttribute("sprache");
-		this.resourceBundle = PropertyResourceBundle.getBundle("I18N." + locale.getLanguage() + "."
-				+ getClass().getSimpleName(), locale);
+		this.resourceBundle = PropertyResourceBundle.getBundle("I18N." + locale.getLanguage() + "." + getClass().getSimpleName(), locale);
 	}
 
+	
 	/**
 	 * <p>
 	 * Stellt die internationalisierte Html-Ausgabe fuer den Anfang des
@@ -98,6 +96,7 @@ public class WarenkorbView {
 		this.out.println("<tr>\n<td colspan=\"7\">\n</td>\n</tr>");
 	}
 
+	
 	/**
 	 * <p>
 	 * Stellt die Html-Ausgabe fuer eine Position des Warenkorbs zur Verfuegung.
@@ -118,8 +117,7 @@ public class WarenkorbView {
 	public void outWarenkorbInhalt(ProduktModel produktModel, int menge, String einzelpreisFormatiert,
 			String gesamtpreisPositionFormatiert) {
 		this.out.println("<tr>\n<td>");
-		this.out.println("<a href=\"/SaatgutOnline/Produktinfo?produkt=" + produktModel.getId() + "\">\n"
-				+ produktModel.getName() + "\n</a>");
+		this.out.println("<a href=\"/SaatgutOnline/Produktinfo?produkt=" + produktModel.getId() + "\">\n" + produktModel.getName() + "\n</a>");
 		this.out.println("</td>\n<td>");
 		this.out.println(produktModel.getProduktnummer());
 		this.out.println("</td>\n<td>");
@@ -127,18 +125,17 @@ public class WarenkorbView {
 		this.out.println("</td>\n<td>");
 		this.out.println(einzelpreisFormatiert);
 		this.out.println("</td>\n<td>");
-		this.out.println("<input type=\"text\" name=\"menge_" + produktModel.getId() + "\" value=\"" + menge
-				+ "\" size=2");
+		this.out.println("<input type=\"text\" name=\"menge_" + produktModel.getId() + "\" value=\"" + menge + "\" size=2");
 		this.out.println("</td>\n<td>");
 		this.out.println(produktModel.getBestand());
 		this.out.println("</td>\n<td>");
 		this.out.println(gesamtpreisPositionFormatiert);
 		this.out.println("</td>\n<td>");
-		this.out.println("<input type=\"checkbox\" name=\"entfernen_" + produktModel.getId()
-				+ "\" value=\"true\">");
+		this.out.println("<input type=\"checkbox\" name=\"entfernen_" + produktModel.getId() + "\" value=\"true\">");
 		this.out.println("</td>\n</tr>");
 	}
 
+	
 	/**
 	 * <p>
 	 * Stellt die internationalisierte Html-Ausgabe fuer eine Ausgabezeile des
@@ -152,6 +149,7 @@ public class WarenkorbView {
 		this.out.println("</td>\n</tr>");
 	}
 
+	
 	/**
 	 * <p>
 	 * Stellt die internationalisierte Html-Ausgabe fuer den leeren Warenkorb
@@ -164,6 +162,7 @@ public class WarenkorbView {
 		this.out.println("</td>\n</tr>");
 	}
 
+	
 	/**
 	 * <p>
 	 * Stellt die internationalisierte Html-Ausgabe fuer das Ende des Warenkorbs
@@ -184,15 +183,12 @@ public class WarenkorbView {
 		this.out.println("</td>\n<td>");
 		this.out.println("</td>\n</tr>\n<tr>\n<td colspan=\"7\">");
 		this.out.println("</td>\n</tr>\n<tr>\n<td>");
-		this.out.println("<input type=\"submit\" name=\"aktualisieren\" value=\""
-				+ this.resourceBundle.getString("AKTUALISIEREN") + "\">");
+		this.out.println("<input type=\"submit\" name=\"aktualisieren\" value=\"" + this.resourceBundle.getString("AKTUALISIEREN") + "\">");
 		this.out.println("</form>");
 		this.out.println("</td>\n<td colspan=\"2\">");
-		this.out.println("<a href=\"/SaatgutOnline/Warenkorb?leeren=true\">\n"
-				+ this.resourceBundle.getString("WARENKORB_LEEREN") + "\n</a>");
+		this.out.println("<a href=\"/SaatgutOnline/Warenkorb?leeren=true\">\n" + this.resourceBundle.getString("WARENKORB_LEEREN") + "\n</a>");
 		this.out.println("</td>\n<td colspan=\"2\">");
-		this.out.println("<a href=\"" + this.urlController.urlAusSessionHolen("Produktseite") + "\">\n"
-				+ this.resourceBundle.getString("WEITER") + "\n</a>");
+		this.out.println("<a href=\"" + this.urlController.urlAusSessionHolen("Produktseite") + "\">\n"	+ this.resourceBundle.getString("WEITER") + "\n</a>");
 		this.out.println("</td>\n<td colspan=\"2\">");
 		this.out.println("<a href=\"/SaatgutOnline/Kasse\">\n" + this.resourceBundle.getString("KASSE") + "\n</a>");
 		this.out.println("</td>\n</tr>");

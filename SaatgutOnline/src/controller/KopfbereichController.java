@@ -17,18 +17,18 @@ import view.KopfbereichView;
  * @since 1.7.0_51
  */
 public class KopfbereichController {
+	
 	private KopfbereichView kopfbereichView;
 	private HttpSession session;
 
+	
 	/**
 	 * <p>
 	 * Konstruktor der Klasse <code>KopfbereichController</code>.
 	 * </p>
 	 * 
-	 * @param request
-	 *            - der aktuelle <code>HttpServletRequest</code>
-	 * @param response
-	 *            - die aktuelle <code>HttpServletResponse</code>
+	 * @param request - der aktuelle <code>HttpServletRequest</code>
+	 * @param response - die aktuelle <code>HttpServletResponse</code>
 	 * @see javax.servlet.http.HttpServletRequest
 	 * @see javax.servlet.http.HttpServletResponse
 	 */
@@ -37,6 +37,7 @@ public class KopfbereichController {
 		this.kopfbereichView = new KopfbereichView(request, response);
 	}
 
+	
 	/**
 	 * <p>
 	 * Formatiert durch den situationsbedingten Aufruf von Methoden der Klasse

@@ -10,34 +10,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class KasseView
-{
-	/**
-	 * Objekt der Klasse <code>PrintWriter</code>
-	 * 
-	 * @see java.io.PrintWriter
-	 */
+public class KasseView {
+
 	private PrintWriter out;
-	/**
-	 * Objekt der Klasse <code>ResourceBundle</code>
-	 * 
-	 * @see java.util.ResourceBundle
-	 */
 	private ResourceBundle resourceBundle;
+
 	
-	/**
-	 * Konstruktor der Klasse <code>KopfbereichView</code>
-	 * @param request
-	 *            - der aktuelle <code>HttpServletRequest</code>
-	 * @param response
-	 *            - die aktuelle <code>HttpServletResponse</code>
-	 * @see javax.servlet.http.HttpServletRequest
-	 * @see javax.servlet.http.HttpServletResponse
-	 */
 	public KasseView(HttpServletRequest request, HttpServletResponse response)
 	{
-		HttpSession session = request.getSession();
-		
+		HttpSession session = request.getSession();		
 		response.setContentType("text/html");
 		try
 		{
@@ -46,12 +27,11 @@ public class KasseView
 		{
 			System.out.println("PrintWriter nicht erstellt!");
 			e.printStackTrace();
-		}
-		
+		}		
 		Locale locale = (Locale) session.getAttribute("sprache");
-		this.resourceBundle = PropertyResourceBundle.getBundle("I18N." + locale.getLanguage() + "."
-				+ getClass().getSimpleName(), locale);
+		this.resourceBundle = PropertyResourceBundle.getBundle("I18N." + locale.getLanguage() + "." + getClass().getSimpleName(), locale);
 	}
+	
 	
 	public void outKasseKomplett()
 	{
