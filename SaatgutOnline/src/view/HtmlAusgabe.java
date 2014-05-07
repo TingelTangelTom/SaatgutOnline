@@ -222,6 +222,7 @@ public class HtmlAusgabe extends HttpServlet
 			String suchbegriff)
 	{
 		String angebote = "false";
+		System.out.println(request.getParameter("sprache"));
 		if (request.getParameter("angebote") != null)
 		{
 			angebote = request.getParameter("angebote");
@@ -271,7 +272,7 @@ public class HtmlAusgabe extends HttpServlet
 			{
 				return "angebote=" + angebote + "&kategorie=" + session.getAttribute("aktuelleKategorie")
 						+ "&erweitertesuche=" + request.getParameter("erweitertesuche") + "&suchen="
-						+ request.getParameter("suchen") + "&suchbegriff=&as="
+						+ request.getParameter("suchen") + "&suchbegriff=gg&as="
 						+ session.getAttribute("sortierung_reihenfolge") + "&sn=" + sortierspalte
 						+ "&beschreibung=" + request.getParameter("beschreibung") + "&preis_von="
 						+ request.getParameter("preis_von") + "&name=" + request.getParameter("name")
@@ -282,7 +283,7 @@ public class HtmlAusgabe extends HttpServlet
 			{
 				return "angebote=" + angebote + "&kategorie=" + session.getAttribute("aktuelleKategorie")
 						+ "&erweitertesuche=" + session.getAttribute("erweitertesuche") + "&suchen="
-						+ session.getAttribute("suchen") + "&suchbegriff=&as="
+						+ session.getAttribute("suchen") + "&suchbegriff=zz&as="
 						+ session.getAttribute("sortierung_reihenfolge") + "&sn=" + sortierspalte;
 			}
 		}
@@ -290,7 +291,7 @@ public class HtmlAusgabe extends HttpServlet
 		{
 			return "angebote=" + angebote + "&kategorie=" + session.getAttribute("aktuelleKategorie")
 					+ "&erweitertesuche=" + session.getAttribute("erweitertesuche") + "&suchen="
-					+ session.getAttribute("suchen") + "&suchbegriff=&as="
+					+ session.getAttribute("suchen") + "&suchbegriff=tt&as="
 					+ session.getAttribute("sortierung_reihenfolge") + "&sn=" + sortierspalte;
 		}
 	}

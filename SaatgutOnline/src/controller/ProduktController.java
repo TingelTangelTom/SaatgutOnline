@@ -329,39 +329,53 @@ public class ProduktController
 	public void setSortierung(HttpServletRequest request)
 	{
 		HttpSession session = ((HttpServletRequest) request).getSession();
+		String erweitertesuche_request = null;
+		if (request.getParameter("erweitertesuche") != null)
+		{
+			erweitertesuche_request = request.getParameter("erweitertesuche");
+		}
+		else
+		{
+			erweitertesuche_request = "false";
+		}
+
 		if (request.getParameter("sn") != null)
 		{
-			// Wenn sortierung_sortierspalte bereits auf demselben Wert steht, wechselt die Sortierreihenfolge
-			if (request.getParameter("sn").equals(
-					(String) session.getAttribute("sortierung_sortierspalte_kuerzel")))
+			if (request.getParameter("sprache") == null && erweitertesuche_request.equals(session.getAttribute("erweitertesuche")))
 			{
-				if (session.getAttribute("sortierung_reihenfolge").equals("DESC"))
+			// Wenn sortierung_sortierspalte bereits auf demselben Wert steht, wechselt die Sortierreihenfolge
+				if (request.getParameter("sn").equals(
+						(String) session.getAttribute("sortierung_sortierspalte_kuerzel")))
 				{
-					session.setAttribute("sortierung_reihenfolge", "ASC");
+					if (session.getAttribute("sortierung_reihenfolge").equals("DESC"))
+					{
+						session.setAttribute("sortierung_reihenfolge", "ASC");
+					}
+					else
+					{
+						session.setAttribute("sortierung_reihenfolge", "DESC");
+					}
 				}
 				else
 				{
-					session.setAttribute("sortierung_reihenfolge", "DESC");
+					switch (request.getParameter("sn"))
+					{
+					case "pn":
+						session.setAttribute("sortierung_sortierspalte", "pb.produkt_name");
+						session.setAttribute("sortierung_sortierspalte_kuerzel", "pn");
+						break;
+					case "pp":
+						session.setAttribute("sortierung_sortierspalte", "p.produkt_preis");
+						session.setAttribute("sortierung_sortierspalte_kuerzel", "pp");
+						break;
+					default:
+						session.setAttribute("sortierung_sortierspalte", "pb.produkt_name");
+						session.setAttribute("sortierung_sortierspalte_kuerzel", "pn");
+						break;
+					}
 				}
 			}
-			else
-			{
-				switch (request.getParameter("sn"))
-				{
-				case "pn":
-					session.setAttribute("sortierung_sortierspalte", "pb.produkt_name");
-					session.setAttribute("sortierung_sortierspalte_kuerzel", "pn");
-					break;
-				case "pp":
-					session.setAttribute("sortierung_sortierspalte", "p.produkt_preis");
-					session.setAttribute("sortierung_sortierspalte_kuerzel", "pp");
-					break;
-				default:
-					session.setAttribute("sortierung_sortierspalte", "pb.produkt_name");
-					session.setAttribute("sortierung_sortierspalte_kuerzel", "pn");
-					break;
-				}
-			}
+			session.setAttribute("erweitertesuche", request.getParameter("erweitertesuche"));
 		}
 	}
 

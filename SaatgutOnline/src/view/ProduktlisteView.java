@@ -76,8 +76,9 @@ public class ProduktlisteView
 	 */
 	public String anzeigenProduktliste(HttpServletRequest request)
 	{
-		@SuppressWarnings("unused")
 		HttpSession session = ((HttpServletRequest) request).getSession();
+		System.out.println(session.getAttribute("urlLetzteSeite"));
+		System.out.println(session.getAttribute("urlProduktseite"));
 		this.produktController.setSortierung(request);
 		this.output = "";
 		// Standardmenge, die im Textfeld Menge eingetragen wird

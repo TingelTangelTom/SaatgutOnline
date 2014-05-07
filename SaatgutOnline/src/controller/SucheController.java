@@ -3,8 +3,10 @@ package controller;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
 import model.ProduktModel;
 
 /**
@@ -68,39 +70,50 @@ public class SucheController
 		}
 		int preis_von = 0;
 		int preis_bis = 0;
-		String name;
+		String name = "";
 		String beschreibung = "";
 		String produktnummer = "";
+		System.out.println("eins" + request.getParameter("name") != null);
+		//System.out.println("zwei" + request.getParameter("name").equals("null") );
 		if (request.getParameter("name") != null)
 		{
 			name = request.getParameter("name");
 		}
 		else
 		{
-			name = request.getParameter("suchbegriff");
-		}
-		if (request.getParameter("beschreibung") != null)
-		{
-			beschreibung = request.getParameter("beschreibung");
-		}
-		if (request.getParameter("produktnummer") != null)
-		{
-			produktnummer = request.getParameter("produktnummer");
-		}
-		if (request.getParameter("preis_von") != null)
-		{
-			if (!request.getParameter("preis_von").equals(""))
+			System.out.println(request.getParameter("suchbegriff").getClass());
+			if (request.getParameter("suchbegriff") != null)
 			{
-				preis_von = Integer.parseInt(request.getParameter("preis_von")); 
+				System.out.println("geht rein");
+				name = request.getParameter("suchbegriff");	
 			}
 		}
-		if (request.getParameter("preis_bis") != null)
+		if (!request.getParameter("suchbegriff").equalsIgnoreCase("null"))
 		{
-			if (!request.getParameter("preis_bis").equals(""))
+			if (request.getParameter("beschreibung") != null)
 			{
-				preis_von = Integer.parseInt(request.getParameter("preis_bis")); 
+				beschreibung = request.getParameter("beschreibung");
+			}
+			if (request.getParameter("produktnummer") != null)
+			{
+				produktnummer = request.getParameter("produktnummer");
+			}
+			if (request.getParameter("preis_von") != null)
+			{
+				if (!request.getParameter("preis_von").equals(""))
+				{
+					preis_von = Integer.parseInt(request.getParameter("preis_von")); 
+				}
+			}
+			if (request.getParameter("preis_bis") != null)
+			{
+				if (!request.getParameter("preis_bis").equals(""))
+				{
+					preis_von = Integer.parseInt(request.getParameter("preis_bis")); 
+				}
 			}
 		}
+		System.out.println("von" + preis_von + "bis" + preis_bis + "name" + name + "beschr" + beschreibung + "pnumer" + produktnummer);
 		String produkt_query;
 		ArrayList<ProduktModel> produkte = new ArrayList<>();
 		produkt_query = "SELECT DISTINCT p.produkt_id " + "FROM produkt AS p "
