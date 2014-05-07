@@ -241,12 +241,12 @@ public class ProduktlisteView
 			ProduktModel produktModel = this.produktliste.get(i);
 			String bruttopreis;
 			String angebot = "";
-			if (produktModel.getPreisBrutto() > produktModel.getPreisAngebotBrutto()
-					&& produktModel.getPreisAngebotBrutto() > 0)
+			if (produktModel.getPreisBrutto() < produktModel.getPreisEhemalsBrutto()
+					&& produktModel.getPreisBrutto() > 0)
 			{
-				bruttopreis = this.htmlAusgabe.outPreisformat(produktModel.getPreisAngebotBrutto())
+				bruttopreis = this.htmlAusgabe.outPreisformat(produktModel.getPreisBrutto())
 						+ " <span style=\"color: red;\"><s>"
-						+ this.htmlAusgabe.outPreisformat(produktModel.getPreisBrutto()) + "</s></span>";
+						+ this.htmlAusgabe.outPreisformat(produktModel.getPreisEhemalsBrutto()) + "</s></span>";
 			}
 			else
 			{
@@ -256,8 +256,8 @@ public class ProduktlisteView
 					+ "<tr>\n"
 					+ "<td class=\"produktliste bild\" rowspan=\"4\"><img src=\"resources/bilder/phoenix_canariensis.jpg\" width=\"100\" height=\"100\" alt=\"Phoenix Canariensis\"></td>\n"
 					+ "<td class=\"produktliste titel\">";
-			if (produktModel.getPreisBrutto() > produktModel.getPreisAngebotBrutto()
-					&& produktModel.getPreisAngebotBrutto() > 0)
+			if (produktModel.getPreisBrutto() < produktModel.getPreisEhemalsBrutto()
+					&& produktModel.getPreisBrutto() > 0)
 			{
 				angebot = "<span style=\"color: red;\"> Angebot</span>";
 			}
@@ -295,6 +295,7 @@ public class ProduktlisteView
 			}
 			else
 			{
+				
 				this.output += "<form action=\"/SaatgutOnline/Warenkorb\" method=\"POST\">\n"
 						+ ""
 						+ this.resourceBundle.getString("MENGE")

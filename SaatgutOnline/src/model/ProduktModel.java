@@ -25,8 +25,8 @@ public class ProduktModel
 	private int angesehen;
 	private double preisNetto;
 	private double preisBrutto;
-	private double preisAngebotNetto;
-	private double preisAngebotBrutto;
+	private double preisEhemalsNetto;
+	private double preisEhemalsBrutto;
 	private Date gueltig_bis;
 	private int vpe;
 	private double steuerSatz;
@@ -316,9 +316,9 @@ public class ProduktModel
 	 * 
 	 * @return <i>double</i> - Angebots-Nettopreis des Produktes
 	 */
-	public double getPreisAngebotNetto()
+	public double getPreisEhemalsNetto()
 	{
-		return preisAngebotNetto;
+		return preisEhemalsNetto;
 	}
 
 	/**
@@ -329,9 +329,9 @@ public class ProduktModel
 	 * @param preisAngebotNetto
 	 *            - des Produkts als <i>double</i>
 	 */
-	public void setPreisAngebotNetto(double preisAngebotNetto)
+	public void setPreisEhemalsNetto(double preisEhemalsNetto)
 	{
-		this.preisAngebotNetto = preisAngebotNetto;
+		this.preisEhemalsNetto = preisEhemalsNetto;
 	}
 
 	/**
@@ -341,9 +341,9 @@ public class ProduktModel
 	 * 
 	 * @return <i>double</i> - Angebots-Nettopreis des Produktes
 	 */
-	public double getPreisAngebotBrutto()
+	public double getPreisEhemalsBrutto()
 	{
-		return preisAngebotBrutto;
+		return preisEhemalsBrutto;
 	}
 
 	/**
@@ -354,9 +354,9 @@ public class ProduktModel
 	 * @param preisAngebotBrutto
 	 *            - des Produkts als <i>double</i>
 	 */
-	public void setPreisAngebotBrutto(double preisAngebotBrutto)
+	public void setPreisEhemalsBrutto(double preisEhemalsBrutto)
 	{
-		this.preisAngebotBrutto = preisAngebotBrutto;
+		this.preisEhemalsBrutto = preisEhemalsBrutto;
 	}
 
 	/**

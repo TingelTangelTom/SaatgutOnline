@@ -295,7 +295,11 @@ public class ProduktController
 				ResultSet resultset_produkt = DatenbankController.sendeSqlRequest(produkt_query);
 				if (resultset_produkt.next())
 				{
-					this.produktModel.setPreisAngebotNetto(resultset_produkt.getDouble(1));
+					this.produktModel.setPreisEhemalsNetto(this.produktModel.getPreisNetto());
+					this.produktModel.setPreisEhemalsBrutto(this.produktModel.getPreisBrutto());
+					this.produktModel.setPreisNetto(resultset_produkt.getDouble(1));
+					getSteuerinformationen(id);
+					
 					this.produktModel.setGueltig_bis(resultset_produkt.getDate(2));
 				}
 			}
@@ -303,8 +307,8 @@ public class ProduktController
 		catch (SQLException e)
 		{
 		}
-		this.produktModel.setPreisAngebotBrutto(runden(this.produktModel.getPreisAngebotNetto()
-				* this.produktModel.getSteuerSatz() / 100 + this.produktModel.getPreisAngebotNetto(), 2));
+		this.produktModel.setPreisEhemalsBrutto(runden(this.produktModel.getPreisEhemalsNetto()
+				* this.produktModel.getSteuerSatz() / 100 + this.produktModel.getPreisEhemalsNetto(), 2));
 	}
 
 	/**
