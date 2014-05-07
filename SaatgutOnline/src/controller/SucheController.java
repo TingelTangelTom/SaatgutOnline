@@ -73,18 +73,14 @@ public class SucheController
 		String name = "";
 		String beschreibung = "";
 		String produktnummer = "";
-		System.out.println("eins" + request.getParameter("name") != null);
-		//System.out.println("zwei" + request.getParameter("name").equals("null") );
 		if (request.getParameter("name") != null)
 		{
 			name = request.getParameter("name");
 		}
 		else
 		{
-			System.out.println(request.getParameter("suchbegriff").getClass());
 			if (request.getParameter("suchbegriff") != null)
 			{
-				System.out.println("geht rein");
 				name = request.getParameter("suchbegriff");	
 			}
 		}
@@ -113,7 +109,6 @@ public class SucheController
 				}
 			}
 		}
-		System.out.println("von" + preis_von + "bis" + preis_bis + "name" + name + "beschr" + beschreibung + "pnumer" + produktnummer);
 		String produkt_query;
 		ArrayList<ProduktModel> produkte = new ArrayList<>();
 		produkt_query = "SELECT DISTINCT p.produkt_id " + "FROM produkt AS p "

@@ -5,8 +5,10 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
 import model.ProduktModel;
 import controller.ProduktController;
 import controller.SucheController;
@@ -76,9 +78,8 @@ public class ProduktlisteView
 	 */
 	public String anzeigenProduktliste(HttpServletRequest request)
 	{
+		@SuppressWarnings("unused")
 		HttpSession session = ((HttpServletRequest) request).getSession();
-		System.out.println(session.getAttribute("urlLetzteSeite"));
-		System.out.println(session.getAttribute("urlProduktseite"));
 		this.produktController.setSortierung(request);
 		this.output = "";
 		// Standardmenge, die im Textfeld Menge eingetragen wird
@@ -255,7 +256,7 @@ public class ProduktlisteView
 			}
 			this.output += "<tr>\n<td class=\"produktliste listenprodukt\" colspan=\"2\"><table class=\"produktliste\">\n"
 					+ "<tr>\n"
-					+ "<td class=\"produktliste bild\" rowspan=\"4\"><img src=\"resources/bilder/phoenix_canariensis.jpg\" width=\"100\" height=\"100\" alt=\"Phoenix Canariensis\"></td>\n"
+					+ "<td class=\"produktliste bild\" rowspan=\"4\"><img src=\"" + produktModel.getBild() + "\" width=\"100\" height=\"100\" alt=\"\"></td>\n"
 					+ "<td class=\"produktliste titel\">";
 			if (produktModel.getPreisBrutto() < produktModel.getPreisEhemalsBrutto()
 					&& produktModel.getPreisBrutto() > 0)

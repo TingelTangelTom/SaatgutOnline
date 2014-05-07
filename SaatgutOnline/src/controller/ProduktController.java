@@ -62,7 +62,7 @@ public class ProduktController
 		{
 			String query = "SELECT p.produkt_id, p.produkt_bestand, pb.produkt_name, pb.produkt_beschreibung,"
 					+ "pb.produkt_suchbegriffe, p.produkt_angesehen, p.produkt_preis, p.produkt_vpe,"
-					+ "p.produkt_steuer_id, p.produkt_datum_hinzugefuegt, p.produkt_datum_geaendert, p.produkt_produktnummer "
+					+ "p.produkt_steuer_id, p.produkt_datum_hinzugefuegt, p.produkt_datum_geaendert, p.produkt_produktnummer, p.produkt_bild "
 					+ "FROM produkt AS p "
 					+ "INNER JOIN produkt_beschreibung AS pb ON p.produkt_id = pb.produkt_id "
 					+ "WHERE pb.sprache_id = '" + this.sprache_id + "' AND p.produkt_id = '" + id + "'";
@@ -82,6 +82,7 @@ public class ProduktController
 				this.produktModel.setHinzugefeugt(resultset.getDate(10));
 				this.produktModel.setGeaendert(resultset.getDate(11));
 				this.produktModel.setProduktnummer(resultset.getString(12));
+				this.produktModel.setBild(resultset.getString(13));
 			}
 		}
 		catch (SQLException e)

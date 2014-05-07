@@ -21,6 +21,7 @@ public class ProduktModel
 	private String name;
 	private String beschreibung;
 	private String suchbegriffe;
+	private String bild;
 	private HashMap<String, String> merkmale;
 	private int angesehen;
 	private double preisNetto;
@@ -207,6 +208,31 @@ public class ProduktModel
 	public void setSuchbegriffe(String suchbegriffe)
 	{
 		this.suchbegriffe = suchbegriffe;
+	}
+
+	/**
+	 * <p>
+	 * Stellt den Bildpfad des Produkts zur Verf&uuml;gung.
+	 * </p>
+	 * 
+	 * @return <i>String</i> - Bildpfad des Produktes
+	 */
+	public String getBild()
+	{
+		return bild;
+	}
+
+	/**
+	 * <p>
+	 * Setzt den Bildpfad des Produkts.
+	 * </p>
+	 * 
+	 * @param bild
+	 *            - Bildpfad des Produkts als <i>String</i>
+	 */
+	public void setBild(String bild)
+	{
+		this.bild = bild;
 	}
 
 	/**

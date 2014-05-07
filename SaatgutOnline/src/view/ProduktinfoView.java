@@ -75,7 +75,7 @@ public class ProduktinfoView
 		warenkorbmenge = 1;
 		this.output = "<table class=\"produktinfo\">\n"
 				+ "<tr>\n"
-				+ "<td class=\"produktinfo bild\"><img src=\"resources/bilder/palme.jpg\" alt=\"Phoenix Canariensis\"></td>\n"
+				+ "<td class=\"produktinfo bild\"><img src=\"" + produktModel.getBild() + "\" alt=\"Phoenix Canariensis\"></td>\n"
 				+ "<td>\n" + "<table class=\"produktinfo mittlerespalte\">\n" + "<tr>\n"
 				+ "<td class=\"produktinfo titel\">"
 				+ this.htmlAusgabe.outLinkProduktinfo(produktModel.getName(), produktModel.getId()) + "</td>\n"

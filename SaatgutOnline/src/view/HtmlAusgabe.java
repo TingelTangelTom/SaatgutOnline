@@ -222,7 +222,6 @@ public class HtmlAusgabe extends HttpServlet
 			String suchbegriff)
 	{
 		String angebote = "false";
-		System.out.println(request.getParameter("sprache"));
 		if (request.getParameter("angebote") != null)
 		{
 			angebote = request.getParameter("angebote");
