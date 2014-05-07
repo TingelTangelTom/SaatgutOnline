@@ -68,7 +68,7 @@ public class RegistrierungFehlerView {
 			return;
 		}
 		this.out.println("<h1>" + this.resourceBundle.getString("UEBERSCHRIFT") + "</h1>"
-				+ "<p>" + this.resourceBundle.getString("UEBERSCHRIFT") + "</p>"
+				+ "<p>" + this.resourceBundle.getString("TEXT") + "</p>"
 			    + "<form action=/SaatgutOnline/RegistrierungVerarbeitung method=\"POST\">"
 			    + "<table width=\"200\" border=\"0\" cellpadding=\"1\" cellspacing=\"1\">");
 		
