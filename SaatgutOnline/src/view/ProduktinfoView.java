@@ -94,7 +94,7 @@ public class ProduktinfoView
 				+ "</table>\n"
 				+ "</tr>\n"
 				+ "<tr>\n"
-				+ "<td class=\"produktinfo\">unter Merkmale</td>\n"
+				+ "<td class=\"produktinfo\">&nbsp;</td>\n"
 				+ "</tr>\n"
 				+ "</table>\n"
 				+ "</td>\n"
@@ -124,11 +124,11 @@ public class ProduktinfoView
 					+ "<input type=\"image\" src=\"resources/bilder/icons/warenkorb.gif\" alt=\"Warenkorb\">\n"
 					+ "</form>\n";
 		}
-		this.output += "</td>\n" + "</tr>\n" + "<tr>\n" + "<td class=\"produktinfo preis\">bla bla</td>\n"
+		this.output += "</td>\n" + "</tr>\n" + "<tr>\n" + "<td class=\"produktinfo preis\">&nbsp;</td>\n"
 				+ "</tr>\n" + "</table>\n" + "" + "</td>\n" + "</tr>\n" + "<tr>\n"
 				+ "<td class=\"produktinfo beschreibung\" colspan=\"3\">" + this.produktModel.getBeschreibung()
 				+ "</td>\n" + "</tr>\n" + "<tr>\n"
-				+ "<td class=\"produktinfo\" colspan=\"3\">zusätzliche Informationen</td>\n" + "</tr>\n"
+				+ "<td class=\"produktinfo\" colspan=\"3\">&nbsp;</td>\n" + "</tr>\n"
 				+ "</table>\n";
 		return this.output;
 	}
