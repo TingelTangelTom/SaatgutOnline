@@ -1,5 +1,9 @@
 package controller;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 /**
  * <p>
  * Die Klasse <code>PasswortController</code> stellt eine Schnittstelle von und zu der Datenbank bereit.
@@ -10,11 +14,6 @@ package controller;
  * @since 1.7.0_51
  * @see https://crackstation.net/hashing-security.htm
  */
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 public class PasswortController
 {
 	/**

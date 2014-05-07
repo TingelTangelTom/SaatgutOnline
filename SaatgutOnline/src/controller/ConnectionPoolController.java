@@ -1,5 +1,9 @@
 package controller;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.Vector;
 /**
  * <p>
  * Die Singleton-Klasse <code>ConnectionPoolController</code> erzeugt einen Pool von SQL-Verbindungen, die ueber
@@ -16,11 +20,6 @@ package controller;
  * @since 1.7.0_51
  * @see KonfigurationController
  */
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.util.Vector;
-
 public class ConnectionPoolController
 {
 	private int dbMaximalePoolgroesse;

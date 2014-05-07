@@ -1,5 +1,9 @@
 package controller;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 /**
  * <p>
  * Die Klasse <code>DatenbankController</code> stellt die statische Datenbankmethode
@@ -13,11 +17,6 @@ package controller;
  * @since 1.7.0_51
  * @see ConnectionPoolController
  */
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-
 public class DatenbankController
 {
 	public DatenbankController()
