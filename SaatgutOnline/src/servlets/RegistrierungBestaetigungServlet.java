@@ -9,9 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import controller.AbmeldungController;
 import controller.RegistrierungBestaetigungController;
-import controller.RegistrierungErfolgreichController;
 
 /**
  * <p>
@@ -35,7 +33,6 @@ public class RegistrierungBestaetigungServlet extends HttpServlet
 	public RegistrierungBestaetigungServlet()
 	{
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -58,6 +55,5 @@ public class RegistrierungBestaetigungServlet extends HttpServlet
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
 			IOException
 	{
-		// TODO Auto-generated method stub
 	}
 }

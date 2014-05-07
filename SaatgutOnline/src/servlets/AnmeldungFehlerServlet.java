@@ -21,7 +21,7 @@ import controller.RegistrierungFehlerController;
  * @author Christof Weigandt
  * @version 1.0
  * @since 1.7.0_51
- * @see anmeldungFehlerController
+ * @see AnmeldungFehlerController
  */
 @WebServlet("/AnmeldungFehler")
 public class AnmeldungFehlerServlet extends HttpServlet

@@ -28,10 +28,15 @@ public class KonfigurationController
 	public KonfigurationController()
 	{
 	}
-
+/**
+ * Zugriff auf die Datei <code>Konfiguration.xml</code>.
+ * Nach Auslesen des Dokumentenbaums werden die einzelnen 
+ * Elemente in den Klassenvariablen gespeichwert und stehen
+ * in der Ablaufumgebung zur Verfügung.
+ * @param konfiguration
+ */
 	public static void initialisiereKonfiguration(ServletConfig konfiguration)
 	{
-		System.out.println("KonfigurationController gestartet");
 		File xmlDatei = new File(konfiguration.getServletContext().getRealPath(
 				"\\resources\\xml\\Konfiguration.xml"));
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -39,7 +44,7 @@ public class KonfigurationController
 		{
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 			Document dokument = dBuilder.parse(xmlDatei);
-			dokument.getDocumentElement().normalize(); // TODO optional!!!
+			dokument.getDocumentElement().normalize();
 			NodeList nodeListe = dokument.getElementsByTagName("konfiguration");
 			Node node = nodeListe.item(0);
 			if (node.getNodeType() == Node.ELEMENT_NODE)
@@ -62,18 +67,12 @@ public class KonfigurationController
 		}
 		catch (ParserConfigurationException e)
 		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		catch (SAXException e)
 		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		catch (IOException e)
 		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		ConnectionPoolController.getInstance(); // Initialisierung
 	}

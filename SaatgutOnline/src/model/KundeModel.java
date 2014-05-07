@@ -1,6 +1,3 @@
-/**
- * 
- */
 package model;
 
 import java.sql.Connection;
@@ -9,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import view.RegistrierungFehlerView;
 import controller.ConnectionPoolController;
 import controller.DatenbankController;
 import controller.KonfigurationController;
@@ -17,8 +13,7 @@ import controller.KonfigurationController;
 /**
  * <p>
  * Die Klasse <code>KundeModel</code> repraesentiert die abstrahierten, relevanten und modellierten Daten eines
- * Kunden des Onlineshops. <code>validiereKundendaten(request)</code>. Je nach Ergebnis der Auswertung wird auf
- * entsprechende Seiten weitergeleitet.
+ * Kunden des Onlineshops. <code>validiereKundendaten(request)</code>.
  * </p>
  * 
  * @author Christof Weigandt

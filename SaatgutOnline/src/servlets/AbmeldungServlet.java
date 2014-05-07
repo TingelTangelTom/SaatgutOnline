@@ -1,16 +1,5 @@
 package servlets;
 
-/**
- * <p>
- * Die Klasse <code>AbmeldungServlet</code> erzeugt einen <code>AbmeldungController</code>, der die weitere
- * Verarbeitung uebernimmt. <code>AbmeldungView</code>
- * </p>
- * 
- * @author Christof Weigandt
- * @version 1.0
- * @since 1.7.0_51
- * @see AbmeldungController
- */
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -22,6 +11,17 @@ import javax.servlet.http.HttpServletResponse;
 
 import controller.AbmeldungController;
 
+/**
+ * <p>
+ * Die Klasse <code>AbmeldungServlet</code> erzeugt einen <code>AbmeldungController</code>, der die weitere
+ * Verarbeitung uebernimmt. <code>AbmeldungView</code>
+ * </p>
+ * 
+ * @author Christof Weigandt
+ * @version 1.0
+ * @since 1.7.0_51
+ * @see AbmeldungController
+ */
 @WebServlet("/Abmeldung")
 public class AbmeldungServlet extends HttpServlet
 {

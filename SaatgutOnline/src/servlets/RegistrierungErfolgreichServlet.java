@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import controller.RegistrierungController;
 import controller.RegistrierungErfolgreichController;
 
 /**
@@ -34,7 +33,6 @@ public class RegistrierungErfolgreichServlet extends HttpServlet
 	public RegistrierungErfolgreichServlet()
 	{
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -57,6 +55,5 @@ public class RegistrierungErfolgreichServlet extends HttpServlet
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
 			IOException
 	{
-		// TODO Auto-generated method stub
 	}
 }

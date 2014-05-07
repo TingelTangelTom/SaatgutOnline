@@ -61,23 +61,18 @@ public class RegistrierungVerarbeitungController
 	 * @author Christof Weigandt
 	 * @version 1.0
 	 * @since 1.7.0_51
-	 * @see RegistrierungFehlerView
+	 * @see PasswortHashController
 	 */
 	public RegistrierungVerarbeitungController(HttpServletRequest request, HttpServletResponse response)
 	{
 		kunde = new KundeModel();
 		this.session = request.getSession();
-		this.passwort = "hallo";
-		System.out.println("this.passwort ist: " + this.passwort);
-		System.out.println(PasswortHashController.erstellePasswortHash(this.passwort));
 		if (validiereKundendaten(request))
 		{
 			generiereUuid();
 			kunde.speichereKundeInDb();
-			System.out.println("this.passwort ist: " + this.passwort);
-			System.out.println(PasswortHashController.erstellePasswortHash(this.passwort));
 			PasswortController.speicherePasswortHashInDb(
-					PasswortHashController.erstellePasswortHash(this.passwort), this.kunde.getId());
+			PasswortHashController.erstellePasswortHash(this.passwort), this.kunde.getId());
 			sendeRegistrierungsEmail();
 			try
 			{
@@ -108,7 +103,6 @@ public class RegistrierungVerarbeitungController
 		if (request.getParameter("Anrede") != null)
 		{
 			this.kunde.setGeschlecht(Integer.parseInt(request.getParameter("Anrede")));
-			System.out.println("kunde geschlecht ist jetzt: " + this.kunde.getGeschlecht());
 			try
 			{
 				if ((Integer.parseInt(request.getParameter("Anrede")) == 0 || (Integer.parseInt(request
@@ -144,19 +138,11 @@ public class RegistrierungVerarbeitungController
 			{
 				this.strasseGeprueft = true;
 			}
-			else
-			{
-				System.out.println("FEHLER bei Strasse");
-			}
 		}
 		if (request.getParameter("Hausnummer") != null)
 		{
 			this.kunde.setHausnummer(request.getParameter("Hausnummer"));
 			this.hausnummerGeprueft = true;
-		}
-		else
-		{
-			System.out.println("FEHLER bei Hausnummer");
 		}
 		if (request.getParameter("Plz") != null)
 		{
@@ -226,21 +212,7 @@ public class RegistrierungVerarbeitungController
 			{
 				this.passwortWiederholungGeprueft = true;
 			}
-			else
-			{
-			}
 		}
-		System.out.println(geschlechtGeprueft);
-		System.out.println(vornameGeprueft);
-		System.out.println(nachnameGeprueft);
-		System.out.println(benutzernameGeprueft);
-		System.out.println(firmaGeprueft);
-		System.out.println(strasseGeprueft);
-		System.out.println(hausnummerGeprueft);
-		System.out.println(ortGeprueft);
-		System.out.println(postleitzahlGeprueft);
-		System.out.println(geschlechtGeprueft);
-		System.out.println(geschlechtGeprueft);
 		if (geschlechtGeprueft && vornameGeprueft && nachnameGeprueft && benutzernameGeprueft && firmaGeprueft
 				&& strasseGeprueft && hausnummerGeprueft && ortGeprueft && postleitzahlGeprueft && telefonGeprueft
 				&& emailadresseGeprueft && passwortGeprueft && passwortWiederholungGeprueft)
@@ -264,8 +236,7 @@ public class RegistrierungVerarbeitungController
 		String emailadresseEmpfaenger = this.kunde.getEmailadresse();
 		String registrierungsnachricht = "Bitte klicken Sie auf den folgenden Link, "
 				+ "um Ihre Registrierung bei saatgutonline.de abzuschliessen: <br />"
-				+ "<a href=\"http://localhost:8080/SaatgutOnline/RegistrierungBestaetigung?" // URL flexibel
-																								// anpassen
+				+ "<a href=\"/SaatgutOnline/RegistrierungBestaetigung?" 
 				+ "uuid=" + this.kunde.getUuid() + "\">Registrierung abschliessen</a>";
 		emailController.sendeEmail("kontakt@saatgutonline.de", "Ihre Registrierung", emailadresseEmpfaenger,
 				registrierungsnachricht);

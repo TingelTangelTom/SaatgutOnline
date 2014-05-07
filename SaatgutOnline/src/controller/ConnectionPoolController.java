@@ -51,7 +51,10 @@ public class ConnectionPoolController
 	{
 		private static final ConnectionPoolController INSTANCE = new ConnectionPoolController();
 	}
-
+	/**
+	 * Dient der Instantiierung der Klasse <code>ConnectionPoolController</code>
+	 * @return INSTANCE
+	 */
 	public static ConnectionPoolController getInstance()
 	{
 		return ConnectionPoolControllerHolder.INSTANCE;

@@ -13,14 +13,14 @@ import controller.RegistrierungController;
 
 /**
  * <p>
- * Die Klasse <code>AnmeldungServlet</code> nimmt den request entgegen und erzeugt einen
- * <code>anmeldungVerarbeitungController</code>.
+ * Die Klasse <code>RegistrierungServlet</code> nimmt den request entgegen und erzeugt einen
+ * <code>RegistrierungController</code>.
  * </p>
  * 
  * @author Christof Weigandt
  * @version 1.0
  * @since 1.7.0_51
- * @see anmeldungVerarbeitungController
+ * @see RegistrierungController
  */
 @WebServlet("/Registrierung")
 public class RegistrierungServlet extends HttpServlet
@@ -55,6 +55,5 @@ public class RegistrierungServlet extends HttpServlet
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
 			IOException
 	{
-		// TODO Auto-generated method stub
 	}
 }

@@ -1,5 +1,12 @@
 package controller;
 
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import view.AbmeldungView;
 /**
  * <p>
  * Die Klasse <code>AbmeldungController</code> meldet den Kunden vom System ab und erzeugt als Ausgabe einen
@@ -11,15 +18,6 @@ package controller;
  * @since 1.7.0_51
  * @see view.AbmeldungView
  */
-import java.io.IOException;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import view.AbmeldungView;
-import view.KopfbereichView;
-
 public class AbmeldungController
 {
 	private AbmeldungView abmeldungView;
@@ -48,12 +46,10 @@ public class AbmeldungController
 			this.session.setAttribute("angemeldet", false);
 			try
 			{
-				response.sendRedirect("Abmeldung"); // url korrekt!?
+				response.sendRedirect("Abmeldung");
 			}
 			catch (IOException e)
 			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
 		}
 	}

@@ -46,7 +46,6 @@ public class AnmeldungErfolgreichView
 		}
 		catch (IOException e)
 		{
-			e.printStackTrace();
 		}
 		Locale locale = (Locale) session.getAttribute("sprache");
 		this.resourceBundle = PropertyResourceBundle.getBundle("I18N." + locale.getLanguage() + "."
@@ -54,7 +53,7 @@ public class AnmeldungErfolgreichView
 	}
 
 	/**
-	 * Gibt Text aus
+	 * Erzeugt HTML-Code
 	 */
 	public void outAnmeldungErfolgreichView()
 	{

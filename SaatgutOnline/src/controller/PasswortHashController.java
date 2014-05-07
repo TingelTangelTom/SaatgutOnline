@@ -5,8 +5,6 @@ import java.security.SecureRandom;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.SecretKeyFactory;
 
-import model.PasswortHashModel;
-
 import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
@@ -51,14 +49,10 @@ public class PasswortHashController
 		}
 		catch (NoSuchAlgorithmException e)
 		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 			return null;
 		}
 		catch (InvalidKeySpecException e)
 		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 			return null;
 		}
 	}

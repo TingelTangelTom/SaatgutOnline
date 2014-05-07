@@ -9,11 +9,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import controller.RegistrierungController;
 import controller.RegistrierungVerarbeitungController;
 
 /**
- * Servlet implementation class RegistrierungVerarbeitung
+ * <p>
+ * Die Klasse <code>RegistrierungVerarbeitungServlet</code> nimmt den request entgegen und erzeugt einen
+ * <code>RegistrierungVerarbeitungController</code>, der die weitere Datenverarbeitung uebernimmt.
+ * </p>
+ * 
+ * @author Christof Weigandt
+ * @version 1.0
+ * @since 1.7.0_51
+ * @see RegistrierungVerarbeitungController
  */
 @WebServlet(name = "RegistrierungVerarbeitungServlet", urlPatterns = { "/RegistrierungVerarbeitung" })
 public class RegistrierungVerarbeitungServlet extends HttpServlet
@@ -26,7 +33,6 @@ public class RegistrierungVerarbeitungServlet extends HttpServlet
 	public RegistrierungVerarbeitungServlet()
 	{
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -35,7 +41,6 @@ public class RegistrierungVerarbeitungServlet extends HttpServlet
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException,
 			IOException
 	{
-		// TODO Auto-generated method stub
 	}
 
 	/**

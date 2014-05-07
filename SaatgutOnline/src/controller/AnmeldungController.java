@@ -4,13 +4,8 @@
 package controller;
 
 import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.mail.Session;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.KundeModel;
-import model.PasswortHashModel;
 
 /**
  * <p>

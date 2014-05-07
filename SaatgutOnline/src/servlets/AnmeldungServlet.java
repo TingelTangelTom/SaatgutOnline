@@ -15,13 +15,13 @@ import controller.RegistrierungController;
 /**
  * <p>
  * Die Klasse <code>AnmeldungServlet</code> nimmt den request entgegen und erzeugt einen
- * <code>anmeldungVerarbeitungController</code>.
+ * <code>AnmeldungController</code>.
  * </p>
  * 
  * @author Christof Weigandt
  * @version 1.0
  * @since 1.7.0_51
- * @see anmeldungVerarbeitungController
+ * @see AnmeldungController
  */
 @WebServlet("/Anmeldung")
 public class AnmeldungServlet extends HttpServlet
@@ -34,7 +34,6 @@ public class AnmeldungServlet extends HttpServlet
 	public AnmeldungServlet()
 	{
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -43,7 +42,6 @@ public class AnmeldungServlet extends HttpServlet
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException,
 			IOException
 	{
-		// TODO Auto-generated method stub
 	}
 
 	/**
@@ -54,7 +52,7 @@ public class AnmeldungServlet extends HttpServlet
 	{
 		RequestDispatcher rd = getServletContext().getRequestDispatcher("/Kopfbereich");
 		rd.include(request, response);
-		AnmeldungController anmeldungVerarbeitungController = new AnmeldungController(request, response);
+		AnmeldungController anmeldungController = new AnmeldungController(request, response);
 		rd = getServletContext().getRequestDispatcher("/Fussbereich");
 		rd.include(request, response);
 	}

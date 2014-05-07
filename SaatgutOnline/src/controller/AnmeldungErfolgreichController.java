@@ -1,5 +1,10 @@
 package controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import view.AnmeldungErfolgreichView;
 /**
  * <p>
  * Die Klasse <code>AnmeldungErfolgreichController</code> erzeugt einen <code>anmeldungErfolgreichView</code>.
@@ -10,13 +15,6 @@ package controller;
  * @since 1.7.0_51
  * @see AnmeldungErfolgreichView
  */
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import view.AnmeldungErfolgreichView;
-import view.KopfbereichView;
-
 public class AnmeldungErfolgreichController
 {
 	private AnmeldungErfolgreichView anmeldungErfolgreichView;

@@ -1,16 +1,5 @@
 package view;
 
-/**
- * <p>
- * Die Klasse <code>AbmeldungView</code> erzeugt einen <code>PrintWriter</code> und gibt gemaess mittels
- * resourcebundle uebergebener Spracheinstellungen den passenden internationalisierten Text aus.
- * </p>
- * 
- * @author Christof Weigandt
- * @version 1.0
- * @since 1.7.0_51
- * @see AnmeldungFehlerView
- */
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Locale;
@@ -21,6 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+/**
+ * <p>
+ * Die Klasse <code>AbmeldungView</code> erzeugt einen <code>PrintWriter</code> und gibt gemaess mittels
+ * resourcebundle uebergebener Spracheinstellungen den passenden internationalisierten Text aus.
+ * </p>
+ * 
+ * @author Christof Weigandt
+ * @version 1.0
+ * @since 1.7.0_51
+ */
 public class AbmeldungView
 {
 	/**
@@ -56,7 +55,6 @@ public class AbmeldungView
 		}
 		catch (IOException e)
 		{
-			e.printStackTrace();
 		}
 		Locale locale = (Locale) session.getAttribute("sprache");
 		this.resourceBundle = PropertyResourceBundle.getBundle("I18N." + locale.getLanguage() + "."
@@ -76,7 +74,6 @@ public class AbmeldungView
 		}
 		catch (IOException e)
 		{
-			e.printStackTrace();
 			return;
 		}
 		out.println("<h1>" + this.resourceBundle.getString("UEBERSCHRIFT") + "</h1>");

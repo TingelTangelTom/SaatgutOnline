@@ -4,7 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import view.AnmeldungFehlerView;
-import view.RegistrierungFehlerView;
 
 /**
  * <p>
@@ -19,6 +18,11 @@ import view.RegistrierungFehlerView;
  */
 public class AnmeldungFehlerController
 {
+	/**
+	 * Erzeugt einen View fuer die Ausgabe und  ruft die Ausgabemethode auf
+	 * @param request
+	 * @param response
+	 */
 	public AnmeldungFehlerController(HttpServletRequest request, HttpServletResponse response)
 	{
 		AnmeldungFehlerView anmeldungFehlerView = new AnmeldungFehlerView(request, response);

@@ -19,6 +19,11 @@ import view.RegistrierungView;
  */
 public class RegistrierungErfolgreichController
 {
+	/**
+	 * Konstruktor der Klasse <code>RegistrierungErfolgreichController</code>
+	 * @param request
+	 * @param response
+	 */
 	public RegistrierungErfolgreichController(HttpServletRequest request, HttpServletResponse response)
 	{
 		RegistrierungErfolgreichView registrierungErfoglreichView = new RegistrierungErfolgreichView(request,
