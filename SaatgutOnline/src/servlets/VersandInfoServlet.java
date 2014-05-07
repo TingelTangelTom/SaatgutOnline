@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import controller.VersandInfoController;
 
 /**
- * Servlet implementation class VersandInfoServlet
  * <p>
  * Inkludiert Kopfbereich, Inhalt und Fussbereich.
  * </p>

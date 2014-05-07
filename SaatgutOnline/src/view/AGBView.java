@@ -10,7 +10,7 @@ import controller.UrlController;
 
 /**
  * <p>
- * Die Klasse <code>AGBView</code> ist für die Ausgabe der AGB zuständig.
+ * Die Klasse <code>AGBView</code> ist für die Ausgabe der AGB zustaendig.
  * </p>
  * 
  * @author Anja Dietrich

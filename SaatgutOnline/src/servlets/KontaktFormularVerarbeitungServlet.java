@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import controller.KontaktFormularVerarbeitungController;
 
 /**
- * Servlet implementation class KontaktFormularVerarbeitungServlet
  * <p>
  * Inkludiert Kopfbereich, Inhalt und Fussbereich.
  * </p>

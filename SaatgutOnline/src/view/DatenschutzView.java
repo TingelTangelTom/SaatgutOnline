@@ -10,7 +10,7 @@ import controller.UrlController;
 
 /**
  * <p>
- * Die Klasse <code>DatenschutzView</code> ist für die Ausgabe der Datenschutzerklärung zuständig.
+ * Die Klasse <code>DatenschutzView</code> ist für die Ausgabe der Datenschutzerklaerung zuständig.
  * </p>
  * 
  * @author Anja Dietrich

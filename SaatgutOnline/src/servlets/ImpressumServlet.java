@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import controller.ImpressumController;
 
 /**
- * Servlet implementation class ImpressumServlet
  * <p>
  * Inkludiert Kopfbereich, Inhalt und Fussbereich.
  * </p>

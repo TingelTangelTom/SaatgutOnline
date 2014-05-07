@@ -11,7 +11,7 @@ import controller.UrlController;
 /**
  * <p>
  * Die Klasse <code>KontaktFormularVerarbeitungView</code> ist für die Ausgabe und Formatierung</br> des
- * Kontaktformulares nach dem absenden zuständig.
+ * Kontaktformulares nach dem absenden zustaendig.
  * </p>
  * 
  * @author Anja Dietrich

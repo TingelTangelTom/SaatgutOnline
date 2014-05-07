@@ -13,7 +13,6 @@ import controller.KontaktFormularController;
 import controller.UrlController;
 
 /**
- * Servlet implementation class KontaktFormularServlet
  * <p>
  * Inkludiert Kopfbereich, Inhalt und Fussbereich.
  * </p>

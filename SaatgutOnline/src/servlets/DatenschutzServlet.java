@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import controller.DatenschutzController;
 
 /**
- * Servlet implementation class DatenschutzServlet
  * <p>
  * Inkludiert Kopfbereich, Inhalt und Fussbereich.
  * </p>

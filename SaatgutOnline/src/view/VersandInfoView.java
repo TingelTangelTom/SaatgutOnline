@@ -10,7 +10,7 @@ import controller.UrlController;
 
 /**
  * <p>
- * Die Klasse <code>VersandInfoView</code> ist für die Ausgabe der Versand & Zahlungs Informationen zuständig.
+ * Die Klasse <code>VersandInfoView</code> ist für die Ausgabe der Versand & Zahlungs Informationen zustaendig.
  * </p>
  * 
  * @author Anja Dietrich
