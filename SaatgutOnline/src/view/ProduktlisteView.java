@@ -87,6 +87,10 @@ public class ProduktlisteView
 		{
 			suchen = request.getParameter("suchen");
 		}
+		if (request.getParameter("suche") != null)
+		{
+			suchen = "true";
+		}
 		String suchbegriff = request.getParameter("suchen");
 		String angebote = "false";
 		if (request.getParameter("angebote") != null)
@@ -306,7 +310,7 @@ public class ProduktlisteView
 			this.output += "</td>\n</tr>\n"
 					+ "<tr>\n<td colspan=\"3\">&nbsp;</td>\n"
 					+ "</tr>\n<tr>\n<td colspan=\"3\" style=\"background-image:url(resources/bilder/icons/trennlinie.gif);height: 1px; background-repeat:repeat-x;\">&nbsp;</td>\n</tr>\n"
-					+ "</table></td></tr>\n" + "";
+					+ "</table>\n" + "";
 		}
 		this.output += "</td>\n</tr>\n</table>\n";
 		return output;

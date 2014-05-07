@@ -61,23 +61,45 @@ public class SucheController
 	public ArrayList<ProduktModel> getProduktliste(HttpServletRequest request)
 	{
 		HttpSession session = ((HttpServletRequest) request).getSession();
-		int kategorie = Integer.parseInt(request.getParameter("kategorie"));
+		int kategorie = 0;
+		if (request.getParameter("kategorie") != null)
+		{
+			kategorie = Integer.parseInt(request.getParameter("kategorie"));
+		}
 		int preis_von = 0;
 		int preis_bis = 0;
-		String name = request.getParameter("name");
-		String beschreibung = request.getParameter("beschreibung");
-		String produktnummer = request.getParameter("produktnummer");
-		if (!request.getParameter("preis_von").equals(""))
+		String name;
+		String beschreibung = "";
+		String produktnummer = "";
+		if (request.getParameter("name") != null)
 		{
-			preis_von = Integer.parseInt(request.getParameter("preis_von"));
+			name = request.getParameter("name");
 		}
 		else
 		{
-			preis_von = 0;
+			name = request.getParameter("suchbegriff");
 		}
-		if (!request.getParameter("preis_bis").equals(""))
+		if (request.getParameter("beschreibung") != null)
 		{
-			preis_bis = Integer.parseInt(request.getParameter("preis_bis"));
+			beschreibung = request.getParameter("beschreibung");
+		}
+		if (request.getParameter("produktnummer") != null)
+		{
+			produktnummer = request.getParameter("produktnummer");
+		}
+		if (request.getParameter("preis_von") != null)
+		{
+			if (!request.getParameter("preis_von").equals(""))
+			{
+				preis_von = Integer.parseInt(request.getParameter("preis_von")); 
+			}
+		}
+		if (request.getParameter("preis_bis") != null)
+		{
+			if (!request.getParameter("preis_bis").equals(""))
+			{
+				preis_von = Integer.parseInt(request.getParameter("preis_bis")); 
+			}
 		}
 		String produkt_query;
 		ArrayList<ProduktModel> produkte = new ArrayList<>();
