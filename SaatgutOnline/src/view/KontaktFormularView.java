@@ -13,35 +13,37 @@ import javax.servlet.http.HttpSession;
 import controller.UrlController;
 
 /**
- * <p>Die Klasse <code>KontaktFormularView</code> ist für die Ausgabe und Formatierung</br>#
- * des Kontaktformulars zuständig.
+ * <p>
+ * Die Klasse <code>KontaktFormularView</code> ist für die Ausgabe und Formatierung</br># des Kontaktformulars
+ * zuständig.
  * 
  * @author Anja Dietrich
  * @version 1.0
  * @since 1.7.0_51
- * 
  */
-public class KontaktFormularView {
-
-	//Für den Zurück-Link
+public class KontaktFormularView
+{
+	// Für den Zurück-Link
 	private UrlController urlController;
-	
 	private ResourceBundle resourceBundle;
 
 	/**
-	 * <p>Konstruktor der Klasse<code>KontaktFormularView</code>.</p>
-	 * <p>Liest die aktuelle eingestellte Sprache aus der <code>HttpSession</code>,</br>
-	 * und gibt die entsprechenden properties aus.</p>
+	 * <p>
+	 * Konstruktor der Klasse<code>KontaktFormularView</code>.
+	 * </p>
+	 * <p>
+	 * Liest die aktuelle eingestellte Sprache aus der <code>HttpSession</code>,</br> und gibt die entsprechenden
+	 * properties aus.
+	 * </p>
 	 * 
 	 * @param request
 	 * @param response
 	 * @see javax.servlet.http.HttpServletRequest
 	 * @see javax.servlet.http.HttpServletResponse
 	 * @see javax.servlet.http.HttpSession
-	 * 
 	 */
-	public KontaktFormularView(HttpServletRequest request, HttpServletResponse response) {
-
+	public KontaktFormularView(HttpServletRequest request, HttpServletResponse response)
+	{
 		// Internationalisierung
 		HttpSession session = request.getSession();
 		Locale locale = (Locale) session.getAttribute("sprache");
@@ -50,7 +52,9 @@ public class KontaktFormularView {
 	}
 
 	/**
-	 * <p>Die Methode <code>outKontaktFormular</code> gibt das Kontaktformular aus.</p>
+	 * <p>
+	 * Die Methode <code>outKontaktFormular</code> gibt das Kontaktformular aus.
+	 * </p>
 	 * 
 	 * @param request
 	 * @param response
@@ -58,25 +62,26 @@ public class KontaktFormularView {
 	 * @see javax.servlet.http.HttpServletResponse
 	 * @see controller.UrlController
 	 * @see java.io.PrintWriter
-	 * 
 	 */
-	public void outKontaktFormular(HttpServletRequest request, HttpServletResponse response) {
-
+	public void outKontaktFormular(HttpServletRequest request, HttpServletResponse response)
+	{
 		// Für den Zurück-Link
 		this.urlController = new UrlController(request);
-
 		response.setContentType("text/html");
 		PrintWriter out;
-		try {
+		try
+		{
 			out = response.getWriter();
-		} catch (IOException e) {
+		}
+		catch (IOException e)
+		{
 			e.printStackTrace();
 			return;
 		}
 		out.println("<h1>Kontakt</h1>\n");
-		out.println("<p><label>SaatgutOnline GmbH<br>\n" + "Am Waldrand 325<br>\n"
-				+ "12325 Palmenhausen<br>\n" + "E-Mail kontakt@saatgutonline.de<br>\n"
-				+ "Tel 049-098-764512-0<br>\n" + "Fax 049-098-764512-99 </label></p>\n");
+		out.println("<p><label>SaatgutOnline GmbH<br>\n" + "Am Waldrand 325<br>\n" + "12325 Palmenhausen<br>\n"
+				+ "E-Mail kontakt@saatgutonline.de<br>\n" + "Tel 049-098-764512-0<br>\n"
+				+ "Fax 049-098-764512-99 </label></p>\n");
 		out.println("<form action=/SaatgutOnline/KontaktFormularVerarbeitung>\n"
 				+ "<table width=\"374\" border=\"0\" cellpadding=\"1\" cellspacing=\"1\">\n");
 		out.println("<tr><td width=\"108\">");

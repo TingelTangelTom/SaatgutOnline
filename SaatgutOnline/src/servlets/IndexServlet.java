@@ -1,4 +1,3 @@
-
 package servlets;
 
 import java.io.IOException;
@@ -27,23 +26,23 @@ public class IndexServlet extends HttpServlet
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException,
+			IOException
 	{
-		RequestDispatcher rd = getServletContext().getRequestDispatcher("/Produktliste?angebote=true&kategorie=0&erweitertesuche=false&suchen=false&suchbegriff=&as=DESC&sn=pn");
+		RequestDispatcher rd = getServletContext()
+				.getRequestDispatcher(
+						"/Produktliste?angebote=true&kategorie=0&erweitertesuche=false&suchen=false&suchbegriff=&as=DESC&sn=pn");
 		rd.forward(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
 			IOException
 	{
-		doGet(request, response);	
+		doGet(request, response);
 	}
-
 }

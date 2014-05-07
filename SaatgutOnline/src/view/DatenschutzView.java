@@ -9,17 +9,20 @@ import javax.servlet.http.HttpServletResponse;
 import controller.UrlController;
 
 /**
- * <p>Die Klasse <code>DatenschutzView</code> ist für die Ausgabe der Datenschutzerklärung zuständig.</p>
+ * <p>
+ * Die Klasse <code>DatenschutzView</code> ist für die Ausgabe der Datenschutzerklärung zuständig.
+ * </p>
  * 
  * @author Anja Dietrich
  * @version 1.0
  * @since 1.7.0_51
- * 
  */
-public class DatenschutzView {
-
+public class DatenschutzView
+{
 	/**
-	 * <p>Konstruktor der Klasse<code>DatenschutzView</code>.</p>
+	 * <p>
+	 * Konstruktor der Klasse<code>DatenschutzView</code>.
+	 * </p>
 	 * 
 	 * @param request
 	 * @param response
@@ -28,19 +31,19 @@ public class DatenschutzView {
 	 * @see javax.servlet.http.HttpServletResponse
 	 * @see controller.UrlController
 	 * @see java.io.PrintWriter
-	 * 
 	 */
-	public DatenschutzView(HttpServletRequest request, HttpServletResponse response,
-			String datenschutzText) {
-
+	public DatenschutzView(HttpServletRequest request, HttpServletResponse response, String datenschutzText)
+	{
 		// Für den Zurück-Link
 		UrlController urlController = new UrlController(request);
-
 		response.setContentType("text/html");
 		PrintWriter out;
-		try {
+		try
+		{
 			out = response.getWriter();
-		} catch (IOException e) {
+		}
+		catch (IOException e)
+		{
 			e.printStackTrace();
 			return;
 		}

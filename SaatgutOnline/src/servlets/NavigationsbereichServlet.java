@@ -14,34 +14,35 @@ import controller.NavigationsbereichController;
  * Servlet implementation class NavigationsbereichController
  */
 @WebServlet("/Navigationsbereich")
-public class NavigationsbereichServlet extends HttpServlet {
+public class NavigationsbereichServlet extends HttpServlet
+{
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public NavigationsbereichServlet() {
+	public NavigationsbereichServlet()
+	{
 		super();
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException,
-			IOException {
+			IOException
+	{
 		NavigationsbereichController navigationsbereichController = new NavigationsbereichController(request,
 				response);
 		navigationsbereichController.navigationsbereichAnzeigen();
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
-			IOException {
+			IOException
+	{
 		doGet(request, response);
 	}
-
 }

@@ -16,43 +16,40 @@ import controller.WarenkorbController;
  * Servlet implementation class WarenkorbServlet
  */
 @WebServlet("/Warenkorb")
-public class WarenkorbServlet extends HttpServlet {
-	
+public class WarenkorbServlet extends HttpServlet
+{
 	private static final long serialVersionUID = 1L;
 
-	
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public WarenkorbServlet() {
+	public WarenkorbServlet()
+	{
 		super();
 	}
 
-	
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException,	IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException,
+			IOException
+	{
 		RequestDispatcher rd = getServletContext().getRequestDispatcher("/Kopfbereich");
 		rd.include(request, response);
-
 		UrlController urlController = new UrlController(request);
 		urlController.urlInSessionLegen();
-
 		WarenkorbController warenkorbController = new WarenkorbController(request, response);
 		warenkorbController.warenkorbAnzeigen();
-
 		rd = getServletContext().getRequestDispatcher("/Fussbereich");
 		rd.include(request, response);
 	}
 
-	
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
+			IOException
+	{
 		doGet(request, response);
 	}
 }

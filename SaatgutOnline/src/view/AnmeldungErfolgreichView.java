@@ -9,23 +9,26 @@ import java.util.ResourceBundle;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 /**
- * <p>Die Klasse <code>AnmeldungErfolgreichView</code>
- * erzeugt einen <code>PrintWriter</code> und gibt
- * gemaess mittels resourcebundle uebergebener Spracheinstellungen
- * den passenden internationalisierten Text aus.
+ * <p>
+ * Die Klasse <code>AnmeldungErfolgreichView</code> erzeugt einen <code>PrintWriter</code> und gibt gemaess mittels
+ * resourcebundle uebergebener Spracheinstellungen den passenden internationalisierten Text aus.
  * </p>
+ * 
  * @author Christof Weigandt
  * @version 1.0
  * @since 1.7.0_51
  * @see AnmeldungFehlerView
  */
-public class AnmeldungErfolgreichView {
+public class AnmeldungErfolgreichView
+{
 	private PrintWriter out;
 	private ResourceBundle resourceBundle;
 
 	/**
 	 * Konstruktor der Klasse <code>KopfbereichView</code>
+	 * 
 	 * @param request
 	 *            - der aktuelle <code>HttpServletRequest</code>
 	 * @param response
@@ -40,7 +43,8 @@ public class AnmeldungErfolgreichView {
 		try
 		{
 			this.out = response.getWriter();
-		} catch (IOException e)
+		}
+		catch (IOException e)
 		{
 			e.printStackTrace();
 		}
@@ -52,7 +56,8 @@ public class AnmeldungErfolgreichView {
 	/**
 	 * Gibt Text aus
 	 */
-	public void outAnmeldungErfolgreichView() {
+	public void outAnmeldungErfolgreichView()
+	{
 		this.out.println("<h1>" + (this.resourceBundle.getString("UEBERSCHRIFT")) + "</h1>");
 	}
 }

@@ -10,15 +10,16 @@ import javax.servlet.http.HttpSession;
 import view.ImpressumView;
 
 /**
- * <p>Die Klasse <code>ImpressumController</code> liest das aktuellste Impressum aus der Datenbank aus.</p>
+ * <p>
+ * Die Klasse <code>ImpressumController</code> liest das aktuellste Impressum aus der Datenbank aus.
+ * </p>
  * 
  * @author Anja Dietrich
  * @version 1.0
  * @since 1.7.0_51
- * 
  */
-public class ImpressumController {
-
+public class ImpressumController
+{
 	private String unternehmen_adresse;
 	private String unternehmen_telefon;
 	private String unternehmen_fax;
@@ -31,9 +32,13 @@ public class ImpressumController {
 	private String impressum_copyright;
 
 	/**
-	 * <p>Der Konstruktor der Klasse <code>ImpressumController</code> liest das aktuellste Impressum
-	 * aus der Datenbank und erzeugt ein neues <code>ImpressumView</code>Objekt</p>
-	 * <p>Sendet die Abfrage an den <code>ImpressumView</code></p>
+	 * <p>
+	 * Der Konstruktor der Klasse <code>ImpressumController</code> liest das aktuellste Impressum aus der Datenbank
+	 * und erzeugt ein neues <code>ImpressumView</code>Objekt
+	 * </p>
+	 * <p>
+	 * Sendet die Abfrage an den <code>ImpressumView</code>
+	 * </p>
 	 * 
 	 * @param request
 	 * @param response
@@ -41,18 +46,17 @@ public class ImpressumController {
 	 * @see javax.servlet.http.HttpServletRequest
 	 * @see javax.servlet.http.HttpServletResponse
 	 * @see view.ImpressumView
-	 * 
 	 */
-	public ImpressumController(HttpServletRequest request, HttpServletResponse response) {
-
+	public ImpressumController(HttpServletRequest request, HttpServletResponse response)
+	{
 		HttpSession session = ((HttpServletRequest) request).getSession();
 		int sprache = (int) session.getAttribute("spracheId");
-
 		String query = "SELECT * FROM impressum WHERE sprache_id=" + sprache;
-
-		try {
+		try
+		{
 			ResultSet resultSet = DatenbankController.sendeSqlRequest(query);
-			if (resultSet.next()) {
+			if (resultSet.next())
+			{
 				unternehmen_adresse = resultSet.getString("unternehmen_adresse");
 				unternehmen_telefon = resultSet.getString("unternehmen_telefon");
 				unternehmen_fax = resultSet.getString("unternehmen_fax");
@@ -63,12 +67,13 @@ public class ImpressumController {
 				umsatzsteuer_id = resultSet.getString("umsatzsteuer_id");
 				wirtschafts_id = resultSet.getString("wirtschafts_id");
 				impressum_copyright = resultSet.getString("impressum_copyright");
-
-				new ImpressumView(request, response, unternehmen_adresse, unternehmen_telefon,
-						unternehmen_fax, unternehmen_email, unternehmen_geschaeftsfuehrung, registergericht,
-						register_nr, umsatzsteuer_id, wirtschafts_id, impressum_copyright);
+				new ImpressumView(request, response, unternehmen_adresse, unternehmen_telefon, unternehmen_fax,
+						unternehmen_email, unternehmen_geschaeftsfuehrung, registergericht, register_nr,
+						umsatzsteuer_id, wirtschafts_id, impressum_copyright);
 			}
-		} catch (SQLException e) {
+		}
+		catch (SQLException e)
+		{
 			e.printStackTrace();
 		}
 	}

@@ -1,10 +1,11 @@
 package view;
+
 /**
- * <p>Die Klasse <code>AbmeldungView</code>
- * erzeugt einen <code>PrintWriter</code> und gibt
- * gemaess mittels resourcebundle uebergebener Spracheinstellungen
- * den passenden internationalisierten Text aus.
+ * <p>
+ * Die Klasse <code>AbmeldungView</code> erzeugt einen <code>PrintWriter</code> und gibt gemaess mittels
+ * resourcebundle uebergebener Spracheinstellungen den passenden internationalisierten Text aus.
  * </p>
+ * 
  * @author Christof Weigandt
  * @version 1.0
  * @since 1.7.0_51
@@ -20,7 +21,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class AbmeldungView {
+public class AbmeldungView
+{
 	/**
 	 * Objekt der Klasse <code>PrintWriter</code>
 	 * 
@@ -36,6 +38,7 @@ public class AbmeldungView {
 
 	/**
 	 * Konstruktor der Klasse <code>AbmeldungView</code>
+	 * 
 	 * @param request
 	 *            - der aktuelle <code>HttpServletRequest</code>
 	 * @param response
@@ -50,7 +53,8 @@ public class AbmeldungView {
 		try
 		{
 			this.out = response.getWriter();
-		} catch (IOException e)
+		}
+		catch (IOException e)
 		{
 			e.printStackTrace();
 		}
@@ -62,15 +66,19 @@ public class AbmeldungView {
 	/**
 	 * Stellt die Html-Ausgabe fuer die Abmeldung zur Verfuegung
 	 */
-	public void outAbmeldungView(HttpServletRequest request, HttpServletResponse response) {
+	public void outAbmeldungView(HttpServletRequest request, HttpServletResponse response)
+	{
 		response.setContentType("text/html");
 		PrintWriter out;
-		try {
+		try
+		{
 			out = response.getWriter();
-		} catch (IOException e) {
+		}
+		catch (IOException e)
+		{
 			e.printStackTrace();
 			return;
 		}
 		out.println("<h1>" + this.resourceBundle.getString("UEBERSCHRIFT") + "</h1>");
-	}	
+	}
 }

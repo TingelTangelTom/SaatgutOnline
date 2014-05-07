@@ -13,42 +13,50 @@ import controller.RegistrierungController;
 import controller.RegistrierungErfolgreichController;
 
 /**
- * <p>Die Klasse <code>RegistrierungErfolgreichServlet</code>
- * nimmt den request entgegen und erzeugt einen <code>RegistrierungErfolgreichController</code>.
+ * <p>
+ * Die Klasse <code>RegistrierungErfolgreichServlet</code> nimmt den request entgegen und erzeugt einen
+ * <code>RegistrierungErfolgreichController</code>.
  * </p>
+ * 
  * @author Christof Weigandt
  * @version 1.0
  * @since 1.7.0_51
  * @see RegistrierungErfolgreichController
  */
 @WebServlet("/RegistrierungErfolgreich")
-public class RegistrierungErfolgreichServlet extends HttpServlet {
+public class RegistrierungErfolgreichServlet extends HttpServlet
+{
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public RegistrierungErfolgreichServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public RegistrierungErfolgreichServlet()
+	{
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException,
+			IOException
+	{
 		RequestDispatcher rd = getServletContext().getRequestDispatcher("/Kopfbereich");
 		rd.include(request, response);
-		
-		RegistrierungErfolgreichController registrierungErfolgreichController = new RegistrierungErfolgreichController(request, response);
-		
+		RegistrierungErfolgreichController registrierungErfolgreichController = new RegistrierungErfolgreichController(
+				request, response);
 		rd = getServletContext().getRequestDispatcher("/Fussbereich");
-		rd.include(request, response);			}
+		rd.include(request, response);
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
+			IOException
+	{
 		// TODO Auto-generated method stub
 	}
 }

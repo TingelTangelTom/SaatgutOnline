@@ -9,18 +9,21 @@ import javax.servlet.http.HttpServletResponse;
 import controller.UrlController;
 
 /**
- * <p>Die Klasse <code>AGBView</code> ist für die Ausgabe der AGB zuständig.</p>
+ * <p>
+ * Die Klasse <code>AGBView</code> ist für die Ausgabe der AGB zuständig.
+ * </p>
  * 
  * @author Anja Dietrich
  * @version 1.0
  * @since 1.7.0_51
- * 
  */
-public class AGBView {
-
+public class AGBView
+{
 	/**
-	 * <p>Konstruktor der Klasse <code>AGBView</code>.</p>
-	 *
+	 * <p>
+	 * Konstruktor der Klasse <code>AGBView</code>.
+	 * </p>
+	 * 
 	 * @param request
 	 * @param response
 	 * @param agbText
@@ -28,18 +31,19 @@ public class AGBView {
 	 * @see javax.servlet.http.HttpServletResponse
 	 * @see controller.UrlController
 	 * @see java.io.PrintWriter
-	 * 
 	 */
-	public AGBView(HttpServletRequest request, HttpServletResponse response, String agbText) {
-
+	public AGBView(HttpServletRequest request, HttpServletResponse response, String agbText)
+	{
 		// Für den Zurück-Link
 		UrlController urlController = new UrlController(request);
-
 		response.setContentType("text/html");
 		PrintWriter out;
-		try {
+		try
+		{
 			out = response.getWriter();
-		} catch (IOException e) {
+		}
+		catch (IOException e)
+		{
 			e.printStackTrace();
 			return;
 		}

@@ -2,13 +2,10 @@ package servlets;
 
 /**
  * @author Christof Weigandt
- * @version 0.1
- * Dieses Konfigurations-Servlet wird einmalig beim Serverstart ausgeführt.
- * Die Konfigurationseinstellungen aus WebContent\resources\xml\Konfiguration.xml
- * werden geparst und den entsprechenden Variablen zugewiesen.
- * 
+ * @version 0.1 Dieses Konfigurations-Servlet wird einmalig beim Serverstart ausgeführt. Die
+ *          Konfigurationseinstellungen aus WebContent\resources\xml\Konfiguration.xml werden geparst und den
+ *          entsprechenden Variablen zugewiesen.
  */
-
 import java.io.File;
 import java.io.IOException;
 
@@ -33,25 +30,25 @@ import controller.KonfigurationController;
 
 import java.io.File;
 
-
 @WebServlet("/Konfiguration")
-public class KonfigurationServlet extends HttpServlet {
+public class KonfigurationServlet extends HttpServlet
+{
 	private static final long serialVersionUID = 1L;
-	public static final boolean release = false;		// assertions enabled...
-       
+	public static final boolean release = false; // assertions enabled...
+
 	/**
-     * @see HttpServlet#HttpServlet()
-     */
-    
-	public KonfigurationServlet() {
-        super();
-    }
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public KonfigurationServlet()
+	{
+		super();
+	}
 
 	/**
 	 * @see Servlet#init(ServletConfig)
 	 */
-	public void init(ServletConfig konfiguration) throws ServletException {
-		
+	public void init(ServletConfig konfiguration) throws ServletException
+	{
 		super.init(konfiguration);
 		KonfigurationController.initialisiereKonfiguration(konfiguration);
 	}

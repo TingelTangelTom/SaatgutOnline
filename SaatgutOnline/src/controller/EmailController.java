@@ -14,45 +14,49 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 /**
- * <p>Die Klasse <code>EmailController</code> verwaltet die E-Mail Funktionalitaeten:</br>
- * - E-Mail validieren</br>
- * - E-Mail versenden</p>
+ * <p>
+ * Die Klasse <code>EmailController</code> verwaltet die E-Mail Funktionalitaeten:</br> - E-Mail validieren</br> -
+ * E-Mail versenden
+ * </p>
  * 
  * @author Anja Dietrich
  * @version 1.0
  * @since 1.7.0_51
- * 
  */
-public class EmailController {
-
+public class EmailController
+{
 	// RegEx für E-Mail Validierung
 	private static String EmailRegel = "[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*"
 			+ "@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-
 	// Pattern und Matcher für E-Mail Validierung
 	private Pattern pattern;
 	private Matcher matcher;
 
 	// Konstruktor für den EmailController.
-	public EmailController() {
-
+	public EmailController()
+	{
 	}
 
 	/**
-	 * <p>Diese Methode überprueft mit einem RegEx E-Mail-Adressen auf ihre Gueltigkeit.</p>
+	 * <p>
+	 * Diese Methode überprueft mit einem RegEx E-Mail-Adressen auf ihre Gueltigkeit.
+	 * </p>
 	 * 
-	 * @param String e-mail
+	 * @param String
+	 *            e-mail
 	 * @return boolean
-	 * 
 	 */
-	public boolean validiereEmail(String email) {
+	public boolean validiereEmail(String email)
+	{
 		pattern = Pattern.compile(EmailRegel);
 		matcher = pattern.matcher(email);
 		return matcher.matches();
 	}
 
 	/**
-	 * <p>Diese Methode versendet E-Mails.</p>
+	 * <p>
+	 * Diese Methode versendet E-Mails.
+	 * </p>
 	 * 
 	 * @param emailadresseAbsender
 	 * @param betreff
@@ -62,34 +66,38 @@ public class EmailController {
 	 * @throws MessagingException
 	 * @see javax.mail.internet.AddressException
 	 * @see javax.mail.MessagingException
-	 * 
 	 */
-	public void sendeEmail(String emailadresseAbsender, String betreff,
-			String emailadresseEmpfaenger, String nachricht) {
-
+	public void sendeEmail(String emailadresseAbsender, String betreff, String emailadresseEmpfaenger,
+			String nachricht)
+	{
 		Properties props = System.getProperties();
 		props.setProperty("mail.smtp.host", "localhost");
 		props.setProperty("mail.transport.protocol", "smtp");
-
 		Session session = Session.getDefaultInstance(props, null);
 		MimeMessage message = new MimeMessage(session);
-
-		try {
+		try
+		{
 			message.setFrom(new InternetAddress(emailadresseAbsender));
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(emailadresseEmpfaenger));
 			message.setSubject(betreff);
 			message.setSentDate(new Date());
 			message.setContent(nachricht, "text/html");
 			Transport.send(message);
-		} catch (AddressException e) {
+		}
+		catch (AddressException e)
+		{
 			e.printStackTrace();
-		} catch (MessagingException e) {
+		}
+		catch (MessagingException e)
+		{
 			e.printStackTrace();
 		}
 	}
 
 	/**
-	 * <p>Diese Methode versendet E-Mails und formatiert die Ausgabe.</p>
+	 * <p>
+	 * Diese Methode versendet E-Mails und formatiert die Ausgabe.
+	 * </p>
 	 * 
 	 * @param emailadresseAbsender
 	 * @param betreff
@@ -98,17 +106,14 @@ public class EmailController {
 	 * @param anrede
 	 * @param vorname
 	 * @param nachname
-	 * 
 	 */
-	public void sendeEmail(String emailadresseAbsender, String betreff,
-			String emailadresseEmpfaenger, String nachricht, String anrede, String vorname,
-			String nachname) {
-
-		nachricht = "<h1>Kontaktanfrage</h1>" + "Nachricht von" + " " + anrede + " " + vorname + " "
-				+ nachname + "<br>" + "<table><tr><td><b>E-Mail: </b></td>" + "<td>" + emailadresseAbsender
-				+ "</td></tr>" + "<br><tr><td><b>Betreff: </b></td>" + "<td>" + betreff + "</td></tr>"
+	public void sendeEmail(String emailadresseAbsender, String betreff, String emailadresseEmpfaenger,
+			String nachricht, String anrede, String vorname, String nachname)
+	{
+		nachricht = "<h1>Kontaktanfrage</h1>" + "Nachricht von" + " " + anrede + " " + vorname + " " + nachname
+				+ "<br>" + "<table><tr><td><b>E-Mail: </b></td>" + "<td>" + emailadresseAbsender + "</td></tr>"
+				+ "<br><tr><td><b>Betreff: </b></td>" + "<td>" + betreff + "</td></tr>"
 				+ "<br><tr><td><b>Nachricht: </b></td>" + "<td>" + nachricht + "</td></tr><table>";
-
 		sendeEmail(emailadresseAbsender, betreff, emailadresseEmpfaenger, nachricht);
 	}
 }
