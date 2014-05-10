@@ -4,8 +4,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import com.mysql.jdbc.StringUtils;
+
 import model.ProduktModel;
 
 /**
@@ -135,6 +139,16 @@ public class ProduktController
 		 * Liefert den passenden produkt_query für die Datenbankabfrage. Die Auswahlmöglichkeiten sind:
 		 * Angebotsprodukte, Produkte aus Unterkategorien und alle Produkte einer Eltern-Kategorie
 		 */
+		String sortierung = request.getParameter("sn");
+		String sortierspalte = request.getParameter("as");
+		if(StringUtils.isNullOrEmpty(sortierung))
+		{
+			sortierung = "ASC";
+		}
+		if(StringUtils.isNullOrEmpty(sortierspalte))
+		{
+			sortierspalte = "pb.produkt_name";
+		}
 		if (request.getParameter("angebote") != null && request.getParameter("angebote").equals("true"))
 		{
 			produkt_query = "SELECT produkt_id FROM angebot WHERE gueltig_bis > now()";
@@ -148,16 +162,17 @@ public class ProduktController
 						+ "WHERE pb.sprache_id = '" + this.sprache_id + "' " + "AND  p.kategorie_id IN ("
 						+ "SELECT kategorie_id FROM kategorie WHERE eltern_id = '" + kategorie_id
 						+ "' OR (kategorie_id = '" + kategorie_id + "' AND eltern_id = 0)" + ") " + "ORDER BY "
-						+ session.getAttribute("sortierung_sortierspalte") + " "
-						+ session.getAttribute("sortierung_reihenfolge");
+						+ sortierspalte + " " + sortierung;
+				System.out.println(produkt_query);
 			}
 			else
 			{
 				produkt_query = "SELECT p.produkt_id " + "FROM produkt AS p "
 						+ "INNER JOIN produkt_beschreibung AS pb ON p.produkt_id = pb.produkt_id "
 						+ "WHERE pb.sprache_id = '" + this.sprache_id + "' " + "AND  p.kategorie_id = '"
-						+ kategorie_id + "' " + "ORDER BY " + session.getAttribute("sortierung_sortierspalte")
-						+ " " + session.getAttribute("sortierung_reihenfolge");
+						+ kategorie_id + "' " + "ORDER BY " + sortierspalte + " " + sortierung;
+				System.out.println(produkt_query);
+
 			}
 		}
 		ArrayList<ProduktModel> produkte = new ArrayList<>();
@@ -199,19 +214,23 @@ public class ProduktController
 			String query = "SELECT k.kategorie_id, k.eltern_id, kb.kategorie_name " + "FROM kategorie AS k "
 					+ "INNER JOIN kategorie_beschreibung AS kb ON k.kategorie_id = kb.kategorie_id "
 					+ "WHERE kb.sprache_id = '" + this.sprache_id + "'";
+			System.out.println(query);
 			ResultSet resultset = DatenbankController.sendeSqlRequest(query);
-			while (resultset.next())
+			if(resultset != null)
 			{
-				kategorie_id = resultset.getInt(1);
-				if (resultset.getInt(2) > 0)
+				while (resultset.next())
 				{
-					wert = "- " + resultset.getString(3);
+					kategorie_id = resultset.getInt(1);
+					if (resultset.getInt(2) > 0)
+					{
+						wert = "- " + resultset.getString(3);
+					}
+					else
+					{
+						wert = resultset.getString(3);
+					}
+					kategorien.put(kategorie_id, wert);
 				}
-				else
-				{
-					wert = resultset.getString(3);
-				}
-				kategorien.put(kategorie_id, wert);
 			}
 		}
 		catch (SQLException e)
@@ -288,8 +307,13 @@ public class ProduktController
 		{
 			String count_query = "SELECT COUNT(a.produkt_id) FROM angebot AS a LEFT JOIN produkt AS p ON p.produkt_id = a.produkt_id WHERE a.produkt_id = '"
 					+ id + "' AND a.gueltig_bis > now()";
-			String produkt_query = "SELECT a.angebotspreis, a.gueltig_bis FROM angebot AS a LEFT JOIN produkt AS p ON p.produkt_id = a.produkt_id WHERE a.produkt_id = '"
-					+ id + "' AND a.gueltig_bis > now()";
+			
+			String produkt_query = "SELECT a.angebotspreis, a.gueltig_bis "
+									+ "FROM angebot AS a "
+									+ "LEFT JOIN produkt AS p ON p.produkt_id = a.produkt_id "
+									+ "WHERE a.produkt_id = '" + id + "' "
+									+ "AND a.gueltig_bis > now()";
+			
 			ResultSet resultset_count = DatenbankController.sendeSqlRequest(count_query);
 			if (resultset_count != null)
 			{

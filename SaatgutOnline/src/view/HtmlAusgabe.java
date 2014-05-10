@@ -5,12 +5,20 @@ import java.sql.SQLException;
 import java.text.MessageFormat;
 import java.text.NumberFormat;
 import java.util.Currency;
+import java.util.Enumeration;
 import java.util.Locale;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import com.mysql.jdbc.StringUtils;
+
+import model.ProduktModel;
 import controller.DatenbankController;
 
 /**
@@ -96,6 +104,22 @@ public class HtmlAusgabe extends HttpServlet
 			englischerZusatz = "";
 		}
 		return englischerZusatz;
+	}	
+	
+	public String outAngebot(ProduktModel produktModel)
+	{
+		String angegbot = "";
+		if (produktModel.getPreisEhemalsBrutto() > 0)
+		{
+			ResourceBundle resourceBundle = PropertyResourceBundle.getBundle("I18N." + this.locale.getLanguage()
+					+ ".ProduktlisteView", this.locale); // Pfad muss noch angepasst werden
+			return "<span style=\"color: red;\">" + resourceBundle.getString("ANGEBOT") + "</span>";
+		}
+		else
+		{
+			return angegbot;
+		}
+		
 	}
 
 	/**
@@ -119,7 +143,7 @@ public class HtmlAusgabe extends HttpServlet
 		NumberFormat prozentFormat = NumberFormat.getPercentInstance(this.locale);
 		String prozent = prozentFormat.format(mwst / 100);
 		ResourceBundle resourceBundle = PropertyResourceBundle.getBundle("I18N." + this.locale.getLanguage()
-				+ ".ProduktinfoView", this.locale); // Pfad muss noch angepasst werden
+				+ ".ProduktinfoView", this.locale);
 		return MessageFormat.format(resourceBundle.getString("PREISTEXT"), prozent)
 				+ " <a href=\"/SaatgutOnline/VersandInfo\"><b>" + versandkosten_text + "</b></a>";
 	}
@@ -218,6 +242,7 @@ public class HtmlAusgabe extends HttpServlet
 	 * @return <i>String</i> der Übergabeparameter
 	 * @see model#Produktliste
 	 */
+	/*
 	public String outParameterLink(HttpServletRequest request, Boolean erweitertesuche, Boolean suchen,
 			String suchbegriff)
 	{
@@ -244,7 +269,81 @@ public class HtmlAusgabe extends HttpServlet
 					+ session.getAttribute("sortierung_sortierspalte_kuerzel");
 		}
 	}
-
+	 */
+	public String ausgabeParameter(HttpServletRequest request)
+	{
+		String parameter = "";
+		String helfer;
+		@SuppressWarnings("rawtypes")
+		Enumeration enumeration = request.getParameterNames();
+		if(enumeration != null)
+		{
+			parameter += "?";
+		}
+		int iterator = 0;
+	    while (enumeration.hasMoreElements())
+	    {
+		   	if(iterator != 0)
+		   	{
+		   		parameter += "&";
+		   	}
+		    helfer = (String)enumeration.nextElement();
+		    parameter += helfer + "=";
+		    parameter += request.getParameter(helfer);
+		    iterator++;
+	    }
+	    System.out.println(parameter);
+	    return parameter;
+	}
+	
+	public String ausgabeParameterErweiterteSuche(HttpServletRequest request)
+	{
+		String parameter = ausgabeParameter(request);
+		String erweitertesuche = request.getParameter("erweitertesuche");
+		if(!StringUtils.isNullOrEmpty(erweitertesuche) && erweitertesuche.equals("false"))
+		{
+			parameter = parameter.replaceAll("erweitertesuche=(true|false)", "erweitertesuche=true");
+		} else
+		{
+			parameter = parameter.replaceAll("erweitertesuche=(true|false)", "erweitertesuche=false");
+		}
+		if(StringUtils.isNullOrEmpty(erweitertesuche))
+		{
+			parameter += "&erweitertesuche=true";
+		}
+		return parameter;	
+	}	
+	
+	public String ausgabeParameterSortierung(HttpServletRequest request, String tabellenspalte)
+	{
+		String parameter = ausgabeParameter(request);
+		String tabelle = request.getParameter("sn");
+		String sortierung = request.getParameter("as");
+		if(!StringUtils.isNullOrEmpty(sortierung))
+		{
+			if(sortierung.equals("ASC"))
+			{
+				parameter = parameter.replaceAll("as=(DESC|ASC)", "as=DESC");
+			} else
+			{
+				parameter = parameter.replaceAll("as=(DESC|ASC)", "as=ASC");
+			}
+		} else
+		{
+			parameter += "&as=DESC";
+		}	
+		if(StringUtils.isNullOrEmpty(tabelle))
+		{
+			System.out.println("ist null");
+			parameter += "&sn=" + tabellenspalte;
+		} else
+		{
+		System.out.println("ist nicht null");
+			parameter = parameter.replaceAll("sn=(pp|pn)", "sn=" + tabellenspalte);
+		}
+		return parameter;
+	}
+		
 	/**
 	 * <p>
 	 * Die Methode <code>outParameterLink</code> gibt die <i>GET</i>-Parameter für den zurück. Dieses setzt sich
@@ -258,6 +357,7 @@ public class HtmlAusgabe extends HttpServlet
 	 * @return <i>String</i> der Übergabeparameter
 	 * @see model#Produktliste
 	 */
+	/*
 	public String outParameterLink(HttpServletRequest request, String sortierspalte)
 	{
 		String angebote = "false";
@@ -294,4 +394,5 @@ public class HtmlAusgabe extends HttpServlet
 					+ session.getAttribute("sortierung_reihenfolge") + "&sn=" + sortierspalte;
 		}
 	}
+	*/
 }

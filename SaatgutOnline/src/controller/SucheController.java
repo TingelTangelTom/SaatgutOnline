@@ -3,9 +3,12 @@ package controller;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import com.mysql.jdbc.StringUtils;
 
 import model.ProduktModel;
 
@@ -22,7 +25,6 @@ import model.ProduktModel;
 public class SucheController
 {
 	private ProduktController produktController;
-	private int sprache_id;
 
 	/**
 	 * <p>
@@ -40,8 +42,6 @@ public class SucheController
 	public SucheController(HttpServletRequest request)
 	{
 		super();
-		HttpSession session = request.getSession();
-		this.sprache_id = (int) session.getAttribute("spracheId");
 		this.produktController = new ProduktController(request);
 	}
 
@@ -63,89 +63,64 @@ public class SucheController
 	public ArrayList<ProduktModel> getProduktliste(HttpServletRequest request)
 	{
 		HttpSession session = ((HttpServletRequest) request).getSession();
-		int kategorie = 0;
-		if (request.getParameter("kategorie") != null)
+
+		String kategorie = request.getParameter("kategorie");
+		String preis_von = request.getParameter("preis_von");
+		String preis_bis = request.getParameter("preis_bis");
+		String name = request.getParameter("name");
+		String beschreibung = request.getParameter("beschreibung");
+		String produktnummer = request.getParameter("produktnummer");
+		if(StringUtils.isNullOrEmpty(preis_von) || !Pattern.matches( "[0-9]+", preis_von))
 		{
-			kategorie = Integer.parseInt(request.getParameter("kategorie"));
+			preis_von = "0";
 		}
-		int preis_von = 0;
-		int preis_bis = 0;
-		String name = "";
-		String beschreibung = "";
-		String produktnummer = "";
-		if (request.getParameter("name") != null)
+		if(StringUtils.isNullOrEmpty(preis_bis) || !Pattern.matches( "[0-9]+", preis_bis))
 		{
-			name = request.getParameter("name");
+			preis_bis = "0";
 		}
-		else
+		String sortierung = request.getParameter("sn");
+		String sortierspalte = request.getParameter("as");
+		if(StringUtils.isNullOrEmpty(sortierung))
 		{
-			if (request.getParameter("suchbegriff") != null)
-			{
-				name = request.getParameter("suchbegriff");	
-			}
+			sortierung = "ASC";
 		}
-		if (!request.getParameter("suchbegriff").equalsIgnoreCase("null"))
+		if(StringUtils.isNullOrEmpty(sortierspalte))
 		{
-			if (request.getParameter("beschreibung") != null)
-			{
-				beschreibung = request.getParameter("beschreibung");
-			}
-			if (request.getParameter("produktnummer") != null)
-			{
-				produktnummer = request.getParameter("produktnummer");
-			}
-			if (request.getParameter("preis_von") != null)
-			{
-				if (!request.getParameter("preis_von").equals(""))
-				{
-					preis_von = Integer.parseInt(request.getParameter("preis_von")); 
-				}
-			}
-			if (request.getParameter("preis_bis") != null)
-			{
-				if (!request.getParameter("preis_bis").equals(""))
-				{
-					preis_von = Integer.parseInt(request.getParameter("preis_bis")); 
-				}
-			}
+			sortierspalte = "pb.produkt_name";
 		}
 		String produkt_query;
 		ArrayList<ProduktModel> produkte = new ArrayList<>();
 		produkt_query = "SELECT DISTINCT p.produkt_id " + "FROM produkt AS p "
-				+ "INNER JOIN produkt_beschreibung AS pb ON p.produkt_id = pb.produkt_id "
-				+ "INNER JOIN kategorie_beschreibung AS kb ON p.kategorie_id = kb.kategorie_id "
-				+ "WHERE pb.sprache_id = '" + this.sprache_id + "' ";
-		if (kategorie > 0)
+				+ "LEFT JOIN produkt_beschreibung AS pb ON p.produkt_id = pb.produkt_id "
+				+ "LEFT JOIN kategorie_beschreibung AS kb ON p.kategorie_id = kb.kategorie_id "
+				+ "WHERE pb.produkt_name LIKE '%" + name + "%' ";
+		if (!StringUtils.isNullOrEmpty(kategorie) && Integer.parseInt(kategorie) > 0)
 		{
 			produkt_query += "AND p.kategorie_id  IN (SELECT kategorie_id FROM kategorie WHERE eltern_id = '"
 					+ kategorie + "' OR (kategorie_id = '" + kategorie + "' AND eltern_id = 0)) ";
 		}
-		if (!name.equals(""))
+		if (!StringUtils.isNullOrEmpty(beschreibung))
 		{
-			produkt_query += "AND MATCH (pb.produkt_name) AGAINST ('" + name + "') ";
+			produkt_query += "AND pb.produkt_beschreibung LIKE '%" + beschreibung + "%' ";
 		}
-		if (!beschreibung.equals(""))
+		if (!StringUtils.isNullOrEmpty(produktnummer))
 		{
-			produkt_query += "AND MATCH (pb.produkt_beschreibung) AGAINST ('" + beschreibung + "') ";
-		}
-		if (!produktnummer.equals(""))
+			produkt_query += "AND p.produkt_produktnummer LIKE '%" + produktnummer + "%' ";
+		}	
+		if (Integer.parseInt(preis_von) >= 0 && Integer.parseInt(preis_bis) > 0 && Integer.parseInt(preis_von) < Integer.parseInt(preis_bis))
 		{
-			produkt_query += "AND p.produkt_produktnummer = '" + produktnummer + "' ";
+			produkt_query += "AND p.produkt_preis BETWEEN " + preis_von + " AND " + preis_bis + " ";
 		}
-		if (preis_von >= 0 && preis_bis > 0 && preis_von < preis_bis)
-		{
-			produkt_query += "AND p.produkt_preis BETWEEN " + preis_von + " AND " + preis_bis;
-		}
-		produkt_query += "ORDER BY " + session.getAttribute("sortierung_sortierspalte") + " "
-				+ session.getAttribute("sortierung_reihenfolge") + " " + "LIMIT "
-				+ session.getAttribute("sortierung_limit_von") + ","
-				+ session.getAttribute("sortierung_produktanzahl") + "";
+		produkt_query += "ORDER BY " + sortierspalte + " " + sortierung;
 		try
 		{
 			ResultSet produkt_resultset = DatenbankController.sendeSqlRequest(produkt_query);
-			while (produkt_resultset.next())
+			if(produkt_resultset != null)
 			{
-				produkte.add(this.produktController.getProdukt(produkt_resultset.getInt(1)));
+				while (produkt_resultset.next())
+				{
+					produkte.add(this.produktController.getProdukt(produkt_resultset.getInt(1)));
+				}
 			}
 		}
 		catch (SQLException e)

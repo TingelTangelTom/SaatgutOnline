@@ -59,8 +59,7 @@ public class ProduktlisteView
 		this.kategorie = request.getParameter("kategorie");
 		this.session = request.getSession();
 		Locale locale = (Locale) session.getAttribute("sprache");
-		this.resourceBundle = PropertyResourceBundle.getBundle("I18N." + locale.getLanguage() + "."
-				+ getClass().getSimpleName(), locale);
+		this.resourceBundle = PropertyResourceBundle.getBundle("I18N." + locale.getLanguage() + "." + getClass().getSimpleName(), locale);
 	}
 
 	/**
@@ -116,7 +115,7 @@ public class ProduktlisteView
 			if (angebote.equals("true"))
 			{
 				this.produktliste = this.produktController.getProduktliste(request, this.kategorie);
-				statusanzeige = resourceBundle.getString("ANGEBOT");
+				statusanzeige = resourceBundle.getString("ANGEBOTE");
 			}
 			else
 			{
@@ -196,14 +195,14 @@ public class ProduktlisteView
 		{
 			if (suchen.equals("true"))
 			{
-				this.output += "<a href=\"/SaatgutOnline/Produktliste?"
-						+ this.htmlAusgabe.outParameterLink(request, false, true, suchbegriff) + "\">"
+				this.output += "<a href=\"/SaatgutOnline/Produktliste"
+						+ this.htmlAusgabe.ausgabeParameterErweiterteSuche(request) + "\">"
 						+ this.resourceBundle.getString("ERWEITERTESUCHE_WAHL_AUS") + "</a>  ";
 			}
 			else
 			{
-				this.output += "<a href=\"/SaatgutOnline/Produktliste?"
-						+ this.htmlAusgabe.outParameterLink(request, false, false, suchbegriff) + "\">"
+				this.output += "<a href=\"/SaatgutOnline/Produktliste"
+						+ this.htmlAusgabe.ausgabeParameterErweiterteSuche(request) + "\">"
 						+ this.resourceBundle.getString("ERWEITERTESUCHE_WAHL_AUS") + "</a>  ";
 			}
 		}
@@ -211,14 +210,14 @@ public class ProduktlisteView
 		{
 			if (suchen.equals("true"))
 			{
-				this.output += "<a href=\"/SaatgutOnline/Produktliste?"
-						+ this.htmlAusgabe.outParameterLink(request, true, true, suchbegriff) + "\">"
+				this.output += "<a href=\"/SaatgutOnline/Produktliste"
+						+ this.htmlAusgabe.ausgabeParameterErweiterteSuche(request) + "\">"
 						+ this.resourceBundle.getString("ERWEITERTESUCHE_WAHL_AN") + "</a>  ";
 			}
 			else
 			{
-				this.output += "<a href=\"/SaatgutOnline/Produktliste?"
-						+ this.htmlAusgabe.outParameterLink(request, true, false, suchbegriff) + "\">"
+				this.output += "<a href=\"/SaatgutOnline/Produktliste"
+						+ this.htmlAusgabe.ausgabeParameterErweiterteSuche(request) + "\">"
 						+ this.resourceBundle.getString("ERWEITERTESUCHE_WAHL_AN") + "</a>  ";
 			}
 		}
@@ -227,14 +226,14 @@ public class ProduktlisteView
 				+ ": "
 				+ this.resourceBundle.getString("NAME")
 				+ " "
-				+ "<a href=\"/SaatgutOnline/Produktliste?"
-				+ this.htmlAusgabe.outParameterLink(request, "pn")
+				+ "<a href=\"/SaatgutOnline/Produktliste"
+				+ this.htmlAusgabe.ausgabeParameterSortierung(request, "pn")
 				+ "\"><img src=\"resources/bilder/icons/pfeil_hoch_runter.gif\" width=\"5\" height=\"10\" border=\"0\" alt=\"Sortierung\"></a> | "
 				+ " "
 				+ this.resourceBundle.getString("PREIS")
 				+ " "
-				+ "<a href=\"/SaatgutOnline/Produktliste?"
-				+ this.htmlAusgabe.outParameterLink(request, "pp")
+				+ "<a href=\"/SaatgutOnline/Produktliste"
+				+ this.htmlAusgabe.ausgabeParameterSortierung(request, "pp")
 				+ "\"><img src=\"resources/bilder/icons/pfeil_hoch_runter.gif\" width=\"5\" height=\"10\" border=\"0\" alt=\"Sortierung\"></a>"
 				+ "</td>\n</tr>\n"
 				+ "<tr>\n<td colspan=\"2\" style=\"background-image:url(resources/bilder/icons/trennlinie.gif);height: 2px; background-repeat:repeat-x;\">&nbsp;</td>\n</tr>\n";
@@ -242,7 +241,6 @@ public class ProduktlisteView
 		{
 			ProduktModel produktModel = this.produktliste.get(i);
 			String bruttopreis;
-			String angebot = "";
 			if (produktModel.getPreisBrutto() < produktModel.getPreisEhemalsBrutto()
 					&& produktModel.getPreisBrutto() > 0)
 			{
@@ -258,14 +256,9 @@ public class ProduktlisteView
 					+ "<tr>\n"
 					+ "<td class=\"produktliste bild\" rowspan=\"4\"><img src=\"" + produktModel.getBild() + "\" width=\"100\" height=\"100\" alt=\"\"></td>\n"
 					+ "<td class=\"produktliste titel\">";
-			if (produktModel.getPreisBrutto() < produktModel.getPreisEhemalsBrutto()
-					&& produktModel.getPreisBrutto() > 0)
-			{
-				angebot = "<span style=\"color: red;\"> Angebot</span>";
-			}
+
 			this.output += htmlAusgabe.outLinkProduktinfo(produktModel.getName(), produktModel.getId())
-					+ " "
-					+ angebot
+					+ " " + this.htmlAusgabe.outAngebot(produktModel)
 					+ "</td>\n"
 					+ "<td class=\"produktliste preis\">"
 					+ bruttopreis
