@@ -79,7 +79,7 @@ public class ProduktlisteView
 	{
 		@SuppressWarnings("unused")
 		HttpSession session = ((HttpServletRequest) request).getSession();
-		this.produktController.setSortierung(request);
+		//this.produktController.setSortierung(request);
 		this.output = "";
 		// Standardmenge, die im Textfeld Menge eingetragen wird
 		warenkorbmenge = 1;
@@ -130,7 +130,8 @@ public class ProduktlisteView
 		HashMap<Integer, String> kategorien = new HashMap<Integer, String>(
 				this.produktController.getAlleKategorien());
 		// Ausgabe der Produktliste
-		this.output += "<table class=\"produktliste\">\n" + "<tr><td class=\"produktliste\" colspan=\"2\">";
+		String userLocale=request.getHeader("Accept-Language");
+		this.output += " "  + userLocale + "<table class=\"produktliste\">\n" + "<tr><td class=\"produktliste\" colspan=\"2\">";
 		// Erweiterte Suche anzeigen
 		if (erweitertesuche.equals("true"))
 		{
@@ -290,8 +291,8 @@ public class ProduktlisteView
 			}
 			else
 			{
-				
-				this.output += "<form action=\"/SaatgutOnline/Warenkorb\" method=\"POST\">\n"
+				/*
+				this.output += "<form name=\"warenkorb\" action=\"/SaatgutOnline/Warenkorb\" method=\"POST\">\n"
 						+ ""
 						+ this.resourceBundle.getString("MENGE")
 						+ " <input class=\"festeTextBoxBreiteMenge\" type=\"text\" name=\"menge\" value=\""
@@ -302,6 +303,7 @@ public class ProduktlisteView
 						+ "\">\n"
 						+ "<input type=\"image\" src=\"resources/bilder/icons/warenkorb.gif\" alt=\"Warenkorb\">\n"
 						+ "</form>\n";
+						*/
 			}
 			this.output += "</td>\n</tr>\n"
 					+ "<tr>\n<td colspan=\"3\">&nbsp;</td>\n"

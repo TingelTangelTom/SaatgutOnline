@@ -292,7 +292,6 @@ public class HtmlAusgabe extends HttpServlet
 		    parameter += request.getParameter(helfer);
 		    iterator++;
 	    }
-	    System.out.println(parameter);
 	    return parameter;
 	}
 	
@@ -334,11 +333,9 @@ public class HtmlAusgabe extends HttpServlet
 		}	
 		if(StringUtils.isNullOrEmpty(tabelle))
 		{
-			System.out.println("ist null");
 			parameter += "&sn=" + tabellenspalte;
 		} else
 		{
-		System.out.println("ist nicht null");
 			parameter = parameter.replaceAll("sn=(pp|pn)", "sn=" + tabellenspalte);
 		}
 		return parameter;

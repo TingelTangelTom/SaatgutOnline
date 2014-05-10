@@ -163,7 +163,6 @@ public class ProduktController
 						+ "SELECT kategorie_id FROM kategorie WHERE eltern_id = '" + kategorie_id
 						+ "' OR (kategorie_id = '" + kategorie_id + "' AND eltern_id = 0)" + ") " + "ORDER BY "
 						+ sortierspalte + " " + sortierung;
-				System.out.println(produkt_query);
 			}
 			else
 			{
@@ -171,8 +170,6 @@ public class ProduktController
 						+ "INNER JOIN produkt_beschreibung AS pb ON p.produkt_id = pb.produkt_id "
 						+ "WHERE pb.sprache_id = '" + this.sprache_id + "' " + "AND  p.kategorie_id = '"
 						+ kategorie_id + "' " + "ORDER BY " + sortierspalte + " " + sortierung;
-				System.out.println(produkt_query);
-
 			}
 		}
 		ArrayList<ProduktModel> produkte = new ArrayList<>();
@@ -214,7 +211,6 @@ public class ProduktController
 			String query = "SELECT k.kategorie_id, k.eltern_id, kb.kategorie_name " + "FROM kategorie AS k "
 					+ "INNER JOIN kategorie_beschreibung AS kb ON k.kategorie_id = kb.kategorie_id "
 					+ "WHERE kb.sprache_id = '" + this.sprache_id + "'";
-			System.out.println(query);
 			ResultSet resultset = DatenbankController.sendeSqlRequest(query);
 			if(resultset != null)
 			{
@@ -351,6 +347,7 @@ public class ProduktController
 	 * @see javax.servlet.http.HttpServletRequest
 	 * @see model#ProduktlisteView
 	 */
+	/*
 	public void setSortierung(HttpServletRequest request)
 	{
 		HttpSession session = ((HttpServletRequest) request).getSession();
@@ -403,7 +400,7 @@ public class ProduktController
 			session.setAttribute("erweitertesuche", request.getParameter("erweitertesuche"));
 		}
 	}
-
+*/
 	/*
 	 * Die Methode rundet den Übergabeparameter 'wert' auf eine bestimmte Anzahl von Stellen nach dem Komma, welche
 	 * durch den Übergabeparameter 'stellen bestimmt wird.

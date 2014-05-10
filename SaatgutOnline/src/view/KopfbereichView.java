@@ -161,7 +161,7 @@ public class KopfbereichView
 	 */
 	public void outLoginBereich()
 	{
-		this.out.println("<form action=\"\" method=\"POST\">");
+		this.out.println("<form name=\"login\" action=\"\" method=\"POST\">");
 		this.out.println("<table>");
 		this.out.println("<tr>\n<td>");
 		this.out.println(this.resourceBundle.getString("BENUTZERNAME"));
@@ -228,7 +228,7 @@ public class KopfbereichView
 	{
 		this.out.println("<table>");
 		this.out.println("<tr>\n<td>");
-		this.out.println("<form action=\"/SaatgutOnline/Produktliste\" method=\"GET\">");
+		this.out.println("<form name=\"einfachesuche\" action=\"/SaatgutOnline/Produktliste\" method=\"GET\">");
 		this.out.println("<input type=\"hidden\" name=\"erweitertesuche\" value=\"false\">");
 		this.out.println("<input type=\"text\" name=\"name\" size=\"20\">");
 		this.out.println("</td>\n<td>");
@@ -248,14 +248,14 @@ public class KopfbereichView
 	{
 		this.out.println("<table>");
 		this.out.println("<tr>\n<td>");
-		this.out.println("<form action=\"\" method=\"POST\">");
-		this.out.println("<input type=\"image\" src=\"resources/bilder/flags_iso/24/de.png\" alt=\"de\">");
-		this.out.println("<input type=\"hidden\" name=\"sprache\" value=\"de\"");
+		this.out.println("<form name=\"sprachwahl1\" action=\"\" method=\"POST\">");
+		this.out.println("<input type=\"hidden\" name=\"sprache\" value=\"de\">");
+		this.out.println("<input type=\"image\" name=\"submit\" src=\"resources/bilder/flags_iso/24/de.png\" alt=\"absenden\">");
 		this.out.println("</form>");
 		this.out.println("</td>\n<td>");
-		this.out.println("<form action=\"\" method=\"POST\">");
-		this.out.println("<input type=\"image\" src=\"resources/bilder/flags_iso/24/us.png\" alt=\"en\">");
-		this.out.println("<input type=\"hidden\" name=\"sprache\" value=\"en\"");
+		this.out.println("<form name=\"sprachwahl2\" action=\"\" method=\"POST\">");
+		this.out.println("<input type=\"hidden\" name=\"sprache\" value=\"en\">");
+		this.out.println("<input type=\"image\" name=\"submit\" src=\"resources/bilder/flags_iso/24/us.png\" alt=\"absenden\">");
 		this.out.println("</form>");
 		this.out.println("</td>\n</tr>");
 		this.out.println("</table>");

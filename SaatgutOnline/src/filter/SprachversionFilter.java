@@ -43,7 +43,6 @@ public class SprachversionFilter implements Filter
 			if (session.getAttribute("sprache") == null)
 			{
 				locale = request.getLocale();
-				System.out.println(locale.equals(Locale.GERMAN));
 				if (!locale.equals(Locale.GERMAN))
 				{
 					locale = Locale.ENGLISH;
