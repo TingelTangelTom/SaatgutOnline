@@ -139,8 +139,8 @@ public class ProduktController
 		 * Liefert den passenden produkt_query für die Datenbankabfrage. Die Auswahlmöglichkeiten sind:
 		 * Angebotsprodukte, Produkte aus Unterkategorien und alle Produkte einer Eltern-Kategorie
 		 */
-		String sortierung = request.getParameter("sn");
-		String sortierspalte = request.getParameter("as");
+		String sortierung = request.getParameter("as");
+		String sortierspalte = request.getParameter("sn");
 		if(StringUtils.isNullOrEmpty(sortierung))
 		{
 			sortierung = "ASC";
@@ -149,9 +149,20 @@ public class ProduktController
 		{
 			sortierspalte = "pb.produkt_name";
 		}
+		else
+		{
+			if(request.getParameter("sn").equals("pn"))
+			{
+				sortierspalte = "pb.produkt_name";
+			}
+			else
+			{
+				sortierspalte = "p.produkt_preis";
+			}
+		}
 		if (request.getParameter("angebote") != null && request.getParameter("angebote").equals("true"))
 		{
-			produkt_query = "SELECT produkt_id FROM angebot WHERE gueltig_bis > now()";
+			produkt_query = "SELECT produkt_id FROM angebot WHERE gueltig_bis > now() ";
 		}
 		else
 		{
@@ -172,6 +183,7 @@ public class ProduktController
 						+ kategorie_id + "' " + "ORDER BY " + sortierspalte + " " + sortierung;
 			}
 		}
+		System.out.println(produkt_query);
 		ArrayList<ProduktModel> produkte = new ArrayList<>();
 		try
 		{
